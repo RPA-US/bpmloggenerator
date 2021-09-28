@@ -27,10 +27,15 @@ def generate_paragraph(para=1):
 
 
 '''
-generar ruta
+Generate path. The argument is the level of path and the extension
+The default arguments are 1 level without extension
 '''
-def generate_path():
-    res = "C:\\"+generate_words()+"\\"+generate_words()+"\\"+generate_words()
+def generate_path(value=1,ext=None):
+    res = "C:\\"+generate_words()
+    for i in range(1,value):        
+        res += "\\"+generate_words()
+    if ext is not None:
+        res += ext
     return res
 
 '''
@@ -64,3 +69,4 @@ def insert_text(text, key):
     new_text.insert(value,key)
     new_text = " ".join([str(x) for x in new_text])
     return new_text
+
