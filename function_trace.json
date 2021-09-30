@@ -1,0 +1,11 @@
+{
+"function1" : "generate_mouse_position",
+"function2" : "generate_DNI",
+"function3" : "generate_random_entity",
+"function4" : "generate_path",
+"function5" : "generate_paragraph",
+"function6" : "generate_sentence",
+"function7" : "generate_words",
+"function8" : "generate_screenshot_demo",
+"function9" : "generate_app_demo"
+}
