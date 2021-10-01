@@ -7,5 +7,10 @@
 "function6" : "generate_sentence",
 "function7" : "generate_words",
 "function8" : "generate_screenshot_demo",
-"function9" : "generate_app_demo"
+"function9" : "generate_app_demo",
+"function10" : "generate_timestamp",
+"function11" : "generate_mouse_position_x",
+"function12" : "generate_mouse_position_y",
+"function13" : "generate_mousekeyboard"
+
 }

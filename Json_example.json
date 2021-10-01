@@ -1,204 +1,411 @@
 {
-	"1": 
-            {"A": {
-                    "MorKeyb": {
-                        "initValue": 1, 
-                        "variate": 1, 
-                        "name": "function1",
-                        "args":[1000,700, 1080,1920, 50, 50]},
-                    "TextInput": {
-                        "initValue": "Antonio", 
-                        "variate": 1, 
-                        "name": "",
-                        "args":""},
-                    "NameApp": {
-                        "initValue": "", 
-                        "variate": 1, 
-                        "name": "function9",
-                        "args":""},
-                    "Screenshot":{
-                        "initValue": "", 
-                        "variate": 1, 
-                        "name": "function8",
-                        "args":""}
+    "columnsNames": ["Timestamp", "MorKeyb", "Coor_X", "Coor_Y", "TextInput", "NameApp", "Screenshot"],
+    "condition": {
+        "activityDecision": "C",
+        "ID2": "A.TextInput == 'Registro'"
+    },
+    "trace": {
+        "1": {
+            "A": {
+                "Timestamp": {
+                    "initValue": 0,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": ""
                 },
-            "B": {
                 "MorKeyb": {
-                    "initValue": 0, 
-                    "variate": 1, 
-                    "name": "",
-                    "args":""},
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": ""
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [700, 1920, 50]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [1000, 1080, 50]
+                },
                 "TextInput": {
-                    "initValue": "", 
-                    "variate": 1, 
-                    "name": "function2",
-                    "args":""},
+                    "initValue": "antonio",
+                    "variate": 1,
+                    "name": "function3",
+                    "args": ""
+                },
                 "NameApp": {
-                    "initValue": "", 
-                    "variate": 1, 
+                    "initValue": "",
+                    "variate": 1,
                     "name": "function9",
-                    "args":""},
-                "Screenshot":{
-                    "initValue": "", 
-                    "variate": 1, 
+                    "args": ""
+                },
+                "Screenshot": {
+                    "initValue": "",
+                    "variate": 1,
                     "name": "function8",
-                    "args":""}
+                    "args": ""
+                }
+            },
+            "B": {
+                "Timestamp": {
+                    "initValue": 0,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": ""
+                },
+                "MorKeyb": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": ""
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function11",
+                    "args": [700, 1920, 50]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function12",
+                    "args": [1000, 1080, 50]
+                },
+                "TextInput": {
+                    "initValue": "Antonio",
+                    "variate": 0,
+                    "name": "",
+                    "args": ""
+                },
+                "NameApp": {
+                    "initValue": "",
+                    "variate": 1,
+                    "name": "function9",
+                    "args": ""
+                },
+                "Screenshot": {
+                    "initValue": "",
+                    "variate": 1,
+                    "name": "function8",
+                    "args": ""
+                }
             },
             "C": {
+                "Timestamp": {
+                    "initValue": 0,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": ""
+                },
                 "MorKeyb": {
-                    "initValue": 1, 
-                    "variate": 1, 
+                    "initValue": 0,
+                    "variate": 0,
                     "name": "function1",
-                    "args":[1000,700, 1080,1920, 50, 50]},
+                    "args": ""
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function11",
+                    "args": [700, 1920, 50]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function12",
+                    "args": [1000, 1080, 50]
+                },
                 "TextInput": {
-                    "initValue": "Antonio", 
-                    "variate": 1, 
+                    "initValue": "Antonio",
+                    "variate": 0,
                     "name": "",
-                    "args":""},
+                    "args": ""
+                },
                 "NameApp": {
-                    "initValue": "", 
-                    "variate": 1, 
+                    "initValue": "",
+                    "variate": 1,
                     "name": "function9",
-                    "args":""},
-                "Screenshot":{
-                    "initValue": "", 
-                    "variate": 1, 
+                    "args": ""
+                },
+                "Screenshot": {
+                    "initValue": "",
+                    "variate": 1,
                     "name": "function8",
-                    "args":""}
+                    "args": ""
+                }
             },
             "D": {
+                "Timestamp": {
+                    "initValue": 0,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": ""
+                },
                 "MorKeyb": {
-                    "initValue": 1, 
-                    "variate": 1, 
+                    "initValue": 1,
+                    "variate": 0,
                     "name": "function1",
-                    "args":[1000,700, 1080,1920, 50, 50]},
+                    "args": ""
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [700, 1920, 50]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [1000, 1080, 50]
+                },
                 "TextInput": {
-                    "initValue": "Antonio", 
-                    "variate": 1, 
+                    "initValue": "Antonio",
+                    "variate": 0,
                     "name": "",
-                    "args":""},
+                    "args": ""
+                },
                 "NameApp": {
-                    "initValue": "", 
-                    "variate": 1, 
+                    "initValue": "",
+                    "variate": 1,
                     "name": "function9",
-                    "args":""},
-                "Screenshot":{
-                    "initValue": "", 
-                    "variate": 1, 
+                    "args": ""
+                },
+                "Screenshot": {
+                    "initValue": "",
+                    "variate": 1,
                     "name": "function8",
-                    "args":""}
+                    "args": ""
+                }
             },
             "E": {
+                "Timestamp": {
+                    "initValue": 0,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": ""
+                },
                 "MorKeyb": {
-                    "initValue": 1, 
-                    "variate": 1, 
+                    "initValue": 0,
+                    "variate": 0,
                     "name": "function1",
-                    "args":[1000,700, 1080,1920, 50, 50]},
+                    "args": [1000, 700, 1080, 1920, 50, 50]
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function11",
+                    "args": [700, 1920, 50]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function12",
+                    "args": [1000, 1080, 50]
+                },
                 "TextInput": {
-                    "initValue": "Antonio", 
-                    "variate": 1, 
-                    "name": "",
-                    "args":""},
+                    "initValue": "Antonio",
+                    "variate": 1,
+                    "name": "function3",
+                    "args": ""
+                },
                 "NameApp": {
-                    "initValue": "", 
-                    "variate": 1, 
+                    "initValue": "",
+                    "variate": 1,
                     "name": "function9",
-                    "args":""},
-                "Screenshot":{
-                    "initValue": "", 
-                    "variate": 1, 
+                    "args": ""
+                },
+                "Screenshot": {
+                    "initValue": "",
+                    "variate": 1,
                     "name": "function8",
-                    "args":""}
+                    "args": ""
+                }
             }
-            },
-	"2": 
-            {"A":{
+        },
+        "2": {
+
+            "A": {
+                "Timestamp": {
+                    "initValue": 0,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": ""
+                },
                 "MorKeyb": {
-                    "initValue": 1, 
-                    "variate": 2, 
+                    "initValue": 1,
+                    "variate": 0,
                     "name": "function1",
-                    "args":[1000,700, 1080,1920, 50, 50]},
+                    "args": ""
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [700, 1920, 50]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [1000, 1080, 50]
+                },
                 "TextInput": {
-                    "initValue": "Antonio", 
-                    "variate": 2, 
-                    "name": "",
-                    "args":""},
+                    "initValue": "antonio",
+                    "variate": 1,
+                    "name": "function3",
+                    "args": ""
+                },
                 "NameApp": {
-                    "initValue": "", 
-                    "variate": 2, 
+                    "initValue": "",
+                    "variate": 1,
                     "name": "function9",
-                    "args":""},
-                "Screenshot":{
-                    "initValue": "", 
-                    "variate": 2, 
+                    "args": ""
+                },
+                "Screenshot": {
+                    "initValue": "",
+                    "variate": 1,
                     "name": "function8",
-                    "args":""}
+                    "args": ""
+                }
             },
             "B": {
+                "Timestamp": {
+                    "initValue": 0,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": ""
+                },
                 "MorKeyb": {
-                    "initValue": 0, 
-                    "variate": 2, 
-                    "name": "",
-                    "args":""},
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": ""
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function11",
+                    "args": [700, 1920, 50]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function12",
+                    "args": [1000, 1080, 50]
+                },
                 "TextInput": {
-                    "initValue": "", 
-                    "variate": 2, 
-                    "name": "function2",
-                    "args":""},
+                    "initValue": "Antonio",
+                    "variate": 0,
+                    "name": "",
+                    "args": ""
+                },
                 "NameApp": {
-                    "initValue": "", 
-                    "variate": 2, 
+                    "initValue": "",
+                    "variate": 1,
                     "name": "function9",
-                    "args":""},
-                "Screenshot":{
-                    "initValue": "", 
-                    "variate": 2, 
+                    "args": ""
+                },
+                "Screenshot": {
+                    "initValue": "",
+                    "variate": 1,
                     "name": "function8",
-                    "args":""}
+                    "args": ""
+                }
             },
             "C": {
+                "Timestamp": {
+                    "initValue": 0,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": ""
+                },
                 "MorKeyb": {
-                    "initValue": 0, 
-                    "variate": 2, 
-                    "name": "",
-                    "args":""},
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": ""
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function11",
+                    "args": [700, 1920, 50]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function12",
+                    "args": [1000, 1080, 50]
+                },
                 "TextInput": {
-                    "initValue": "Registro", 
-                    "variate": 2, 
+                    "initValue": "Registro",
+                    "variate": 0,
                     "name": "",
-                    "args":""},
+                    "args": ""
+                },
                 "NameApp": {
-                    "initValue": "", 
-                    "variate": 2, 
+                    "initValue": "",
+                    "variate": 1,
                     "name": "function9",
-                    "args":""},
-                "Screenshot":{
-                    "initValue": "", 
-                    "variate": 2, 
+                    "args": ""
+                },
+                "Screenshot": {
+                    "initValue": "",
+                    "variate": 1,
                     "name": "function8",
-                    "args":""}
+                    "args": ""
+                }
             },
             "F": {
+                "Timestamp": {
+                    "initValue": 0,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": ""
+                },
                 "MorKeyb": {
-                    "initValue": 1, 
-                    "variate": 2, 
+                    "initValue": 0,
+                    "variate": 0,
                     "name": "function1",
-                    "args":[1000,700, 1080,1920, 50, 50]},
+                    "args": ""
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function11",
+                    "args": [700, 1920, 50]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function12",
+                    "args": [1000, 1080, 50]
+                },
                 "TextInput": {
-                    "initValue": "Antonio", 
-                    "variate": 2, 
-                    "name": "",
-                    "args":""},
+                    "initValue": "Antonio",
+                    "variate": 1,
+                    "name": "function2",
+                    "args": ""
+                },
                 "NameApp": {
-                    "initValue": "", 
-                    "variate": 2, 
+                    "initValue": "",
+                    "variate": 1,
                     "name": "function9",
-                    "args":""},
-                "Screenshot":{
-                    "initValue": "", 
-                    "variate": 2, 
+                    "args": ""
+                },
+                "Screenshot": {
+                    "initValue": "",
+                    "variate": 1,
                     "name": "function8",
-                    "args":""}
+                    "args": ""
+                }
             }
-            }
+        }
+
+    }
 }
