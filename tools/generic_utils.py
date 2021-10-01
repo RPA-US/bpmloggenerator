@@ -10,6 +10,6 @@ from plugins.string.random_timestamp import generate_timestamp
 Ver que se hace con las funciones
 '''
 def detect_function(text):
-    f = open('function_trace.json')
+    f = open('resources\\function_trace.json')
     json_func = json.load(f)
     return eval(json_func[text])
