@@ -1,36 +1,41 @@
 from lorem_text import lorem
 import random
-'''
-Generate words. The argument is the number of words to generate.
-The default argument is 1 word.
-'''
+
 def generate_words(words=1):
+    '''
+    Generate words. The argument is the number of words to generate.
+    args:
+        words: number of words to be generated. The default argument is 1 word.
+    '''
     text = lorem.words(words)
     return text
 
 
-'''
-Generate one sentence.
-'''
 def generate_sentence():
+    '''
+    Generate one sentence.
+    '''
     text =  lorem.sentence()
     return text
 
 
-'''
-Generate paragraphs. The argument is the number of paragraphs to generate.
-The default argument is 1 paragraph.
-'''
+
 def generate_paragraph(para=1):
+    '''
+    Generate paragraphs. The argument is the number of paragraphs to generate.
+    args:
+        para: number of paragraphs to be generated
+    '''
     text =  lorem.paragraphs(para)
     return text
 
-
-'''
-Generate path. The argument is the level of path and the extension
-The default arguments are 1 level without extension
-'''
 def generate_path(value=1,ext=None):
+    '''
+    Generate path. The argument is the level of path and the extension
+    args:
+        value: number of levels of the path
+        ext: the extension if is the path of a file 
+    '''
     res = "C:\\"+generate_words()
     for i in range(1,value):        
         res += "\\"+generate_words()
@@ -38,10 +43,11 @@ def generate_path(value=1,ext=None):
         res += ext
     return res
 
-'''
-Generate spanish number identification.
-'''
+
 def generate_DNI():
+    '''
+    Generate spanish number identification.
+    '''
     DNI = 0
     value = random.randint(1,99999999)
     number_control = value%23
@@ -52,10 +58,10 @@ def generate_DNI():
     return DNI
 
 
-'''
-Generate entity.
-'''
-def generate_random_entity(words=1):
+def generate_random_entity():
+    '''
+    Generate a word with first letter capital 
+    '''
     text = lorem.words(words).capitalize() 
     return text
 

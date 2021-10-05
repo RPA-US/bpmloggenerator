@@ -6,10 +6,14 @@ from plugins.screenshot.replace_gui_component import generate_screenshot_demo
 from plugins.app.nameapp import generate_app_demo
 from plugins.string.random_timestamp import generate_timestamp
 
-'''
-Ver que se hace con las funciones
-'''
+
 def detect_function(text):
+    '''
+    Selecting a function in the system by means of a keyword
+    args:
+        text: function to be detected
+    '''
+    # Search the function by key in the json
     f = open('resources\\function_trace.json')
     json_func = json.load(f)
     return eval(json_func[text])
