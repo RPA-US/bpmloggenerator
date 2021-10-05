@@ -58,7 +58,7 @@ def generate_DNI():
     return DNI
 
 
-def generate_random_entity():
+def generate_random_entity(words=1):
     '''
     Generate a word with first letter capital 
     '''
