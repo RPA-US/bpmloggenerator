@@ -1,0 +1,79 @@
+{% load static %}
+
+<header>
+  <!-- Header Start -->
+  <div class="header-area">
+    <div class="main-header ">
+      {% if request.user.is_authenticated %}
+      <div class="header-top top-bg d-none d-lg-block">
+        <div class="container-fluid">
+          <div class="col-xl-12">
+            <div class="row d-flex justify-content-between align-items-center">
+              <div class="header-info-left d-flex">
+                <div class="flag">
+                  <a href="/termandconds"><img src="{% static "img/icon/header_icon.png" %}" alt="" width="100em"></a>
+                </div>
+                <ul class="contact-now">
+                  <li>+34 954556817</li>
+                </ul>
+              </div>
+              <div class="header-info-right">
+                <ul>
+                  <li><a href="{% url 'home_url' %}">Logout</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      <div class="header-bottom  header-sticky">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <!-- Logo -->
+            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-3">
+              <div class="logo">
+                <a href="/"><img src="{% static "img/logo/logo_titulo.png" %}" alt="UI log generator logo" height="50"></a>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-8 col-md-7 col-sm-5">
+              <!-- Main-menu -->
+              <div class="main-menu f-right d-none d-lg-block">
+                <nav>
+                  <ul id="navigation">
+                    <li><a href="/">Home</a></li>
+                    <li class="hot"><a href="{% url "home_url" %}">Latest</a>
+                    </li>
+                    <li><a href="{% url "home_url" %}">Categories</a>
+                      <ul class="submenu">
+                        <li><a href="{% url "home_url" %}"> Navigate</a></li>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <div id="desktop-elements" class="col-xl-5 col-lg-3 col-md-3 col-sm-3 fix-card">
+              <ul class="header-right f-right d-none d-lg-block d-flex justify-content-between">
+                <li class="d-none d-xl-block">
+                  <div class="form-box f-right ">
+                    <form method="GET" action="{% url 'home_url' %}">
+                      <input type="text" name="q" placeholder="Search">
+                      <div class="search-icon">
+                        <button class="search-btn" type="submit"><i class="fas fa-search special-tag"></i></button>
+                      </div>
+                    </form>
+                  </div>
+                </li>
+                </ul>
+            </div>
+            <!-- Mobile Menu -->
+            <div class="col-12">
+              <div class="mobile_menu d-block d-lg-none"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Header End -->
+</header>

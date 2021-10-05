@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Homepage
+{% endblock %}
+
+{% block content %}
+
+<main>
+
+    <!-- slider Area Start -->
+    <div class="slider-area ">
+        <!-- Mobile Menu -->
+        <div class="slider-active">
+            <div class="single-slider slider-height" data-background="{% static 'img/hero/h1_hero.jpg' %}">
+                <div class="container">
+                    <div class="row d-flex align-items-center justify-content-between">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-none d-md-block">
+                            <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
+                                <img src="{% static 'img/hero/hero7.png' %}" alt="" height="750em">
+                            </div>
+                        </div>
+                        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
+                            <div class="hero__caption">
+                                <span data-animation="fadeInRight" data-delay=".4s">Contributes to our </span>
+                                <h1 data-animation="fadeInRight" data-delay=".6s">Collaborative<br> taxonomy</h1>
+                                <p data-animation="fadeInRight" data-delay=".8s">Best CRPA Classification By 2020!</p>
+                                <!-- Hero-btn -->
+                                <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
+                                    <a href="{% url 'home_url' %}" class="btn hero-btn">Find what you want at CRPA</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slider slider-height" data-background="{% static 'img/hero/h1_hero.jpg' %}">
+                <div class="container">
+                    <div class="row d-flex align-items-center justify-content-between">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-none d-md-block">
+                            <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
+                                <img src="{% static 'img/hero/hero_man.png' %}" alt="">
+                            </div>
+                        </div>
+                        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
+                            <div class="hero__caption">
+                                <span data-animation="fadeInRight" data-delay=".4s">Contributes to our</span>
+                                <h1 data-animation="fadeInRight" data-delay=".6s">Collaborative <br> taxonomy</h1>
+                                <p data-animation="fadeInRight" data-delay=".8s">Best CRPA Classification By 2020!</p>
+                                <!-- Hero-btn -->
+                                <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
+                                    <a href="{% url 'home_url' %}" class="btn hero-btn">Find what you want at CRPA</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider Area End-->
+    <!-- Category Area Start-->
+    <section class="category-area section-padding30">
+        <div class="container-fluid">
+            <!-- Section Tittle -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-tittle text-center mb-85">
+                        <h2>Shop by Category</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-lg-6">
+                    <div class="single-category mb-30">
+                        <div class="category-img">
+                            <img src="{% static 'img/categori/cat1.png' %}" alt="">
+                            <div class="category-caption">
+                                <h2>Classification</h2>
+                                <span class="best"><a href="{% url 'home_url' %}">Best New Deals</a></span>
+                                <span class="collection">New Collection</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6">
+                    <div class="single-category mb-30">
+                        <div class="category-img text-center">
+                            <img src="{% static 'img/categori/cat2.png' %}" alt="">
+                            <div class="category-caption">
+                                <span class="collection">Download!</span>
+                                <h2>Processing</h2>
+                                <p><a href="{% url 'home_url' %}">Most popular</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6">
+                    <div class="single-category mb-30">
+                        <div class="category-img">
+                            <img src="{% static 'img/categori/cat3.png' %}" alt="">
+                            <div class="category-caption">
+                                <h2>Governance</h2>
+                                <span class="best"><a href="{% url 'home_url' %}">Best New Deals</a></span>
+                                <span class="collection">New Collection</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Category Area End-->
+   
+    <!-- Shop Method Start-->
+    <div class="shop-method-area section-padding30">
+        <div class="container">
+            <div class="row d-flex justify-content-between">
+                <div class="col-xl-3 col-lg-3 col-md-6">
+                    <div class="single-method mb-40">
+                        <i class="ti-package"></i>
+                        <h6>Instant download</h6>
+                        <p>When you pay for the component, it will be available for download in your component list.</p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6">
+                    <div class="single-method mb-40">
+                        <i class="ti-unlock"></i>
+                        <h6>Secure Payment System</h6>
+                        <p>There are several payment methods available for you to choose from.</p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6">
+                    <div class="single-method mb-40">
+                        <i class="ti-reload"></i>
+                        <h6>Reusable components</h6>
+                        <p>You can download the components as many times as you want once you have paid.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Shop Method End-->
+    <!-- Gallery Start-->
+    <div class="gallery-wrapper lf-padding">
+        <div class="gallery-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="gallery-items">
+                        <img src="{% static 'img/gallery/gallery1.jpg' %}" alt="">
+                    </div>
+                    <div class="gallery-items">
+                        <img src="{% static 'img/gallery/gallery2.jpg' %}" alt="">
+                    </div>
+                    <div class="gallery-items">
+                        <img src="{% static 'img/gallery/gallery3.jpg' %}" alt="">
+                    </div>
+                    <div class="gallery-items">
+                        <img src="{% static 'img/gallery/gallery4.jpg' %}" alt="">
+                    </div>
+                    <div class="gallery-items">
+                        <img src="{% static 'img/gallery/gallery5.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Gallery End-->
+
+</main>
+{% endblock content %}
