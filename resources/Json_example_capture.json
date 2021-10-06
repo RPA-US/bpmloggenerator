@@ -1,0 +1,104 @@
+{
+    "GUIElements": ["Button", "TextInput", "Checkbox", "RadioButton"],
+    "condition": {
+        "activityDecision": "C",
+        "ID2": "A.TextInput == 'Registro'"
+    },
+    "trace": {
+        "1": {
+            "A": {
+                "TextInput1": {
+                    "initValue": "",
+                    "coordinates": [100, 100, 200, 275],
+                    "variate": 1,
+                    "capturePath": "Captura de pantalla 2021-10-05 132706.png",
+                    "name": "function21",
+                    "args": "TextInput1"
+                }
+            },
+            "B": {
+                "TextInput1": {
+                    "initValue": "",
+                    "coordinates": [100, 200, 300, 375],
+                    "variate": 1,
+                    "capturePath": "Captura de pantalla 2021-10-05 132706.png",
+                    "name": "function21",
+                    "args": "TextInput1"
+                }
+            },
+            "C": {
+                "TextInput1": {
+                    "initValue": "",
+                    "coordinates": [100, 200, 300, 375],
+                    "variate": 1,
+                    "capturePath": "Captura de pantalla 2021-10-05 132706.png",
+                    "name": "function21",
+                    "args": "TextInput1"
+                }
+            },
+            "D": {
+                "Checkbox": {
+                    "initValue": "",
+                    "coordinates": [700, 750, 1000, 1050],
+                    "variate": 1,
+                    "capturePath": "Captura de pantalla 2021-10-05 132706.png",
+                    "name": "function20",
+                    "args": "Checkbox1"
+                }
+            },
+            "E": {
+                "TextInput1": {
+                    "initValue": "",
+                    "coordinates": [100, 200, 300, 375],
+                    "variate": 1,
+                    "capturePath": "Captura de pantalla 2021-10-05 132706.png",
+                    "name": "function21",
+                    "args": "TextInput1"
+                }
+            }
+        },
+        "2": {
+            "A": {
+                "TextInput1": {
+                    "initValue": "",
+                    "coordinates": [100, 100, 200, 275],
+                    "variate": 1,
+                    "capturePath": "Captura de pantalla 2021-10-05 132706.png",
+                    "name": "function21",
+                    "args": "TextInput1"
+                }
+            },
+            "B": {
+                "TextInput1": {
+                    "initValue": "",
+                    "coordinates": [100, 200, 300, 375],
+                    "variate": 1,
+                    "capturePath": "Captura de pantalla 2021-10-05 132706.png",
+                    "name": "function21",
+                    "args": "TextInput1"
+                }
+            },
+            "C": {
+                "TextInput1": {
+                    "initValue": "",
+                    "coordinates": [100, 200, 300, 375],
+                    "variate": 1,
+                    "capturePath": "Captura de pantalla 2021-10-05 132706.png",
+                    "name": "function21",
+                    "args": "TextInput1"
+                }
+            },
+            "F": {
+                "TextInput1": {
+                    "initValue": "",
+                    "coordinates": [100, 200, 300, 375],
+                    "variate": 1,
+                    "capturePath": "Captura de pantalla 2021-10-05 132706.png",
+                    "name": "function21",
+                    "args": "TextInput1"
+                }
+            }
+        }
+
+    }
+}

@@ -47,7 +47,7 @@
                     "initValue": "",
                     "variate": 1,
                     "name": "function8",
-                    "args": ""
+                    "args": "acu"
                 }
             },
             "B": {
@@ -91,7 +91,7 @@
                     "initValue": "",
                     "variate": 1,
                     "name": "function8",
-                    "args": ""
+                    "args": "acu"
                 }
             },
             "C": {
@@ -135,7 +135,7 @@
                     "initValue": "",
                     "variate": 1,
                     "name": "function8",
-                    "args": ""
+                    "args": "acu"
                 }
             },
             "D": {
@@ -179,7 +179,7 @@
                     "initValue": "",
                     "variate": 1,
                     "name": "function8",
-                    "args": ""
+                    "args": "acu"
                 }
             },
             "E": {
@@ -223,7 +223,7 @@
                     "initValue": "",
                     "variate": 1,
                     "name": "function8",
-                    "args": ""
+                    "args": "acu"
                 }
             }
         },
@@ -270,7 +270,7 @@
                     "initValue": "",
                     "variate": 1,
                     "name": "function8",
-                    "args": ""
+                    "args": "acu"
                 }
             },
             "B": {
@@ -314,7 +314,7 @@
                     "initValue": "",
                     "variate": 1,
                     "name": "function8",
-                    "args": ""
+                    "args": "acu"
                 }
             },
             "C": {
@@ -358,7 +358,7 @@
                     "initValue": "",
                     "variate": 1,
                     "name": "function8",
-                    "args": ""
+                    "args": "acu"
                 }
             },
             "F": {
@@ -402,7 +402,7 @@
                     "initValue": "",
                     "variate": 1,
                     "name": "function8",
-                    "args": ""
+                    "args": "acu"
                 }
             }
         }
