@@ -1,0 +1,18 @@
+<div class="card mr-2" style="width: 18rem;">
+  {% if instance.image %}
+  <img src="{{ instance.image.url }}" class="card-img-top" alt="{{ instance.title }}">
+  {% endif %}
+  <div class="card-body">
+    <small>{{ instance.created_at|timesince }} ago</small>
+    <h5 class="card-title">{{ instance.title }}</h5>
+    <h7 class="card-text">{{ instance.description|truncatewords:12 }}</h7>
+    <div class="col">
+      <div class="button-group-area mt-40">
+        <a href="{{ instance.get_absolute_url }}" class="btn btn-primary mb-2">Detail</a>
+        {% if not instance.user.pk == request.user.pk %}
+        {% include "products/snippets/update-cart.html" with product=instance cart=cart %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
+{% url "products:list" as products_list_url %}
 {% load static %}
-
 <header>
   <!-- Header Start -->
   <div class="header-area">
@@ -44,9 +44,9 @@
                     <li><a href="/">Home</a></li>
                     <li class="hot"><a href="{% url "home_url" %}">Latest</a>
                     </li>
-                    <li><a href="{% url "home_url" %}">Categories</a>
+                    <li><a href="{% url "home_url" %}">Generator</a>
                       <ul class="submenu">
-                        <li><a href="{% url "home_url" %}"> Navigate</a></li>
+                        <li><a href="{% url 'UIlogs:create' %}"> Navigate</a></li>
                     </li>
                   </ul>
                 </nav>

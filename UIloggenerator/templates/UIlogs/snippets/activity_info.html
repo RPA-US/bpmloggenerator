@@ -1,0 +1,6 @@
+{% if c.active and c.children.count %}
+{% for child in c.children.all %}
+<option value="{{ child.pk }}" {% if val == category.pk %}selected{% endif %}>{{sufix}} {{ child }}</option>
+{% include 'categories/snippets/taxcateg-child-form.html' with c=child sufix=sufix|add:">" val=val %}
+{% endfor %}
+{% endif %}

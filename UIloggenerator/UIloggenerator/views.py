@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 
 def home_page(request):
-    return render(request, "home.html", context)
+    return render(request, "home.html", {})
 
 def termandconds_page(request):
     return render(request, "termandconds.html", {})

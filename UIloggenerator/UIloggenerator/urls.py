@@ -25,6 +25,7 @@ urlpatterns = (
         path("admin/", admin.site.urls),
         path("", home_page, name="home_url"),
         path("termandconds", termandconds_page, name="termandconds_url"),
+        path("uilogs/", include("UIlogs.urls"), name="UIlogs"),
         # path("variabilityselector/", include("variabilityselector.urls")),
         # path("search/", include("search.urls")),
         # path("categories/", include("taxcategs.urls")),

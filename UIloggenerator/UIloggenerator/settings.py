@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'UIlogs'
 ]
 
 MIDDLEWARE = [
@@ -141,4 +142,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
 
 ACCOUNT_LOGOUT_ON_GET = True
 LOGIN_REDIRECT_URL = "home_url"
-LOGOUT_REDIRECT_URL = "accounts:login"
