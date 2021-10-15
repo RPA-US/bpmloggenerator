@@ -123,7 +123,7 @@ def main_function(json_path,generate_path,number_logs,percent_per_trace):
 
         
 if __name__ == '__main__':
-    json_path = "resources\\Json_example.json"
+    json_path = "resources\\Json_example_log.json"
     generate_path = "CSV_sample_exit.csv"
     number_logs = 10
     percent_per_trace = [0.25,0.75]
