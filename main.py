@@ -37,12 +37,13 @@ def validation_params(json_path,generate_path,number_logs,percent_per_trace):
     return res
 
 
-def generate_row(dict,case,variante):
+
+def generate_row(dict,acu,variante):
     '''
     Generate row reading the json
     args:
         dict: json with the trace
-        case: number of the case
+        acu: number of the case
         variante: if use the initial value or the generate
     '''
     Timestamp = str(round(time.time() * 1000)+1)
@@ -51,6 +52,7 @@ def generate_row(dict,case,variante):
     json_list = dict["trace"][str(variante)]
     for key in json_list:
         attr = []
+        acu += 1
         for i in columns:
             element = json_list[key][i]
             if element is not None:
@@ -58,9 +60,11 @@ def generate_row(dict,case,variante):
                 variate = element["variate"]
                 name = element["name"]
                 args = element["args"]
+                if args=="acu":
+                    args = acu
                 if variate == 1:
                     if args =="":
-                        val  = detect_function(name)()
+                            val  = detect_function(name)()
                     else:
                         val  = detect_function(name)(args)
                 elif initValue !="":
@@ -71,7 +75,8 @@ def generate_row(dict,case,variante):
                 val="NaN"
             attr.append(val)
         rows.append(tuple(attr))
-    return rows
+    return rows,acu
+
 
 def main_function(json_path,generate_path,number_logs,percent_per_trace):
     '''
