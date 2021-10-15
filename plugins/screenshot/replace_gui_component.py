@@ -5,12 +5,13 @@ import os
 import PIL
 import glob
 
+
 def replace_gui_element_by_other(capture, coordenates, image_element,new_image):
     '''
     An input capture is obtained, and a visual element is inserted into it​
     args:​
         capture: path of the image to insert in
-        coordenates: list with the 4 corners limits of the visual element. The coordenate (0,0) is the top_left in the image
+        coordenates: list with the 2 corners limits of the visual element. The coordenate (0,0) is the top_left in the image
         id_element: id of the visual element to be inserted
     '''
     # Coordenates x and y
@@ -32,8 +33,3 @@ def replace_gui_element_by_other(capture, coordenates, image_element,new_image):
     back_im = capture_img.copy()
     back_im.paste(upper_im,(left_top_x,left_top_y))
     back_im.save(new_image, quality=95)
-
-
-
-    # Random number, the timestamp and the extension with a img identification
-    # return str(round(time.time() * 1000))+"_"+str(random.randint(0,1000))+"_img.jpg"
