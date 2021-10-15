@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 
 CSV_sample_exit.csv
+resources/test_GUI_components
+resources/test_screenshots

@@ -1,9 +1,10 @@
-from tools.generic_utils import detect_function
+from tools.generic_utils import detect_function, detect_element
 import csv
 import os
 import logging
 import time
 import json
+from plugins.screenshot.replace_gui_component import replace_gui_element_by_other
 
 def validation_params(json_path,generate_path,number_logs,percent_per_trace):   
     '''
@@ -118,7 +119,7 @@ def main_function(json_path,generate_path,number_logs,percent_per_trace):
             f.close()
         else:
             logging.warn("Configuration arguments are wrongs")
-    except e:
+    except:
         logging.warn("Json structure")
 
         
@@ -129,3 +130,12 @@ if __name__ == '__main__':
     percent_per_trace = [0.25,0.75]
     main_function(json_path,generate_path,number_logs,percent_per_trace)    
 
+    capture = "resources/test_screenshots/test_screenshot.png"
+    element_image = detect_element("element1")
+    coordenates = [100,100,200,275]
+    left_top_x = coordenates[0]
+    left_top_y = coordenates[1]
+    right_bot_x = coordenates[2]
+    right_bot_y = coordenates[3]
+    new_image = "resources/test_screenshots/10_img.png"
+    replace_gui_element_by_other(capture, coordenates, element_image,new_image)
