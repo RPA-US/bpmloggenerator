@@ -1,0 +1,14 @@
+et-xmlfile==1.1.0
+tk==0.1.0
+xmltodict==0.12.0
+asgiref==3.4.1
+Django==3.2.8
+et-xmlfile==1.1.0
+pytz==2021.3
+sqlparse==0.4.2
+click==8.0.1
+colorama==0.4.4
+lorem-text==1.5
+numpy==1.21.2
+opencv-python==4.5.3.56
+Pillow==8.3.2
