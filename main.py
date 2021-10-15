@@ -112,8 +112,7 @@ def main_function(json_path,generate_path,number_logs,percent_per_trace):
             acu = 0
             for i in range(1,len(list_percents)+1):
                 for j in range(0,list_percents[i-1]):
-                    acu += 1
-                    rows = generate_row(json_act_path,acu,i)
+                    rows,acu = generate_row(json_act_path,acu,i)
                     for row in rows:
                         writer.writerow(row)
             f.close()
