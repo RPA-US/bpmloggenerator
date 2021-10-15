@@ -113,13 +113,13 @@ def main_function(json_path,generate_path,number_logs,percent_per_trace):
                         writer.writerow(row)
             f.close()
         else:
-            logging.warn("Configuration arguments are wrongs")
+            logging.warning("Configuration arguments are wrongs")
     except e:
-        logging.warn("Json structure")
+        logging.warning("Json structure")
 
         
 if __name__ == '__main__':
-    json_path = "resources\\Json_example.json"
+    json_path = "resources\\Json_example_log.json"
     generate_path = "CSV_sample_exit.csv"
     number_logs = 10
     percent_per_trace = [0.25,0.75]
