@@ -1,17 +1,21 @@
 from lorem_text import lorem
 import random
 
-def generate_words(words=1):
+def generate_words(list):
     '''
     Generate words. The argument is the number of words to generate.
     args:
         words: number of words to be generated. The default argument is 1 word.
     '''
+    if list  == []:
+        words=1
+    else:
+        words = list[0]
     text = lorem.words(words)
     return text
 
 
-def generate_sentence():
+def generate_sentence(list):
     '''
     Generate one sentence.
     '''
@@ -20,22 +24,32 @@ def generate_sentence():
 
 
 
-def generate_paragraph(para=1):
+def generate_paragraph(list):
     '''
     Generate paragraphs. The argument is the number of paragraphs to generate.
     args:
         para: number of paragraphs to be generated
     '''
+    if list  == []:
+        para=1
+    else:
+        para = list[0]
     text =  lorem.paragraphs(para)
     return text
 
-def generate_path(value=1,ext=None):
+def generate_path(list):
     '''
     Generate path. The argument is the level of path and the extension
     args:
         value: number of levels of the path
         ext: the extension if is the path of a file 
     '''
+    if list  == []:
+        value=1
+        ext=None
+    else:
+        value=list[0]
+        ext=list[1] 
     res = "C:\\"+generate_words()
     for i in range(1,value):        
         res += "\\"+generate_words()
@@ -44,7 +58,7 @@ def generate_path(value=1,ext=None):
     return res
 
 
-def generate_DNI():
+def generate_DNI(list):
     '''
     Generate spanish number identification.
     '''
@@ -58,10 +72,14 @@ def generate_DNI():
     return DNI
 
 
-def generate_random_entity(words=1):
+def generate_random_entity(list):
     '''
     Generate a word with first letter capital 
     '''
+    if list == []:
+        words=1
+    else:
+        words = list[0]
     text = lorem.words(words).capitalize() 
     return text
 

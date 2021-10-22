@@ -1,7 +1,7 @@
 import random
 
 
-def generate_mousekeyboard():
+def generate_mousekeyboard(list):
     '''
     Generate a random decision about the type of action (keyboard or mouse)
     '''

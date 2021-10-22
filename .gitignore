@@ -129,5 +129,8 @@ dmypy.json
 .pyre/
 
 CSV_sample_exit.csv
+CSV_sample_exit_csv
 resources/test_GUI_components
+resources/Componentes GUI pruebas
 resources/test_screenshots
+Captura de pantalla 2021-10-05 132706.png

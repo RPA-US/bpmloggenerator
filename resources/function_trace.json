@@ -11,6 +11,9 @@
 "function10" : "generate_timestamp",
 "function11" : "generate_mouse_position_x",
 "function12" : "generate_mouse_position_y",
-"function13" : "generate_mousekeyboard"
-
+"function13" : "generate_mousekeyboard",
+"function21" : "replace_gui_element_by_other",
+"function22" : "insert_text_image",
+"function23" : "hidden_gui_element",
+"function30" : "generate_capture"
 }
