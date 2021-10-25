@@ -1,21 +1,21 @@
 from lorem_text import lorem
 import random
 
-def generate_words(list):
+def generate_words(args):
     '''
     Generate words. The argument is the number of words to generate.
     args:
         words: number of words to be generated. The default argument is 1 word.
     '''
-    if list  == []:
+    if args  == []:
         words=1
     else:
-        words = list[0]
+        words = args[0]
     text = lorem.words(words)
     return text
 
 
-def generate_sentence(list):
+def generate_sentence(args):
     '''
     Generate one sentence.
     '''
@@ -24,32 +24,32 @@ def generate_sentence(list):
 
 
 
-def generate_paragraph(list):
+def generate_paragraph(args):
     '''
     Generate paragraphs. The argument is the number of paragraphs to generate.
     args:
         para: number of paragraphs to be generated
     '''
-    if list  == []:
+    if args  == []:
         para=1
     else:
-        para = list[0]
+        para = args[0]
     text =  lorem.paragraphs(para)
     return text
 
-def generate_path(list):
+def generate_path(args):
     '''
     Generate path. The argument is the level of path and the extension
     args:
         value: number of levels of the path
         ext: the extension if is the path of a file 
     '''
-    if list  == []:
+    if args  == []:
         value=1
         ext=None
     else:
-        value=list[0]
-        ext=list[1] 
+        value=args[0]
+        ext=args[1] 
     res = "C:\\"+generate_words()
     for i in range(1,value):        
         res += "\\"+generate_words()
@@ -58,7 +58,7 @@ def generate_path(list):
     return res
 
 
-def generate_DNI(list):
+def generate_DNI(args):
     '''
     Generate spanish number identification.
     '''
@@ -72,14 +72,14 @@ def generate_DNI(list):
     return DNI
 
 
-def generate_random_entity(list):
+def generate_random_entity(args):
     '''
     Generate a word with first letter capital 
     '''
-    if list == []:
+    if args == []:
         words=1
     else:
-        words = list[0]
+        words = args[0]
     text = lorem.words(words).capitalize() 
     return text
 

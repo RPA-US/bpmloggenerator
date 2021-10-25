@@ -1,6 +1,6 @@
 import time
 
-def generate_timestamp(list):    
+def generate_timestamp(args):    
     '''
     Generate a timestamp plus 1
     '''

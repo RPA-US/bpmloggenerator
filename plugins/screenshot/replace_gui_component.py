@@ -10,7 +10,7 @@ from PIL import ImageDraw
 import tools.generic_utils as util
 
 
-def replace_gui_element_by_other(list):
+def replace_gui_element_by_other(args):
     '''
     An input capture is obtained, and a visual element is inserted into it​
     args:​
@@ -19,10 +19,10 @@ def replace_gui_element_by_other(list):
         id_element: id of the visual element to be inserted
         new_image: saved image
     '''
-    image_element = util.detect_element(list[0])
-    new_image = list[1]
-    capture = list[2]
-    coordenates = list[3]
+    image_element = util.detect_element(util.select_random_list(args[0]))
+    new_image = args[1]
+    capture = args[2]
+    coordenates = args[3]
     # Coordenates x and y
     left_top_x = coordenates[0]
     left_top_y = coordenates[1]
@@ -44,7 +44,7 @@ def replace_gui_element_by_other(list):
     back_im.save(new_image, quality=95)
     return new_image
 
-def insert_text_image(list):
+def insert_text_image(args):
     '''
     An input capture is obtained, and a text is inserted into it​
     args:​
@@ -54,13 +54,13 @@ def insert_text_image(list):
         new_image: saved image
         configuration: path to the font type; integer of the font size; the tuple of the font color
     '''
-    text = list[0]
-    font = list[1][0]
-    font_size = list[1][1]
-    font_color = list[1][2]
-    new_image = list[2]
-    capture = list[3]
-    coordenates = list[4]
+    text = args[0]
+    font = args[1][0]
+    font_size = args[1][1]
+    font_color = args[1][2]
+    new_image = args[2]
+    capture = args[3]
+    coordenates = args[4]
     # Coordenates x and y
     left_top_x = coordenates[0]
     left_top_y = coordenates[1]
@@ -75,7 +75,7 @@ def insert_text_image(list):
     back_im.save(new_image, quality=95)
     return new_image
 
-def hidden_gui_element(list):
+def hidden_gui_element(args):
     '''
     An input capture is obtained, and a gui element is hidden​
     args:​
@@ -84,10 +84,10 @@ def hidden_gui_element(list):
         new_image: saved image
         configuration: path to the font type; integer of the font size; the tuple of the font color
     '''
-    configuration = list[0]
-    new_image = list[1]
-    capture = list[2]
-    coordenates = list[3]
+    configuration = util.select_random_list(args[0])
+    new_image = args[1]
+    capture = args[2]
+    coordenates = args[3]
     # Configuration
     rectangle_color = configuration
     # Open capture
