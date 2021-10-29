@@ -58,23 +58,24 @@ def generate_row(generate_path,dict,acu,variante):
         acu += 1
         text = ""
         for i in columns:
-            element = json_list[key][i]
-            if element is not None:
-                initValue = element["initValue"]
-                variate = element["variate"]
-                name = element["name"]
-                args = element["args"]
-                if variate == 1:
-                    if name=="function30":
-                        val = generate_capture(columns_ui,columns,element,acu,generate_path,attr)
+            if i in json_list[key]:
+                element = json_list[key][i]
+                if element is not None:
+                    initValue = element["initValue"]
+                    variate = element["variate"]
+                    name = element["name"]
+                    args = element["args"]
+                    if variate == 1:
+                        if name=="function30":
+                            val = generate_capture(columns_ui,columns,element,acu,generate_path,attr)
+                        else:
+                            val  = detect_function(name)(args)
+                    elif initValue !="":
+                        val = initValue 
                     else:
-                        val  = detect_function(name)(args)
-                elif initValue !="":
-                    val = initValue 
+                        val="NaN"
                 else:
                     val="NaN"
-            else:
-                val="NaN"
             attr.append(val)
         rows.append(tuple(attr))
     return rows,acu
@@ -126,7 +127,7 @@ def main_function(json_log_path,generate_path,number_logs,percent_per_trace):
 
 
 if __name__ == '__main__':
-    json_log_path = "resources\\Json_example_capture.json"
+    json_log_path = "resources\\Json_capture.json"
     generate_path = "CSV_exit"
     number_logs = 10
     percent_per_trace = [0.25,0.75]

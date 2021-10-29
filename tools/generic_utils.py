@@ -6,6 +6,7 @@ from plugins.list.mouse_tipe import generate_mousekeyboard
 from plugins.screenshot.replace_gui_component import hidden_gui_element, insert_text_image, replace_gui_element_by_other
 from plugins.app.nameapp import generate_app_demo
 from plugins.string.random_timestamp import generate_timestamp
+from plugins.screenshot.create_screenshot import change_screenshot_name
 
 def detect_function(text):
     '''
