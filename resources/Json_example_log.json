@@ -1,5 +1,6 @@
 {
     "columnsNames": ["Timestamp", "MorKeyb", "Coor_X", "Coor_Y", "TextInput", "NameApp", "Screenshot"],
+    "GUIElements": ["Button", "TextInput", "Checkbox", "RadioButton"],
     "condition": {
         "activityDecision": "C",
         "ID2": "A.TextInput == 'Registro'"
@@ -11,13 +12,13 @@
                     "initValue": 0,
                     "variate": 1,
                     "name": "function10",
-                    "args": ""
+                    "args": []
                 },
                 "MorKeyb": {
                     "initValue": 1,
                     "variate": 0,
                     "name": "function1",
-                    "args": ""
+                    "args": []
                 },
                 "Coor_X": {
                     "initValue": "NaN",
@@ -35,19 +36,38 @@
                     "initValue": "antonio",
                     "variate": 1,
                     "name": "function3",
-                    "args": ""
+                    "args": []
                 },
                 "NameApp": {
                     "initValue": "",
                     "variate": 1,
                     "name": "function9",
-                    "args": ""
+                    "args": []
                 },
                 "Screenshot": {
-                    "initValue": "",
+                    "initValue": "Captura de pantalla 2021-10-05 132706.png",
                     "variate": 1,
-                    "name": "function8",
-                    "args": "acu"
+                    "name": "function30",
+                    "args": {
+                        "TextInput": [{
+                            "coordinates": [800, 900, 750, 800],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",16,"#000000"]
+                        },{
+                            "coordinates": [200, 300, 300, 400],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",16,"#000000"]
+                        }],
+                        "Checkbox": [{
+                            "coordinates": [100, 100, 200, 275],
+                            "name": "function23",
+                            "args": "#ffffff"
+                        },{
+                            "coordinates": [500, 600, 700, 800],
+                            "name": "function21",
+                            "args": "element12"
+                        }]
+                    }
                 }
             },
             "B": {
@@ -55,13 +75,13 @@
                     "initValue": 0,
                     "variate": 1,
                     "name": "function10",
-                    "args": ""
+                    "args": []
                 },
                 "MorKeyb": {
                     "initValue": 0,
                     "variate": 0,
                     "name": "function1",
-                    "args": ""
+                    "args": []
                 },
                 "Coor_X": {
                     "initValue": "NaN",
@@ -79,19 +99,38 @@
                     "initValue": "Antonio",
                     "variate": 0,
                     "name": "",
-                    "args": ""
+                    "args": []
                 },
                 "NameApp": {
                     "initValue": "",
                     "variate": 1,
                     "name": "function9",
-                    "args": ""
+                    "args": []
                 },
                 "Screenshot": {
-                    "initValue": "",
+                    "initValue": "Captura de pantalla 2021-10-05 132706.png",
                     "variate": 1,
-                    "name": "function8",
-                    "args": "acu"
+                    "name": "function30",
+                    "args": {
+                        "TextInput": [{
+                            "coordinates": [800, 900, 750, 800],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",16,"#000000"]
+                        },{
+                            "coordinates": [200, 300, 300, 400],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",16,"#000000"]
+                        }],
+                        "Checkbox": [{
+                            "coordinates": [100, 100, 200, 275],
+                            "name": "function23",
+                            "args": "#ffffff"
+                        },{
+                            "coordinates": [500, 600, 700, 800],
+                            "name": "function21",
+                            "args": "element12"
+                        }]
+                    }
                 }
             },
             "C": {
@@ -99,13 +138,13 @@
                     "initValue": 0,
                     "variate": 1,
                     "name": "function10",
-                    "args": ""
+                    "args": []
                 },
                 "MorKeyb": {
                     "initValue": 0,
                     "variate": 0,
                     "name": "function1",
-                    "args": ""
+                    "args": []
                 },
                 "Coor_X": {
                     "initValue": "NaN",
@@ -123,19 +162,38 @@
                     "initValue": "Antonio",
                     "variate": 0,
                     "name": "",
-                    "args": ""
+                    "args": []
                 },
                 "NameApp": {
                     "initValue": "",
                     "variate": 1,
                     "name": "function9",
-                    "args": ""
+                    "args": []
                 },
                 "Screenshot": {
-                    "initValue": "",
+                    "initValue": "Captura de pantalla 2021-10-05 132706.png",
                     "variate": 1,
-                    "name": "function8",
-                    "args": "acu"
+                    "name": "function30",
+                    "args": {
+                        "TextInput": [{
+                            "coordinates": [800, 900, 750, 800],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",16,"#000000"]
+                        },{
+                            "coordinates": [200, 300, 300, 400],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",16,"#000000"]
+                        }],
+                        "Checkbox": [{
+                            "coordinates": [100, 100, 200, 275],
+                            "name": "function23",
+                            "args": "#ffffff"
+                        },{
+                            "coordinates": [500, 600, 700, 800],
+                            "name": "function21",
+                            "args": "element12"
+                        }]
+                    }
                 }
             },
             "D": {
@@ -143,13 +201,13 @@
                     "initValue": 0,
                     "variate": 1,
                     "name": "function10",
-                    "args": ""
+                    "args": []
                 },
                 "MorKeyb": {
                     "initValue": 1,
                     "variate": 0,
                     "name": "function1",
-                    "args": ""
+                    "args": []
                 },
                 "Coor_X": {
                     "initValue": "NaN",
@@ -167,19 +225,38 @@
                     "initValue": "Antonio",
                     "variate": 0,
                     "name": "",
-                    "args": ""
+                    "args": []
                 },
                 "NameApp": {
                     "initValue": "",
                     "variate": 1,
                     "name": "function9",
-                    "args": ""
+                    "args": []
                 },
                 "Screenshot": {
-                    "initValue": "",
+                    "initValue": "Captura de pantalla 2021-10-05 132706.png",
                     "variate": 1,
-                    "name": "function8",
-                    "args": "acu"
+                    "name": "function30",
+                    "args": {
+                        "TextInput": [{
+                            "coordinates": [800, 900, 750, 800],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",16,"#000000"]
+                        },{
+                            "coordinates": [200, 300, 300, 400],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",16,"#000000"]
+                        }],
+                        "Checkbox": [{
+                            "coordinates": [100, 100, 200, 275],
+                            "name": "function23",
+                            "args": "#ffffff"
+                        },{
+                            "coordinates": [500, 600, 700, 800],
+                            "name": "function21",
+                            "args": "element12"
+                        }]
+                    }
                 }
             },
             "E": {
@@ -187,7 +264,7 @@
                     "initValue": 0,
                     "variate": 1,
                     "name": "function10",
-                    "args": ""
+                    "args": []
                 },
                 "MorKeyb": {
                     "initValue": 0,
@@ -211,19 +288,38 @@
                     "initValue": "Antonio",
                     "variate": 1,
                     "name": "function3",
-                    "args": ""
+                    "args": []
                 },
                 "NameApp": {
                     "initValue": "",
                     "variate": 1,
                     "name": "function9",
-                    "args": ""
+                    "args": []
                 },
                 "Screenshot": {
-                    "initValue": "",
+                    "initValue": "Captura de pantalla 2021-10-05 132706.png",
                     "variate": 1,
-                    "name": "function8",
-                    "args": "acu"
+                    "name": "function30",
+                    "args": {
+                        "TextInput": [{
+                            "coordinates": [800, 900, 750, 800],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",16,"#000000"]
+                        },{
+                            "coordinates": [200, 300, 300, 400],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",16,"#000000"]
+                        }],
+                        "Checkbox": [{
+                            "coordinates": [100, 100, 200, 275],
+                            "name": "function23",
+                            "args": "#ffffff"
+                        },{
+                            "coordinates": [500, 600, 700, 800],
+                            "name": "function21",
+                            "args": "element12"
+                        }]
+                    }
                 }
             }
         },
@@ -234,13 +330,13 @@
                     "initValue": 0,
                     "variate": 1,
                     "name": "function10",
-                    "args": ""
+                    "args": []
                 },
                 "MorKeyb": {
                     "initValue": 1,
                     "variate": 0,
                     "name": "function1",
-                    "args": ""
+                    "args": []
                 },
                 "Coor_X": {
                     "initValue": "NaN",
@@ -258,19 +354,38 @@
                     "initValue": "antonio",
                     "variate": 1,
                     "name": "function3",
-                    "args": ""
+                    "args": []
                 },
                 "NameApp": {
                     "initValue": "",
                     "variate": 1,
                     "name": "function9",
-                    "args": ""
+                    "args": []
                 },
                 "Screenshot": {
-                    "initValue": "",
+                    "initValue": "Captura de pantalla 2021-10-05 132706.png",
                     "variate": 1,
-                    "name": "function8",
-                    "args": "acu"
+                    "name": "function30",
+                    "args": {
+                        "TextInput": [{
+                            "coordinates": [800, 900, 750, 800],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",16,"#000000"]
+                        },{
+                            "coordinates": [200, 300, 300, 400],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",16,"#000000"]
+                        }],
+                        "Checkbox": [{
+                            "coordinates": [100, 100, 200, 275],
+                            "name": "function23",
+                            "args": "#ffffff"
+                        },{
+                            "coordinates": [500, 600, 700, 800],
+                            "name": "function21",
+                            "args": "element12"
+                        }]
+                    }
                 }
             },
             "B": {
@@ -278,13 +393,13 @@
                     "initValue": 0,
                     "variate": 1,
                     "name": "function10",
-                    "args": ""
+                    "args": []
                 },
                 "MorKeyb": {
                     "initValue": 0,
                     "variate": 0,
                     "name": "function1",
-                    "args": ""
+                    "args": []
                 },
                 "Coor_X": {
                     "initValue": "NaN",
@@ -302,19 +417,38 @@
                     "initValue": "Antonio",
                     "variate": 0,
                     "name": "",
-                    "args": ""
+                    "args": []
                 },
                 "NameApp": {
                     "initValue": "",
                     "variate": 1,
                     "name": "function9",
-                    "args": ""
+                    "args": []
                 },
                 "Screenshot": {
-                    "initValue": "",
+                    "initValue": "Captura de pantalla 2021-10-05 132706.png",
                     "variate": 1,
-                    "name": "function8",
-                    "args": "acu"
+                    "name": "function30",
+                    "args": {
+                        "TextInput": [{
+                            "coordinates": [800, 900, 750, 800],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",16,"#000000"]
+                        },{
+                            "coordinates": [200, 300, 300, 400],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",16,"#000000"]
+                        }],
+                        "Checkbox": [{
+                            "coordinates": [100, 100, 200, 275],
+                            "name": "function23",
+                            "args": "#ffffff"
+                        },{
+                            "coordinates": [500, 600, 700, 800],
+                            "name": "function21",
+                            "args": "element12"
+                        }]
+                    }
                 }
             },
             "C": {
@@ -322,13 +456,13 @@
                     "initValue": 0,
                     "variate": 1,
                     "name": "function10",
-                    "args": ""
+                    "args": []
                 },
                 "MorKeyb": {
                     "initValue": 0,
                     "variate": 0,
                     "name": "function1",
-                    "args": ""
+                    "args": []
                 },
                 "Coor_X": {
                     "initValue": "NaN",
@@ -346,19 +480,38 @@
                     "initValue": "Registro",
                     "variate": 0,
                     "name": "",
-                    "args": ""
+                    "args": []
                 },
                 "NameApp": {
                     "initValue": "",
                     "variate": 1,
                     "name": "function9",
-                    "args": ""
+                    "args": []
                 },
                 "Screenshot": {
-                    "initValue": "",
+                    "initValue": "Captura de pantalla 2021-10-05 132706.png",
                     "variate": 1,
-                    "name": "function8",
-                    "args": "acu"
+                    "name": "function30",
+                    "args": {
+                        "TextInput": [{
+                            "coordinates": [800, 900, 750, 800],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",16,"#000000"]
+                        },{
+                            "coordinates": [200, 300, 300, 400],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",16,"#000000"]
+                        }],
+                        "Checkbox": [{
+                            "coordinates": [100, 100, 200, 275],
+                            "name": "function23",
+                            "args": "#ffffff"
+                        },{
+                            "coordinates": [500, 600, 700, 800],
+                            "name": "function21",
+                            "args": "element12"
+                        }]
+                    }
                 }
             },
             "F": {
@@ -366,13 +519,13 @@
                     "initValue": 0,
                     "variate": 1,
                     "name": "function10",
-                    "args": ""
+                    "args": []
                 },
                 "MorKeyb": {
                     "initValue": 0,
                     "variate": 0,
                     "name": "function1",
-                    "args": ""
+                    "args": []
                 },
                 "Coor_X": {
                     "initValue": "NaN",
@@ -390,22 +543,40 @@
                     "initValue": "Antonio",
                     "variate": 1,
                     "name": "function2",
-                    "args": ""
+                    "args": []
                 },
                 "NameApp": {
                     "initValue": "",
                     "variate": 1,
                     "name": "function9",
-                    "args": ""
+                    "args": []
                 },
                 "Screenshot": {
-                    "initValue": "",
+                    "initValue": "Captura de pantalla 2021-10-05 132706.png",
                     "variate": 1,
-                    "name": "function8",
-                    "args": "acu"
+                    "name": "function30",
+                    "args": {
+                        "TextInput": [{
+                            "coordinates": [800, 900, 750, 800],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",16,"#000000"]
+                        },{
+                            "coordinates": [200, 300, 300, 400],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",16,"#000000"]
+                        }],
+                        "Checkbox": [{
+                            "coordinates": [100, 100, 200, 275],
+                            "name": "function23",
+                            "args": "#ffffff"
+                        },{
+                            "coordinates": [500, 600, 700, 800],
+                            "name": "function21",
+                            "args": "element12"
+                        }]
+                    }
                 }
             }
         }
-
     }
 }

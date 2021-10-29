@@ -1,104 +1,518 @@
 {
-    "GUIElements": ["Button", "TextInput", "Checkbox", "RadioButton"],
+    "columnsNames": ["Timestamp", "MorKeyb", "Coor_X", "Coor_Y","Click", "TextInput", "NameApp", "Screenshot"],
+    "GUIElements": ["Button", "UI", "Checkbox", "TextInput"],
     "condition": {
-        "activityDecision": "C",
-        "ID2": "A.TextInput == 'Registro'"
+        "activityDecision": "B",
+        "ID2": "B.Screenshot == 'Attached'"
     },
     "trace": {
         "1": {
             "A": {
-                "TextInput1": {
-                    "initValue": "",
-                    "coordinates": [100, 100, 200, 275],
+                "Timestamp": {
+                    "initValue": 0,
                     "variate": 1,
-                    "capturePath": "Captura de pantalla 2021-10-05 132706.png",
-                    "name": "function21",
-                    "args": "TextInput1"
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [146, 1280, 978]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [193, 800, 77]
+                },
+                "Click": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "Firefox",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\V1_image0001.png",
+                    "variate": 1,
+                    "name": "function30",
+                    "args": {
+                        "Button": [{
+                            "coordinates": [1164, 40, 1255, 122],
+                            "name": "function21",
+                            "args": ["element3"]
+                        },{
+                            "coordinates": [1144, 215, 1234, 248],
+                            "name": "function21",
+                            "args": ["element21"]
+                        },{
+                            "coordinates": [1144, 384, 1234, 418],
+                            "name": "function21",
+                            "args": ["element22"]
+                        },{
+                            "coordinates": [1144, 490, 1234, 525],
+                            "name": "function21",
+                            "args": ["element21"]
+                        },{
+                            "coordinates": [1144, 572, 1234, 603],
+                            "name": "function21",
+                            "args": ["element22"]
+                        },{
+                            "coordinates": [1144, 655, 1234, 685],
+                            "name": "function21",
+                            "args": ["element21"]
+                        }]
+                    }
                 }
             },
             "B": {
-                "TextInput1": {
-                    "initValue": "",
-                    "coordinates": [100, 200, 300, 375],
+                "Timestamp": {
+                    "initValue": 0,
                     "variate": 1,
-                    "capturePath": "Captura de pantalla 2021-10-05 132706.png",
-                    "name": "function21",
-                    "args": "TextInput1"
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [567, 1280, 100]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [244, 800, 60]
+                },
+                "Click": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "Firefox",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\V1_image0003.png",
+                    "variate": 1,
+                    "name": "function30",
+                    "args": {
+                        "UI": [{
+                            "coordinates": [567, 244, 667, 304],
+                            "name": "function21",
+                            "args": ["image_alt_1","image_alt_2","image_alt_3","image_alt_4","image_alt_5","image_alt_6","image_alt_7","image_alt_8","image_alt_9","image_alt_10"]
+                        }],
+                        "Button": [{
+                            "coordinates": [1142, 40, 1253, 152],
+                            "name": "function21",
+                            "args": ["element7"]
+                        },{
+                            "coordinates": [305, 73, 391, 151],
+                            "name": "function21",
+                            "args": ["element25"]
+                        }]
+                    }
                 }
             },
             "C": {
-                "TextInput1": {
-                    "initValue": "",
-                    "coordinates": [100, 200, 300, 375],
+                "Timestamp": {
+                    "initValue": 0,
                     "variate": 1,
-                    "capturePath": "Captura de pantalla 2021-10-05 132706.png",
-                    "name": "function21",
-                    "args": "TextInput1"
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [138, 1280, 544]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [361, 800, 322]
+                },
+                "Click": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "key.ALT+key.TAB",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "Firefox",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\V1_image0004.png",
+                    "variate": 1,
+                    "name": "function30",
+                    "args": {
+                        "UI": [{
+                            "coordinates": [138, 361, 682, 683],
+                            "name": "function21",
+                            "args": ["image_alt_1","image_alt_2","image_alt_3","image_alt_4","image_alt_5","image_alt_6","image_alt_7","image_alt_8","image_alt_9","image_alt_10"]
+                        }],
+                        "Button": [{
+                            "coordinates": [1142, 40, 1253, 152],
+                            "name": "function21",
+                            "args": ["element7"]
+                        },{
+                            "coordinates": [305, 73, 391, 151],
+                            "name": "function21",
+                            "args": ["element25"]
+                        }]
+                    }
                 }
             },
             "D": {
-                "Checkbox": {
-                    "initValue": "",
-                    "coordinates": [700, 750, 1000, 1050],
+                "Timestamp": {
+                    "initValue": 0,
                     "variate": 1,
-                    "capturePath": "Captura de pantalla 2021-10-05 132706.png",
-                    "name": "function20",
-                    "args": "Checkbox1"
-                }
-            },
-            "E": {
-                "TextInput1": {
-                    "initValue": "",
-                    "coordinates": [100, 200, 300, 375],
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function11",
+                    "args": [0, 1280, 230]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function12",
+                    "args": [260, 800, 30]
+                },
+                "Click": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "Carmen",
                     "variate": 1,
-                    "capturePath": "Captura de pantalla 2021-10-05 132706.png",
-                    "name": "function21",
-                    "args": "TextInput1"
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "Firefox",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\V1_image0005.png",
+                    "variate": 1,
+                    "name": "function30",
+                    "args": {
+                        "Button": [{
+                            "coordinates": [1155, 23, 1249, 116],
+                            "name": "function21",
+                            "args": ["element7"]
+                        },{
+                            "coordinates": [468, 565, 641, 618],
+                            "name": "function21",
+                            "args": ["element24"]
+                        },{
+                            "coordinates": [692, 565, 869, 618],
+                            "name": "function21",
+                            "args": ["element21"]
+                        }],
+                        "UI": [{
+                            "coordinates": [432, 254, 951, 285],
+                            "name": "function21",
+                            "args": ["element18"]
+                        },{
+                            "coordinates": [432, 310, 951, 340],
+                            "name": "function21",
+                            "args": ["element18"]
+                        },{
+                            "coordinates": [432, 369, 951, 402],
+                            "name": "function21",
+                            "args": ["element10"]
+                        },{
+                            "coordinates": [432, 422, 951, 452],
+                            "name": "function21",
+                            "args": ["element18"]
+                        }],
+                        "TextInput": [{
+                            "coordinates": [432, 254, 951, 285],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",20,"#000000"]
+                        }],
+                        "Checkbox": [{
+                            "coordinates": [434, 480, 467, 515],
+                            "name": "function21",
+                            "args": ["element15"]
+                        }]
+                    }
                 }
             }
         },
         "2": {
+
             "A": {
-                "TextInput1": {
-                    "initValue": "",
-                    "coordinates": [100, 100, 200, 275],
+                "Timestamp": {
+                    "initValue": 0,
                     "variate": 1,
-                    "capturePath": "Captura de pantalla 2021-10-05 132706.png",
-                    "name": "function21",
-                    "args": "TextInput1"
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [146, 1280, 978]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [193, 800, 77]
+                },
+                "Click": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "Firefox",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\V2_image0001.png",
+                    "variate": 1,
+                    "name": "function30",
+                    "args": {
+                        "Button": [{
+                            "coordinates": [1164, 40, 1255, 122],
+                            "name": "function21",
+                            "args": ["element3"]
+                        },{
+                            "coordinates": [1144, 215, 1234, 248],
+                            "name": "function21",
+                            "args": ["element21"]
+                        },{
+                            "coordinates": [1144, 384, 1234, 418],
+                            "name": "function21",
+                            "args": ["element22"]
+                        },{
+                            "coordinates": [1144, 490, 1234, 525],
+                            "name": "function21",
+                            "args": ["element21"]
+                        },{
+                            "coordinates": [1144, 572, 1234, 603],
+                            "name": "function21",
+                            "args": ["element22"]
+                        },{
+                            "coordinates": [1144, 655, 1234, 685],
+                            "name": "function21",
+                            "args": ["element21"]
+                        }]
+                    }
                 }
             },
             "B": {
-                "TextInput1": {
-                    "initValue": "",
-                    "coordinates": [100, 200, 300, 375],
+                "Timestamp": {
+                    "initValue": 0,
                     "variate": 1,
-                    "capturePath": "Captura de pantalla 2021-10-05 132706.png",
-                    "name": "function21",
-                    "args": "TextInput1"
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [1006, 1280, 110]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [41, 800, 110]
+                },
+                "Click": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "Firefox",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\V2_image0003.png",
+                    "variate": 1,
+                    "name": "function30",
+                    "args": {
+                        "Button": [{
+                            "coordinates": [1142, 40, 1253, 152],
+                            "name": "function21",
+                            "args": ["element7"]
+                        },{
+                            "coordinates": [305, 73, 391, 151],
+                            "name": "function21",
+                            "args": ["element25"]
+                        }]
+                    }
                 }
             },
-            "C": {
-                "TextInput1": {
-                    "initValue": "",
-                    "coordinates": [100, 200, 300, 375],
+            "E": {
+                "Timestamp": {
+                    "initValue": 0,
                     "variate": 1,
-                    "capturePath": "Captura de pantalla 2021-10-05 132706.png",
-                    "name": "function21",
-                    "args": "TextInput1"
-                }
-            },
-            "F": {
-                "TextInput1": {
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function11",
+                    "args": [0, 1280, 230]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function12",
+                    "args": [260, 800, 30]
+                },
+                "Click": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
                     "initValue": "",
-                    "coordinates": [100, 200, 300, 375],
                     "variate": 1,
-                    "capturePath": "Captura de pantalla 2021-10-05 132706.png",
-                    "name": "function21",
-                    "args": "TextInput1"
+                    "name": "function7",
+                    "args": [4]
+                },
+                "NameApp": {
+                    "initValue": "Firefox",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\V2_image0004.png",
+                    "variate": 1,
+                    "name": "function30",
+                    "args": {
+                        "UI": [{
+                            "coordinates": [121, 349, 1130, 705],
+                            "name": "function23",
+                            "args": ["#ffffff"]
+                        }],
+                        "TextInput": [{
+                            "coordinates": [121, 349, 1130, 705],
+                            "name": "function22",
+                            "args": ["resources/Roboto-Black.ttf",20,"#000000"]
+                        }],
+                        "Button": [{
+                            "coordinates": [1141, 38, 1254, 150],
+                            "name": "function21",
+                            "args": ["element7"]
+                        },{
+                            "coordinates": [305, 73, 391, 151],
+                            "name": "function21",
+                            "args": ["element25"]
+                        }]
+                    }
                 }
             }
         }
-
     }
 }

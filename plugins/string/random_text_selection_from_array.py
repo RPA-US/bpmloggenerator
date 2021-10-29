@@ -2,7 +2,7 @@ from generator.key_generator import generate_sentence, generate_words, generate_
 import random
 
 
-def generate_clipboard_content():
+def generate_clipboard_content(args):
     '''
     Generate text or paths for the paperclip content.
     '''

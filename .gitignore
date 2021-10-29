@@ -128,5 +128,12 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-
 CSV_sample_exit.csv
+CSV_sample_exit_csv
+CSV_exit
+resources/test_GUI_components
+resources/Componentes GUI pruebas
+resources/test_screenshots
+resources/test_dni
+mockups
+Captura de pantalla 2021-10-05 132706.png
