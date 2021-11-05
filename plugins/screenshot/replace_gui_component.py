@@ -99,3 +99,4 @@ def hidden_gui_element(args):
     # Save image
     back_im.save(new_image, quality=95)
     return new_image
+

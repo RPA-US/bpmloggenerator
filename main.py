@@ -3,7 +3,7 @@ import os
 import logging
 import time
 import json
-from plugins.screenshot.create_screenshot import generate_capture
+from plugins.screenshot.create_screenshot import generate_capture, change_screenshot_name
 from tools.generic_utils import detect_function
 
 def validation_params(json_path,generate_path,number_logs,percent_per_trace):   
@@ -65,15 +65,20 @@ def generate_row(generate_path,dict,acu,variante):
                     variate = element["variate"]
                     name = element["name"]
                     args = element["args"]
+                    
                     if variate == 1:
                         if name=="function30":
                             val = generate_capture(columns_ui,columns,element,acu,generate_path,attr)
                         else:
                             val  = detect_function(name)(args)
-                    elif initValue !="":
-                        val = initValue 
-                    else:
-                        val="NaN"
+                    elif variate == 0:
+                        if initValue !="":
+                            if name=="function31":
+                                val = change_screenshot_name([initValue,generate_path,acu])
+                            else:
+                                val = initValue 
+                        else:
+                            val="NaN"
                 else:
                     val="NaN"
             attr.append(val)
@@ -108,7 +113,7 @@ def main_function(json_log_path,generate_path,number_logs,percent_per_trace):
                 list_percents.append(number_logs-total_percent)
         generate_path = generate_path+"\\"+str(round(time.time() * 1000))+"logs\\"
         if not os.path.exists(generate_path):
-            os.mkdir(generate_path)
+            os.makedirs(generate_path)
         f = open(generate_path+"log.csv", 'w',newline='')
         writer = csv.writer(f)
         columns = json_act_path["columnsNames"]

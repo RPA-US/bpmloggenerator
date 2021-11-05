@@ -14,6 +14,7 @@ def generate_screenshot_demo(args):
     number = args[1]
     return generate_path+str(number)+"_img.png"
 
+
 def change_screenshot_name(args):
     '''
     Generate an image copy renamed
@@ -21,10 +22,11 @@ def change_screenshot_name(args):
     capture = args[0]
     generate_path = args[1]
     number = args[2]
-    name = generate_path+number+"_img.png"
+    name = generate_screenshot_demo([generate_path,number])
     shutil.copyfile(capture, name)
     # Random number and the extension with a img identification
     return name
+
 
 def generate_capture(columns_ui,columns,element,acu,generate_path,attr):
     '''
@@ -47,22 +49,23 @@ def generate_capture(columns_ui,columns,element,acu,generate_path,attr):
                     ind_text = columns.index(i)
                     content = attr[ind_text]
                     arguments.append(content)
-                func = args_tmp[i]
-                for j in func:
-                    if element is not None:
-                        coordinates = j["coordinates"]
-                        name = j["name"]
-                        args = j["args"]
-                        if os.path.exists(pathA+"\\"+new_image):
-                            capturePath=new_image
-                        arguments.append(args)
-                        arguments.append(new_image)
-                        arguments.append(capturePath)
-                        arguments.append(coordinates)
-                        val = util.detect_function(name)(arguments)
-                    else:
-                        val="NaN"
-                    arguments = []
+                if i in args_tmp:
+                    func = args_tmp[i]
+                    for j in func:
+                        if element is not None:
+                            coordinates = j["coordinates"]
+                            name = j["name"]
+                            args = j["args"]
+                            if os.path.exists(pathA+"\\"+new_image):
+                                capturePath=new_image
+                            arguments.append(args)
+                            arguments.append(new_image)
+                            arguments.append(capturePath)
+                            arguments.append(coordinates)
+                            new_image = util.detect_function(name)(arguments)
+                        else:
+                            new_image="NaN"
+                        arguments = []
             except:
                 arguments = []
     except:
