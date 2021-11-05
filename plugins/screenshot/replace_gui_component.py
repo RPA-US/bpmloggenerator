@@ -97,3 +97,15 @@ def hidden_gui_element(args):
     back_im.save(new_image, quality=95)
     return new_image
 
+
+def generate_copied_capture(args):
+    '''
+    Generate an image copy renamed
+    '''
+    capture = args[0]
+    generate_path = args[1]
+    number = args[2]
+    name = generate_path+str(number)+"_img.png"
+    shutil.copyfile(capture, name)
+    # Random number and the extension with a img identification
+    return name

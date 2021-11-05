@@ -15,6 +15,5 @@
 "function21" : "replace_gui_element_by_other",
 "function22" : "insert_text_image",
 "function23" : "hidden_gui_element",
-"function30" : "generate_capture",
 "function_copy": "generate_copied_capture"
 }

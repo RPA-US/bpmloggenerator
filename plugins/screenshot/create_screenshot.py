@@ -10,20 +10,6 @@ def generate_screenshot_demo(args):
     number = args[1]
     return generate_path+str(number)+"_img.png"
 
-
-def change_screenshot_name(args):
-    '''
-    Generate an image copy renamed
-    '''
-    capture = args[0]
-    generate_path = args[1]
-    number = args[2]
-    name = generate_screenshot_demo([generate_path,number])
-    shutil.copyfile(capture, name)
-    # Random number and the extension with a img identification
-    return name
-
-
 def generate_capture(columns_ui,columns,element,acu,generate_path,attr):
     '''
     Generate row reading the json

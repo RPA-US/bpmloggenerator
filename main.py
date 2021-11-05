@@ -3,7 +3,8 @@ import os
 import logging
 import time
 import json
-from plugins.screenshot.create_screenshot import generate_capture, change_screenshot_name
+from plugins.screenshot.create_screenshot import generate_capture
+from plugins.screenshot.replace_gui_component import generate_copied_capture
 from tools.generic_utils import detect_function
 
 def validation_params(json_path,generate_path,number_logs,percent_per_trace):   
@@ -48,6 +49,7 @@ def generate_row(generate_path,dict,acu,variante):
         acu: number of the case
         variante: if use the initial value or the generate
     '''
+    screenshot_column_name = "Screenshot" # TODO: generalize
     Timestamp = str(round(time.time() * 1000)+1)
     rows = []
     columns= dict["columnsNames"]
@@ -67,14 +69,14 @@ def generate_row(generate_path,dict,acu,variante):
                     args = element["args"]
                     
                     if variate == 1:
-                        if name=="function30":
+                        if i==screenshot_column_name:
                             val = generate_capture(columns_ui,columns,element,acu,generate_path,attr)
                         else:
                             val  = detect_function(name)(args)
                     elif variate == 0:
                         if initValue !="":
-                            if name=="function31":
-                                val = change_screenshot_name([initValue,generate_path,acu])
+                            if i==screenshot_column_name:
+                                val = generate_copied_capture([initValue,generate_path,acu])
                             else:
                                 val = initValue 
                         else:

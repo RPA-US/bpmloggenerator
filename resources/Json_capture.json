@@ -103,7 +103,7 @@
                 "Screenshot": {
                     "initValue": "mockups\\V1_image0003.png",
                     "variate": 1,
-                    "name": "function30",
+                    "name": "",
                     "args": {
                         "ImageView": [{
                             "coordinates": [567, 244, 667, 304],
@@ -159,7 +159,7 @@
                 "Screenshot": {
                     "initValue": "mockups\\V1_image0004.png",
                     "variate": 1,
-                    "name": "function30",
+                    "name": "",
                     "args": {
                         "ImageView": [{
                             "coordinates": [138, 361, 682, 683],
@@ -215,7 +215,7 @@
                 "Screenshot": {
                     "initValue": "mockups\\V1_image0005.png",
                     "variate": 1,
-                    "name": "function30",
+                    "name": "",
                     "args": {
                         "ImageView": [{
                             "coordinates": [432, 254, 951, 285],
@@ -294,7 +294,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V2_image001.png",
+                    "initValue": "mockups\\V2_image0001.png",
                     "variate": 0,
                     "name": "function_copy",
                     "args": {}
@@ -396,7 +396,7 @@
                 "Screenshot": {
                     "initValue": "mockups\\V2_image0004.png",
                     "variate": 1,
-                    "name": "function30",
+                    "name": "",
                     "args": {
                         "ImageView": [{
                             "coordinates": [121, 349, 1130, 705],
