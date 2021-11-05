@@ -1,9 +1,6 @@
-import random
-import time
 from PIL import Image
-import os
 import PIL
-import glob
+import shutil
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw 

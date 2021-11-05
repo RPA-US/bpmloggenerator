@@ -1,8 +1,4 @@
-import random
-import time
-import random
 import os
-import shutil
 import tools.generic_utils as util
 
 def generate_screenshot_demo(args):

@@ -49,6 +49,12 @@
                     "variate": 0,
                     "name": "function9",
                     "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\V1_image0001.png",
+                    "variate": 0,
+                    "name": "function_copy",
+                    "args": {}
                 }
             },
             "B": {
@@ -286,6 +292,12 @@
                     "variate": 0,
                     "name": "function9",
                     "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\V2_image001.png",
+                    "variate": 0,
+                    "name": "function_copy",
+                    "args": {}
                 }
             },
             "B": {
@@ -330,6 +342,12 @@
                     "variate": 0,
                     "name": "function9",
                     "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\V2_image0003.png",
+                    "variate": 0,
+                    "name": "function_copy",
+                    "args": {}
                 }
             },
             "E": {
