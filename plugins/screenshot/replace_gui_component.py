@@ -1,9 +1,6 @@
-import random
-import time
 from PIL import Image
-import os
 import PIL
-import glob
+import shutil
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw 
@@ -99,3 +96,15 @@ def hidden_gui_element(args):
     # Save image
     back_im.save(new_image, quality=95)
     return new_image
+
+def generate_copied_capture(args):
+    '''
+    Generate an image copy renamed
+    '''
+    capture = args[0]
+    generate_path = args[1]
+    number = args[2]
+    name = generate_path+number+"_img.png"
+    shutil.copyfile(capture, name)
+    # Random number and the extension with a img identification
+    return name

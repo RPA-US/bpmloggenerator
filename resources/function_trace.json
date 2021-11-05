@@ -16,5 +16,5 @@
 "function22" : "insert_text_image",
 "function23" : "hidden_gui_element",
 "function30" : "generate_capture",
-"function_copy": "change_screenshot_name"
+"function_copy": "generate_copied_capture"
 }
