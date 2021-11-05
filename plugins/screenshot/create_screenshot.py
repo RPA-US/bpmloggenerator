@@ -18,8 +18,8 @@ def generate_capture(columns_ui,columns,element,acu,generate_path,attr):
         acu: number of the case
         variante: if use the initial value or the generate
     '''    
-    pathA = os.getcwd()
-    capturePath= element["initValue"]
+    actual_path = os.getcwd()
+    capture_path= element["initValue"]
     args_tmp = element["args"]
     args = [generate_path,acu]
     new_image = generate_screenshot_demo(args)
@@ -38,11 +38,11 @@ def generate_capture(columns_ui,columns,element,acu,generate_path,attr):
                             coordinates = j["coordinates"]
                             name = j["name"]
                             args = j["args"]
-                            if os.path.exists(pathA+"\\"+new_image):
-                                capturePath=new_image
+                            if os.path.exists(actual_path+"\\"+new_image):
+                                capture_path=new_image
                             arguments.append(args)
                             arguments.append(new_image)
-                            arguments.append(capturePath)
+                            arguments.append(capture_path)
                             arguments.append(coordinates)
                             new_image = util.detect_function(name)(arguments)
                         else:
