@@ -164,6 +164,7 @@
                         "ImageView": [{
                             "coordinates": [[138, 361, 682, 683], [567, 244, 667, 304]],
                             "name": "function24",
+                            "dependency": "B",
                             "args": ["image_alt_1","image_alt_2","image_alt_3","image_alt_4","image_alt_5","image_alt_6","image_alt_7","image_alt_8","image_alt_9","image_alt_10"]
                         }]
                     }

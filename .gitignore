@@ -138,3 +138,5 @@ resources/test_dni
 resources/json_examples
 mockups
 Captura de pantalla 2021-10-05 132706.png
+# SQLite Database
+loggenerator.db

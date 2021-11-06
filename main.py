@@ -6,6 +6,7 @@ import json
 from plugins.screenshot.create_screenshot import generate_capture
 from plugins.screenshot.replace_gui_component import generate_copied_capture
 from tools.generic_utils import detect_function
+from tools.database import init_database
 
 def validation_params(json_path,generate_path,number_logs,percent_per_trace):   
     '''
@@ -43,7 +44,7 @@ def validation_params(json_path,generate_path,number_logs,percent_per_trace):
 
 
 
-def generate_row(generate_path,dict,acu,variante, screenshot_column_name, case):
+def generate_row(generate_path,dict,acu,variant, screenshot_column_name, case):
     '''
     Generate row reading the json
     args:
@@ -54,7 +55,7 @@ def generate_row(generate_path,dict,acu,variante, screenshot_column_name, case):
     rows = []
     columns= dict["columnsNames"]
     columns_ui= dict["GUIElements"]
-    json_list = dict["trace"][str(variante)]
+    json_list = dict["trace"][str(variant)]
     for key in json_list:
         attr = []
         acu += 1
@@ -66,10 +67,10 @@ def generate_row(generate_path,dict,acu,variante, screenshot_column_name, case):
                     variate = element["variate"]
                     name = element["name"]
                     args = element["args"]
-                    
+                                        
                     if variate == 1:
                         if i==screenshot_column_name:
-                            val = generate_capture(columns_ui,columns,element,acu,generate_path,attr)
+                            val = generate_capture(columns_ui,columns,element,acu,generate_path,attr, case, key, variant)
                         else:
                             val  = detect_function(name)(args)
                     elif variate == 0:
@@ -83,7 +84,7 @@ def generate_row(generate_path,dict,acu,variante, screenshot_column_name, case):
                 else:
                     val="NaN"
             attr.append(val)
-        rows.append(tuple([case,key,variante] + attr))
+        rows.append(tuple([case,key,variant] + attr))
     return rows,acu
 
 
@@ -98,6 +99,7 @@ def main_function(json_log_path,generate_path,number_logs,percent_per_trace, act
     '''
     #try:
     if validation_params(json_log_path,generate_path,number_logs,percent_per_trace):
+        init_database()
         json_log = open(json_log_path)
         json_act_path = json.load(json_log)
         list_percents = []

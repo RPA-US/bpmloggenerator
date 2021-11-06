@@ -5,6 +5,7 @@ from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw 
 import tools.generic_utils as util
+import sqlite3 as sl
 
 
 def replace_gui_element_by_other(args):
@@ -17,12 +18,18 @@ def replace_gui_element_by_other(args):
         image_path_to_save: path where to save the image
     '''
     if isinstance(args[0], list):
-        image_element = util.detect_element(util.select_random_list(args[0]))
+        selected_element = util.select_random_list(args[0])
+        image_element = util.detect_element(selected_element)
     else:
-        image_element =  args[0]
+        image_element = args[0]
     image_path_to_save = args[1]
     capture = args[2]
     coordenates = args[3]
+
+    if len(args) > 4:
+        selected_element = args[4]
+        image_element = util.detect_element(selected_element)
+
     # Coordenates x and y
     left_top_x = coordenates[0]
     left_top_y = coordenates[1]
@@ -33,8 +40,8 @@ def replace_gui_element_by_other(args):
     height_size = right_bot_y-left_top_y
     newsize = (width_size,height_size)
     # Open gui element
-    image_element = Image.open(image_element)
-    upper_im = image_element.copy()
+    image_gui_element = Image.open(image_element)
+    upper_im = image_gui_element.copy()
     # Resize gui element
     upper_im = upper_im.resize(newsize, PIL.Image.NEAREST)
     # Open capture
@@ -42,7 +49,7 @@ def replace_gui_element_by_other(args):
     back_im = capture_img.copy()
     back_im.paste(upper_im,(left_top_x,left_top_y))
     back_im.save(image_path_to_save, quality=95)
-    return image_path_to_save
+    return selected_element
 
 def replace_gui_element_various_places(args):
     '''
@@ -53,22 +60,25 @@ def replace_gui_element_various_places(args):
         id_element: id of the visual element to be inserted
         image_path_to_save: path where to save the image
     '''
-    image_element = util.detect_element(util.select_random_list(args[0]))
+    selected_element = util.select_random_list(args[0])
     image_path_to_save = args[1]
     capture = args[2]
     coordenates = args[3]
+
+    if len(args) > 4:
+        selected_element = args[4]
+        
+    image_element = util.detect_element(selected_element)
 
     # Open capture
     capture_img = Image.open(capture)
     back_im = capture_img.copy()
 
     # Open gui element
-    image_element = Image.open(image_element)
-    upper_im = image_element.copy()
+    image_gui_element = Image.open(image_element)
+    upper_im = image_gui_element.copy()
 
     for i in range(0, len(coordenates)):
-        #replace_gui_element_by_other(image_element, image_path_to_save, capture, coordenates[limit])
-
         # Coordenates x and y
         left_top_x = coordenates[i][0]
         left_top_y = coordenates[i][1]
@@ -87,6 +97,8 @@ def replace_gui_element_various_places(args):
         
         back_im.paste(upper_im,(left_top_x,left_top_y))
         back_im.save(image_path_to_save, quality=95)
+       
+    return selected_element
     
 
 

@@ -1,5 +1,6 @@
 import os
 import tools.generic_utils as util
+from tools.database import create_connection, select_variations_by, create_variation
 
 def generate_screenshot_demo(args):
     '''
@@ -10,7 +11,7 @@ def generate_screenshot_demo(args):
     number = args[1]
     return generate_path+str(number)+"_img.png"
 
-def generate_capture(columns_ui,columns,element,acu,generate_path,attr):
+def generate_capture(columns_ui,columns,element,acu,generate_path,attr,case, activity, variant):
     '''
     Generate row reading the json
     args:
@@ -44,7 +45,14 @@ def generate_capture(columns_ui,columns,element,acu,generate_path,attr):
                             arguments.append(new_image)
                             arguments.append(capture_path)
                             arguments.append(coordinates)
-                            new_image = util.detect_function(name)(arguments)
+                            if "dependency" in j:
+                                con = create_connection()
+                                dependant_row = select_variations_by(con, case, j["dependency"]) # fetch a list
+                                arguments.append(dependant_row[0][4])
+                                
+                            image_element = util.detect_function(name)(arguments)
+                            if type(image_element) == str:
+                                create_variation(None, case, activity, variant, name, image_element)
                         else:
                             new_image="NaN"
                         arguments = []
