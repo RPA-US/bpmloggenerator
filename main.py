@@ -87,6 +87,35 @@ def generate_row(generate_path,dict,acu,variant, screenshot_column_name, case):
         rows.append(tuple([case,key,variant] + attr))
     return rows,acu
 
+def number_rows_by_cases(number_logs, percent_per_trace):
+    list_percents = []
+    total_percent = 0
+    # Calculate the number of cases per trace with the percent per case
+    for i in range(0,len(percent_per_trace)):
+        # The number of cases is rounded
+        if i != len(percent_per_trace)-1:
+            trace_percent = round(percent_per_trace[i]*number_logs)
+            total_percent += trace_percent
+            list_percents.append(trace_percent)
+        else:
+        # The number of cases for the second trace after rounding
+            list_percents.append(number_logs-total_percent)
+    return list_percents
+
+def number_rows_by_number_of_activities(dict, number_logs, percent_per_trace):
+    list_percents = []
+    # Calculate the number of cases per trace with the percent per case
+    for i in range(0,len(percent_per_trace)):
+        num_of_activities = len(dict[str(i+1)])
+        # The number of cases is rounded
+        trace_percent = round((percent_per_trace[i]*number_logs)/num_of_activities)
+        print("=======================================\nVariant "+str(i+1)+
+            ":\n  Number of activities -> "+str(num_of_activities)+
+             "\n  Percentage indicated -> "+str(percent_per_trace[i]) +
+             "\n  Cases generated      -> "+str(trace_percent))
+        list_percents.append(trace_percent)
+    #normalised_vector = [i/sum(list_percents) for i in list_percents]
+    return list_percents
 
 def main_function(json_log_path,generate_path,number_logs,percent_per_trace, activity_column_name, variant_column_name, case_column_name, screenshot_column_name):
     '''
@@ -98,23 +127,16 @@ def main_function(json_log_path,generate_path,number_logs,percent_per_trace, act
             percent_per_trace: percentage of cases for the two possible json traces
     '''
     #try:
-    if validation_params(json_log_path,generate_path,number_logs,percent_per_trace):
+    if validation_params(json_log_path,generate_path,number_logs[1],percent_per_trace):
         init_database()
         json_log = open(json_log_path)
         json_act_path = json.load(json_log)
-        list_percents = []
-        total_percent = 0
-        # Calculate the number of cases per trace with the percent per case
-        for i in range(0,len(percent_per_trace)):
-            # The number of cases is rounded
-            if i != len(percent_per_trace):
-                trace_percent = round(percent_per_trace[i]*number_logs)
-                total_percent += trace_percent
-                list_percents.append(trace_percent)
-            else:
-            # The number of cases for the second trace after rounding
-                list_percents.append(number_logs-total_percent)
-
+     
+        if number_logs[0] == "log_size":
+            list_percents = number_rows_by_number_of_activities(json_act_path["trace"], number_logs[1], percent_per_trace)
+        else:
+            list_percents = number_rows_by_cases(number_logs[1],percent_per_trace)
+        
         # Generate directory to storage screenshots and log generated
         generate_path = generate_path+"\\"+str(round(time.time() * 1000))+"logs\\"
         if not os.path.exists(generate_path):
@@ -142,8 +164,8 @@ def main_function(json_log_path,generate_path,number_logs,percent_per_trace, act
 if __name__ == '__main__':
     json_log_path = "resources\\Json_capture.json"
     generate_path = "CSV_exit"
-    number_logs = 10
-    percent_per_trace = [0.80,0.20]
+    number_logs = ["log_size",100]
+    percent_per_trace = [0.08,0.92]
     activity_column_name = "Activity"
     variant_column_name = "Variant"
     case_column_name = "Case"

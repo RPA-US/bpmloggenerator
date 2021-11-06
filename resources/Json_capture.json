@@ -243,7 +243,7 @@
                         "Checkbox": [{
                             "coordinates": [434, 480, 467, 515],
                             "name": "function21",
-                            "args": ["element15"]
+                            "args": ["element16"]
                         }]
                     }
                 }
