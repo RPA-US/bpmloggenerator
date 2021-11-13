@@ -6,6 +6,7 @@ from plugins.list.mouse_tipe import generate_mousekeyboard
 from plugins.screenshot.replace_gui_component import hidden_gui_element, insert_text_image, replace_gui_element_by_other, generate_copied_capture, replace_gui_element_various_places
 from plugins.app.nameapp import generate_app_demo
 from plugins.string.random_timestamp import generate_timestamp
+from configuration.settings import sep, function_trace, element_trace
 
 def detect_function(text):
     '''
@@ -14,7 +15,7 @@ def detect_function(text):
         text: function to be detected
     '''
     # Search the function by key in the json
-    f = open('resources\\function_trace.json')
+    f = open('resources'+sep+function_trace)
     json_func = json.load(f)
     return eval(json_func[text])
 
@@ -25,7 +26,7 @@ def detect_element(text):
         text: element to be detected
     '''
     # Search the function by key in the json
-    f = open('resources\\element_trace.json')
+    f = open('resources'+sep+element_trace)
     json_func = json.load(f)
     return json_func[text]
 

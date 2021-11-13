@@ -8,6 +8,7 @@ from plugins.screenshot.create_screenshot import generate_capture
 from plugins.screenshot.replace_gui_component import generate_copied_capture
 from tools.generic_utils import detect_function
 from tools.database import init_database
+from configuration.settings import sep
 
 def validation_params(json_path,generate_path,number_logs,percent_per_trace):   
     '''
@@ -20,7 +21,7 @@ def validation_params(json_path,generate_path,number_logs,percent_per_trace):
     '''
     actual_path = os.getcwd()
     res = True
-    if os.path.exists(actual_path+"\\"+json_path):
+    if os.path.exists(actual_path+ sep +json_path):
         res = True
     else:
         return False
@@ -142,7 +143,7 @@ def main_function(json_log_path,generate_path,number_logs,percent_per_trace, act
         if path:
             generate_path = path
         else:
-            generate_path += "\\"+str(round(time.time() * 1000))+"logs\\"
+            generate_path += sep+str(round(time.time() * 1000))+"logs"+sep
         if not os.path.exists(generate_path):
             os.makedirs(generate_path)
         f = open(generate_path+"log.csv", 'w',newline='')
@@ -172,7 +173,7 @@ def automatic_experiments(json_log_path, generate_path, activity_column_name, va
         "Imbalanced": imbalanced
     }
     
-    version_path = generate_path + "\\version"+str(round(time.time() * 1000))
+    version_path = generate_path + sep + "version"+str(round(time.time() * 1000))
     os.makedirs(version_path)
     
     # os.system("cd " + param_path_log_generator)
@@ -180,15 +181,15 @@ def automatic_experiments(json_log_path, generate_path, activity_column_name, va
         for i in size_secuence:
             for b in balance_conf:
                 size = ['log_size',i]
-                output_path = version_path + "\\" + family + "_" + str(i) + "_" + b +"\\"
+                output_path = version_path + sep + family + "_" + str(i) + "_" + b + sep
                 main_function(json_log_path,generate_path,size,balance_conf[b], activity_column_name, variant_column_name, case_column_name, screenshot_column_name, output_path)
 
 
 if __name__ == '__main__':
     param_mode = sys.argv[1] if len(sys.argv) > 1 else "normal_mode"
-    number_logs = list(sys.argv[2]) if len(sys.argv) > 2 else ["log_size",10]
-    percent_per_trace = list(sys.argv[3]) if len(sys.argv) > 3 else [0.5,0.5]
-    json_log_path = sys.argv[4] if len(sys.argv) > 4 else "resources\\Json_capture.json"
+    json_log_path = sys.argv[2] if len(sys.argv) > 2 else "resources"+sep+"Json_capture.json"
+    number_logs = list(sys.argv[3]) if len(sys.argv) > 3 else ["log_size",10]
+    percent_per_trace = list(sys.argv[4]) if len(sys.argv) > 4 else [0.5,0.5]
     generate_path = sys.argv[5] if len(sys.argv) > 5 else "CSV_exit"
     
     activity_column_name = "Activity"
