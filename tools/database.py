@@ -1,10 +1,11 @@
 #!/usr/bin/python
 import sqlite3
 from sqlite3.dbapi2 import Error
+from configuration.settings import DATABASE
 import sys
 # To initialize Database
 # python -c "from tools.database import init_database; init_database()"
-db_file = 'loggenerator.db'
+db_file = DATABASE
 
 def create_connection():
     """ create a database connection to the SQLite database

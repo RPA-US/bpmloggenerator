@@ -8,6 +8,7 @@ from plugins.screenshot.create_screenshot import generate_capture
 from plugins.screenshot.replace_gui_component import generate_copied_capture
 from tools.generic_utils import detect_function
 from tools.database import init_database
+from configuration.settings import sep
 
 def validation_params(json_path,generate_path,number_logs,percent_per_trace):   
     '''
@@ -20,7 +21,7 @@ def validation_params(json_path,generate_path,number_logs,percent_per_trace):
     '''
     actual_path = os.getcwd()
     res = True
-    if os.path.exists(actual_path+"\\"+json_path):
+    if os.path.exists(actual_path+ sep +json_path):
         res = True
     else:
         return False
@@ -118,9 +119,9 @@ def number_rows_by_number_of_activities(dict, number_logs, percent_per_trace):
     #normalised_vector = [i/sum(list_percents) for i in list_percents]
     return list_percents
 
-def main_function(json_log_path,generate_path,number_logs,percent_per_trace, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, screenshot_name_generation_function, path):
+def case_generation(json_log_path,generate_path,number_logs,percent_per_trace, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, screenshot_name_generation_function, path):
     '''
-    The main function to generate logs
+    The main function to generate logs for a case
         args:
             json_path: path of the json generated with the trace
             generate_path: log generation destination path
@@ -142,7 +143,7 @@ def main_function(json_log_path,generate_path,number_logs,percent_per_trace, act
         if path:
             generate_path = path
         else:
-            generate_path += "\\"+str(round(time.time() * 1000))+"logs\\"
+            generate_path += sep+str(round(time.time() * 1000))+"logs"+sep
         if not os.path.exists(generate_path):
             os.makedirs(generate_path)
         f = open(generate_path+"log.csv", 'w',newline='')
@@ -172,7 +173,7 @@ def automatic_experiments(json_log_path, generate_path, activity_column_name, va
         "Imbalanced": imbalanced
     }
     
-    version_path = generate_path + "\\version"+str(round(time.time() * 1000))
+    version_path = generate_path + sep + "version"+str(round(time.time() * 1000))
     os.makedirs(version_path)
     
     # os.system("cd " + param_path_log_generator)
@@ -180,51 +181,81 @@ def automatic_experiments(json_log_path, generate_path, activity_column_name, va
         for i in size_secuence:
             for b in balance_conf:
                 size = ['log_size',i]
-                output_path = version_path + "\\" + family + "_" + str(i) + "_" + b +"\\"
-                main_function(json_log_path,generate_path,size,balance_conf[b], activity_column_name, variant_column_name, case_column_name, screenshot_column_name, screenshot_name_generation_function, output_path)
+                output_path = version_path + sep + family + "_" + str(i) + "_" + b + sep
+                case_generation(json_log_path,generate_path,size,balance_conf[b], activity_column_name, variant_column_name, case_column_name, screenshot_column_name, screenshot_name_generation_function, output_path)
 
+def scenario_generation(json_case_variability, generate_path, size, label_division, colnames):
+    activity_column_name = colnames["Activity"]
+    variant_column_name = colnames["Variant"]
+    case_column_name = colnames["Case"]
+    screenshot_column_name = colnames["Screenshot"]
+    # Scenario variability: screenshot seeds to later generate case variability are generated 
+    
+    # For each different scenario generate case variability as indicate in "trace" inside "json_case_variability"
+    
 
 if __name__ == '__main__':
+    """[Instructions for use]
+    
+    * param_mode: can be
+        -- "normal_mode": generate one log with the varibility specified in json_log_path
+        -- "autogeneration_mode": generate several logs, one for each family-balance pair. Families and banlance/imbalance percentage are indicated on code below
+        -- "autoscenario_mode": generate variations at scenario level (changing apps environment GUI components), and for each one execute the autogeneration_mode
+        
+    * json_log_path: JSON file indicating variability specifications. On normal and autogeneration modes they are indicate in "trace" attribute. On autoscenario mode, there are also a "scenario" attribute to indicate scenario variability (it must contains the same activities and cases than "trace" attribute)
+    
+    * number_logs: it is a list with two attributes. The first one is the mode we want to measure log size and the second one, the size. There are two modes:
+        -- "log_size": the number in the second position restrict the number of rows of the log
+        -- "cases_size": the number in the second position restrict the number of cases. Each case will have a number of rows associated, so the size of the logs in terms of number of rows will be greater than the number indicated at second position of the list.
+        
+    * percent_per_trace: it is a list indicating the percentage of cases of each variant (label) that we want to generate in the log
+    
+    * generate_path: path where the output of the log generator will be stored
+    
+    * autogeneration_conf: configuration params use in "autogeneration_mode" to generate logs of different sizes (size_secuence) for variations of type of family (families) and balance percentage (balanced, imbalanced)
+    
+    * scenario_size: number of scenarios to generate when "autoscenario_mode" is selected
+    """
     param_mode = sys.argv[1] if len(sys.argv) > 1 else "normal_mode"
-    number_logs = list(sys.argv[2]) if len(sys.argv) > 2 else ["log_size",10]
-    percent_per_trace = list(sys.argv[3]) if len(sys.argv) > 3 else [0.5,0.5]
-    json_log_path = sys.argv[4] if len(sys.argv) > 4 else "resources\\Json_capture.json"
+    json_log_path = sys.argv[2] if len(sys.argv) > 2 else "resources"+sep+"Json_capture.json"
+    number_logs = list(sys.argv[3]) if len(sys.argv) > 3 else ["log_size",10]
+    percent_per_trace = list(sys.argv[4]) if len(sys.argv) > 4 else [0.5,0.5]
     generate_path = sys.argv[5] if len(sys.argv) > 5 else "CSV_exit"
     
-    activity_column_name = "Activity"
-    variant_column_name = "Variant"
-    case_column_name = "Case"
-    screenshot_column_name = "Screenshot" # It must coincide with the column in the seed log
-    screenshot_name_generation_function = "function8"
+    default_conf = { 
+        "balanced": [0.5,0.5],
+        "imbalanced": [0.1,0.9],
+        # Specify secuence of log sizes to automatic generation of experiments
+        "size_secuence": [10, 100],#,100,1000]
+        "families": ["Basic"]#, "Intermediate", "Advanced"]
+    }
+    autogeneration_conf = sys.argv[6] if len(sys.argv) > 6 else default_conf
+    scenario_size = sys.argv[7] if len(sys.argv) > 7 else 10
+    screenshot_name_generation_function = sys.argv[8] if len(sys.argv) > 8 else "function8"
+
+    
+    colnames = {
+        "Case": "Case",
+        "Activity": "Activity",
+        "Screenshot": "Screenshot",
+        "Variant": "Variant"
+    }
+    special_colnames = sys.argv[7] if len(sys.argv) > 7 else colnames # It must coincide with the column in the seed log
     
     if param_mode == "autogeneration_mode":
         # To use this mode execute: python main.py autogeneration_mode
-        balanced = [0.5,0.5]
-        imbalanced = [0.1,0.9]
-        # Specify secuence of log sizes to automatic generation of experiments
-        size_secuence = [10, 100]#,100,1000]
-        families = ["Basic"]#, "Intermediate", "Advanced"]
-        automatic_experiments(json_log_path, generate_path, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, balanced, imbalanced, size_secuence, families, screenshot_name_generation_function)
+        # TODO: autogeneration_conf JSON parse (not autogeneration_conf situation) 
+        automatic_experiments(json_log_path, generate_path, special_colnames["Activity"], special_colnames["Variant"], special_colnames["Case"],
+                              special_colnames["Screenshot"], autogeneration_conf["balanced"], autogeneration_conf["imbalanced"],
+                              autogeneration_conf["size_secuence"], autogeneration_conf["families"], screenshot_name_generation_function)
+    elif param_mode == "autoscenario_mode":
+        size = {
+            number_logs,
+            scenario_size
+        }
+        scenario_generation(json_log_path, generate_path, size, percent_per_trace, colnames)
     else:
-        main_function(json_log_path,generate_path,number_logs,percent_per_trace, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, screenshot_name_generation_function, None)
-    '''
-    from plugins.screenshot.replace_gui_component import insert_text_image, hidden_gui_element
-    capture = "resources/Captura de pantalla 2021-10-05 132706.png"
-    coordenates = [100,500,150,550]
-    new_image = "10_img.png"
-    configuration = [(0,0,0)]
-    hidden_gui_element(capture, coordenates, new_image, configuration)
-    '''
-    '''
-    from plugins.screenshot.replace_gui_component import insert_text_image, hidden_gui_element
-    text = "Hello world!"
-    font = "resources/Roboto-Black.ttf"
-    font_size = 16
-    font_color = "#000000"
-    new_image = "10_img.png"
-    capture = "Captura de pantalla 2021-10-05 132706.png"
-    coordenates = [100,500]
-    list = [text, font, font_size,font_color,new_image,capture,coordenates]
-    insert_text_image(list)
-    '''
+        case_generation(json_log_path,generate_path,number_logs,percent_per_trace, special_colnames["Activity"], 
+                        special_colnames["Variant"], special_colnames["Case"], special_colnames["Screenshot"], screenshot_name_generation_function, None)
+
 

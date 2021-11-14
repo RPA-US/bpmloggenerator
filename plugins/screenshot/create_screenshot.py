@@ -2,6 +2,7 @@ import os
 import tools.generic_utils as util
 from tools.database import create_connection, select_variations_by, create_variation
 from tools.generic_utils import detect_function
+from configuration.settings import sep
 
 def generate_capture(columns_ui,columns,element,acu,generate_path,attr,case, activity, variant, screenshot_name_generation_function):
     '''
@@ -32,7 +33,7 @@ def generate_capture(columns_ui,columns,element,acu,generate_path,attr,case, act
                             coordinates = j["coordinates"]
                             name = j["name"]
                             args = j["args"]
-                            if os.path.exists(actual_path+"\\"+new_image):
+                            if os.path.exists(actual_path+sep+new_image):
                                 capture_path=new_image
                             arguments.append(args)
                             arguments.append(new_image)
