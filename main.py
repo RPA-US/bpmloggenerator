@@ -45,7 +45,7 @@ def validation_params(json_path,generate_path,number_logs,percent_per_trace):
 
 
 
-def generate_row(generate_path,dict,acu,variant, screenshot_column_name, case):
+def generate_row(generate_path,dict,acu,variant, screenshot_column_name, case, screenshot_name_generation_function):
     '''
     Generate row reading the json
     args:
@@ -71,7 +71,7 @@ def generate_row(generate_path,dict,acu,variant, screenshot_column_name, case):
                                         
                     if variate == 1:
                         if i==screenshot_column_name:
-                            val = generate_capture(columns_ui,columns,element,acu,generate_path,attr, case, key, variant)
+                            val = generate_capture(columns_ui,columns,element,acu,generate_path,attr, case, key, variant, screenshot_name_generation_function)
                         else:
                             val  = detect_function(name)(args)
                     elif variate == 0:
@@ -118,7 +118,7 @@ def number_rows_by_number_of_activities(dict, number_logs, percent_per_trace):
     #normalised_vector = [i/sum(list_percents) for i in list_percents]
     return list_percents
 
-def main_function(json_log_path,generate_path,number_logs,percent_per_trace, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, path):
+def main_function(json_log_path,generate_path,number_logs,percent_per_trace, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, screenshot_name_generation_function, path):
     '''
     The main function to generate logs
         args:
@@ -155,7 +155,7 @@ def main_function(json_log_path,generate_path,number_logs,percent_per_trace, act
         # TODO: randommize the order of V1 case and others
         for index, num_cases in enumerate(list_percents):
             for i in range(1,num_cases+1):
-                rows,acu = generate_row(generate_path,json_act_path,acu,index+1,screenshot_column_name,case)
+                rows,acu = generate_row(generate_path,json_act_path,acu,index+1,screenshot_column_name,case, screenshot_name_generation_function)
                 case+=1
                 for row in rows:
                     writer.writerow(row)
@@ -165,7 +165,7 @@ def main_function(json_log_path,generate_path,number_logs,percent_per_trace, act
     except:
         logging.warning("Json structure")'''
 
-def automatic_experiments(json_log_path, generate_path, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, balanced, imbalanced, size_secuence, families):
+def automatic_experiments(json_log_path, generate_path, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, balanced, imbalanced, size_secuence, families, screenshot_name_generation_function):
     # Specify balanced and imbalanced percentage to automatic generation of experiments
     balance_conf = {
         "Balanced": balanced,
@@ -181,7 +181,7 @@ def automatic_experiments(json_log_path, generate_path, activity_column_name, va
             for b in balance_conf:
                 size = ['log_size',i]
                 output_path = version_path + "\\" + family + "_" + str(i) + "_" + b +"\\"
-                main_function(json_log_path,generate_path,size,balance_conf[b], activity_column_name, variant_column_name, case_column_name, screenshot_column_name, output_path)
+                main_function(json_log_path,generate_path,size,balance_conf[b], activity_column_name, variant_column_name, case_column_name, screenshot_column_name, screenshot_name_generation_function, output_path)
 
 
 if __name__ == '__main__':
@@ -195,6 +195,8 @@ if __name__ == '__main__':
     variant_column_name = "Variant"
     case_column_name = "Case"
     screenshot_column_name = "Screenshot" # It must coincide with the column in the seed log
+    screenshot_name_generation_function = "function8"
+    
     if param_mode == "autogeneration_mode":
         # To use this mode execute: python main.py autogeneration_mode
         balanced = [0.5,0.5]
@@ -202,9 +204,9 @@ if __name__ == '__main__':
         # Specify secuence of log sizes to automatic generation of experiments
         size_secuence = [10, 100]#,100,1000]
         families = ["Basic"]#, "Intermediate", "Advanced"]
-        automatic_experiments(json_log_path, generate_path, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, balanced, imbalanced, size_secuence, families)
+        automatic_experiments(json_log_path, generate_path, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, balanced, imbalanced, size_secuence, families, screenshot_name_generation_function)
     else:
-        main_function(json_log_path,generate_path,number_logs,percent_per_trace, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, None)
+        main_function(json_log_path,generate_path,number_logs,percent_per_trace, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, screenshot_name_generation_function, None)
     '''
     from plugins.screenshot.replace_gui_component import insert_text_image, hidden_gui_element
     capture = "resources/Captura de pantalla 2021-10-05 132706.png"

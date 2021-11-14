@@ -1,17 +1,9 @@
 import os
 import tools.generic_utils as util
 from tools.database import create_connection, select_variations_by, create_variation
+from tools.generic_utils import detect_function
 
-def generate_screenshot_demo(args):
-    '''
-    Generate an image name as string with an extension png
-    '''
-    # Random number and the extension with a img identification
-    generate_path = args[0]
-    number = args[1]
-    return generate_path+str(number)+"_img.png"
-
-def generate_capture(columns_ui,columns,element,acu,generate_path,attr,case, activity, variant):
+def generate_capture(columns_ui,columns,element,acu,generate_path,attr,case, activity, variant, screenshot_name_generation_function):
     '''
     Generate row reading the json
     args:
@@ -23,7 +15,8 @@ def generate_capture(columns_ui,columns,element,acu,generate_path,attr,case, act
     capture_path= element["initValue"]
     args_tmp = element["args"]
     args = [generate_path,acu]
-    new_image = generate_screenshot_demo(args)
+    #new_image = generate_screenshot_demo(args)
+    new_image = detect_function(screenshot_name_generation_function)(args)
     try:
         for i in columns_ui:
             try:
