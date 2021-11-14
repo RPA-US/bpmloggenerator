@@ -16,5 +16,6 @@
 "function22" : "insert_text_image",
 "function23" : "hidden_gui_element",
 "function24" : "replace_gui_element_various_places",
+"function25" : "generate_screenshot_without_root_path",
 "function_copy": "generate_copied_capture"
 }

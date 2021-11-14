@@ -4,7 +4,8 @@
 
 DATABASE = "loggenerator.db"
 
-operating_system = "linux" #"windows"
+# operating_system = "linux"
+operating_system = "windows"
 
 if operating_system == "windows":
     sep = "\\"

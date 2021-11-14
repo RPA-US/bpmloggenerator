@@ -74,7 +74,7 @@ def generate_row(generate_path,dict,acu,variant, screenshot_column_name, case, s
                         if i==screenshot_column_name:
                             val = generate_capture(columns_ui,columns,element,acu,generate_path,attr, case, key, variant, screenshot_name_generation_function)
                         else:
-                            val  = detect_function(name)(args)
+                            val = detect_function(name)(args)
                     elif variate == 0:
                         if initValue !="":
                             if i==screenshot_column_name:
@@ -231,7 +231,7 @@ if __name__ == '__main__':
     }
     autogeneration_conf = sys.argv[6] if len(sys.argv) > 6 else default_conf
     scenario_size = sys.argv[7] if len(sys.argv) > 7 else 10
-    screenshot_name_generation_function = sys.argv[8] if len(sys.argv) > 8 else "function8"
+    screenshot_name_generation_function = sys.argv[8] if len(sys.argv) > 8 else "function25" # function8: complete path
 
     
     colnames = {

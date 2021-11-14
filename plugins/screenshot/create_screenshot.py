@@ -33,10 +33,14 @@ def generate_capture(columns_ui,columns,element,acu,generate_path,attr,case, act
                             coordinates = j["coordinates"]
                             name = j["name"]
                             args = j["args"]
-                            if os.path.exists(actual_path+sep+new_image):
-                                capture_path=new_image
+                            # if os.path.exists(actual_path+sep+new_image):
+                            #     capture_path=new_image
+                            if not sep in new_image:
+                                image_path_to_save = generate_path + new_image
+                            else:
+                                image_path_to_save = new_image
                             arguments.append(args)
-                            arguments.append(new_image)
+                            arguments.append(image_path_to_save)
                             arguments.append(capture_path)
                             arguments.append(coordinates)
                             if "dependency" in j:
