@@ -12,7 +12,7 @@ def generate_capture(columns_ui,columns,element,acu,generate_path,attr,case, act
         acu: number of the case
         variante: if use the initial value or the generate
     '''    
-    actual_path = os.getcwd()
+    # actual_path = os.getcwd()
     capture_path= element["initValue"]
     args_tmp = element["args"]
     args = [generate_path,acu]

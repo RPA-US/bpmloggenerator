@@ -53,7 +53,7 @@
                 "Screenshot": {
                     "initValue": "mockups\\V1_image0001.png",
                     "variate": 0,
-                    "name": "function_copy",
+                    "name": "function_copy_without_root",
                     "args": {}
                 }
             },
@@ -285,7 +285,7 @@
                 "Screenshot": {
                     "initValue": "mockups\\V2_image0001.png",
                     "variate": 0,
-                    "name": "function_copy",
+                    "name": "function_copy_without_root",
                     "args": {}
                 }
             },
@@ -335,7 +335,7 @@
                 "Screenshot": {
                     "initValue": "mockups\\V2_image0003.png",
                     "variate": 0,
-                    "name": "function_copy",
+                    "name": "function_copy_without_root",
                     "args": {}
                 }
             },

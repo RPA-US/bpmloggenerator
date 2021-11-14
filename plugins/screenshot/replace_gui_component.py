@@ -6,6 +6,7 @@ from PIL import ImageFont
 from PIL import ImageDraw 
 import tools.generic_utils as util
 import sqlite3 as sl
+from configuration.settings import sep
 
 
 def replace_gui_element_by_other(args):
@@ -131,6 +132,9 @@ def insert_text_image(args):
     draw.text((left_top_x, left_top_y),text,font_color,font=font)
     # Save image
     back_im.save(new_image, quality=95)
+    if sep in new_image:
+        splitted = new_image.split('/')
+        new_image = splitted[len(splitted)-1]
     return new_image
 
 def hidden_gui_element(args):
@@ -156,6 +160,9 @@ def hidden_gui_element(args):
     draw.rectangle(coordenates, fill =rectangle_color, outline =rectangle_color)
     # Save image
     back_im.save(new_image, quality=95)
+    if sep in new_image:
+        splitted = new_image.split('/')
+        new_image = splitted[len(splitted)-1]
     return new_image
 
 
@@ -168,5 +175,17 @@ def generate_copied_capture(args):
     number = args[2]
     name = generate_path+str(number)+"_img.png"
     shutil.copyfile(capture, name)
+    # Random number and the extension with a img identification
+    return name
+
+def generate_copied_capture_without_root(args):
+    '''
+    Generate an image copy renamed
+    '''
+    capture = args[0]
+    generate_path = args[1]
+    number = args[2]
+    name = str(number)+"_img.png"
+    shutil.copyfile(capture, generate_path+name)
     # Random number and the extension with a img identification
     return name

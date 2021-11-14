@@ -4,8 +4,9 @@ import logging
 import sys
 import time
 import json
+import random
 from plugins.screenshot.create_screenshot import generate_capture
-from plugins.screenshot.replace_gui_component import generate_copied_capture
+from plugins.screenshot.replace_gui_component import generate_copied_capture_without_root
 from tools.generic_utils import detect_function
 from tools.database import init_database
 from configuration.settings import sep
@@ -78,7 +79,7 @@ def generate_row(generate_path,dict,acu,variant, screenshot_column_name, case, s
                     elif variate == 0:
                         if initValue !="":
                             if i==screenshot_column_name:
-                                val = generate_copied_capture([initValue,generate_path,acu])
+                                val = generate_copied_capture_without_root([initValue,generate_path,acu])
                             else:
                                 val = initValue 
                         else:
@@ -153,13 +154,16 @@ def case_generation(json_log_path,generate_path,number_logs,percent_per_trace, a
         writer.writerow(tuple(columns))
         acu = 0
         case = 1
-        # TODO: randommize the order of V1 case and others
-        for index, num_cases in enumerate(list_percents):
-            for i in range(1,num_cases+1):
-                rows,acu = generate_row(generate_path,json_act_path,acu,index+1,screenshot_column_name,case, screenshot_name_generation_function)
-                case+=1
-                for row in rows:
-                    writer.writerow(row)
+        total_variants = []
+        for i, num_cases_per_variant_i in enumerate(list_percents):
+            total_variants += num_cases_per_variant_i * [i+1]
+    
+        random.shuffle(total_variants)
+        for variant in total_variants:
+            rows,acu = generate_row(generate_path,json_act_path,acu,variant,screenshot_column_name,case, screenshot_name_generation_function)
+            case+=1
+            for row in rows:
+                writer.writerow(row)
         f.close()
 '''        else:
             logging.warning("Configuration arguments are wrongs")
@@ -226,7 +230,7 @@ if __name__ == '__main__':
         "balanced": [0.5,0.5],
         "imbalanced": [0.1,0.9],
         # Specify secuence of log sizes to automatic generation of experiments
-        "size_secuence": [10, 100],#,100,1000]
+        "size_secuence": [10],# 100],#,100,1000]
         "families": ["Basic"]#, "Intermediate", "Advanced"]
     }
     autogeneration_conf = sys.argv[6] if len(sys.argv) > 6 else default_conf
@@ -257,5 +261,3 @@ if __name__ == '__main__':
     else:
         case_generation(json_log_path,generate_path,number_logs,percent_per_trace, special_colnames["Activity"], 
                         special_colnames["Variant"], special_colnames["Case"], special_colnames["Screenshot"], screenshot_name_generation_function, None)
-
-
