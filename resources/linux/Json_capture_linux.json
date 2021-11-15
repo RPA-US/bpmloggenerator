@@ -51,9 +51,9 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V1_image0001.png",
+                    "initValue": "mockups/V1_image0001.png",
                     "variate": 0,
-                    "name": "function_copy_without_root",
+                    "name": "function_copy",
                     "args": {}
                 }
             },
@@ -101,15 +101,14 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V1_image0003.png",
+                    "initValue": "mockups/V1_image0003.png",
                     "variate": 1,
                     "name": "",
                     "args": {
                         "ImageView": [{
-                            "id": 1,
                             "coordinates": [499, 210, 598, 278],
                             "name": "function21",
-                            "args": ["id_card_1","id_card_2","id_card_3","id_card_4","id_card_5","id_card_6","id_card_7","id_card_8","id_card_9","id_card_10"]
+                            "args": ["image_alt_1","image_alt_2","image_alt_3","image_alt_4","image_alt_5","image_alt_6","image_alt_7","image_alt_8","image_alt_9","image_alt_10"]
                         }]
                     }
                 }
@@ -158,16 +157,15 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V1_image0004.png",
+                    "initValue": "mockups/V1_image0004.png",
                     "variate": 1,
                     "name": "",
                     "args": {
                         "ImageView": [{
-                            "id": 1,
                             "coordinates": [[116, 311, 606, 609], [499, 210, 598, 278]],
                             "name": "function24",
                             "dependency": "B",
-                            "args": ["id_card_1","id_card_2","id_card_3","id_card_4","id_card_5","id_card_6","id_card_7","id_card_8","id_card_9","id_card_10"]
+                            "args": ["image_alt_1","image_alt_2","image_alt_3","image_alt_4","image_alt_5","image_alt_6","image_alt_7","image_alt_8","image_alt_9","image_alt_10"]
                         }]
                     }
                 }
@@ -216,21 +214,24 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V1_image0005.png",
+                    "initValue": "mockups/V1_image0005.png",
                     "variate": 1,
                     "name": "",
                     "args": {
+                        "ImageView": [{
+                            "coordinates": [378, 325, 842, 352],
+                            "name": "function21",
+                            "args": ["element18"]
+                        }],
                         "TextInput": [{
-                            "id": 2,
                             "coordinates": [385, 228, 831, 246],
                             "name": "function22",
                             "args": ["resources/Roboto-Black.ttf",20,"#000000"]
                         }],
                         "Checkbox": [{
-                            "id": 3,
                             "coordinates": [379, 420, 419, 458],
                             "name": "function21",
-                            "args": ["checkbox_4"]
+                            "args": ["element16"]
                         }]
                     }
                 }
@@ -282,9 +283,9 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V2_image0001.png",
+                    "initValue": "mockups/V2_image0001.png",
                     "variate": 0,
-                    "name": "function_copy_without_root",
+                    "name": "function_copy",
                     "args": {}
                 }
             },
@@ -332,9 +333,9 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V2_image0003.png",
+                    "initValue": "mockups/V2_image0003.png",
                     "variate": 0,
-                    "name": "function_copy_without_root",
+                    "name": "function_copy",
                     "args": {}
                 }
             },
@@ -382,18 +383,16 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V2_image0004.png",
+                    "initValue": "mockups/V2_image0004.png",
                     "variate": 1,
                     "name": "",
                     "args": {
                         "ImageView": [{
-                            "id": 1,
                             "coordinates": [121, 349, 1130, 705],
                             "name": "function23",
                             "args": ["#ffffff"]
                         }],
                         "TextInput": [{
-                            "id": 2,
                             "coordinates": [121, 349, 1130, 705],
                             "name": "function22",
                             "args": ["resources/Roboto-Black.ttf",20,"#000000"]

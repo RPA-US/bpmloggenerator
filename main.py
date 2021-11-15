@@ -170,7 +170,7 @@ def case_generation(json_log_path,generate_path,number_logs,percent_per_trace, a
     except:
         logging.warning("Json structure")'''
 
-def automatic_experiments(json_log_path, generate_path, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, balanced, imbalanced, size_secuence, families, screenshot_name_generation_function):
+def automatic_experiments(generate_path, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, balanced, imbalanced, size_secuence, families, scenario, screenshot_name_generation_function):
     # Specify balanced and imbalanced percentage to automatic generation of experiments
     balance_conf = {
         "Balanced": balanced,
@@ -181,22 +181,34 @@ def automatic_experiments(json_log_path, generate_path, activity_column_name, va
     os.makedirs(version_path)
     
     # os.system("cd " + param_path_log_generator)
-    for family in families:
+    for family in families.keys():
         for i in size_secuence:
             for b in balance_conf:
                 size = ['log_size',i]
-                output_path = version_path + sep + family + "_" + str(i) + "_" + b + sep
-                case_generation(json_log_path,generate_path,size,balance_conf[b], activity_column_name, variant_column_name, case_column_name, screenshot_column_name, screenshot_name_generation_function, output_path)
+                if scenario: 
+                    output_path = version_path + sep + scenario + sep + family + "_" + str(i) + "_" + b + sep
+                else:
+                    output_path = version_path + sep + family + "_" + str(i) + "_" + b + sep
+                case_generation(families[family], generate_path, size, balance_conf[b], activity_column_name, variant_column_name, case_column_name, screenshot_column_name, screenshot_name_generation_function, output_path)
 
-def scenario_generation(json_case_variability, generate_path, size, label_division, colnames):
+def scenario_generation(json_case_variability, generate_path, size, label_division, colnames, autogeneration_conf):
     activity_column_name = colnames["Activity"]
     variant_column_name = colnames["Variant"]
     case_column_name = colnames["Case"]
     screenshot_column_name = colnames["Screenshot"]
     # Scenario variability: screenshot seeds to later generate case variability are generated 
     
+    # Call scenario variation: "size" variations 
+    # For each variation, we generate a set of all captures of the process.
+    # After that, we modify each JSON of autogeneration_conf["families"]. Substitution of original image name by variation image name
+    # Output will be a list that contains the path of each JSON modified (by scenario and family)
+    # ls = ["basic_conf_scenario1.json", "intermediate_conf_scenario1.json", "advanced_conf_scenario1.json",
+    #   "basic_conf_scenario2.json", "intermediate_conf_scenario2.json", "advanced_conf_scenario2.json"...
+    #   ]
     # For each different scenario generate case variability as indicate in "trace" inside "json_case_variability"
-    
+    automatic_experiments(generate_path, activity_column_name, variant_column_name, case_column_name, screenshot_column_name,  autogeneration_conf["balanced"], 
+                          autogeneration_conf["imbalanced"], autogeneration_conf["size_secuence"], autogeneration_conf["families"], scenario, screenshot_name_generation_function)
+
 
 if __name__ == '__main__':
     """[Instructions for use]
@@ -230,9 +242,14 @@ if __name__ == '__main__':
         "balanced": [0.5,0.5],
         "imbalanced": [0.1,0.9],
         # Specify secuence of log sizes to automatic generation of experiments
-        "size_secuence": [10],# 100],#,100,1000]
-        "families": ["Basic"]#, "Intermediate", "Advanced"]
+        "size_secuence": [10, 50],#,100,1000]
+        "families": {
+            "Basic": "resources"+sep+"test_scenarios"+sep+"Basic_Act5_Var2_DesElem2.json",
+            # "Intermediate": "resources"+sep+"Intermediate_Act8_Var2_DesElem2.json",
+            # "Advanced": "resources"+sep+"Advanced_Act10_Var2_DesElem4.json"
+        }
     }
+    # TODO: autogeneration_conf JSON parse
     autogeneration_conf = sys.argv[6] if len(sys.argv) > 6 else default_conf
     scenario_size = sys.argv[7] if len(sys.argv) > 7 else 10
     screenshot_name_generation_function = sys.argv[8] if len(sys.argv) > 8 else "function25" # function8: complete path
@@ -249,15 +266,15 @@ if __name__ == '__main__':
     if param_mode == "autogeneration_mode":
         # To use this mode execute: python main.py autogeneration_mode
         # TODO: autogeneration_conf JSON parse (not autogeneration_conf situation) 
-        automatic_experiments(json_log_path, generate_path, special_colnames["Activity"], special_colnames["Variant"], special_colnames["Case"],
+        automatic_experiments(generate_path, special_colnames["Activity"], special_colnames["Variant"], special_colnames["Case"],
                               special_colnames["Screenshot"], autogeneration_conf["balanced"], autogeneration_conf["imbalanced"],
-                              autogeneration_conf["size_secuence"], autogeneration_conf["families"], screenshot_name_generation_function)
+                              autogeneration_conf["size_secuence"], autogeneration_conf["families"], None, screenshot_name_generation_function)
     elif param_mode == "autoscenario_mode":
         size = {
             number_logs,
             scenario_size
         }
-        scenario_generation(json_log_path, generate_path, size, percent_per_trace, colnames)
+        scenario_generation(json_log_path, generate_path, size, percent_per_trace, colnames, autogeneration_conf)
     else:
         case_generation(json_log_path,generate_path,number_logs,percent_per_trace, special_colnames["Activity"], 
                         special_colnames["Variant"], special_colnames["Case"], special_colnames["Screenshot"], screenshot_name_generation_function, None)
