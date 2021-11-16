@@ -1,10 +1,10 @@
 {
-    "scenario": {
+    "Basic": {
         "1": {
             "A": {
                 "Screenshot": {
                     "initValue": "mockups\\V1_image0001.png",
-                    "variate": 0,
+                    "variate": 1,
                     "name": "",
                     "args": {
                         "Button": [{

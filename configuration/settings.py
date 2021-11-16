@@ -13,5 +13,5 @@ if operating_system == "windows":
     element_trace = "element_trace.json"
 else:
     sep = "/"
-    function_trace = "linux/function_trace_linux.json"
+    function_trace = "function_trace.json"
     element_trace = "linux/element_trace_linux.json"

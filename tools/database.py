@@ -2,7 +2,6 @@
 import sqlite3
 from sqlite3.dbapi2 import Error
 from configuration.settings import DATABASE
-import sys
 # To initialize Database
 # python -c "from tools.database import init_database; init_database()"
 db_file = DATABASE
@@ -26,7 +25,7 @@ def init_database():
     with con:
         cur = con.cursor()
         cur.execute("DROP TABLE IF EXISTS variations")
-        cur.execute("CREATE TABLE variations(case_id INT, activity TEXT, variant INT, function_name TEXT, gui_element TEXT)")
+        cur.execute("CREATE TABLE variations(case_id INT, case_variation_id INT, activity TEXT, variant INT, function_name TEXT, gui_element TEXT)")
     con.commit()
 
 def select_all_variations(conn):
@@ -40,7 +39,7 @@ def select_all_variations(conn):
 
     return cur.fetchall()
 
-def select_variations_by(conn, case, activity):
+def select_variations_by(conn, case, activity, case_variation_id):
     """
     Query variations by Id_case and Activity
     :param conn: the Connection object
@@ -48,17 +47,19 @@ def select_variations_by(conn, case, activity):
     :param activity:
     :return: Collections of fetched objects
     """
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM variations WHERE case_id=? AND activity=?", (case,activity))
-
-    return cur.fetchall()
-
-def create_variation(conn, case, activity, variant, function, image_element):
     if not conn:
         conn = create_connection()
     cur = conn.cursor()
-    v = [case, activity, variant, function, image_element]
-    cur.execute("INSERT INTO variations(case_id, activity, variant, function_name, gui_element) VALUES (?,?,?,?,?)", v)
+    cur.execute("SELECT * FROM variations WHERE case_id=? AND activity=? AND case_variation_id=?", (case,activity,case_variation_id))
+
+    return cur.fetchall()
+
+def create_variation(conn, case, case_variation_id, activity, variant, function, image_element):
+    if not conn:
+        conn = create_connection()
+    cur = conn.cursor()
+    v = [case, case_variation_id, activity, variant, function, image_element]
+    cur.execute("INSERT INTO variations(case_id, case_variation_id, activity, variant, function_name, gui_element) VALUES (?,?,?,?,?,?)", v)
     res = cur.lastrowid
     conn.commit()
     return res

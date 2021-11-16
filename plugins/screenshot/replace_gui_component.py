@@ -133,7 +133,7 @@ def insert_text_image(args):
     # Save image
     back_im.save(new_image, quality=95)
     if sep in new_image:
-        splitted = new_image.split('/')
+        splitted = new_image.split(sep)
         new_image = splitted[len(splitted)-1]
     return new_image
 
@@ -161,7 +161,7 @@ def hidden_gui_element(args):
     # Save image
     back_im.save(new_image, quality=95)
     if sep in new_image:
-        splitted = new_image.split('/')
+        splitted = new_image.split(sep)
         new_image = splitted[len(splitted)-1]
     return new_image
 

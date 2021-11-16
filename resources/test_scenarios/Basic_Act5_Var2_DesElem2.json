@@ -53,7 +53,7 @@
                 "Screenshot": {
                     "initValue": "mockups\\V1_image0001.png",
                     "variate": 0,
-                    "name": "function_copy",
+                    "name": "function_copy_without_root",
                     "args": {}
                 }
             },
@@ -106,9 +106,10 @@
                     "name": "",
                     "args": {
                         "ImageView": [{
+                            "id": 1,
                             "coordinates": [499, 210, 598, 278],
                             "name": "function21",
-                            "args": ["image_alt_1","image_alt_2","image_alt_3","image_alt_4","image_alt_5","image_alt_6","image_alt_7","image_alt_8","image_alt_9","image_alt_10"]
+                            "args": ["id_card_1","id_card_2","id_card_3","id_card_4","id_card_5","id_card_6","id_card_7","id_card_8","id_card_9","id_card_10"]
                         }]
                     }
                 }
@@ -162,10 +163,14 @@
                     "name": "",
                     "args": {
                         "ImageView": [{
+                            "id": 1,
                             "coordinates": [[116, 311, 606, 609], [499, 210, 598, 278]],
                             "name": "function24",
-                            "dependency": "B",
-                            "args": ["image_alt_1","image_alt_2","image_alt_3","image_alt_4","image_alt_5","image_alt_6","image_alt_7","image_alt_8","image_alt_9","image_alt_10"]
+                            "dependency": {
+                                "Activity": "B",
+                                "id": 1
+                            },
+                            "args": ["id_card_1","id_card_2","id_card_3","id_card_4","id_card_5","id_card_6","id_card_7","id_card_8","id_card_9","id_card_10"]
                         }]
                     }
                 }
@@ -218,17 +223,14 @@
                     "variate": 1,
                     "name": "",
                     "args": {
-                        "ImageView": [{
-                            "coordinates": [378, 325, 842, 352],
-                            "name": "function21",
-                            "args": ["text_input_2"]
-                        }],
                         "TextInput": [{
+                            "id": 1,
                             "coordinates": [385, 228, 831, 246],
                             "name": "function22",
                             "args": ["resources/Roboto-Black.ttf",20,"#000000"]
                         }],
                         "Checkbox": [{
+                            "id": 2,
                             "coordinates": [379, 420, 419, 458],
                             "name": "function21",
                             "args": ["checkbox_4"]
@@ -285,7 +287,7 @@
                 "Screenshot": {
                     "initValue": "mockups\\V2_image0001.png",
                     "variate": 0,
-                    "name": "function_copy",
+                    "name": "function_copy_without_root",
                     "args": {}
                 }
             },
@@ -335,7 +337,7 @@
                 "Screenshot": {
                     "initValue": "mockups\\V2_image0003.png",
                     "variate": 0,
-                    "name": "function_copy",
+                    "name": "function_copy_without_root",
                     "args": {}
                 }
             },
@@ -388,12 +390,14 @@
                     "name": "",
                     "args": {
                         "ImageView": [{
-                            "coordinates": [121, 349, 1130, 705],
+                            "id": 1,
+                            "coordinates": [109, 309, 993, 613],
                             "name": "function23",
                             "args": ["#ffffff"]
                         }],
                         "TextInput": [{
-                            "coordinates": [121, 349, 1130, 705],
+                            "id": 2,
+                            "coordinates": [121, 349, 980, 605],
                             "name": "function22",
                             "args": ["resources/Roboto-Black.ttf",20,"#000000"]
                         }]
