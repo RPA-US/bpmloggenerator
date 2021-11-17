@@ -18,6 +18,5 @@
 "function24" : "replace_gui_element_various_places",
 "function25" : "generate_screenshot_without_root_path",
 "function_copy": "generate_copied_capture",
-"function_duplicate": "duplicate_capture",
 "function_copy_without_root": "generate_copied_capture_without_root"
 }

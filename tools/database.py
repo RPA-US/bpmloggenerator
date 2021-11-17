@@ -25,7 +25,7 @@ def init_database():
     with con:
         cur = con.cursor()
         cur.execute("DROP TABLE IF EXISTS variations")
-        cur.execute("CREATE TABLE variations(case_id INT, case_variation_id INT, activity TEXT, variant INT, function_name TEXT, gui_element TEXT)")
+        cur.execute("CREATE TABLE variations(case_id INT, scenario INT, case_variation_id INT, activity TEXT, variant INT, function_name TEXT, gui_element TEXT)")
     con.commit()
 
 def select_all_variations(conn):
@@ -39,7 +39,7 @@ def select_all_variations(conn):
 
     return cur.fetchall()
 
-def select_variations_by(conn, case, activity, case_variation_id):
+def select_variations_by(conn, case, scenario, activity, case_variation_id):
     """
     Query variations by Id_case and Activity
     :param conn: the Connection object
@@ -50,16 +50,16 @@ def select_variations_by(conn, case, activity, case_variation_id):
     if not conn:
         conn = create_connection()
     cur = conn.cursor()
-    cur.execute("SELECT * FROM variations WHERE case_id=? AND activity=? AND case_variation_id=?", (case,activity,case_variation_id))
+    cur.execute("SELECT * FROM variations WHERE scenario=? AND case_id=? AND activity=? AND case_variation_id=?", (scenario,case,activity,case_variation_id))
 
     return cur.fetchall()
 
-def create_variation(conn, case, case_variation_id, activity, variant, function, image_element):
+def create_variation(conn, case, scenario, case_variation_id, activity, variant, function, image_element):
     if not conn:
         conn = create_connection()
     cur = conn.cursor()
-    v = [case, case_variation_id, activity, variant, function, image_element]
-    cur.execute("INSERT INTO variations(case_id, case_variation_id, activity, variant, function_name, gui_element) VALUES (?,?,?,?,?,?)", v)
+    v = [case, scenario, case_variation_id, activity, variant, function, image_element]
+    cur.execute("INSERT INTO variations(case_id, scenario, case_variation_id, activity, variant, function_name, gui_element) VALUES (?,?,?,?,?,?,?)", v)
     res = cur.lastrowid
     conn.commit()
     return res

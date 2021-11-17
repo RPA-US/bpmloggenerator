@@ -173,7 +173,10 @@ def generate_copied_capture(args):
     capture = args[0]
     generate_path = args[1]
     number = args[2]
-    name = generate_path+str(number)+"_img.png"
+    if not '.png' in str(number):
+        name = generate_path+str(number)+"_img.png"
+    else:
+        name = generate_path+str(number)
     shutil.copyfile(capture, name)
     # Random number and the extension with a img identification
     return name

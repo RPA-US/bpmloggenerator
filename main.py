@@ -6,6 +6,7 @@ import sys
 import time
 import json
 import random
+import json
 from plugins.screenshot.create_screenshot import generate_capture, generate_scenario_capture
 from plugins.screenshot.replace_gui_component import generate_copied_capture_without_root, generate_copied_capture
 from tools.generic_utils import detect_function
@@ -237,15 +238,15 @@ def scenario_generation(scenarios_path, generate_path, scenario_size, colnames, 
     n_scenario_seed_logs = []
     image_mapping = {}
     # Call scenario variation: "size" variations 
-    for scenario_i in range(1, scenario_size+1):
+    for scenario_i in range(0, scenario_size+1):
         scenario_iteration_path = prefix_scenario + str(scenario_i)
         image_names_conf[scenario_i] = {}
         for family in autogeneration_conf["families"]:
             image_names_conf[scenario_i][family] = {}
-            for variant in range(1,len(autogeneration_conf["balanced"])):
-                # Loading json to modify
-                original_json = json.load(open(variation_json_seed_per_family[family]))
-                
+            # Loading json to modify
+            original_json = json.load(open(variation_json_seed_per_family[family]))
+            
+            for variant in range(1,len(autogeneration_conf["balanced"])+1):
                 image_names_conf[scenario_i][family][variant] = {}
                 json_list = scenario_json[family][str(variant)]
                 for key in json_list:
@@ -256,24 +257,25 @@ def scenario_generation(scenarios_path, generate_path, scenario_size, colnames, 
                         
                         new_init_value = select_last_item(initValue, sep)
                         
-                        new_image = path + sep + scenario_iteration_path + sep + scenario_iteration_path + new_init_value
+                        new_image = path + sep + scenario_iteration_path + sep + scenario_iteration_path + "_" +new_init_value
                         if not os.path.exists(path + sep + scenario_iteration_path):
                             os.makedirs(path + sep + scenario_iteration_path)
                             
                         if variate == 1:
-                                val = generate_scenario_capture(element,0,generate_path,key,variant,new_image)
+                                val = generate_scenario_capture(element,0,generate_path,key,variant,new_image,scenario_i)
                         elif variate == 0:
                             if initValue !="":
-                                val = generate_copied_capture([initValue,path + sep + scenario_iteration_path + sep,scenario_iteration_path])
+                                image_to_duplicate = path + sep + scenario_iteration_path + sep + scenario_iteration_path + "_" + select_last_item(element["image_to_duplicate"],sep)
+                                val = generate_copied_capture([image_to_duplicate,path + sep + scenario_iteration_path + sep,scenario_iteration_path + "_" +new_init_value])
                             else:
                                 val="NaN"
-                        image_names_conf[scenario_i][family][variant][initValue] = val
+                        # image_names_conf[scenario_i][family][variant][initValue] = str(val)
+                        original_json["trace"][str(variant)][key][screenshot_column_name]["initValue"] = str(val)
                 
-                json_object = json.dumps(original_json["trace"][str(variant)], indent = 4)
-                for original, replacement in image_names_conf[scenario_i][family][variant].items():
-                    json_object = json_object.replace(original, replacement)
-                
-                original_json[variant] = json.loads(json_object)
+                # json_object = json.dumps(original_json["trace"][str(variant)], indent = 4)
+                # for original, replacement in image_names_conf[scenario_i][family][variant].items():
+                #     refactored_json = json.dumps(original_json["trace"][str(variant)]).replace(original, replacement)                                 
+                # original_json["trace"][str(variant)] = json.loads(refactored_json)
             # Serializing json 
             json_to_write = json.dumps(original_json, indent = 4)
             # Writing to .json
@@ -283,7 +285,6 @@ def scenario_generation(scenarios_path, generate_path, scenario_size, colnames, 
             image_mapping[family] = filename
             
         n_scenario_seed_logs.append(image_mapping)
-    
     # Output will be a list that contains the path of each JSON modified (by scenario and family)
     # n_scenario_seed_logs = [{"Basic": "basic_conf_scenario1.json", "Intermediate": "intermediate_conf_scenario1.json", "Advanced": "advanced_conf_scenario1.json"},
     #   {"Basic": "basic_conf_scenario2.json", "Intermediate": "intermediate_conf_scenario2.json", "Advanced": "advanced_conf_scenario2.json"}, ...

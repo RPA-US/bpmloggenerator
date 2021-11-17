@@ -47,12 +47,12 @@ def generate_capture(columns_ui,columns,element,case,generate_path,attr, activit
                             arguments.append(capture_path)
                             arguments.append(coordinates)
                             if "dependency" in j:
-                                dependant_row = select_variations_by(None, case, j["dependency"]["Activity"], j["dependency"]["id"]) # fetch a list
-                                arguments.append(dependant_row[0][5])
+                                dependant_row = select_variations_by(None, case, 0, j["dependency"]["Activity"], j["dependency"]["id"]) # fetch a list
+                                arguments.append(dependant_row[0][6])
                                 
                             image_element = util.detect_function(name)(arguments)
                             if type(image_element) == str:
-                                create_variation(None, case, j["id"], activity, variant, name, image_element)
+                                create_variation(None, case, 0, j["id"], activity, variant, name, image_element)
                         else:
                             new_image="NaN"
                         arguments = []
@@ -66,7 +66,7 @@ def generate_capture(columns_ui,columns,element,case,generate_path,attr, activit
         new_image = "NaN"
     return new_image
 
-def generate_scenario_capture(element,case,generate_path,activity,variant,new_image):
+def generate_scenario_capture(element,case,generate_path,activity,variant,new_image,scenario):
     '''
     Generate row reading the json
     args:
@@ -99,12 +99,12 @@ def generate_scenario_capture(element,case,generate_path,activity,variant,new_im
                 arguments.append(capture_path)
                 arguments.append(coordinates)
                 if "dependency" in variation_conf:
-                    dependant_row = select_variations_by(None, case, variation_conf["dependency"]["Activity"], variation_conf["dependency"]["id"]) # fetch a list
-                    arguments.append(dependant_row[0][5])
+                    dependant_row = select_variations_by(None, case, scenario, variation_conf["dependency"]["Activity"], variation_conf["dependency"]["id"]) # fetch a list
+                    arguments.append(dependant_row[0][6])
                     
                 image_element = util.detect_function(name)(arguments)
                 if type(image_element) == str:
-                    create_variation(None, case, variation_conf["id"], activity, variant, name, image_element)
+                    create_variation(None, case, scenario, variation_conf["id"], activity, variant, name, image_element)
             else:
                 new_image="NaN"
             arguments = []
