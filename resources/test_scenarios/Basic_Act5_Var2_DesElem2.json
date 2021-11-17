@@ -168,6 +168,7 @@
                             "name": "function24",
                             "dependency": {
                                 "Activity": "B",
+                                "V": 1,
                                 "id": 1
                             },
                             "args": ["id_card_1","id_card_2","id_card_3","id_card_4","id_card_5","id_card_6","id_card_7","id_card_8","id_card_9","id_card_10"]

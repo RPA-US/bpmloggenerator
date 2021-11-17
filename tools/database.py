@@ -39,7 +39,7 @@ def select_all_variations(conn):
 
     return cur.fetchall()
 
-def select_variations_by(conn, case, scenario, activity, case_variation_id):
+def select_variations_by(conn, case, scenario, activity, case_variation_id, variant):
     """
     Query variations by Id_case and Activity
     :param conn: the Connection object
@@ -50,7 +50,7 @@ def select_variations_by(conn, case, scenario, activity, case_variation_id):
     if not conn:
         conn = create_connection()
     cur = conn.cursor()
-    cur.execute("SELECT * FROM variations WHERE scenario=? AND case_id=? AND activity=? AND case_variation_id=?", (scenario,case,activity,case_variation_id))
+    cur.execute("SELECT * FROM variations WHERE scenario=? AND case_id=? AND activity=? AND case_variation_id=? AND variant=?", (scenario,case,activity,case_variation_id,variant))
 
     return cur.fetchall()
 

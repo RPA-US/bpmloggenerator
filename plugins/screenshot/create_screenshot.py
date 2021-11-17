@@ -47,7 +47,7 @@ def generate_capture(columns_ui,columns,element,acu,case,generate_path,attr, act
                             arguments.append(capture_path)
                             arguments.append(coordinates)
                             if "dependency" in j:
-                                dependant_row = select_variations_by(None, case, 0, j["dependency"]["Activity"], j["dependency"]["id"]) # fetch a list
+                                dependant_row = select_variations_by(None, case, 0, j["dependency"]["Activity"], j["dependency"]["id"], j["dependency"]["V"]) # fetch a list
                                 arguments.append(dependant_row[0][6])
                                 
                             image_element = util.detect_function(name)(arguments)
@@ -99,7 +99,7 @@ def generate_scenario_capture(element,case,generate_path,activity,variant,new_im
                 arguments.append(capture_path)
                 arguments.append(coordinates)
                 if "dependency" in variation_conf:
-                    dependant_row = select_variations_by(None, case, scenario, variation_conf["dependency"]["Activity"], variation_conf["dependency"]["id"]) # fetch a list
+                    dependant_row = select_variations_by(None, case, scenario, variation_conf["dependency"]["Activity"], variation_conf["dependency"]["id"], variation_conf["dependency"]["V"]) # fetch a list
                     arguments.append(dependant_row[0][6])
                     
                 image_element = util.detect_function(name)(arguments)
