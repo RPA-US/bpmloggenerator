@@ -340,6 +340,11 @@
                             "id": 5,
                             "coordinates": [303, 35, 366, 105],
                             "name": "function21",
+                            "dependency": {
+                                "Activity": "B",
+                                "V": 1,
+                                "id": 5
+                            },
                             "args": ["trash_1", "trash_2", "trash_3", "trash_4", "trash_5", "trash_6"]
                         }]
                     }

@@ -352,7 +352,7 @@ if __name__ == '__main__':
         "balanced": [0.5,0.5],
         "imbalanced": [0.1,0.9],
         # Specify secuence of log sizes to automatic generation of experiments
-        "size_secuence": [10,50],#100],#1000]
+        "size_secuence": [10,50,100],#1000]
         "families": {
             "Basic": "resources"+sep+"test_scenarios"+sep+"Basic_Act5_Var2_DesElem2.json",
             # "Intermediate": "resources"+sep+"Intermediate_Act8_Var2_DesElem2.json",
@@ -360,7 +360,7 @@ if __name__ == '__main__':
         }
     }
     autogeneration_conf = json.loads(sys.argv[8]) if len(sys.argv) > 8 else default_conf
-    scenario_size = sys.argv[9] if len(sys.argv) > 9 else 3
+    scenario_size = sys.argv[9] if len(sys.argv) > 9 else 30
     scenarios_path = sys.argv[10] if len(sys.argv) > 10 else "resources"+sep+"test_scenarios"+sep+"scenarios.json"
     
     

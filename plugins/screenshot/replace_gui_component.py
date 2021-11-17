@@ -8,7 +8,6 @@ import tools.generic_utils as util
 import sqlite3 as sl
 from configuration.settings import sep
 
-
 def replace_gui_element_by_other(args):
     '''
     An input capture is obtained, and a visual element is inserted into it​
@@ -29,7 +28,7 @@ def replace_gui_element_by_other(args):
 
     if len(args) > 4:
         selected_element = args[4]
-        image_element = util.detect_element(selected_element)
+        image_element = util.detect_element(selected_element)        
 
     # Coordenates x and y
     left_top_x = coordenates[0]
@@ -40,16 +39,34 @@ def replace_gui_element_by_other(args):
     width_size = right_bot_x-left_top_x
     height_size = right_bot_y-left_top_y
     newsize = (width_size,height_size)
-    # Open gui element
-    image_gui_element = Image.open(image_element)
-    upper_im = image_gui_element.copy()
-    # Resize gui element
-    upper_im = upper_im.resize(newsize, PIL.Image.NEAREST)
-    # Open capture
-    capture_img = Image.open(capture)
-    back_im = capture_img.copy()
-    back_im.paste(upper_im,(left_top_x,left_top_y))
-    back_im.save(image_path_to_save, quality=95)
+    if ".png" in image_path_to_save:
+        rectangle_color = "#ffffff"
+        
+        # Open gui element
+        image_gui_element = Image.open(image_element).convert("RGBA")
+        upper_im = image_gui_element.copy()
+        # Resize gui element
+        upper_im = upper_im.resize(newsize, PIL.Image.NEAREST)
+        # Open capture
+        capture_img = Image.open(capture).convert("RGBA")
+        back_im = capture_img.copy()
+        
+        draw = ImageDraw.Draw(back_im)  
+        draw.rectangle(coordenates, fill =rectangle_color, outline =rectangle_color)
+        
+        back_im.paste(upper_im,(left_top_x,left_top_y), upper_im)
+        back_im.save(image_path_to_save, quality=95, format="png")
+    else:
+        # Open gui element
+        image_gui_element = Image.open(image_element)
+        upper_im = image_gui_element.copy()
+        # Resize gui element
+        upper_im = upper_im.resize(newsize, PIL.Image.NEAREST)
+        # Open capture
+        capture_img = Image.open(capture)
+        back_im = capture_img.copy()
+        back_im.paste(upper_im,(left_top_x,left_top_y), upper_im)
+        back_im.save(image_path_to_save, quality=95)
     return selected_element
 
 def replace_gui_element_various_places(args):
