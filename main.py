@@ -49,7 +49,7 @@ def validation_params(json_path,generate_path,number_logs,percent_per_trace):
 
 
 
-def generate_row(generate_path,dict,case,variant, screenshot_column_name, screenshot_name_generation_function):
+def generate_row(generate_path,dict,acu,case,variant, screenshot_column_name, screenshot_name_generation_function):
     '''
     Generate row reading the json
     args:
@@ -61,9 +61,10 @@ def generate_row(generate_path,dict,case,variant, screenshot_column_name, screen
     columns= dict["columnsNames"]
     columns_ui= dict["GUIElements"]
     json_list = dict["trace"][str(variant)]
+    
     for key in json_list:
         attr = []
-        case += 1
+        acu += 1
         for i in columns:
             if i in json_list[key]:
                 element = json_list[key][i]
@@ -75,13 +76,13 @@ def generate_row(generate_path,dict,case,variant, screenshot_column_name, screen
                                         
                     if variate == 1:
                         if i==screenshot_column_name:
-                            val = generate_capture(columns_ui,columns,element,case,generate_path,attr, key, variant, screenshot_name_generation_function)
+                            val = generate_capture(columns_ui,columns,element,acu,case,generate_path,attr, key, variant, screenshot_name_generation_function)
                         else:
                             val = detect_function(name)(args)
                     elif variate == 0:
                         if initValue !="":
                             if i==screenshot_column_name:
-                                val = generate_copied_capture_without_root([initValue,generate_path,case])
+                                val = generate_copied_capture_without_root([initValue,generate_path,acu])
                             else:
                                 val = initValue 
                         else:
@@ -90,7 +91,7 @@ def generate_row(generate_path,dict,case,variant, screenshot_column_name, screen
                     val="NaN"
             attr.append(val)
         rows.append(tuple([case,key,variant] + attr))
-    return rows,case
+    return rows,acu
 
 def number_rows_by_cases(number_logs, percent_per_trace):
     list_percents = []
@@ -154,14 +155,16 @@ def case_generation(json_log_path,generate_path,number_logs,percent_per_trace, a
         writer = csv.writer(f)
         columns = [case_column_name, activity_column_name, variant_column_name] + json_act_path["columnsNames"]
         writer.writerow(tuple(columns))
-        case = 0
+        acu = 0
+        case = 1
         total_variants = []
         for i, num_cases_per_variant_i in enumerate(list_percents):
             total_variants += num_cases_per_variant_i * [i+1]
     
         random.shuffle(total_variants)
         for variant in total_variants:
-            rows,case = generate_row(generate_path,json_act_path,case,variant,screenshot_column_name, screenshot_name_generation_function)
+            rows,acu = generate_row(generate_path,json_act_path,acu,case,variant,screenshot_column_name, screenshot_name_generation_function)
+            case += 1
             for row in rows:
                 writer.writerow(row)
         f.close()
@@ -331,7 +334,7 @@ if __name__ == '__main__':
     
     * scenario_size: number of scenarios to generate when "autoscenario_mode" is selected
     """
-    param_mode = sys.argv[1] if len(sys.argv) > 1 else "normal_mode"
+    param_mode = sys.argv[1] if len(sys.argv) > 1 else "autogeneration_mode"
     json_log_path = sys.argv[2] if len(sys.argv) > 2 else "resources"+sep+"test_scenarios"+sep+"Basic_Act5_Var2_DesElem2.json"
     number_logs = list(sys.argv[3]) if len(sys.argv) > 3 else ["log_size",10]
     percent_per_trace = list(sys.argv[4]) if len(sys.argv) > 4 else [0.5,0.5]

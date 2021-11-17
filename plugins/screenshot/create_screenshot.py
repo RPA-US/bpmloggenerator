@@ -4,7 +4,7 @@ from tools.database import select_variations_by, create_variation
 from tools.generic_utils import detect_function
 from configuration.settings import sep
 
-def generate_capture(columns_ui,columns,element,case,generate_path,attr, activity, variant, screenshot_name_generation_function):
+def generate_capture(columns_ui,columns,element,acu,case,generate_path,attr, activity, variant, screenshot_name_generation_function):
     '''
     Generate row reading the json
     args:
@@ -15,7 +15,7 @@ def generate_capture(columns_ui,columns,element,case,generate_path,attr, activit
     # actual_path = os.getcwd()
     capture_path= element["initValue"]
     args_tmp = element["args"]
-    args = [generate_path,case]
+    args = [generate_path,acu]
     #new_image = generate_screenshot_demo(args)
     new_image = detect_function(screenshot_name_generation_function)(args)
     try:
