@@ -359,7 +359,7 @@ if __name__ == '__main__':
     scenarios_path =                        sys.argv[10] if len(sys.argv) > 10 else "resources"+sep+"test_scenarios"+sep+"scenarios.json"
     
     if additional_balance:
-        default_conf["Imbalanced"] = additional_balance
+        default_conf["balance"]["Imbalanced"] = additional_balance
     
     if param_mode == "autogeneration_mode":
         # To use this mode execute: python main.py autogeneration_mode
