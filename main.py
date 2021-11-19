@@ -327,6 +327,11 @@ if __name__ == '__main__':
     
     * scenario_size: number of scenarios to generate when "autoscenario_mode" is selected
     """
+    # Configuration params
+    number_logs = ["log_size",10] # not relevant for autogeneration/autoscenario mode
+    percent_per_trace = [0.5,0.5] # not relevant for autogeneration/autoscenario mode
+    
+    
     colnames = {
         "Case": "Case",
         "Activity": "Activity",
@@ -347,11 +352,10 @@ if __name__ == '__main__':
         }
     }
     param_mode =                            sys.argv[1] if len(sys.argv) > 1 else "autogeneration_mode"
-    additional_balance =                    list(sys.argv[2]) if len(sys.argv) > 2 else None
-    generate_path =                         sys.argv[3] if len(sys.argv) > 3 else "CSV_exit"
+    additional_balance =                    sys.argv[2] if len(sys.argv) > 2 else 0.2
+    additional_balance_name =               sys.argv[3] if len(sys.argv) > 3 else "Imbalanced"
     json_log_path =                         sys.argv[4] if len(sys.argv) > 4 else "resources"+sep+"test_scenarios"+sep+"Basic_Act5_Var2_DesElem2.json"  # not relevant for autogeneration/autoscenario mode
-    number_logs =                           list(sys.argv[4]) if len(sys.argv) > 5 else ["log_size",10] # not relevant for autogeneration/autoscenario mode
-    percent_per_trace =                     list(sys.argv[5]) if len(sys.argv) > 6 else [0.5,0.5] # not relevant for autogeneration/autoscenario mode
+    generate_path =                         sys.argv[5] if len(sys.argv) > 5 else "CSV_exit"
     special_colnames =                      sys.argv[6] if len(sys.argv) > 6 else colnames # It must coincide with the column in the seed log
     screenshot_name_generation_function =   sys.argv[7] if len(sys.argv) > 7 else "function25" # Use function8 to obtain complete paths
     autogeneration_conf =                   json.loads(sys.argv[8]) if len(sys.argv) > 8 else default_conf
@@ -359,7 +363,7 @@ if __name__ == '__main__':
     scenarios_path =                        sys.argv[10] if len(sys.argv) > 10 else "resources"+sep+"test_scenarios"+sep+"scenarios.json"
     
     if additional_balance:
-        default_conf["balance"]["Imbalanced"] = additional_balance
+        default_conf["balance"][additional_balance_name] = [additional_balance, 1-additional_balance]
     
     if param_mode == "autogeneration_mode":
         # To use this mode execute: python main.py autogeneration_mode
