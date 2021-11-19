@@ -327,24 +327,16 @@ if __name__ == '__main__':
     
     * scenario_size: number of scenarios to generate when "autoscenario_mode" is selected
     """
-    param_mode = sys.argv[1] if len(sys.argv) > 1 else "autogeneration_mode"
-    json_log_path = sys.argv[2] if len(sys.argv) > 2 else "resources"+sep+"test_scenarios"+sep+"Basic_Act5_Var2_DesElem2.json"
-    number_logs = list(sys.argv[3]) if len(sys.argv) > 3 else ["log_size",10] # not relevant for autogeneration/autoscenario mode
-    percent_per_trace = list(sys.argv[4]) if len(sys.argv) > 4 else [0.5,0.5] # not relevant for autogeneration/autoscenario mode
-    generate_path = sys.argv[5] if len(sys.argv) > 5 else "CSV_exit"
     colnames = {
         "Case": "Case",
         "Activity": "Activity",
         "Screenshot": "Screenshot",
         "Variant": "Variant"
     }
-    special_colnames = sys.argv[6] if len(sys.argv) > 6 else colnames # It must coincide with the column in the seed log
-    screenshot_name_generation_function = sys.argv[7] if len(sys.argv) > 7 else "function25" # Use function8 to obtain complete paths
-    
     default_conf = { 
         "balance":{
             # "Balanced": [0.5,0.5],
-            "Imbalanced": [0.3,0.7]
+            # "Imbalanced": [0.3,0.7]
         },
         # Specify secuence of log sizes to automatic generation of experiments
         "size_secuence": [10,50,100],#1000]
@@ -354,11 +346,20 @@ if __name__ == '__main__':
             # "Advanced": "resources"+sep+"Advanced_Act10_Var2_DesElem4.json"
         }
     }
-    autogeneration_conf = json.loads(sys.argv[8]) if len(sys.argv) > 8 else default_conf
-    scenario_size = sys.argv[9] if len(sys.argv) > 9 else 30
-    scenarios_path = sys.argv[10] if len(sys.argv) > 10 else "resources"+sep+"test_scenarios"+sep+"scenarios.json"
+    param_mode =                            sys.argv[1] if len(sys.argv) > 1 else "autogeneration_mode"
+    additional_balance =                    list(sys.argv[2]) if len(sys.argv) > 2 else None
+    generate_path =                         sys.argv[3] if len(sys.argv) > 3 else "CSV_exit"
+    json_log_path =                         sys.argv[4] if len(sys.argv) > 4 else "resources"+sep+"test_scenarios"+sep+"Basic_Act5_Var2_DesElem2.json"  # not relevant for autogeneration/autoscenario mode
+    number_logs =                           list(sys.argv[4]) if len(sys.argv) > 5 else ["log_size",10] # not relevant for autogeneration/autoscenario mode
+    percent_per_trace =                     list(sys.argv[5]) if len(sys.argv) > 6 else [0.5,0.5] # not relevant for autogeneration/autoscenario mode
+    special_colnames =                      sys.argv[6] if len(sys.argv) > 6 else colnames # It must coincide with the column in the seed log
+    screenshot_name_generation_function =   sys.argv[7] if len(sys.argv) > 7 else "function25" # Use function8 to obtain complete paths
+    autogeneration_conf =                   json.loads(sys.argv[8]) if len(sys.argv) > 8 else default_conf
+    scenario_size =                         sys.argv[9] if len(sys.argv) > 9 else 30
+    scenarios_path =                        sys.argv[10] if len(sys.argv) > 10 else "resources"+sep+"test_scenarios"+sep+"scenarios.json"
     
-    
+    if additional_balance:
+        default_conf["Imbalanced"] = additional_balance
     
     if param_mode == "autogeneration_mode":
         # To use this mode execute: python main.py autogeneration_mode
