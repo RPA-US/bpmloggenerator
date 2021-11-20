@@ -137,6 +137,7 @@ resources/test_screenshots
 resources/test_dni
 resources/json_examples
 resources/msi_resources
+resources/databases
 mockups
 Captura de pantalla 2021-10-05 132706.png
 # SQLite Database

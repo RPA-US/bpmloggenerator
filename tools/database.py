@@ -1,12 +1,22 @@
 #!/usr/bin/python
 import sqlite3
 from sqlite3.dbapi2 import Error
+import os
 from configuration.settings import DATABASE
+from configuration.settings import sep
+import time
 # To initialize Database
 # python -c "from tools.database import init_database; init_database()"
-db_file = DATABASE
 
-def create_connection():
+
+def get_database_name(additional_name):
+    if additional_name:
+        res = DATABASE+sep+"loggenerator_"+additional_name+".db"
+    else:
+        res = DATABASE+sep+"loggenerator.db"
+    return res
+
+def create_connection(additional_name):
     """ create a database connection to the SQLite database
         specified by the db_file
     :param db_file: database file
@@ -14,14 +24,17 @@ def create_connection():
     """
     conn = None
     try:
-        conn = sqlite3.connect(db_file)
+        if not os.path.exists(DATABASE):
+            os.makedirs(DATABASE)
+        conn = sqlite3.connect(get_database_name(additional_name))
     except Error as e:
         print(e)
 
     return conn
 
-def init_database():
-    con = create_connection()
+def init_database(additional_name):
+    con = create_connection(additional_name)
+
     with con:
         cur = con.cursor()
         cur.execute("DROP TABLE IF EXISTS variations")
@@ -48,7 +61,7 @@ def select_variations_by(conn, case, scenario, activity, case_variation_id, vari
     :return: Collections of fetched objects
     """
     if not conn:
-        conn = create_connection()
+        conn = create_connection(None)
     cur = conn.cursor()
     cur.execute("SELECT * FROM variations WHERE scenario=? AND case_id=? AND activity=? AND case_variation_id=? AND variant=?", (scenario,case,activity,case_variation_id,variant))
 
@@ -56,7 +69,7 @@ def select_variations_by(conn, case, scenario, activity, case_variation_id, vari
 
 def create_variation(conn, case, scenario, case_variation_id, activity, variant, function, image_element):
     if not conn:
-        conn = create_connection()
+        conn = create_connection(None)
     cur = conn.cursor()
     v = [case, scenario, case_variation_id, activity, variant, function, image_element]
     cur.execute("INSERT INTO variations(case_id, scenario, case_variation_id, activity, variant, function_name, gui_element) VALUES (?,?,?,?,?,?,?)", v)

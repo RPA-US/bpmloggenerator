@@ -1,10 +1,10 @@
 import os
 import tools.generic_utils as util
-from tools.database import select_variations_by, create_variation
+from tools.database import select_variations_by, create_variation, create_connection
 from tools.generic_utils import detect_function
 from configuration.settings import sep
 
-def generate_capture(columns_ui,columns,element,acu,case,generate_path,attr, activity, variant, screenshot_name_generation_function):
+def generate_capture(columns_ui,columns,element,acu,case,generate_path,attr, activity, variant, screenshot_name_generation_function, database_name):
     '''
     Generate row reading the json
     args:
@@ -46,13 +46,15 @@ def generate_capture(columns_ui,columns,element,acu,case,generate_path,attr, act
                             arguments.append(image_path_to_save)
                             arguments.append(capture_path)
                             arguments.append(coordinates)
+                            conn = create_connection(database_name)
+                            
                             if "dependency" in j:
-                                dependant_row = select_variations_by(None, case, 0, j["dependency"]["Activity"], j["dependency"]["id"], j["dependency"]["V"]) # fetch a list
+                                dependant_row = select_variations_by(conn, case, 0, j["dependency"]["Activity"], j["dependency"]["id"], j["dependency"]["V"]) # fetch a list
                                 arguments.append(dependant_row[0][6])
                                 
                             image_element = util.detect_function(name)(arguments)
                             if type(image_element) == str:
-                                create_variation(None, case, 0, j["id"], activity, variant, name, image_element)
+                                create_variation(conn, case, 0, j["id"], activity, variant, name, image_element)
                         else:
                             new_image="NaN"
                         arguments = []
@@ -66,7 +68,7 @@ def generate_capture(columns_ui,columns,element,acu,case,generate_path,attr, act
         new_image = "NaN"
     return new_image
 
-def generate_scenario_capture(element,case,generate_path,activity,variant,new_image,scenario):
+def generate_scenario_capture(element,case,generate_path,activity,variant,new_image,scenario,database_name):
     '''
     Generate row reading the json
     args:
@@ -98,13 +100,16 @@ def generate_scenario_capture(element,case,generate_path,activity,variant,new_im
                 arguments.append(image_path_to_save)
                 arguments.append(capture_path)
                 arguments.append(coordinates)
+                conn = create_connection(database_name)
+                
+                
                 if "dependency" in variation_conf:
-                    dependant_row = select_variations_by(None, case, scenario, variation_conf["dependency"]["Activity"], variation_conf["dependency"]["id"], variation_conf["dependency"]["V"]) # fetch a list
+                    dependant_row = select_variations_by(conn, case, scenario, variation_conf["dependency"]["Activity"], variation_conf["dependency"]["id"], variation_conf["dependency"]["V"]) # fetch a list
                     arguments.append(dependant_row[0][6])
                     
                 image_element = util.detect_function(name)(arguments)
                 if type(image_element) == str:
-                    create_variation(None, case, scenario, variation_conf["id"], activity, variant, name, image_element)
+                    create_variation(conn, case, scenario, variation_conf["id"], activity, variant, name, image_element)
             else:
                 new_image="NaN"
             arguments = []

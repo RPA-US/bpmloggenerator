@@ -2,8 +2,6 @@
 
 # Generator configuration
 
-DATABASE = "loggenerator.db"
-
 # operating_system = "linux"
 operating_system = "windows"
 
@@ -15,3 +13,5 @@ else:
     sep = "/"
     function_trace = "function_trace.json"
     element_trace = "linux/element_trace_linux.json"
+
+DATABASE = "resources"+sep+"databases"
