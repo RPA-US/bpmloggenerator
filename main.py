@@ -28,17 +28,18 @@ def validation_params(json_path,generate_path,number_logs,percent_per_trace):
         res = True
     else:
         return False
-    if len(percent_per_trace) == 2:
-        res = True
-    else:
-        return False
-    acu = 0
-    for i in percent_per_trace:
-        acu += i
-    if acu == 1:
-        res = True
-    else:
-        return False
+    # Check if it is a binary decision (2 variants)
+    # if len(percent_per_trace) == 2:
+    #     res = True
+    # else:
+    #     return False
+    # acu = 0
+    # for i in percent_per_trace:
+    #     acu += i
+    # if acu == 1:
+    #     res = True
+    # else:
+    #     return False
     if number_logs > 0 and number_logs:
         res = True
     else:
@@ -293,7 +294,6 @@ def scenario_generation(scenarios_path, generate_path, scenario_size, colnames, 
     #   {"Basic": "basic_conf_scenario2.json", "Intermediate": "intermediate_conf_scenario2.json", "Advanced": "advanced_conf_scenario2.json"}, ...
     #   ]
     
-    
     # f = open(generate_path+"log.csv", 'w',newline='')
     # writer = csv.writer(f)
     
@@ -346,19 +346,21 @@ if __name__ == '__main__':
     }
     default_conf = { 
         "balance":{
-            "Balanced": [0.5,0.5],
-            "Imbalanced": [0.3,0.7]
+            "Balanced": [0.25,0.25,0.25,0.25],
+            "Imbalanced": [0.4,0.2,0.2,0.2]
+            # "Balanced": [0.5,0.5],
+            # "Imbalanced": [0.4,0.6]
         },
         # Specify secuence of log sizes to automatic generation of experiments
-        "size_secuence": [10],#,50,100],#1000]
+        "size_secuence": [10,20,30,50,100],#1000]
         "families": {
-            "Basic": "resources"+sep+"test_scenarios"+sep+"Basic_Act5_Var2_DesElem2.json",
-            # "Intermediate": "resources"+sep+"Intermediate_Act8_Var2_DesElem2.json",
-            # "Advanced": "resources"+sep+"Advanced_Act10_Var2_DesElem4.json"
+            # "Basic": "resources"+sep+"test_scenarios"+sep+"Basic_Act5_Var2_DesElem2.json",
+            # "Intermediate": "resources"+sep+"test_scenarios"+sep+"Intermediate_Act8_Var2_DesElem2.json",
+            "Advanced": "resources"+sep+"test_scenarios"+sep+"Advanced_Act10_Var2_DesElem4.json"
         }
     }
-    param_mode =                            sys.argv[1] if len(sys.argv) > 1 else "autogeneration_mode"
-    additional_balance =                    sys.argv[2] if len(sys.argv) > 2 else 0.3
+    param_mode =                            sys.argv[1] if len(sys.argv) > 1 else "autoscenario_mode"
+    additional_balance =                    sys.argv[2] if len(sys.argv) > 2 else None
     additional_balance_name =               sys.argv[3] if len(sys.argv) > 3 else "Imbalanced"
     json_log_path =                         sys.argv[4] if len(sys.argv) > 4 else "resources"+sep+"test_scenarios"+sep+"Basic_Act5_Var2_DesElem2.json"  # not relevant for autogeneration/autoscenario mode
     generate_path =                         sys.argv[5] if len(sys.argv) > 5 else "CSV_exit"

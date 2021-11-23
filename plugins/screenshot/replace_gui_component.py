@@ -4,9 +4,47 @@ import shutil
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw 
+from lorem_text import lorem
 import tools.generic_utils as util
 import sqlite3 as sl
 from configuration.settings import sep
+
+def random_word_image(args):
+    return random_text_image(args,lorem.words(1))
+    
+def random_paragraph_image(args):
+    return random_text_image(args,lorem.paragraphs(1))
+    
+def random_sentence_image(args):
+    return random_text_image(args,lorem.sentence())
+
+def random_text_image(args,random_text):
+    '''
+    An input capture is obtained, and a text is inserted into it​
+    args:​
+        capture: path of the image to insert in
+        coordenates: list with the top left corner. The coordenate (0,0) is the top_left in the image
+        text: the text to be inserted
+        new_image: saved image
+        configuration: path to the font type; integer of the font size; the tuple of the font color
+    '''
+    
+    args_aux = args
+    
+    # hide background
+    args_aux.insert(0,random_text)
+    new_image = args_aux[2]
+    capture = args_aux[3]
+    coordenates = args_aux[4]
+    
+    capture_img = Image.open(capture)
+    back_im = capture_img.copy()
+    draw = ImageDraw.Draw(back_im)  
+    draw.rectangle(coordenates, fill ="#ffffff", outline ="#ffffff")
+    # Save image
+    back_im.save(new_image, quality=95)
+    
+    return insert_text_image(args_aux)
 
 def replace_gui_element_by_other(args):
     '''
@@ -137,14 +175,26 @@ def insert_text_image(args):
     new_image = args[2]
     capture = args[3]
     coordenates = args[4]
+    
     # Coordenates x and y
     left_top_x = coordenates[0]
     left_top_y = coordenates[1]
-    # Open capture
-    capture_img = Image.open(capture)
-    back_im = capture_img.copy()
-    # Create text
-    draw = ImageDraw.Draw(back_im)
+    
+    if len(args) > 5:
+        text = args[5]
+        capture_img = Image.open(capture)
+        back_im = capture_img.copy()
+        draw = ImageDraw.Draw(back_im)  
+        draw.rectangle(coordenates, fill ="#ffffff", outline ="#ffffff")
+        # Save image
+        back_im.save(new_image, quality=95)
+    else:
+        # Open capture
+        capture_img = Image.open(capture)
+        back_im = capture_img.copy()
+        # Create text
+        draw = ImageDraw.Draw(back_im)
+    
     font = ImageFont.truetype(font, int(font_size))
     draw.text((left_top_x, left_top_y),text,font_color,font=font)
     # Save image
@@ -152,7 +202,7 @@ def insert_text_image(args):
     if sep in new_image:
         splitted = new_image.split(sep)
         new_image = splitted[len(splitted)-1]
-    return new_image
+    return text
 
 def hidden_gui_element(args):
     '''
@@ -161,7 +211,7 @@ def hidden_gui_element(args):
         capture: path of the image to insert in
         coordenates: list with the 2 corners limits of the visual element (left_top_x,left_top_y,right_bot_x,right_bot_y). The coordenate (0,0) is the top_left in the image
         new_image: saved image
-        configuration: path to the font type; integer of the font size; the tuple of the font color
+        configuration: background color (p.e. #FFFFF)
     '''
     configuration = util.select_random_list(args[0])
     new_image = args[1]
