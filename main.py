@@ -346,17 +346,18 @@ if __name__ == '__main__':
     }
     default_conf = { 
         "balance":{
-            "Balanced": [0.25,0.25,0.25,0.25],
-            "Imbalanced": [0.4,0.2,0.2,0.2]
-            # "Balanced": [0.5,0.5],
-            # "Imbalanced": [0.4,0.6]
+            # "Balanced": [0.25,0.25,0.25,0.25],
+            # "Imbalanced": [0.4,0.2,0.2,0.2]
+            "Balanced": [0.5,0.5],
+            "Imbalanced": [0.4,0.6]
         },
         # Specify secuence of log sizes to automatic generation of experiments
-        "size_secuence": [10,20,30,50,100],#1000]
+        # "size_secuence": [10,20,30,50,100],#1000]
+        "size_secuence": [25],
         "families": {
-            # "Basic": "resources"+sep+"test_scenarios"+sep+"Basic_Act5_Var2_DesElem2.json",
+            "Basic": "resources"+sep+"test_scenarios"+sep+"Basic_Act5_Var2_DesElem2.json",
             # "Intermediate": "resources"+sep+"test_scenarios"+sep+"Intermediate_Act8_Var2_DesElem2.json",
-            "Advanced": "resources"+sep+"test_scenarios"+sep+"Advanced_Act10_Var2_DesElem4.json"
+            # "Advanced": "resources"+sep+"test_scenarios"+sep+"Advanced_Act10_Var2_DesElem4.json"
         }
     }
     param_mode =                            sys.argv[1] if len(sys.argv) > 1 else "autoscenario_mode"
