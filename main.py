@@ -367,7 +367,7 @@ if __name__ == '__main__':
     special_colnames =                      sys.argv[6] if len(sys.argv) > 6 else colnames # It must coincide with the column in the seed log
     screenshot_name_generation_function =   sys.argv[7] if len(sys.argv) > 7 else "function25" # Use function8 to obtain complete paths
     autogeneration_conf =                   json.loads(sys.argv[8]) if len(sys.argv) > 8 else default_conf
-    scenario_size =                         sys.argv[9] if len(sys.argv) > 9 else 3
+    scenario_size =                         sys.argv[9] if len(sys.argv) > 9 else 30
     scenarios_path =                        sys.argv[10] if len(sys.argv) > 10 else "resources"+sep+"test_scenarios"+sep+"scenarios.json"
     
     if additional_balance:
