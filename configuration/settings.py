@@ -57,7 +57,7 @@ default_intermediate_conf = {
     },
     # Specify secuence of log sizes to automatic generation of experiments
     # "size_secuence": [30,40,50,100,200],
-    "size_secuence": [20],
+    "size_secuence": [30,40,50,100,200],
     "families": {
         "Intermediate": "resources"+sep+"test_scenarios"+sep+"Intermediate_Act8_Var2_DesElem2.json",
     }
