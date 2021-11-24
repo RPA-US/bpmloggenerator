@@ -51,7 +51,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V1_image0001.png",
+                    "initValue": "mockups\\basic\\V1_image0001.png",
                     "variate": 0,
                     "name": "function_copy_without_root",
                     "args": {}
@@ -101,7 +101,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V1_image0003.png",
+                    "initValue": "mockups\\basic\\V1_image0003.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -158,7 +158,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V1_image0004.png",
+                    "initValue": "mockups\\basic\\V1_image0004.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -220,7 +220,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V1_image0005.png",
+                    "initValue": "mockups\\basic\\V1_image0005.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -286,7 +286,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V2_image0001.png",
+                    "initValue": "mockups\\basic\\V2_image0001.png",
                     "variate": 0,
                     "name": "function_copy_without_root",
                     "args": {}
@@ -336,7 +336,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V2_image0003.png",
+                    "initValue": "mockups\\basic\\V2_image0003.png",
                     "variate": 0,
                     "name": "function_copy_without_root",
                     "args": {}
@@ -386,7 +386,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V2_image0004.png",
+                    "initValue": "mockups\\basic\\V2_image0004.png",
                     "variate": 1,
                     "name": "",
                     "args": {
