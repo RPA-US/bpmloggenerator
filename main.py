@@ -10,7 +10,7 @@ from plugins.screenshot.create_screenshot import generate_capture, generate_scen
 from plugins.screenshot.replace_gui_component import generate_copied_capture_without_root, generate_copied_capture
 from tools.generic_utils import detect_function
 from tools.database import init_database
-from configuration.settings import sep, default_scenario_configurations, scenarios_json, colnames, output
+from configuration.settings import sep, default_scenario_configurations, scenarios_json, colnames, output, autoanalize, melrpa_case_study
 
 def validation_params(json_path,generate_path,number_logs,percent_per_trace):   
     '''
@@ -311,6 +311,8 @@ def scenario_generation(scenarios_path, generate_path, scenario_size, colnames, 
         autogeneration_conf["families"] = scenario_conf
         automatic_experiments(path, activity_column_name, variant_column_name, case_column_name, screenshot_column_name,  autogeneration_conf["balance"], autogeneration_conf["size_secuence"], autogeneration_conf["families"], 
                             prefix_scenario+str(index), screenshot_name_generation_function,database_name)
+        
+    return version_subpath#path
 
 
 def select_last_item(initValue, sep):
@@ -368,10 +370,19 @@ if __name__ == '__main__':
                               special_colnames["Screenshot"], autogeneration_conf[autogeneration_conf_family]["balance"],
                               autogeneration_conf[autogeneration_conf_family]["size_secuence"], autogeneration_conf[autogeneration_conf_family]["families"], None, screenshot_name_generation_function,database_name)
     elif param_mode == "autoscenario_mode":
+        final_path = []
         for family in autogeneration_conf.keys():
             print(Back.GREEN + family)
             print(Style.RESET_ALL)
-            scenario_generation(scenarios_path, generate_path, scenario_size, colnames, autogeneration_conf[family], screenshot_name_generation_function, family)
+            path_aux = scenario_generation(scenarios_path, generate_path, scenario_size, colnames, autogeneration_conf[family], screenshot_name_generation_function, family)
+            final_path.append(path_aux)
+        
+        if autoanalize:
+            for familypath in final_path:
+                s = "python " + melrpa_case_study + " " + familypath + " True True"  
+                os.system(s)
+            
     else:
         case_generation(json_log_path,generate_path,number_logs,percent_per_trace, special_colnames["Activity"], 
                         special_colnames["Variant"], special_colnames["Case"], special_colnames["Screenshot"], screenshot_name_generation_function, None, None)
+    

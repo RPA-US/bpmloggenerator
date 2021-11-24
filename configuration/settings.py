@@ -16,6 +16,10 @@ else:
 
 DATABASE = "resources"+sep+"databases"
 
+# Analzer (MELRPA) case study script path
+melrpa_case_study = ".." + sep + "melrpa" + sep + "melrpa" + sep + "Case_study_util.py"
+autoanalize = False
+
 # Output location
 output = "CSV_exit"
 
@@ -52,7 +56,8 @@ default_intermediate_conf = {
         "Imbalanced": [0.4,0.6]
     },
     # Specify secuence of log sizes to automatic generation of experiments
-    "size_secuence": [30,40,50,100,200],
+    # "size_secuence": [30,40,50,100,200],
+    "size_secuence": [20],
     "families": {
         "Intermediate": "resources"+sep+"test_scenarios"+sep+"Intermediate_Act8_Var2_DesElem2.json",
     }
@@ -72,7 +77,7 @@ default_advanced_conf = {
 }
 
 default_scenario_configurations = {
-    "Basic": default_basic_conf,
+    # "Basic": default_basic_conf,
     "Intermediate": default_intermediate_conf,
-    "Advanced": default_advanced_conf,
+    # "Advanced": default_advanced_conf,
 }

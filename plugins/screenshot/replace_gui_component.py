@@ -9,14 +9,28 @@ import tools.generic_utils as util
 import sqlite3 as sl
 from configuration.settings import sep
 
+def delimit_characters(s, char_limit):
+    res = "".join(s[i:i+char_limit] + "\n" for i in range(0,len(s),char_limit))
+    return res
+
 def random_word_image(args):
     return random_text_image(args,lorem.words(1))
     
 def random_paragraph_image(args):
-    return random_text_image(args,lorem.paragraphs(1))
+    """
+    Mandatory to have as args Font, Font size, Font color, Background color and Character delimitation for paragraph: "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+    """
+    s = lorem.paragraphs(1)
+    s_line_breaks = delimit_characters(s,args[0][4])
+    return random_text_image(args,s_line_breaks)
     
 def random_sentence_image(args):
-    return random_text_image(args,lorem.sentence())
+    """
+    Mandatory to have as args Font, Font size, Font color, Background color and Character delimitation for paragraph: "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+    """
+    s = lorem.sentence()
+    s_line_breaks = delimit_characters(s,args[0][4])
+    return random_text_image(args,s_line_breaks)
 
 def random_text_image(args,random_text):
     '''
@@ -33,17 +47,6 @@ def random_text_image(args,random_text):
     
     # hide background
     args_aux.insert(0,random_text)
-    new_image = args_aux[2]
-    capture = args_aux[3]
-    coordenates = args_aux[4]
-    
-    capture_img = Image.open(capture)
-    back_im = capture_img.copy()
-    draw = ImageDraw.Draw(back_im)  
-    draw.rectangle(coordenates, fill ="#ffffff", outline ="#ffffff")
-    # Save image
-    back_im.save(new_image, quality=95)
-    
     return insert_text_image(args_aux)
 
 def replace_gui_element_by_other(args):
@@ -175,6 +178,9 @@ def insert_text_image(args):
     new_image = args[2]
     capture = args[3]
     coordenates = args[4]
+    background_color = False
+    if len(args[1]) > 3:
+        background_color = args[1][3]
     
     # Coordenates x and y
     left_top_x = coordenates[0]
@@ -186,6 +192,13 @@ def insert_text_image(args):
         back_im = capture_img.copy()
         draw = ImageDraw.Draw(back_im)  
         draw.rectangle(coordenates, fill ="#ffffff", outline ="#ffffff")
+        # Save image
+        back_im.save(new_image, quality=95)
+    elif background_color:
+        capture_img = Image.open(capture)
+        back_im = capture_img.copy()
+        draw = ImageDraw.Draw(back_im)  
+        draw.rectangle(coordenates, fill =background_color, outline =background_color)
         # Save image
         back_im.save(new_image, quality=95)
     else:
