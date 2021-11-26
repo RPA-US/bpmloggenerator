@@ -10,6 +10,18 @@ import sqlite3 as sl
 from configuration.settings import sep
 import random
 
+def resize_respecting_ratio(width_size, height_size, image):
+    image_width = image.size[0]
+    image_height = image.size[1]
+    if width_size - image_width < height_size - image_height:
+        height_percent = (height_size / float(image.size[1]))
+        width_size = int((float(image.size[0]) * float(height_percent)))
+    else:
+        width_percent = (width_size / float(image.size[0]))
+        height_size = int((float(image.size[1]) * float(width_percent)))
+    return (width_size, height_size)
+
+
 def replace_gui_element_by_other(args):
     '''
     An input capture is obtained, and a visual element is inserted into it​
@@ -30,28 +42,43 @@ def replace_gui_element_by_other(args):
 
     if len(args) > 4:
         selected_element = args[4]
-        image_element = util.detect_element(selected_element)        
+        image_element = util.detect_element(selected_element)       
 
     # Coordenates x and y
     left_top_x = coordenates[0]
     left_top_y = coordenates[1]
     right_bot_x = coordenates[2]
     right_bot_y = coordenates[3]
+        
+    # Open gui element
+    image_gui_element = Image.open(image_element)
+            
     # New size element id
     width_size = right_bot_x-left_top_x
     height_size = right_bot_y-left_top_y
-    newsize = (width_size,height_size)
+    
+    if len(coordenates)>4: # [571, 167, 627, 240, "RATIO"] to respect aspect ratio
+        newsize = resize_respecting_ratio(width_size, height_size, image_gui_element)
+        coordenates = coordenates[:4]
+    else:
+        newsize = (width_size,height_size)
+        
+    replace_gui_element_and_save(image_path_to_save, image_gui_element, newsize, capture, coordenates, left_top_x, left_top_y, None)
+    
+    return selected_element
+
+def replace_gui_element_and_save(image_path_to_save, image_gui_element, newsize, capture, coordenates, left_top_x, left_top_y, back_im):
     if ".png" in image_path_to_save:
         rectangle_color = "#ffffff"
         
-        # Open gui element
-        image_gui_element = Image.open(image_element).convert("RGBA")
+        image_gui_element = image_gui_element.convert("RGBA")
         upper_im = image_gui_element.copy()
         # Resize gui element
         upper_im = upper_im.resize(newsize, PIL.Image.NEAREST)
         # Open capture
         capture_img = Image.open(capture).convert("RGBA")
-        back_im = capture_img.copy()
+        if not back_im:
+            back_im = capture_img.copy()
         
         draw = ImageDraw.Draw(back_im)  
         draw.rectangle(coordenates, fill =rectangle_color, outline =rectangle_color)
@@ -59,17 +86,15 @@ def replace_gui_element_by_other(args):
         back_im.paste(upper_im,(left_top_x,left_top_y), upper_im)
         back_im.save(image_path_to_save, quality=95, format="png")
     else:
-        # Open gui element
-        image_gui_element = Image.open(image_element)
         upper_im = image_gui_element.copy()
         # Resize gui element
         upper_im = upper_im.resize(newsize, PIL.Image.NEAREST)
         # Open capture
         capture_img = Image.open(capture)
-        back_im = capture_img.copy()
+        if not back_im:
+            back_im = capture_img.copy()
         back_im.paste(upper_im,(left_top_x,left_top_y), upper_im)
         back_im.save(image_path_to_save, quality=95)
-    return selected_element
 
 def replace_gui_element_various_places(args):
     '''
@@ -90,13 +115,12 @@ def replace_gui_element_various_places(args):
         
     image_element = util.detect_element(selected_element)
 
-    # Open capture
+    # Open capture: can be abstracted not using replace_gui_element_and_save
     capture_img = Image.open(capture)
     back_im = capture_img.copy()
 
     # Open gui element
     image_gui_element = Image.open(image_element)
-    upper_im = image_gui_element.copy()
 
     for i in range(0, len(coordenates)):
         # Coordenates x and y
@@ -107,16 +131,14 @@ def replace_gui_element_various_places(args):
         # New size element id
         width_size = right_bot_x-left_top_x
         height_size = right_bot_y-left_top_y
-        newsize = (width_size,height_size)
 
-        # Resize gui element
-        upper_im = upper_im.resize(newsize, PIL.Image.NEAREST)
-
-        back_im.paste(upper_im,(left_top_x,left_top_y))
-        back_im.save(image_path_to_save, quality=95)
+        if len(coordenates[i])>4: # [571, 167, 627, 240, "RATIO"] to respect aspect ratio
+            newsize = resize_respecting_ratio(width_size, height_size, image_gui_element)
+            coordenates[i] = coordenates[i][:4]
+        else:
+            newsize = (width_size,height_size)
         
-        back_im.paste(upper_im,(left_top_x,left_top_y))
-        back_im.save(image_path_to_save, quality=95)
+        replace_gui_element_and_save(image_path_to_save, image_gui_element, newsize, capture, coordenates[i], left_top_x, left_top_y, back_im)
        
     return selected_element
 

@@ -82,7 +82,7 @@
                     "variate": 0,
                     "name": "function12",
                     "args": []
-                },  
+                },
                 "Click": {
                     "initValue": 1,
                     "variate": 0,
@@ -118,7 +118,7 @@
                             "id": 2,
                             "coordinates": [145, 343, 435, 479],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }]
                     }
                 }
@@ -175,7 +175,7 @@
                             "id": 1,
                             "coordinates": [615, 140, 792, 159],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }]
                     }
                 }
@@ -232,29 +232,29 @@
                             "id": 1,
                             "coordinates": [615, 140, 792, 159],
                             "name": "function22",
-                            "dependency":{
+                            "dependency": {
                                 "Activity": "C",
                                 "V": 1,
                                 "id": 1
                             },
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }],
                         "ImageView": [{
                             "id": 3,
                             "coordinates": [535, 320, 709, 345],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }, {
                             "id": 4,
                             "coordinates": [581, 374, 730, 421],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }, {
                             "id": 5,
                             "coordinates": [629, 448, 823, 468],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
-                        },{
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }, {
                             "id": 7,
                             "coordinates": [817, 225, 1000, 408],
                             "name": "function21",
@@ -472,16 +472,16 @@
                         "ImageView": [{
                             "id": 1,
                             "coordinates": [
-                                [571, 167, 627, 240],
-                                [719, 325, 948, 619]
+                                [571, 167, 627, 240, "RATIO"],
+                                [719, 325, 948, 619, "RATIO"]
                             ],
                             "name": "function24",
                             "args": ["doc_1", "doc_2", "doc_3", "doc_4", "doc_5", "doc_6", "doc_7", "doc_8", "doc_9"]
-                        },{
+                        }, {
                             "id": 2,
                             "coordinates": [145, 343, 435, 479],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }]
                     }
                 }
@@ -538,7 +538,7 @@
                             "id": 1,
                             "coordinates": [615, 140, 792, 159],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }]
                     }
                 }
@@ -595,29 +595,29 @@
                             "id": 1,
                             "coordinates": [615, 140, 792, 159],
                             "name": "function22",
-                            "dependency":{
+                            "dependency": {
                                 "Activity": "C",
                                 "V": 1,
                                 "id": 1
                             },
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }],
                         "ImageView": [{
                             "id": 3,
                             "coordinates": [535, 320, 709, 345],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }, {
                             "id": 4,
                             "coordinates": [581, 374, 730, 421],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }, {
                             "id": 5,
                             "coordinates": [629, 448, 823, 468],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
-                        },{
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }, {
                             "id": 7,
                             "coordinates": [817, 225, 1000, 408],
                             "name": "function21",
@@ -786,7 +786,7 @@
                             "id": 1,
                             "coordinates": [145, 343, 435, 479],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }]
                     }
                 }
@@ -843,7 +843,7 @@
                             "id": 1,
                             "coordinates": [615, 140, 792, 159],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }]
                     }
                 }
@@ -900,29 +900,29 @@
                             "id": 1,
                             "coordinates": [615, 140, 792, 159],
                             "name": "function22",
-                            "dependency":{
+                            "dependency": {
                                 "Activity": "C",
                                 "V": 1,
                                 "id": 1
                             },
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }],
                         "ImageView": [{
                             "id": 3,
                             "coordinates": [535, 320, 709, 345],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }, {
                             "id": 4,
                             "coordinates": [581, 374, 730, 421],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }, {
                             "id": 5,
                             "coordinates": [629, 448, 823, 468],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
-                        },{
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }, {
                             "id": 7,
                             "coordinates": [817, 225, 1000, 408],
                             "name": "function21",
@@ -1141,7 +1141,7 @@
                             "id": 1,
                             "coordinates": [145, 343, 435, 479],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }]
                     }
                 }
@@ -1198,7 +1198,7 @@
                             "id": 1,
                             "coordinates": [615, 140, 792, 159],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }]
                     }
                 }
@@ -1255,29 +1255,29 @@
                             "id": 1,
                             "coordinates": [615, 140, 792, 159],
                             "name": "function22",
-                            "dependency":{
+                            "dependency": {
                                 "Activity": "C",
                                 "V": 1,
                                 "id": 1
                             },
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }],
                         "ImageView": [{
                             "id": 3,
                             "coordinates": [535, 320, 709, 345],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }, {
                             "id": 4,
                             "coordinates": [581, 374, 730, 421],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }, {
                             "id": 5,
                             "coordinates": [629, 448, 823, 468],
                             "name": "function_random_words",
-                            "args": ["resources/Roboto-Black.ttf", 20, "#000000"]
-                        },{
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }, {
                             "id": 7,
                             "coordinates": [817, 225, 1000, 408],
                             "name": "function21",
