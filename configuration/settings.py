@@ -33,6 +33,8 @@ colnames = {
 
 # Scenarios variations json location
 scenarios_json = "resources"+sep+"test_scenarios"+sep+"scenarios.json"
+scenario_size = 4
+decision_activity = "D"
 
 # Default_scenario_configurations
 
@@ -57,7 +59,7 @@ default_intermediate_conf = {
     },
     # Specify secuence of log sizes to automatic generation of experiments
     # "size_secuence": [30,40,50,100,200],
-    "size_secuence": [30,40,50,100,200],
+    "size_secuence": [50,100],
     "families": {
         "Intermediate": "resources"+sep+"test_scenarios"+sep+"Intermediate_Act8_Var2_DesElem2.json",
     }

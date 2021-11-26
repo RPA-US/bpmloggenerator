@@ -229,7 +229,7 @@
                             "coordinates": [535, 270, 709, 287],
                             "name": "function_random_words",
                             "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
-                        },{
+                        }, {
                             "id": 3,
                             "coordinates": [535, 320, 709, 345],
                             "name": "function_random_words",
@@ -569,8 +569,13 @@
                         "ImageView": [{
                             "id": 1,
                             "coordinates": [615, 140, 792, 159],
-                            "name": "function_random_paragraph",
+                            "name": "function_random_words",
                             "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }, {
+                            "id": 2,
+                            "coordinates": [455, 425, 965, 538],
+                            "name": "function_random_paragraph",
+                            "args": ["resources/Roboto-Black.ttf", 14, "#000000", "#FFFFFF", 80]
                         }]
                     }
                 }

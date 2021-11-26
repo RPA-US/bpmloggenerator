@@ -10,7 +10,7 @@ from plugins.screenshot.create_screenshot import generate_capture, generate_scen
 from plugins.screenshot.replace_gui_component import generate_copied_capture_without_root, generate_copied_capture
 from tools.generic_utils import detect_function
 from tools.database import init_database
-from configuration.settings import sep, default_scenario_configurations, scenarios_json, colnames, output, autoanalize, melrpa_case_study
+from configuration.settings import sep, default_scenario_configurations, scenarios_json, colnames, output, autoanalize, melrpa_case_study, decision_activity, scenario_size
 
 def validation_params(json_path,generate_path,number_logs,percent_per_trace):   
     '''
@@ -221,7 +221,7 @@ def automatic_experiments(generate_path, activity_column_name, variant_column_na
 #         conf[family] = filename
 #     return conf
 
-def scenario_generation(scenarios_path, generate_path, scenario_size, colnames, autogeneration_conf, screenshot_name_generation_function,folder_name):
+def scenario_generation(scenarios_json, generate_path, scenario_size, colnames, autogeneration_conf, screenshot_name_generation_function,folder_name):
     activity_column_name = colnames["Activity"]
     variant_column_name = colnames["Variant"]
     case_column_name = colnames["Case"]
@@ -245,7 +245,7 @@ def scenario_generation(scenarios_path, generate_path, scenario_size, colnames, 
     
     # Scenario variability: screenshot seeds to later generate case variability are generated 
     image_names_conf = {}
-    json_log = open(scenarios_path)
+    json_log = open(scenarios_json)
     scenario_json = json.load(json_log)
     
     n_scenario_seed_logs = []
@@ -357,8 +357,6 @@ if __name__ == '__main__':
     special_colnames =                      sys.argv[6] if len(sys.argv) > 6 else colnames # It must coincide with the column in the seed log
     screenshot_name_generation_function =   sys.argv[7] if len(sys.argv) > 7 else "function25" # Use function8 to obtain complete paths
     autogeneration_conf =                   json.loads(sys.argv[8]) if len(sys.argv) > 8 else default_scenario_configurations
-    scenario_size =                         sys.argv[9] if len(sys.argv) > 9 else 2
-    scenarios_path =                        sys.argv[10] if len(sys.argv) > 10 else scenarios_json
     
     if additional_balance:
         default_scenario_configurations["Basic"]["balance"]["Imbalanced"] = [float(additional_balance), 1-float(additional_balance)]
@@ -374,12 +372,12 @@ if __name__ == '__main__':
         for family in autogeneration_conf.keys():
             print(Back.GREEN + family)
             print(Style.RESET_ALL)
-            path_aux = scenario_generation(scenarios_path, generate_path, scenario_size, colnames, autogeneration_conf[family], screenshot_name_generation_function, family)
+            path_aux = scenario_generation(scenarios_json, generate_path, scenario_size, colnames, autogeneration_conf[family], screenshot_name_generation_function, family)
             final_path.append(path_aux)
         
         if autoanalize:
             for familypath in final_path:
-                s = "python " + melrpa_case_study + " " + familypath + " True True"  
+                s = "python " + melrpa_case_study + " " + familypath + " " + decision_activity + " both"  
                 os.system(s)
             
     else:
