@@ -8,46 +8,7 @@ from lorem_text import lorem
 import tools.generic_utils as util
 import sqlite3 as sl
 from configuration.settings import sep
-
-def delimit_characters(s, char_limit):
-    res = "".join(s[i:i+char_limit] + "\n" for i in range(0,len(s),char_limit))
-    return res
-
-def random_word_image(args):
-    return random_text_image(args,lorem.words(1))
-    
-def random_paragraph_image(args):
-    """
-    Mandatory to have as args Font, Font size, Font color, Background color and Character delimitation for paragraph: "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
-    """
-    s = lorem.paragraphs(1)
-    s_line_breaks = delimit_characters(s,args[0][4])
-    return random_text_image(args,s_line_breaks)
-    
-def random_sentence_image(args):
-    """
-    Mandatory to have as args Font, Font size, Font color, Background color and Character delimitation for paragraph: "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
-    """
-    s = lorem.sentence()
-    s_line_breaks = delimit_characters(s,args[0][4])
-    return random_text_image(args,s_line_breaks)
-
-def random_text_image(args,random_text):
-    '''
-    An input capture is obtained, and a text is inserted into it​
-    args:​
-        capture: path of the image to insert in
-        coordenates: list with the top left corner. The coordenate (0,0) is the top_left in the image
-        text: the text to be inserted
-        new_image: saved image
-        configuration: path to the font type; integer of the font size; the tuple of the font color
-    '''
-    
-    args_aux = args
-    
-    # hide background
-    args_aux.insert(0,random_text)
-    return insert_text_image(args_aux)
+import random
 
 def replace_gui_element_by_other(args):
     '''
@@ -158,7 +119,116 @@ def replace_gui_element_various_places(args):
         back_im.save(image_path_to_save, quality=95)
        
     return selected_element
+
+def hidden_gui_element(args):
+    '''
+    An input capture is obtained, and a gui element is hidden​
+    args:​
+        capture: path of the image to insert in
+        coordenates: list with the 2 corners limits of the visual element (left_top_x,left_top_y,right_bot_x,right_bot_y). The coordenate (0,0) is the top_left in the image
+        new_image: saved image
+        configuration: background color (p.e. #FFFFF)
+    '''
+    configuration = util.select_random_list(args[0])
+    new_image = args[1]
+    capture = args[2]
+    coordenates = args[3]
+    # Configuration
+    rectangle_color = configuration
+    # Open capture
+    capture_img = Image.open(capture)
+    back_im = capture_img.copy()
+    # Hidden element
+    draw = ImageDraw.Draw(back_im)  
+    draw.rectangle(coordenates, fill =rectangle_color, outline =rectangle_color)
+    # Save image
+    back_im.save(new_image, quality=95)
+    if sep in new_image:
+        splitted = new_image.split(sep)
+        new_image = splitted[len(splitted)-1]
+    return new_image
+
+
+def generate_copied_capture(args):
+    '''
+    Generate an image copy renamed
+    '''
+    capture = args[0]
+    generate_path = args[1]
+    number = args[2]
+    if not '.png' in str(number):
+        name = generate_path+str(number)+"_img.png"
+    else:
+        name = generate_path+str(number)
+    shutil.copyfile(capture, name)
+    # Random number and the extension with a img identification
+    return name
+
+def generate_copied_capture_without_root(args):
+    '''
+    Generate an image copy renamed
+    '''
+    capture = args[0]
+    generate_path = args[1]
+    number = args[2]
+    name = str(number)+"_img.png"
+    shutil.copyfile(capture, generate_path+name)
+    # Random number and the extension with a img identification
+    return name
+
+########################
+# INSERT TEXT IN IMAGE #
+########################
+
+def delimit_characters(s, char_limit):
+    res = "".join(s[i:i+char_limit] + "\n" for i in range(0,len(s),char_limit))
+    return res
+
+def random_word_image(args):
+    if args[0] and len(list(args[0]))>5:
+        size = random.randint(1,args[0][5])
+    else:
+        size = 1
+    s = lorem.words(size)
+    s_line_breaks = delimit_characters(s,args[0][4])
+    return random_text_image(args,s_line_breaks)
     
+def random_paragraph_image(args):
+    """
+    Mandatory to have as args Font, Font size, Font color, Background color and Character delimitation for paragraph: "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+    """
+    if args[0] and len(list(args[0]))>5:
+        size = random.randint(1,args[0][5])
+    else:
+        size = random.randint(1,2)
+    s = lorem.paragraphs(size)
+    s_line_breaks = delimit_characters(s,args[0][4])
+    return random_text_image(args,s_line_breaks)
+    
+def random_sentence_image(args):
+    """
+    Mandatory to have as args Font, Font size, Font color, Background color and Character delimitation for paragraph: "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+    """
+    s = lorem.sentence()
+    s_line_breaks = delimit_characters(s,args[0][4])
+    return random_text_image(args,s_line_breaks)
+
+def random_text_image(args,random_text):
+    '''
+    An input capture is obtained, and a text is inserted into it​
+    args:​
+        capture: path of the image to insert in
+        coordenates: list with the top left corner. The coordenate (0,0) is the top_left in the image
+        text: the text to be inserted
+        new_image: saved image
+        configuration: path to the font type; integer of the font size; the tuple of the font color
+    '''
+    
+    args_aux = args
+    
+    # hide background
+    args_aux.insert(0,random_text)
+    return insert_text_image(args_aux)
 
 
 def insert_text_image(args):
@@ -216,59 +286,3 @@ def insert_text_image(args):
         splitted = new_image.split(sep)
         new_image = splitted[len(splitted)-1]
     return text
-
-def hidden_gui_element(args):
-    '''
-    An input capture is obtained, and a gui element is hidden​
-    args:​
-        capture: path of the image to insert in
-        coordenates: list with the 2 corners limits of the visual element (left_top_x,left_top_y,right_bot_x,right_bot_y). The coordenate (0,0) is the top_left in the image
-        new_image: saved image
-        configuration: background color (p.e. #FFFFF)
-    '''
-    configuration = util.select_random_list(args[0])
-    new_image = args[1]
-    capture = args[2]
-    coordenates = args[3]
-    # Configuration
-    rectangle_color = configuration
-    # Open capture
-    capture_img = Image.open(capture)
-    back_im = capture_img.copy()
-    # Hidden element
-    draw = ImageDraw.Draw(back_im)  
-    draw.rectangle(coordenates, fill =rectangle_color, outline =rectangle_color)
-    # Save image
-    back_im.save(new_image, quality=95)
-    if sep in new_image:
-        splitted = new_image.split(sep)
-        new_image = splitted[len(splitted)-1]
-    return new_image
-
-
-def generate_copied_capture(args):
-    '''
-    Generate an image copy renamed
-    '''
-    capture = args[0]
-    generate_path = args[1]
-    number = args[2]
-    if not '.png' in str(number):
-        name = generate_path+str(number)+"_img.png"
-    else:
-        name = generate_path+str(number)
-    shutil.copyfile(capture, name)
-    # Random number and the extension with a img identification
-    return name
-
-def generate_copied_capture_without_root(args):
-    '''
-    Generate an image copy renamed
-    '''
-    capture = args[0]
-    generate_path = args[1]
-    number = args[2]
-    name = str(number)+"_img.png"
-    shutil.copyfile(capture, generate_path+name)
-    # Random number and the extension with a img identification
-    return name
