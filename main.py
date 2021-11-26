@@ -352,7 +352,7 @@ if __name__ == '__main__':
     param_mode =                            sys.argv[1] if len(sys.argv) > 1 else "autoscenario_mode"
     autogeneration_conf_family =            sys.argv[2] if len(sys.argv) > 2 else "Basic"
     additional_balance =                    sys.argv[3] if len(sys.argv) > 3 else None
-    json_log_path =                         sys.argv[4] if len(sys.argv) > 4 else "resources"+sep+"test_scenarios"+sep+"Basic_Act5_Var2_DesElem2.json"  # not relevant for autogeneration/autoscenario modes
+    json_log_path =                         sys.argv[4] if len(sys.argv) > 4 else "resources"+sep+"scenarios_json"+sep+"Basic_Act5_Var2_DesElem2.json"  # not relevant for autogeneration/autoscenario modes
     generate_path =                         sys.argv[5] if len(sys.argv) > 5 else output
     special_colnames =                      sys.argv[6] if len(sys.argv) > 6 else colnames # It must coincide with the column in the seed log
     screenshot_name_generation_function =   sys.argv[7] if len(sys.argv) > 7 else "function25" # Use function8 to obtain complete paths

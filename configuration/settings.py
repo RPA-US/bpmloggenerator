@@ -1,28 +1,24 @@
-# Database configuration
-
-# Generator configuration
+# OS configuration 
 
 # operating_system = "linux"
 operating_system = "windows"
 
+function_trace = "function_trace.json"
 if operating_system == "windows":
     sep = "\\"
-    function_trace = "function_trace.json"
     element_trace = "element_trace.json"
 else:
     sep = "/"
-    function_trace = "function_trace.json"
-    element_trace = "linux/element_trace_linux.json"
+    element_trace = "configuration_linux/element_trace_linux.json"
 
-DATABASE = "resources"+sep+"databases"
+###########################
+# Generator configuration #
+###########################
+output = "CSV_exit" # Output location
 
-# Analzer (MELRPA) case study script path
-melrpa_case_study = ".." + sep + "melrpa" + sep + "melrpa" + sep + "Case_study_util.py"
-autoanalize = False
-
-# Output location
-output = "CSV_exit"
-
+scenarios_json = "resources"+sep+"scenarios_json"+sep+"scenarios.json"# Scenarios variations json location
+scenario_size = 1#30
+decision_activity = "D"
 # Column names
 colnames = {
     "Case": "Case",
@@ -31,13 +27,8 @@ colnames = {
     "Variant": "Variant"
 }
 
-# Scenarios variations json location
-scenarios_json = "resources"+sep+"test_scenarios"+sep+"scenarios.json"
-scenario_size = 4
-decision_activity = "D"
 
 # Default_scenario_configurations
-
 # BASIC family
 default_basic_conf = { 
     "balance":{
@@ -45,9 +36,9 @@ default_basic_conf = {
         "Imbalanced": [0.4,0.6]
     },
     # Specify secuence of log sizes to automatic generation of experiments
-    "size_secuence": [30,40,50,100,200],
+    "size_secuence": [25,50,100],
     "families": {
-        "Basic": "resources"+sep+"test_scenarios"+sep+"Basic_Act5_Var2_DesElem2.json",
+        "Basic": "resources"+sep+"scenarios_json"+sep+"Basic_Act5_Var2_DesElem2.json",
     }
 }
 
@@ -59,9 +50,9 @@ default_intermediate_conf = {
     },
     # Specify secuence of log sizes to automatic generation of experiments
     # "size_secuence": [30,40,50,100,200],
-    "size_secuence": [50,100],
+    "size_secuence": [25,50,100],
     "families": {
-        "Intermediate": "resources"+sep+"test_scenarios"+sep+"Intermediate_Act8_Var2_DesElem2.json",
+        "Intermediate": "resources"+sep+"scenarios_json"+sep+"Intermediate_Act8_Var2_DesElem2.json",
     }
 }
 
@@ -72,9 +63,9 @@ default_advanced_conf = {
         "Imbalanced": [0.4,0.2,0.2,0.2]
     },
     # Specify secuence of log sizes to automatic generation of experiments
-    "size_secuence": [30,40,50,100,200],
+    "size_secuence": [25,50,100],
     "families": {
-        "Advanced": "resources"+sep+"test_scenarios"+sep+"Advanced_Act10_Var2_DesElem4.json"
+        "Advanced": "resources"+sep+"scenarios_json"+sep+"Advanced_Act10_Var2_DesElem4.json"
     }
 }
 
@@ -83,3 +74,14 @@ default_scenario_configurations = {
     "Intermediate": default_intermediate_conf,
     # "Advanced": default_advanced_conf,
 }
+
+##########################
+# Database configuration #
+##########################
+DATABASE = "resources"+sep+"databases"
+
+##########################
+# Analzer (MELRPA) 
+##########################
+melrpa_case_study = ".." + sep + "melrpa" + sep + "melrpa" + sep + "Case_study_util.py" # case study script path
+autoanalize = False
