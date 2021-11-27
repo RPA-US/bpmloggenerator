@@ -17,8 +17,8 @@ else:
 output = "CSV_exit" # Output location
 
 scenarios_json = "resources"+sep+"scenarios_json"+sep+"scenarios.json"# Scenarios variations json location
-scenario_size = 1#30
-decision_activity = "D"
+scenario_size = 30
+decision_activity = "B"
 # Column names
 colnames = {
     "Case": "Case",
@@ -33,10 +33,10 @@ colnames = {
 default_basic_conf = { 
     "balance":{
         "Balanced": [0.5,0.5],
-        "Imbalanced": [0.4,0.6]
+        "Imbalanced": [0.25,0.75]
     },
     # Specify secuence of log sizes to automatic generation of experiments
-    "size_secuence": [25,50,100],
+    "size_secuence": [10,25,50,100],
     "families": {
         "Basic": "resources"+sep+"scenarios_json"+sep+"Basic_Act5_Var2_DesElem2.json",
     }
@@ -46,11 +46,11 @@ default_basic_conf = {
 default_intermediate_conf = { 
     "balance":{
         "Balanced": [0.5,0.5],
-        "Imbalanced": [0.4,0.6]
+        "Imbalanced": [0.25,0.75]
     },
     # Specify secuence of log sizes to automatic generation of experiments
-    # "size_secuence": [30,40,50,100,200],
-    "size_secuence": [25,50,100],
+    # "size_secuence": [25,50,100],
+    "size_secuence": [10,25,50,100],
     "families": {
         "Intermediate": "resources"+sep+"scenarios_json"+sep+"Intermediate_Act8_Var2_DesElem2.json",
     }
@@ -63,16 +63,16 @@ default_advanced_conf = {
         "Imbalanced": [0.4,0.2,0.2,0.2]
     },
     # Specify secuence of log sizes to automatic generation of experiments
-    "size_secuence": [25],
+    "size_secuence": [10,25,50,100],
     "families": {
         "Advanced": "resources"+sep+"scenarios_json"+sep+"Advanced_Act10_Var2_DesElem4.json"
     }
 }
 
 default_scenario_configurations = {
-    # "Basic": default_basic_conf,
-    # Intermediate": default_intermediate_conf,
-    "Advanced": default_advanced_conf,
+    "Basic": default_basic_conf,
+    # "Intermediate": default_intermediate_conf,
+    # "Advanced": default_advanced_conf,
 }
 
 ##########################

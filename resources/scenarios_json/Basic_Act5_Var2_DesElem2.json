@@ -234,7 +234,7 @@
                             "id": 2,
                             "coordinates": [379, 420, 419, 458],
                             "name": "function21",
-                            "args": ["checkbox_4"]
+                            "args": ["checked_1", "checked_2", "checked_3", "checked_4", "checked_5", "checked_6", "checked_7", "checked_8", "checked_9", "checked_10", "checked_11", "checked_12", "checked_13", "checked_14", "checked_15", "checked_16", "checked_17", "checked_18", "checked_19", "checked_20", "checked_21", "checked_22", "checked_23", "checked_24", "checked_25", "checked_26", "checked_27", "checked_28", "checked_29", "checked_30", "checked_31"]
                         }]
                     }
                 }
