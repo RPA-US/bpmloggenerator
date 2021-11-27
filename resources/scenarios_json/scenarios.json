@@ -36,7 +36,7 @@
                             "id": 6,
                             "coordinates": [1007, 189, 1090, 220],
                             "name": "function21",
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }, {
                             "id": 7,
                             "coordinates": [1007, 262, 1090, 291],
@@ -46,7 +46,7 @@
                                 "V": 1,
                                 "id": 6
                             },
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }, {
                             "id": 8,
                             "coordinates": [1007, 340, 1090, 370],
@@ -56,7 +56,7 @@
                                 "V": 1,
                                 "id": 6
                             },
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }, {
                             "id": 9,
                             "coordinates": [1007, 432, 1090, 463],
@@ -66,7 +66,7 @@
                                 "V": 1,
                                 "id": 6
                             },
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }, {
                             "id": 10,
                             "coordinates": [1007, 505, 1090, 536],
@@ -76,7 +76,7 @@
                                 "V": 1,
                                 "id": 6
                             },
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }, {
                             "id": 11,
                             "coordinates": [1007, 577, 1090, 607],
@@ -86,7 +86,7 @@
                                 "V": 1,
                                 "id": 6
                             },
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }],
                         "TextInput": [{
                             "id": 12,
@@ -263,7 +263,7 @@
                             "id": 5,
                             "coordinates": [610, 496, 765, 546],
                             "name": "function21",
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }, {
                             "id": 6,
                             "coordinates": [774, 496, 819, 545],
@@ -448,7 +448,7 @@
                             "id": 6,
                             "coordinates": [1007, 189, 1090, 220],
                             "name": "function21",
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }, {
                             "id": 7,
                             "coordinates": [1007, 262, 1090, 291],
@@ -458,7 +458,7 @@
                                 "V": 1,
                                 "id": 6
                             },
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }, {
                             "id": 8,
                             "coordinates": [1007, 340, 1090, 370],
@@ -468,7 +468,7 @@
                                 "V": 1,
                                 "id": 6
                             },
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }, {
                             "id": 9,
                             "coordinates": [1007, 432, 1090, 463],
@@ -478,7 +478,7 @@
                                 "V": 1,
                                 "id": 6
                             },
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }, {
                             "id": 10,
                             "coordinates": [1007, 505, 1090, 536],
@@ -488,7 +488,7 @@
                                 "V": 1,
                                 "id": 6
                             },
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }, {
                             "id": 11,
                             "coordinates": [1007, 577, 1090, 607],
@@ -498,7 +498,7 @@
                                 "V": 1,
                                 "id": 6
                             },
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }],
                         "TextInput": [{
                             "id": 12,
@@ -612,6 +612,11 @@
                                 "id": 2
                             },
                             "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        },{
+                            "id": 3,
+                            "coordinates": [886, 611, 1000, 650],
+                            "name": "function21",
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }]
                     }
                 }
@@ -877,7 +882,7 @@
                             "id": 6,
                             "coordinates": [1007, 189, 1090, 220],
                             "name": "function21",
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }, {
                             "id": 7,
                             "coordinates": [1007, 262, 1090, 291],
@@ -887,7 +892,7 @@
                                 "V": 1,
                                 "id": 6
                             },
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }, {
                             "id": 8,
                             "coordinates": [1007, 340, 1090, 370],
@@ -897,7 +902,7 @@
                                 "V": 1,
                                 "id": 6
                             },
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }, {
                             "id": 9,
                             "coordinates": [1007, 432, 1090, 463],
@@ -907,7 +912,7 @@
                                 "V": 1,
                                 "id": 6
                             },
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }, {
                             "id": 10,
                             "coordinates": [1007, 505, 1090, 536],
@@ -917,7 +922,7 @@
                                 "V": 1,
                                 "id": 6
                             },
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }, {
                             "id": 11,
                             "coordinates": [1007, 577, 1090, 607],
@@ -927,7 +932,7 @@
                                 "V": 1,
                                 "id": 6
                             },
-                            "args": ["delete_1", "delete_2"]
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }],
                         "TextInput": [{
                             "id": 12,
@@ -1041,6 +1046,11 @@
                                 "id": 2
                             },
                             "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        },{
+                            "id": 3,
+                            "coordinates": [886, 611, 1000, 650],
+                            "name": "function21",
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }]
                     }
                 }
@@ -1225,6 +1235,11 @@
                                 "id": 2
                             },
                             "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        },{
+                            "id": 3,
+                            "coordinates": [886, 611, 1000, 650],
+                            "name": "function21",
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }]
                     }
                 }
@@ -1396,6 +1411,11 @@
                                 "id": 2
                             },
                             "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        },{
+                            "id": 3,
+                            "coordinates": [886, 611, 1000, 650],
+                            "name": "function21",
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }]
                     }
                 }
@@ -1558,6 +1578,11 @@
                                 "id": 2
                             },
                             "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        },{
+                            "id": 3,
+                            "coordinates": [886, 611, 1000, 650],
+                            "name": "function21",
+                            "args": ["delete_1", "delete_2", "delete_3"]
                         }]
                     }
                 }
