@@ -17,7 +17,7 @@ else:
 output = "CSV_exit" # Output location
 
 scenarios_json = "resources"+sep+"scenarios_json"+sep+"scenarios.json"# Scenarios variations json location
-scenario_size = 30
+scenario_size = 0
 decision_activity = "B"
 # Column names
 colnames = {
@@ -70,9 +70,9 @@ default_advanced_conf = {
 }
 
 default_scenario_configurations = {
-    "Basic": default_basic_conf,
-    # "Intermediate": default_intermediate_conf,
-    # "Advanced": default_advanced_conf,
+    # "Basic": default_basic_conf,
+    "Intermediate": default_intermediate_conf,
+    "Advanced": default_advanced_conf,
 }
 
 ##########################
