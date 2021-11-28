@@ -614,7 +614,7 @@
                             "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
                         },{
                             "id": 3,
-                            "coordinates": [886, 611, 1000, 650],
+                            "coordinates": [886, 611, 1000, 650, "RATIO"],
                             "name": "function21",
                             "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
                         }]
@@ -1048,7 +1048,7 @@
                             "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
                         },{
                             "id": 3,
-                            "coordinates": [886, 611, 1000, 650],
+                            "coordinates": [886, 611, 1000, 650, "RATIO"],
                             "name": "function21",
                             "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
                         }]
@@ -1237,7 +1237,7 @@
                             "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
                         },{
                             "id": 3,
-                            "coordinates": [886, 611, 1000, 650],
+                            "coordinates": [886, 611, 1000, 650, "RATIO"],
                             "name": "function21",
                             "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
                         }]
@@ -1413,7 +1413,7 @@
                             "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
                         },{
                             "id": 3,
-                            "coordinates": [886, 611, 1000, 650],
+                            "coordinates": [886, 611, 1000, 650, "RATIO"],
                             "name": "function21",
                             "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
                         }]
@@ -1580,7 +1580,7 @@
                             "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
                         },{
                             "id": 3,
-                            "coordinates": [886, 611, 1000, 650],
+                            "coordinates": [886, 611, 1000, 650, "RATIO"],
                             "name": "function21",
                             "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
                         }]

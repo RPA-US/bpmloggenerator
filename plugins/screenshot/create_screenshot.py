@@ -59,11 +59,12 @@ def generate_capture(columns_ui,columns,element,acu,case,generate_path,attr, act
                             new_image="NaN"
                         arguments = []
             except Exception as e:
-                print("Unexpected error: print in create_screenshot.py line 62")
-                print(e)
+                # print("Unexpected error: print in create_screenshot.py line 62")
+                # print(e)
                 arguments = []
     except Exception as e:
         print("Unexpected error: print in create_screenshot.py line 66")
+        # func = args_tmp[i] or content = attr[ind_text]: list out of range
         print(e)
         new_image = "NaN"
     return new_image
