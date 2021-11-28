@@ -251,7 +251,7 @@ def scenario_generation(scenarios_json, generate_path, scenario_size, colnames, 
     n_scenario_seed_logs = []
     image_mapping = {}
     # Call scenario variation: "size" variations 
-    for scenario_i in range(0, scenario_size+1):
+    for scenario_i in range(1, scenario_size+1):
         scenario_iteration_path = prefix_scenario + str(scenario_i)
         image_names_conf[scenario_i] = {}
         for family in autogeneration_conf["families"]:
