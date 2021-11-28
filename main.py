@@ -5,7 +5,7 @@ import time
 import json
 import random
 import json
-from colorama import Back,Style
+from colorama import Back,Style, Fore
 from plugins.screenshot.create_screenshot import generate_capture, generate_scenario_capture
 from plugins.screenshot.replace_gui_component import generate_copied_capture_without_root, generate_copied_capture
 from tools.generic_utils import detect_function
@@ -251,7 +251,7 @@ def scenario_generation(scenarios_json, generate_path, scenario_size, colnames, 
     n_scenario_seed_logs = []
     image_mapping = {}
     # Call scenario variation: "size" variations 
-    for scenario_i in range(1, scenario_size+1):
+    for scenario_i in range(0, scenario_size+1):
         scenario_iteration_path = prefix_scenario + str(scenario_i)
         image_names_conf[scenario_i] = {}
         for family in autogeneration_conf["families"]:
@@ -309,6 +309,8 @@ def scenario_generation(scenarios_json, generate_path, scenario_size, colnames, 
     # For each different scenario generate case variability as indicate in "trace" inside "json_case_variability"
     for index, scenario_conf in enumerate(n_scenario_seed_logs):
         autogeneration_conf["families"] = scenario_conf
+        print(Fore.GREEN + " Scenario " + str(index))
+        print(Style.RESET_ALL)
         automatic_experiments(path, activity_column_name, variant_column_name, case_column_name, screenshot_column_name,  autogeneration_conf["balance"], autogeneration_conf["size_secuence"], autogeneration_conf["families"], 
                             prefix_scenario+str(index), screenshot_name_generation_function,database_name)
         
