@@ -116,7 +116,7 @@
                             "args": ["doc_1", "doc_2", "doc_3", "doc_4", "doc_5", "doc_6", "doc_7", "doc_8", "doc_9"]
                         }, {
                             "id": 2,
-                            "coordinates": [145, 343, 435, 479],
+                            "coordinates": [145, 343, 544, 576],
                             "name": "function_random_words",
                             "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }]
@@ -251,7 +251,7 @@
                             "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }, {
                             "id": 5,
-                            "coordinates": [629, 448, 823, 468],
+                            "coordinates": [629, 448, 823, 470],
                             "name": "function_random_words",
                             "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
                         }, {

@@ -17,7 +17,7 @@ else:
 output = "CSV_exit" # Output location
 
 scenarios_json = "resources"+sep+"scenarios_json"+sep+"scenarios.json"# Scenarios variations json location
-scenario_size = 1
+scenario_size = 30
 decision_activity = "D"
 # Column names
 colnames = {
@@ -63,7 +63,7 @@ default_advanced_conf = {
         "Imbalanced": [0.4,0.2,0.2,0.2]
     },
     # Specify secuence of log sizes to automatic generation of experiments
-    "size_secuence": [10,25],#,50,100],
+    "size_secuence": [10,25,50,100],
     "families": {
         "Advanced": "resources"+sep+"scenarios_json"+sep+"Advanced_Act10_Var2_DesElem4.json"
     }
@@ -71,8 +71,8 @@ default_advanced_conf = {
 
 default_scenario_configurations = {
     # "Basic": default_basic_conf,
-    "Intermediate": default_intermediate_conf,
-    # "Advanced": default_advanced_conf,
+    # "Intermediate": default_intermediate_conf,
+    "Advanced": default_advanced_conf,
 }
 
 ##########################
