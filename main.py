@@ -298,6 +298,7 @@ def scenario_generation(scenarios_json, generate_path, scenario_size, colnames, 
             image_mapping[family] = filename
             
         n_scenario_seed_logs.append(image_mapping)
+        image_mapping = {}
     # Output will be a list that contains the path of each JSON modified (by scenario and family)
     # n_scenario_seed_logs = [{"Basic": "basic_conf_scenario1.json", "Intermediate": "intermediate_conf_scenario1.json", "Advanced": "advanced_conf_scenario1.json"},
     #   {"Basic": "basic_conf_scenario2.json", "Intermediate": "intermediate_conf_scenario2.json", "Advanced": "advanced_conf_scenario2.json"}, ...
