@@ -1,6 +1,6 @@
 {
     "columnsNames": ["Timestamp", "MorKeyb", "Coor_X", "Coor_Y","Click", "TextInput", "NameApp", "Screenshot"],
-    "GUIElements": ["Button", "UI", "Checkbox", "TextInput"],
+    "GUIElements": ["Button", "ImageView", "Checkbox", "TextInput"],
     "condition": {
         "activityDecision": "B",
         "ID2": "B.Screenshot == 'Attached'"
@@ -21,13 +21,13 @@
                     "args": []
                 },
                 "Coor_X": {
-                    "initValue": "NaN",
+                    "initValue": "580",
                     "variate": 1,
                     "name": "function11",
                     "args": [146, 1280, 978]
                 },
                 "Coor_Y": {
-                    "initValue": "NaN",
+                    "initValue": "200",
                     "variate": 1,
                     "name": "function12",
                     "args": [193, 800, 77]
@@ -51,41 +51,15 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V1_image0001.png",
-                    "variate": 1,
-                    "name": "function30",
-                    "args": {
-                        "Button": [{
-                            "coordinates": [1164, 40, 1255, 122],
-                            "name": "function21",
-                            "args": ["element3"]
-                        },{
-                            "coordinates": [1144, 215, 1234, 248],
-                            "name": "function21",
-                            "args": ["element21"]
-                        },{
-                            "coordinates": [1144, 384, 1234, 418],
-                            "name": "function21",
-                            "args": ["element22"]
-                        },{
-                            "coordinates": [1144, 490, 1234, 525],
-                            "name": "function21",
-                            "args": ["element21"]
-                        },{
-                            "coordinates": [1144, 572, 1234, 603],
-                            "name": "function21",
-                            "args": ["element22"]
-                        },{
-                            "coordinates": [1144, 655, 1234, 685],
-                            "name": "function21",
-                            "args": ["element21"]
-                        }]
-                    }
+                    "initValue": "mockups\\basic\\V1_image0001.png",
+                    "variate": 0,
+                    "name": "function_copy_without_root",
+                    "args": {}
                 }
             },
             "B": {
                 "Timestamp": {
-                    "initValue": 0,
+                    "initValue": 1,
                     "variate": 1,
                     "name": "function10",
                     "args": []
@@ -97,13 +71,13 @@
                     "args": []
                 },
                 "Coor_X": {
-                    "initValue": "NaN",
+                    "initValue": "568",
                     "variate": 1,
                     "name": "function11",
                     "args": [567, 1280, 100]
                 },
                 "Coor_Y": {
-                    "initValue": "NaN",
+                    "initValue": "255",
                     "variate": 1,
                     "name": "function12",
                     "args": [244, 800, 60]
@@ -127,30 +101,22 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V1_image0003.png",
+                    "initValue": "mockups\\basic\\V1_image0003.png",
                     "variate": 1,
-                    "name": "function30",
+                    "name": "",
                     "args": {
-                        "UI": [{
-                            "coordinates": [567, 244, 667, 304],
+                        "ImageView": [{
+                            "id": 1,
+                            "coordinates": [499, 210, 598, 278],
                             "name": "function21",
-                            "args": ["image_alt_1","image_alt_2","image_alt_3","image_alt_4","image_alt_5","image_alt_6","image_alt_7","image_alt_8","image_alt_9","image_alt_10"]
-                        }],
-                        "Button": [{
-                            "coordinates": [1142, 40, 1253, 152],
-                            "name": "function21",
-                            "args": ["element7"]
-                        },{
-                            "coordinates": [305, 73, 391, 151],
-                            "name": "function21",
-                            "args": ["element25"]
+                            "args": ["id_card_1","id_card_2","id_card_3","id_card_4","id_card_5","id_card_6","id_card_7","id_card_8","id_card_9","id_card_10"]
                         }]
                     }
                 }
             },
             "C": {
                 "Timestamp": {
-                    "initValue": 0,
+                    "initValue": 2,
                     "variate": 1,
                     "name": "function10",
                     "args": []
@@ -192,30 +158,27 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V1_image0004.png",
+                    "initValue": "mockups\\basic\\V1_image0004.png",
                     "variate": 1,
-                    "name": "function30",
+                    "name": "",
                     "args": {
-                        "UI": [{
-                            "coordinates": [138, 361, 682, 683],
-                            "name": "function21",
-                            "args": ["image_alt_1","image_alt_2","image_alt_3","image_alt_4","image_alt_5","image_alt_6","image_alt_7","image_alt_8","image_alt_9","image_alt_10"]
-                        }],
-                        "Button": [{
-                            "coordinates": [1142, 40, 1253, 152],
-                            "name": "function21",
-                            "args": ["element7"]
-                        },{
-                            "coordinates": [305, 73, 391, 151],
-                            "name": "function21",
-                            "args": ["element25"]
+                        "ImageView": [{
+                            "id": 1,
+                            "coordinates": [[116, 311, 606, 609], [499, 210, 598, 278]],
+                            "name": "function24",
+                            "dependency": {
+                                "Activity": "B",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["id_card_1","id_card_2","id_card_3","id_card_4","id_card_5","id_card_6","id_card_7","id_card_8","id_card_9","id_card_10"]
                         }]
                     }
                 }
             },
             "D": {
                 "Timestamp": {
-                    "initValue": 0,
+                    "initValue": 3,
                     "variate": 1,
                     "name": "function10",
                     "args": []
@@ -239,7 +202,7 @@
                     "args": [260, 800, 30]
                 },
                 "Click": {
-                    "initValue": "NaN",
+                    "initValue": 0,
                     "variate": 0,
                     "name": "",
                     "args": []
@@ -257,49 +220,21 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V1_image0005.png",
+                    "initValue": "mockups\\basic\\V1_image0005.png",
                     "variate": 1,
-                    "name": "function30",
+                    "name": "",
                     "args": {
-                        "Button": [{
-                            "coordinates": [1155, 23, 1249, 116],
-                            "name": "function21",
-                            "args": ["element7"]
-                        },{
-                            "coordinates": [468, 565, 641, 618],
-                            "name": "function21",
-                            "args": ["element24"]
-                        },{
-                            "coordinates": [692, 565, 869, 618],
-                            "name": "function21",
-                            "args": ["element21"]
-                        }],
-                        "UI": [{
-                            "coordinates": [432, 254, 951, 285],
-                            "name": "function21",
-                            "args": ["element18"]
-                        },{
-                            "coordinates": [432, 310, 951, 340],
-                            "name": "function21",
-                            "args": ["element18"]
-                        },{
-                            "coordinates": [432, 369, 951, 402],
-                            "name": "function21",
-                            "args": ["element10"]
-                        },{
-                            "coordinates": [432, 422, 951, 452],
-                            "name": "function21",
-                            "args": ["element18"]
-                        }],
                         "TextInput": [{
-                            "coordinates": [432, 254, 951, 285],
+                            "id": 1,
+                            "coordinates": [385, 228, 831, 246],
                             "name": "function22",
                             "args": ["resources/Roboto-Black.ttf",20,"#000000"]
                         }],
                         "Checkbox": [{
-                            "coordinates": [434, 480, 467, 515],
+                            "id": 2,
+                            "coordinates": [379, 420, 419, 458],
                             "name": "function21",
-                            "args": ["element15"]
+                            "args": ["checked_1", "checked_2", "checked_3", "checked_4", "checked_5", "checked_6", "checked_7", "checked_8", "checked_9", "checked_10", "checked_11", "checked_12", "checked_13", "checked_14", "checked_15", "checked_16", "checked_17", "checked_18", "checked_19", "checked_20", "checked_21", "checked_22", "checked_23", "checked_24", "checked_25", "checked_26", "checked_27", "checked_28", "checked_29", "checked_30", "checked_31"]
                         }]
                     }
                 }
@@ -309,7 +244,7 @@
 
             "A": {
                 "Timestamp": {
-                    "initValue": 0,
+                    "initValue": 4,
                     "variate": 1,
                     "name": "function10",
                     "args": []
@@ -321,13 +256,13 @@
                     "args": []
                 },
                 "Coor_X": {
-                    "initValue": "NaN",
+                    "initValue": "200",
                     "variate": 1,
                     "name": "function11",
                     "args": [146, 1280, 978]
                 },
                 "Coor_Y": {
-                    "initValue": "NaN",
+                    "initValue": "211",
                     "variate": 1,
                     "name": "function12",
                     "args": [193, 800, 77]
@@ -351,41 +286,15 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V2_image0001.png",
-                    "variate": 1,
-                    "name": "function30",
-                    "args": {
-                        "Button": [{
-                            "coordinates": [1164, 40, 1255, 122],
-                            "name": "function21",
-                            "args": ["element3"]
-                        },{
-                            "coordinates": [1144, 215, 1234, 248],
-                            "name": "function21",
-                            "args": ["element21"]
-                        },{
-                            "coordinates": [1144, 384, 1234, 418],
-                            "name": "function21",
-                            "args": ["element22"]
-                        },{
-                            "coordinates": [1144, 490, 1234, 525],
-                            "name": "function21",
-                            "args": ["element21"]
-                        },{
-                            "coordinates": [1144, 572, 1234, 603],
-                            "name": "function21",
-                            "args": ["element22"]
-                        },{
-                            "coordinates": [1144, 655, 1234, 685],
-                            "name": "function21",
-                            "args": ["element21"]
-                        }]
-                    }
+                    "initValue": "mockups\\basic\\V2_image0001.png",
+                    "variate": 0,
+                    "name": "function_copy_without_root",
+                    "args": {}
                 }
             },
             "B": {
                 "Timestamp": {
-                    "initValue": 0,
+                    "initValue": 5,
                     "variate": 1,
                     "name": "function10",
                     "args": []
@@ -397,13 +306,13 @@
                     "args": []
                 },
                 "Coor_X": {
-                    "initValue": "NaN",
+                    "initValue": "1050",
                     "variate": 1,
                     "name": "function11",
                     "args": [1006, 1280, 110]
                 },
                 "Coor_Y": {
-                    "initValue": "NaN",
+                    "initValue": "68",
                     "variate": 1,
                     "name": "function12",
                     "args": [41, 800, 110]
@@ -427,25 +336,15 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V2_image0003.png",
-                    "variate": 1,
-                    "name": "function30",
-                    "args": {
-                        "Button": [{
-                            "coordinates": [1142, 40, 1253, 152],
-                            "name": "function21",
-                            "args": ["element7"]
-                        },{
-                            "coordinates": [305, 73, 391, 151],
-                            "name": "function21",
-                            "args": ["element25"]
-                        }]
-                    }
+                    "initValue": "mockups\\basic\\V2_image0003.png",
+                    "variate": 0,
+                    "name": "function_copy_without_root",
+                    "args": {}
                 }
             },
             "E": {
                 "Timestamp": {
-                    "initValue": 0,
+                    "initValue": 6,
                     "variate": 1,
                     "name": "function10",
                     "args": []
@@ -475,7 +374,7 @@
                     "args": []
                 },
                 "TextInput": {
-                    "initValue": "",
+                    "initValue": "key.ALT+key.TAB",
                     "variate": 1,
                     "name": "function7",
                     "args": [4]
@@ -487,28 +386,21 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups\\V2_image0004.png",
+                    "initValue": "mockups\\basic\\V2_image0004.png",
                     "variate": 1,
-                    "name": "function30",
+                    "name": "",
                     "args": {
-                        "UI": [{
-                            "coordinates": [121, 349, 1130, 705],
+                        "ImageView": [{
+                            "id": 1,
+                            "coordinates": [109, 309, 993, 613],
                             "name": "function23",
                             "args": ["#ffffff"]
                         }],
                         "TextInput": [{
-                            "coordinates": [121, 349, 1130, 705],
+                            "id": 2,
+                            "coordinates": [121, 349, 980, 605],
                             "name": "function22",
                             "args": ["resources/Roboto-Black.ttf",20,"#000000"]
-                        }],
-                        "Button": [{
-                            "coordinates": [1141, 38, 1254, 150],
-                            "name": "function21",
-                            "args": ["element7"]
-                        },{
-                            "coordinates": [305, 73, 391, 151],
-                            "name": "function21",
-                            "args": ["element25"]
                         }]
                     }
                 }

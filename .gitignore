@@ -109,6 +109,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+*.bak
 
 # Spyder project settings
 .spyderproject
@@ -132,8 +133,14 @@ CSV_sample_exit.csv
 CSV_sample_exit_csv
 CSV_exit
 resources/test_GUI_components
+resources/GUI_components
 resources/Componentes GUI pruebas
 resources/test_screenshots
 resources/test_dni
+resources/json_examples
+resources/msi_resources
+resources/databases
 mockups
 Captura de pantalla 2021-10-05 132706.png
+# SQLite Database
+loggenerator.db

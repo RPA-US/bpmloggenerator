@@ -1,5 +1,6 @@
 from lorem_text import lorem
 import random
+from configuration.settings import sep
 
 def generate_words(args):
     '''
@@ -50,9 +51,9 @@ def generate_path(args):
     else:
         value=args[0]
         ext=args[1] 
-    res = "C:\\"+generate_words()
+    res = "C:"+sep+generate_words()
     for i in range(1,value):        
-        res += "\\"+generate_words()
+        res += sep+generate_words()
     if ext is not None:
         res += ext
     return res

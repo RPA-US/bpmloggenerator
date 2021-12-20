@@ -1,0 +1,1652 @@
+{
+    "Basic": {
+        "1": {
+            "A": {
+                "Screenshot": {
+                    "initValue": "mockups\\basic\\V1_image0001.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "Button": [{
+                            "id": 1,
+                            "coordinates": [47, 31, 137, 112],
+                            "name": "function21",
+                            "args": ["back_1", "back_2", "back_3", "back_4", "back_5", "back_6", "back_7", "back_8", "back_9", "back_10", "back_11", "back_12", "back_13", "back_14", "back_15", "back_16", "back_17", "back_18", "back_19", "back_20", "back_21", "back_22", "back_23", "back_24"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [173, 38, 255, 101],
+                            "name": "function21",
+                            "args": ["mail_1", "mail_2", "mail_3", "mail_4", "mail_5", "mail_6", "mail_7", "mail_8", "mail_9"]
+                        }, {
+                            "id": 3,
+                            "coordinates": [861, 31, 947, 112],
+                            "name": "function21",
+                            "args": ["reply_1", "reply_2", "reply_3", "reply_4", "reply_5"]
+                        }, {
+                            "id": 4,
+                            "coordinates": [985, 28, 1069, 110],
+                            "name": "function21",
+                            "args": ["menu_1", "menu_2", "menu_3", "menu_4", "menu_5", "menu_6", "menu_7", "menu_8", "menu_9"]
+                        }, {
+                            "id": 5,
+                            "coordinates": [293, 41, 361, 112],
+                            "name": "function21",
+                            "args": ["reload_1", "reload_2", "reload_3", "reload_4", "reload_5"]
+                        }, {
+                            "id": 6,
+                            "coordinates": [1007, 189, 1090, 220],
+                            "name": "function21",
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }, {
+                            "id": 7,
+                            "coordinates": [1007, 262, 1090, 291],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 6
+                            },
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }, {
+                            "id": 8,
+                            "coordinates": [1007, 340, 1090, 370],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 6
+                            },
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }, {
+                            "id": 9,
+                            "coordinates": [1007, 432, 1090, 463],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 6
+                            },
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }, {
+                            "id": 10,
+                            "coordinates": [1007, 505, 1090, 536],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 6
+                            },
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }, {
+                            "id": 11,
+                            "coordinates": [1007, 577, 1090, 607],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 6
+                            },
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }],
+                        "TextInput": [{
+                            "id": 12,
+                            "coordinates": [516, 58, 826, 86],
+                            "name": "function21",
+                            "args": ["text_input_1", "text_input_2"]
+                        }]
+                    }
+                }
+            },
+            "B": {
+                "Screenshot": {
+                    "initValue": "mockups\\basic\\V1_image0003.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "Button": [{
+                            "id": 1,
+                            "coordinates": [47, 31, 137, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["back_1", "back_2", "back_3", "back_4", "back_5", "back_6", "back_7", "back_8", "back_9", "back_10", "back_11", "back_12", "back_13", "back_14", "back_15", "back_16", "back_17", "back_18", "back_19", "back_20", "back_21", "back_22", "back_23", "back_24"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [173, 38, 255, 101],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["mail_1", "mail_2", "mail_3", "mail_4", "mail_5", "mail_6", "mail_7", "mail_8", "mail_9"]
+                        }, {
+                            "id": 3,
+                            "coordinates": [861, 31, 947, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 3
+                            },
+                            "args": ["reply_1", "reply_2", "reply_3", "reply_4", "reply_5"]
+                        }, {
+                            "id": 4,
+                            "coordinates": [985, 28, 1069, 110],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 4
+                            },
+                            "args": ["menu_1", "menu_2", "menu_3", "menu_4", "menu_5", "menu_6", "menu_7", "menu_8", "menu_9"]
+                        }, {
+                            "id": 5,
+                            "coordinates": [303, 35, 366, 105],
+                            "name": "function21",
+                            "args": ["trash_1", "trash_2", "trash_3", "trash_4", "trash_5", "trash_6"]
+                        }]
+                    }
+                }
+            },
+            "C": {
+                "Screenshot": {
+                    "initValue": "mockups\\basic\\V1_image0004.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "Button": [{
+                            "id": 1,
+                            "coordinates": [47, 31, 137, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["back_1", "back_2", "back_3", "back_4", "back_5", "back_6", "back_7", "back_8", "back_9", "back_10", "back_11", "back_12", "back_13", "back_14", "back_15", "back_16", "back_17", "back_18", "back_19", "back_20", "back_21", "back_22", "back_23", "back_24"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [173, 38, 255, 101],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["mail_1", "mail_2", "mail_3", "mail_4", "mail_5", "mail_6", "mail_7", "mail_8", "mail_9"]
+                        }, {
+                            "id": 3,
+                            "coordinates": [861, 31, 947, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 3
+                            },
+                            "args": ["reply_1", "reply_2", "reply_3", "reply_4", "reply_5"]
+                        }, {
+                            "id": 4,
+                            "coordinates": [985, 28, 1069, 110],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 4
+                            },
+                            "args": ["menu_1", "menu_2", "menu_3", "menu_4", "menu_5", "menu_6", "menu_7", "menu_8", "menu_9"]
+                        }, {
+                            "id": 5,
+                            "coordinates": [303, 35, 366, 105],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "B",
+                                "V": 1,
+                                "id": 5
+                            },
+                            "args": ["trash_1", "trash_2", "trash_3", "trash_4", "trash_5", "trash_6"]
+                        }]
+                    }
+                }
+            },
+            "D": {
+                "Screenshot": {
+                    "initValue": "mockups\\basic\\V1_image0005.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "ImageView": [{
+                            "id": 1,
+                            "coordinates": [378, 225, 842, 252],
+                            "name": "function21",
+                            "args": ["text_input_1", "text_input_2"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [378, 274, 842, 299],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "D",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["text_input_1", "text_input_2"]
+                        }, {
+                            "id": 3,
+                            "coordinates": [378, 325, 842, 352],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "D",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["text_input_1", "text_input_2"]
+                        }, {
+                            "id": 4,
+                            "coordinates": [378, 375, 842, 400],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "D",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["text_input_1", "text_input_2"]
+                        }],
+                        "Button": [{
+                            "id": 4,
+                            "coordinates": [413, 496, 567, 546],
+                            "name": "function21",
+                            "args": ["save_1", "save_2", "save_3", "save_4", "save_5", "save_6", "save_7", "save_8", "save_9", "save_10", "save_11", "save_12", "save_13"]
+                        }, {
+                            "id": 5,
+                            "coordinates": [610, 496, 765, 546],
+                            "name": "function21",
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }, {
+                            "id": 6,
+                            "coordinates": [774, 496, 819, 545],
+                            "name": "function21",
+                            "args": ["trash_1", "trash_2", "trash_3", "trash_4", "trash_5", "trash_6"]
+                        }, {
+                            "id": 7,
+                            "coordinates": [990, 15, 1072, 97],
+                            "name": "function21",
+                            "args": ["menu_1", "menu_2", "menu_3", "menu_4", "menu_5", "menu_6", "menu_7", "menu_8", "menu_9"]
+                        }]
+                    }
+                }
+            }
+        },
+        "2": {
+            "A": {
+                "Screenshot": {
+                    "initValue": "mockups\\basic\\V2_image0001.png",
+                    "variate": 0,
+                    "name": "function_copy",
+                    "image_to_duplicate": "mockups\\basic\\V1_image0001.png",
+                    "args": {}
+                }
+            },
+            "B": {
+                "Screenshot": {
+                    "initValue": "mockups\\basic\\V2_image0003.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "Button": [{
+                            "id": 1,
+                            "coordinates": [47, 31, 137, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["back_1", "back_2", "back_3", "back_4", "back_5", "back_6", "back_7", "back_8", "back_9", "back_10", "back_11", "back_12", "back_13", "back_14", "back_15", "back_16", "back_17", "back_18", "back_19", "back_20", "back_21", "back_22", "back_23", "back_24"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [173, 38, 255, 101],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["mail_1", "mail_2", "mail_3", "mail_4", "mail_5", "mail_6", "mail_7", "mail_8", "mail_9"]
+                        }, {
+                            "id": 3,
+                            "coordinates": [861, 31, 947, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 3
+                            },
+                            "args": ["reply_1", "reply_2", "reply_3", "reply_4", "reply_5"]
+                        }, {
+                            "id": 4,
+                            "coordinates": [985, 28, 1069, 110],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 4
+                            },
+                            "args": ["menu_1", "menu_2", "menu_3", "menu_4", "menu_5", "menu_6", "menu_7", "menu_8", "menu_9"]
+                        }, {
+                            "id": 5,
+                            "coordinates": [303, 35, 366, 105],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "B",
+                                "V": 1,
+                                "id": 5
+                            },
+                            "args": ["trash_1", "trash_2", "trash_3", "trash_4", "trash_5", "trash_6"]
+                        }]
+                    }
+                }
+            },
+            "E": {
+                "Screenshot": {
+                    "initValue": "mockups\\basic\\V2_image0004.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "Button": [{
+                            "id": 1,
+                            "coordinates": [47, 31, 137, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["back_1", "back_2", "back_3", "back_4", "back_5", "back_6", "back_7", "back_8", "back_9", "back_10", "back_11", "back_12", "back_13", "back_14", "back_15", "back_16", "back_17", "back_18", "back_19", "back_20", "back_21", "back_22", "back_23", "back_24"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [173, 38, 255, 101],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["mail_1", "mail_2", "mail_3", "mail_4", "mail_5", "mail_6", "mail_7", "mail_8", "mail_9"]
+                        }, {
+                            "id": 3,
+                            "coordinates": [861, 31, 947, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 3
+                            },
+                            "args": ["reply_1", "reply_2", "reply_3", "reply_4", "reply_5"]
+                        }, {
+                            "id": 4,
+                            "coordinates": [985, 28, 1069, 110],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 4
+                            },
+                            "args": ["menu_1", "menu_2", "menu_3", "menu_4", "menu_5", "menu_6", "menu_7", "menu_8", "menu_9"]
+                        }, {
+                            "id": 5,
+                            "coordinates": [303, 35, 366, 105],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "B",
+                                "V": 1,
+                                "id": 5
+                            },
+                            "args": ["trash_1", "trash_2", "trash_3", "trash_4", "trash_5", "trash_6"]
+                        }]
+                    }
+                }
+            }
+        }
+    },
+    "Intermediate": {
+        "1": {
+            "A": {
+                "Screenshot": {
+                    "initValue": "mockups\\intermediate\\V1_image0001.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "Button": [{
+                            "id": 1,
+                            "coordinates": [47, 31, 137, 112],
+                            "name": "function21",
+                            "args": ["back_1", "back_2", "back_3", "back_4", "back_5", "back_6", "back_7", "back_8", "back_9", "back_10", "back_11", "back_12", "back_13", "back_14", "back_15", "back_16", "back_17", "back_18", "back_19", "back_20", "back_21", "back_22", "back_23", "back_24"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [173, 38, 255, 101],
+                            "name": "function21",
+                            "args": ["mail_1", "mail_2", "mail_3", "mail_4", "mail_5", "mail_6", "mail_7", "mail_8", "mail_9"]
+                        }, {
+                            "id": 3,
+                            "coordinates": [861, 31, 947, 112],
+                            "name": "function21",
+                            "args": ["reply_1", "reply_2", "reply_3", "reply_4", "reply_5"]
+                        }, {
+                            "id": 4,
+                            "coordinates": [985, 28, 1069, 110],
+                            "name": "function21",
+                            "args": ["menu_1", "menu_2", "menu_3", "menu_4", "menu_5", "menu_6", "menu_7", "menu_8", "menu_9"]
+                        }, {
+                            "id": 5,
+                            "coordinates": [293, 41, 361, 112],
+                            "name": "function21",
+                            "args": ["reload_1", "reload_2", "reload_3", "reload_4", "reload_5"]
+                        }, {
+                            "id": 6,
+                            "coordinates": [1007, 189, 1090, 220],
+                            "name": "function21",
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }, {
+                            "id": 7,
+                            "coordinates": [1007, 262, 1090, 291],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 6
+                            },
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }, {
+                            "id": 8,
+                            "coordinates": [1007, 340, 1090, 370],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 6
+                            },
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }, {
+                            "id": 9,
+                            "coordinates": [1007, 432, 1090, 463],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 6
+                            },
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }, {
+                            "id": 10,
+                            "coordinates": [1007, 505, 1090, 536],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 6
+                            },
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }, {
+                            "id": 11,
+                            "coordinates": [1007, 577, 1090, 607],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 6
+                            },
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }],
+                        "TextInput": [{
+                            "id": 12,
+                            "coordinates": [516, 58, 826, 86],
+                            "name": "function21",
+                            "args": ["text_input_1", "text_input_2"]
+                        }]
+                    }
+                }
+            },
+            "B": {
+                "Screenshot": {
+                    "initValue": "mockups\\intermediate\\V1_image0002.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "Button": [{
+                            "id": 1,
+                            "coordinates": [47, 31, 137, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["back_1", "back_2", "back_3", "back_4", "back_5", "back_6", "back_7", "back_8", "back_9", "back_10", "back_11", "back_12", "back_13", "back_14", "back_15", "back_16", "back_17", "back_18", "back_19", "back_20", "back_21", "back_22", "back_23", "back_24"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [173, 38, 255, 101],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["mail_1", "mail_2", "mail_3", "mail_4", "mail_5", "mail_6", "mail_7", "mail_8", "mail_9"]
+                        }, {
+                            "id": 3,
+                            "coordinates": [861, 31, 947, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 3
+                            },
+                            "args": ["reply_1", "reply_2", "reply_3", "reply_4", "reply_5"]
+                        }, {
+                            "id": 4,
+                            "coordinates": [985, 28, 1069, 110],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 4
+                            },
+                            "args": ["menu_1", "menu_2", "menu_3", "menu_4", "menu_5", "menu_6", "menu_7", "menu_8", "menu_9"]
+                        }, {
+                            "id": 5,
+                            "coordinates": [303, 35, 366, 105],
+                            "name": "function21",
+                            "args": ["trash_1", "trash_2", "trash_3", "trash_4", "trash_5", "trash_6"]
+                        }]
+                    }
+                }
+            },
+            "C": {
+                "Screenshot": {
+                    "initValue": "mockups\\intermediate\\V1_image0003.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "TextInput": [{
+                            "id": 1,
+                            "coordinates": [588, 135, 976, 166],
+                            "name": "function21",
+                            "args": ["text_input_1", "text_input_2"]
+                        }],
+                        "ImageView": [{
+                            "id": 2,
+                            "coordinates": [83, 230, 365, 515],
+                            "name": "function21",
+                            "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        }]
+                    }
+                }
+            },
+            "D": {
+                "Screenshot": {
+                    "initValue": "mockups\\intermediate\\V1_image0004.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "TextInput": [{
+                            "id": 1,
+                            "coordinates": [588, 135, 976, 166],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["text_input_1", "text_input_2"]
+                        }],
+                        "ImageView": [{
+                            "id": 2,
+                            "coordinates": [83, 230, 365, 515],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        },{
+                            "id": 3,
+                            "coordinates": [886, 611, 1000, 650, "RATIO"],
+                            "name": "function21",
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }]
+                    }
+                }
+            },
+            "E": {
+                "Screenshot": {
+                    "initValue": "mockups\\intermediate\\V1_image0005.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "ImageView": [{
+                            "id": 2,
+                            "coordinates": [83, 230, 365, 515],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        }]
+                    }
+                }
+            },
+            "F": {
+                "Screenshot": {
+                    "initValue": "mockups\\intermediate\\V1_image0006.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "TextInput": [{
+                            "id": 1,
+                            "coordinates": [588, 135, 976, 166],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["text_input_1", "text_input_2"]
+                        }],
+                        "ImageView": [{
+                            "id": 2,
+                            "coordinates": [83, 230, 365, 515],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        }]
+                    }
+                }
+            }
+        },
+        "2": {
+            "A": {
+                "Screenshot": {
+                    "initValue": "mockups\\intermediate\\V2_image0001.png",
+                    "variate": 0,
+                    "name": "function_copy",
+                    "image_to_duplicate": "V1_image0001.png",
+                    "args": {}
+                }
+            },
+            "B": {
+                "Screenshot": {
+                    "initValue": "mockups\\intermediate\\V2_image0002.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "Button": [{
+                            "id": 1,
+                            "coordinates": [47, 31, 137, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["back_1", "back_2", "back_3", "back_4", "back_5", "back_6", "back_7", "back_8", "back_9", "back_10", "back_11", "back_12", "back_13", "back_14", "back_15", "back_16", "back_17", "back_18", "back_19", "back_20", "back_21", "back_22", "back_23", "back_24"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [173, 38, 255, 101],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["mail_1", "mail_2", "mail_3", "mail_4", "mail_5", "mail_6", "mail_7", "mail_8", "mail_9"]
+                        }, {
+                            "id": 3,
+                            "coordinates": [861, 31, 947, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 3
+                            },
+                            "args": ["reply_1", "reply_2", "reply_3", "reply_4", "reply_5"]
+                        }, {
+                            "id": 4,
+                            "coordinates": [985, 28, 1069, 110],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 4
+                            },
+                            "args": ["menu_1", "menu_2", "menu_3", "menu_4", "menu_5", "menu_6", "menu_7", "menu_8", "menu_9"]
+                        }, {
+                            "id": 5,
+                            "coordinates": [303, 35, 366, 105],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "B",
+                                "V": 1,
+                                "id": 5
+                            },
+                            "args": ["trash_1", "trash_2", "trash_3", "trash_4", "trash_5", "trash_6"]
+                        }]
+                    }
+                }
+            },
+            "C": {
+                "Screenshot": {
+                    "initValue": "mockups\\intermediate\\V2_image0003.png",
+                    "variate": 0,
+                    "name": "function_copy",
+                    "image_to_duplicate": "V1_image0003.png",
+                    "args": {}
+                }
+            },
+            "D": {
+                "Screenshot": {
+                    "initValue": "mockups\\intermediate\\V2_image0003.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "TextInput": [{
+                            "id": 1,
+                            "coordinates": [588, 135, 976, 166],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["text_input_1", "text_input_2"]
+                        }],
+                        "ImageView": [{
+                            "id": 2,
+                            "coordinates": [83, 230, 365, 515],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        }]
+                    }
+                }
+            },
+            "E": {
+                "Screenshot": {
+                    "initValue": "mockups\\intermediate\\V2_image0005.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "Button": [{
+                            "id": 1,
+                            "coordinates": [47, 31, 137, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["back_1", "back_2", "back_3", "back_4", "back_5", "back_6", "back_7", "back_8", "back_9", "back_10", "back_11", "back_12", "back_13", "back_14", "back_15", "back_16", "back_17", "back_18", "back_19", "back_20", "back_21", "back_22", "back_23", "back_24"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [173, 38, 255, 101],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["mail_1", "mail_2", "mail_3", "mail_4", "mail_5", "mail_6", "mail_7", "mail_8", "mail_9"]
+                        }, {
+                            "id": 3,
+                            "coordinates": [861, 31, 947, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 3
+                            },
+                            "args": ["reply_1", "reply_2", "reply_3", "reply_4", "reply_5"]
+                        }, {
+                            "id": 4,
+                            "coordinates": [985, 28, 1069, 110],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 4
+                            },
+                            "args": ["menu_1", "menu_2", "menu_3", "menu_4", "menu_5", "menu_6", "menu_7", "menu_8", "menu_9"]
+                        }, {
+                            "id": 5,
+                            "coordinates": [303, 35, 366, 105],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "B",
+                                "V": 1,
+                                "id": 5
+                            },
+                            "args": ["trash_1", "trash_2", "trash_3", "trash_4", "trash_5", "trash_6"]
+                        }]
+                    }
+                }
+            }
+        }
+    },
+    "Advanced": {
+        "1": {
+            "A": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V1_image0001.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "Button": [{
+                            "id": 1,
+                            "coordinates": [47, 31, 137, 112],
+                            "name": "function21",
+                            "args": ["back_1", "back_2", "back_3", "back_4", "back_5", "back_6", "back_7", "back_8", "back_9", "back_10", "back_11", "back_12", "back_13", "back_14", "back_15", "back_16", "back_17", "back_18", "back_19", "back_20", "back_21", "back_22", "back_23", "back_24"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [173, 38, 255, 101],
+                            "name": "function21",
+                            "args": ["mail_1", "mail_2", "mail_3", "mail_4", "mail_5", "mail_6", "mail_7", "mail_8", "mail_9"]
+                        }, {
+                            "id": 3,
+                            "coordinates": [861, 31, 947, 112],
+                            "name": "function21",
+                            "args": ["reply_1", "reply_2", "reply_3", "reply_4", "reply_5"]
+                        }, {
+                            "id": 4,
+                            "coordinates": [985, 28, 1069, 110],
+                            "name": "function21",
+                            "args": ["menu_1", "menu_2", "menu_3", "menu_4", "menu_5", "menu_6", "menu_7", "menu_8", "menu_9"]
+                        }, {
+                            "id": 5,
+                            "coordinates": [293, 41, 361, 112],
+                            "name": "function21",
+                            "args": ["reload_1", "reload_2", "reload_3", "reload_4", "reload_5"]
+                        }, {
+                            "id": 6,
+                            "coordinates": [1007, 189, 1090, 220],
+                            "name": "function21",
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }, {
+                            "id": 7,
+                            "coordinates": [1007, 262, 1090, 291],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 6
+                            },
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }, {
+                            "id": 8,
+                            "coordinates": [1007, 340, 1090, 370],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 6
+                            },
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }, {
+                            "id": 9,
+                            "coordinates": [1007, 432, 1090, 463],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 6
+                            },
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }, {
+                            "id": 10,
+                            "coordinates": [1007, 505, 1090, 536],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 6
+                            },
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }, {
+                            "id": 11,
+                            "coordinates": [1007, 577, 1090, 607],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 6
+                            },
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }],
+                        "TextInput": [{
+                            "id": 12,
+                            "coordinates": [516, 58, 826, 86],
+                            "name": "function21",
+                            "args": ["text_input_1", "text_input_2"]
+                        }]
+                    }
+                }
+            },
+            "B": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V1_image0002.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "Button": [{
+                            "id": 1,
+                            "coordinates": [47, 31, 137, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["back_1", "back_2", "back_3", "back_4", "back_5", "back_6", "back_7", "back_8", "back_9", "back_10", "back_11", "back_12", "back_13", "back_14", "back_15", "back_16", "back_17", "back_18", "back_19", "back_20", "back_21", "back_22", "back_23", "back_24"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [173, 38, 255, 101],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["mail_1", "mail_2", "mail_3", "mail_4", "mail_5", "mail_6", "mail_7", "mail_8", "mail_9"]
+                        }, {
+                            "id": 3,
+                            "coordinates": [861, 31, 947, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 3
+                            },
+                            "args": ["reply_1", "reply_2", "reply_3", "reply_4", "reply_5"]
+                        }, {
+                            "id": 4,
+                            "coordinates": [985, 28, 1069, 110],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 4
+                            },
+                            "args": ["menu_1", "menu_2", "menu_3", "menu_4", "menu_5", "menu_6", "menu_7", "menu_8", "menu_9"]
+                        }, {
+                            "id": 5,
+                            "coordinates": [303, 35, 366, 105],
+                            "name": "function21",
+                            "args": ["trash_1", "trash_2", "trash_3", "trash_4", "trash_5", "trash_6"]
+                        }]
+                    }
+                }
+            },
+            "C": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V1_image0003.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "TextInput": [{
+                            "id": 1,
+                            "coordinates": [588, 135, 976, 166],
+                            "name": "function21",
+                            "args": ["text_input_1", "text_input_2"]
+                        }],
+                        "ImageView": [{
+                            "id": 2,
+                            "coordinates": [83, 230, 365, 515],
+                            "name": "function21",
+                            "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        }]
+                    }
+                }
+            },
+            "D": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V1_image0004.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "TextInput": [{
+                            "id": 1,
+                            "coordinates": [588, 135, 976, 166],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["text_input_1", "text_input_2"]
+                        }],
+                        "ImageView": [{
+                            "id": 2,
+                            "coordinates": [83, 230, 365, 515],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        },{
+                            "id": 3,
+                            "coordinates": [886, 611, 1000, 650, "RATIO"],
+                            "name": "function21",
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }]
+                    }
+                }
+            },
+            "E": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V1_image0005.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "ImageView": [{
+                            "id": 2,
+                            "coordinates": [83, 230, 365, 515],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        }]
+                    }
+                }
+            },
+            "F": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V1_image0006.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "TextInput": [{
+                            "id": 1,
+                            "coordinates": [588, 135, 976, 166],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["text_input_1", "text_input_2"]
+                        }],
+                        "ImageView": [{
+                            "id": 2,
+                            "coordinates": [83, 230, 365, 515],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        }]
+                    }
+                }
+            }
+        },
+        "2": {
+            "A": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V2_image0001.png",
+                    "variate": 0,
+                    "name": "function_copy",
+                    "image_to_duplicate": "V1_image0001.png",
+                    "args": {}
+                }
+            },
+            "B": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V2_image0002.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "Button": [{
+                            "id": 1,
+                            "coordinates": [47, 31, 137, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["back_1", "back_2", "back_3", "back_4", "back_5", "back_6", "back_7", "back_8", "back_9", "back_10", "back_11", "back_12", "back_13", "back_14", "back_15", "back_16", "back_17", "back_18", "back_19", "back_20", "back_21", "back_22", "back_23", "back_24"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [173, 38, 255, 101],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["mail_1", "mail_2", "mail_3", "mail_4", "mail_5", "mail_6", "mail_7", "mail_8", "mail_9"]
+                        }, {
+                            "id": 3,
+                            "coordinates": [861, 31, 947, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 3
+                            },
+                            "args": ["reply_1", "reply_2", "reply_3", "reply_4", "reply_5"]
+                        }, {
+                            "id": 4,
+                            "coordinates": [985, 28, 1069, 110],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 4
+                            },
+                            "args": ["menu_1", "menu_2", "menu_3", "menu_4", "menu_5", "menu_6", "menu_7", "menu_8", "menu_9"]
+                        }, {
+                            "id": 5,
+                            "coordinates": [303, 35, 366, 105],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "B",
+                                "V": 1,
+                                "id": 5
+                            },
+                            "args": ["trash_1", "trash_2", "trash_3", "trash_4", "trash_5", "trash_6"]
+                        }]
+                    }
+                }
+            },
+            "C": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V2_image0003.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "TextInput": [{
+                            "id": 1,
+                            "coordinates": [588, 135, 976, 166],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["text_input_1", "text_input_2"]
+                        }],
+                        "ImageView": [{
+                            "id": 2,
+                            "coordinates": [83, 230, 365, 515],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        }]
+                    }
+                }
+            },
+            "D": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V2_image0004.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "TextInput": [{
+                            "id": 1,
+                            "coordinates": [588, 135, 976, 166],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["text_input_1", "text_input_2"]
+                        }],
+                        "ImageView": [{
+                            "id": 2,
+                            "coordinates": [83, 230, 365, 515],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        },{
+                            "id": 3,
+                            "coordinates": [886, 611, 1000, 650, "RATIO"],
+                            "name": "function21",
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }]
+                    }
+                }
+            },
+            "G": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V2_image0005.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "Button": [{
+                            "id": 1,
+                            "coordinates": [47, 31, 137, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["back_1", "back_2", "back_3", "back_4", "back_5", "back_6", "back_7", "back_8", "back_9", "back_10", "back_11", "back_12", "back_13", "back_14", "back_15", "back_16", "back_17", "back_18", "back_19", "back_20", "back_21", "back_22", "back_23", "back_24"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [173, 38, 255, 101],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["mail_1", "mail_2", "mail_3", "mail_4", "mail_5", "mail_6", "mail_7", "mail_8", "mail_9"]
+                        }, {
+                            "id": 3,
+                            "coordinates": [861, 31, 947, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 3
+                            },
+                            "args": ["reply_1", "reply_2", "reply_3", "reply_4", "reply_5"]
+                        }, {
+                            "id": 4,
+                            "coordinates": [985, 28, 1069, 110],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 4
+                            },
+                            "args": ["menu_1", "menu_2", "menu_3", "menu_4", "menu_5", "menu_6", "menu_7", "menu_8", "menu_9"]
+                        }, {
+                            "id": 5,
+                            "coordinates": [303, 35, 366, 105],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "B",
+                                "V": 1,
+                                "id": 5
+                            },
+                            "args": ["trash_1", "trash_2", "trash_3", "trash_4", "trash_5", "trash_6"]
+                        }]
+                    }
+                }
+            }
+        },
+        "3": {
+            "A": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V3_image0001.png",
+                    "variate": 0,
+                    "name": "function_copy",
+                    "image_to_duplicate": "V1_image0001.png",
+                    "args": {}
+                }
+            },
+            "B": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V3_image0002.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "Button": [{
+                            "id": 1,
+                            "coordinates": [47, 31, 137, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["back_1", "back_2", "back_3", "back_4", "back_5", "back_6", "back_7", "back_8", "back_9", "back_10", "back_11", "back_12", "back_13", "back_14", "back_15", "back_16", "back_17", "back_18", "back_19", "back_20", "back_21", "back_22", "back_23", "back_24"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [173, 38, 255, 101],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["mail_1", "mail_2", "mail_3", "mail_4", "mail_5", "mail_6", "mail_7", "mail_8", "mail_9"]
+                        }, {
+                            "id": 3,
+                            "coordinates": [861, 31, 947, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 3
+                            },
+                            "args": ["reply_1", "reply_2", "reply_3", "reply_4", "reply_5"]
+                        }, {
+                            "id": 4,
+                            "coordinates": [985, 28, 1069, 110],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 4
+                            },
+                            "args": ["menu_1", "menu_2", "menu_3", "menu_4", "menu_5", "menu_6", "menu_7", "menu_8", "menu_9"]
+                        }, {
+                            "id": 5,
+                            "coordinates": [303, 35, 366, 105],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "B",
+                                "V": 1,
+                                "id": 5
+                            },
+                            "args": ["trash_1", "trash_2", "trash_3", "trash_4", "trash_5", "trash_6"]
+                        }]
+                    }
+                }
+            },
+            "C": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V3_image0003.png",
+                    "variate": 0,
+                    "name": "function_copy",
+                    "image_to_duplicate": "V1_image0003.png",
+                    "args": {}
+                }
+            },
+            "D": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V3_image0004.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "TextInput": [{
+                            "id": 1,
+                            "coordinates": [588, 135, 976, 166],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["text_input_1", "text_input_2"]
+                        }],
+                        "ImageView": [{
+                            "id": 2,
+                            "coordinates": [83, 230, 365, 515],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        },{
+                            "id": 3,
+                            "coordinates": [886, 611, 1000, 650, "RATIO"],
+                            "name": "function21",
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }]
+                    }
+                }
+            },
+            "E": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V3_image0005.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "ImageView": [{
+                            "id": 2,
+                            "coordinates": [83, 230, 365, 515],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        }]
+                    }
+                }
+            },
+            "F": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V3_image0006.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "TextInput": [{
+                            "id": 1,
+                            "coordinates": [588, 135, 976, 166],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["text_input_1", "text_input_2"]
+                        }],
+                        "ImageView": [{
+                            "id": 2,
+                            "coordinates": [83, 230, 365, 515],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        }]
+                    }
+                }
+            }
+        },
+        "4": {
+            "A": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V4_image0001.png",
+                    "variate": 0,
+                    "name": "function_copy",
+                    "image_to_duplicate": "V1_image0001.png",
+                    "args": {}
+                }
+            },
+            "B": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V4_image0002.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "Button": [{
+                            "id": 1,
+                            "coordinates": [47, 31, 137, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["back_1", "back_2", "back_3", "back_4", "back_5", "back_6", "back_7", "back_8", "back_9", "back_10", "back_11", "back_12", "back_13", "back_14", "back_15", "back_16", "back_17", "back_18", "back_19", "back_20", "back_21", "back_22", "back_23", "back_24"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [173, 38, 255, 101],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["mail_1", "mail_2", "mail_3", "mail_4", "mail_5", "mail_6", "mail_7", "mail_8", "mail_9"]
+                        }, {
+                            "id": 3,
+                            "coordinates": [861, 31, 947, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 3
+                            },
+                            "args": ["reply_1", "reply_2", "reply_3", "reply_4", "reply_5"]
+                        }, {
+                            "id": 4,
+                            "coordinates": [985, 28, 1069, 110],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 4
+                            },
+                            "args": ["menu_1", "menu_2", "menu_3", "menu_4", "menu_5", "menu_6", "menu_7", "menu_8", "menu_9"]
+                        }, {
+                            "id": 5,
+                            "coordinates": [303, 35, 366, 105],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "B",
+                                "V": 1,
+                                "id": 5
+                            },
+                            "args": ["trash_1", "trash_2", "trash_3", "trash_4", "trash_5", "trash_6"]
+                        }]
+                    }
+                }
+            },
+            "C": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V4_image0003.png",
+                    "variate": 0,
+                    "name": "function_copy",
+                    "image_to_duplicate": "V1_image0003.png",
+                    "args": {}
+                }
+            },
+            "D": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V4_image0004.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "TextInput": [{
+                            "id": 1,
+                            "coordinates": [588, 135, 976, 166],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["text_input_1", "text_input_2"]
+                        }],
+                        "ImageView": [{
+                            "id": 2,
+                            "coordinates": [83, 230, 365, 515],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["crm_1", "crm_3", "crm_4", "crm_5", "crm_6", "crm_7", "crm_8", "crm_9"]
+                        },{
+                            "id": 3,
+                            "coordinates": [886, 611, 1000, 650, "RATIO"],
+                            "name": "function21",
+                            "args": ["delete_1", "delete_2", "delete_3", "delete_4", "delete_5", "delete_6", "delete_7"]
+                        }]
+                    }
+                }
+            },
+            "G": {
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V4_image0005.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "Button": [{
+                            "id": 1,
+                            "coordinates": [47, 31, 137, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["back_1", "back_2", "back_3", "back_4", "back_5", "back_6", "back_7", "back_8", "back_9", "back_10", "back_11", "back_12", "back_13", "back_14", "back_15", "back_16", "back_17", "back_18", "back_19", "back_20", "back_21", "back_22", "back_23", "back_24"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [173, 38, 255, 101],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 2
+                            },
+                            "args": ["mail_1", "mail_2", "mail_3", "mail_4", "mail_5", "mail_6", "mail_7", "mail_8", "mail_9"]
+                        }, {
+                            "id": 3,
+                            "coordinates": [861, 31, 947, 112],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 3
+                            },
+                            "args": ["reply_1", "reply_2", "reply_3", "reply_4", "reply_5"]
+                        }, {
+                            "id": 4,
+                            "coordinates": [985, 28, 1069, 110],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "A",
+                                "V": 1,
+                                "id": 4
+                            },
+                            "args": ["menu_1", "menu_2", "menu_3", "menu_4", "menu_5", "menu_6", "menu_7", "menu_8", "menu_9"]
+                        }, {
+                            "id": 5,
+                            "coordinates": [303, 35, 366, 105],
+                            "name": "function21",
+                            "dependency": {
+                                "Activity": "B",
+                                "V": 1,
+                                "id": 5
+                            },
+                            "args": ["trash_1", "trash_2", "trash_3", "trash_4", "trash_5", "trash_6"]
+                        }]
+                    }
+                }
+            }
+        }
+    }
+}

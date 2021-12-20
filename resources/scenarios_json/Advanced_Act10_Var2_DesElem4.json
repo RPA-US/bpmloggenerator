@@ -1,0 +1,1348 @@
+{
+    "columnsNames": ["Timestamp", "MorKeyb", "Coor_X", "Coor_Y", "Click", "TextInput", "NameApp", "Screenshot"],
+    "GUIElements": ["Button", "ImageView", "Checkbox", "TextInput"],
+    "condition": {
+        "activityDecision": "D",
+        "gui_component": "Checkbox_D",
+        "quantity_difference": 1
+    },
+    "trace": {
+        "1": {
+            "A": {
+                "Timestamp": {
+                    "initValue": 0,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "580",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [496, 1280, 27]
+                },
+                "Coor_Y": {
+                    "initValue": "200",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [189, 800, 22]
+                },
+                "Click": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "Firefox",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V1_image0001.png",
+                    "variate": 0,
+                    "name": "function_copy_without_root",
+                    "args": {}
+                }
+            },
+            "B": {
+                "Timestamp": {
+                    "initValue": 1,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function11",
+                    "args": []
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function12",
+                    "args": []
+                },
+                "Click": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "key.ALT+key.TAB",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "Firefox",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V1_image0002.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "ImageView": [{
+                            "id": 1,
+                            "coordinates": [
+                                [571, 167, 627, 240],
+                                [719, 325, 948, 619]
+                            ],
+                            "name": "function24",
+                            "args": ["doc_1", "doc_2", "doc_3", "doc_4", "doc_5", "doc_6", "doc_7", "doc_8", "doc_9"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [145, 343, 544, 576],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }]
+                    }
+                }
+            },
+            "C": {
+                "Timestamp": {
+                    "initValue": 2,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "954",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [940, 1280, 26]
+                },
+                "Coor_Y": {
+                    "initValue": "151",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [140, 800, 20]
+                },
+                "Click": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "johndoe@mail.com",
+                    "variate": 1,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "CRM",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V1_image0003.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "ImageView": [{
+                            "id": 1,
+                            "coordinates": [615, 140, 792, 159],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }]
+                    }
+                }
+            },
+            "D": {
+                "Timestamp": {
+                    "initValue": 3,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "815",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [814, 1280, 196]
+                },
+                "Coor_Y": {
+                    "initValue": "610",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [608, 800, 32]
+                },
+                "Click": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "CRM",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V1_image0004.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "TextInput": [{
+                            "id": 1,
+                            "coordinates": [615, 140, 792, 159],
+                            "name": "function22",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }],
+                        "ImageView": [{
+                            "id": 3,
+                            "coordinates": [535, 320, 709, 345],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }, {
+                            "id": 4,
+                            "coordinates": [581, 374, 730, 421],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }, {
+                            "id": 5,
+                            "coordinates": [629, 448, 823, 470],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }, {
+                            "id": 7,
+                            "coordinates": [817, 225, 1000, 408],
+                            "name": "function21",
+                            "args": ["photo_1", "photo_2", "photo_3", "photo_4", "photo_5", "photo_6", "photo_7", "photo_8", "photo_9", "photo_10", "photo_11", "photo_12", "photo_13", "photo_14", "photo_15", "photo_16", "photo_17", "photo_18", "photo_19", "photo_20", "photo_21", "photo_22", "photo_23", "photo_24"]
+                        }],
+                        "Checkbox": [{
+                            "id": 6,
+                            "coordinates": [756, 498, 789, 530],
+                            "name": "function21",
+                            "args": ["checked_1", "checked_2", "checked_3", "checked_4", "checked_5", "checked_6", "checked_7", "checked_8", "checked_9", "checked_10", "checked_11", "checked_12", "checked_13", "checked_14", "checked_15", "checked_16", "checked_17", "checked_18", "checked_19", "checked_20", "checked_21", "checked_22", "checked_23", "checked_24", "checked_25", "checked_26", "checked_27", "checked_28", "checked_29", "checked_30", "checked_31"]
+                        }]
+                    }
+                }
+            },
+            "E": {
+                "Timestamp": {
+                    "initValue": 4,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "603",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [597, 1280, 74]
+                },
+                "Coor_Y": {
+                    "initValue": "423",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [413, 800, 35]
+                },
+                "Click": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "CRM",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V1_image0005.png",
+                    "variate": 0,
+                    "name": "function_copy_without_root",
+                    "args": {}
+                }
+            },
+            "F": {
+                "Timestamp": {
+                    "initValue": 5,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [596, 1280, 75]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [413, 800, 35]
+                },
+                "Click": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "CRM",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V1_image0006.png",
+                    "variate": 0,
+                    "name": "function_copy_without_root",
+                    "args": {}
+                }
+            }
+        },
+        "2": {
+            "A": {
+                "Timestamp": {
+                    "initValue": 0,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "580",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [496, 1280, 29]
+                },
+                "Coor_Y": {
+                    "initValue": "200",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [189, 800, 27]
+                },
+                "Click": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "Firefox",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V2_image0001.png",
+                    "variate": 0,
+                    "name": "function_copy_without_root",
+                    "args": {}
+                }
+            },
+            "B": {
+                "Timestamp": {
+                    "initValue": 1,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function11",
+                    "args": []
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function12",
+                    "args": []
+                },
+                "Click": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "key.ALT+key.TAB",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "Firefox",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V2_image0002.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "ImageView": [{
+                            "id": 1,
+                            "coordinates": [
+                                [571, 167, 627, 240, "RATIO"],
+                                [719, 325, 948, 619, "RATIO"]
+                            ],
+                            "name": "function24",
+                            "args": ["doc_1", "doc_2", "doc_3", "doc_4", "doc_5", "doc_6", "doc_7", "doc_8", "doc_9"]
+                        }, {
+                            "id": 2,
+                            "coordinates": [145, 343, 435, 479],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }]
+                    }
+                }
+            },
+            "C": {
+                "Timestamp": {
+                    "initValue": 2,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "954",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [940, 1280, 26]
+                },
+                "Coor_Y": {
+                    "initValue": "151",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [140, 800, 20]
+                },
+                "Click": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "johndoe@mail.com",
+                    "variate": 1,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "CRM",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V2_image0003.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "ImageView": [{
+                            "id": 1,
+                            "coordinates": [615, 140, 792, 159],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }]
+                    }
+                }
+            },
+            "D": {
+                "Timestamp": {
+                    "initValue": 3,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "815",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [814, 1280, 196]
+                },
+                "Coor_Y": {
+                    "initValue": "610",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [608, 800, 32]
+                },
+                "Click": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "CRM",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V2_image0004.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "TextInput": [{
+                            "id": 1,
+                            "coordinates": [615, 140, 792, 159],
+                            "name": "function22",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }],
+                        "ImageView": [{
+                            "id": 3,
+                            "coordinates": [535, 320, 709, 345],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }, {
+                            "id": 4,
+                            "coordinates": [581, 374, 730, 421],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }, {
+                            "id": 5,
+                            "coordinates": [629, 448, 823, 468],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }, {
+                            "id": 7,
+                            "coordinates": [817, 225, 1000, 408],
+                            "name": "function21",
+                            "args": ["photo_1", "photo_2", "photo_3", "photo_4", "photo_5", "photo_6", "photo_7", "photo_8", "photo_9", "photo_10", "photo_11", "photo_12", "photo_13", "photo_14", "photo_15", "photo_16", "photo_17", "photo_18", "photo_19", "photo_20", "photo_21", "photo_22", "photo_23", "photo_24"]
+                        }],
+                        "Checkbox": [{
+                            "id": 8,
+                            "coordinates": [753, 490, 791, 532],
+                            "name": "function21",
+                            "args": ["alert_1", "alert_2", "alert_3", "alert_4", "alert_5", "alert_6", "alert_7", "alert_8", "alert_9", "alert_10"]
+                        }]
+                    }
+                }
+            },
+            "G": {
+                "Timestamp": {
+                    "initValue": 2,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function11",
+                    "args": [940, 1280, 26]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function12",
+                    "args": [140, 800, 20]
+                },
+                "Click": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "key.ENTER",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "Firefox",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V2_image0005.png",
+                    "variate": 0,
+                    "name": "function_copy_without_root",
+                    "args": {}
+                }
+            }
+        },
+        "3": {
+            "A": {
+                "Timestamp": {
+                    "initValue": 0,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "580",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [496, 1280, 27]
+                },
+                "Coor_Y": {
+                    "initValue": "200",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [189, 800, 27]
+                },
+                "Click": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "Firefox",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V3_image0001.png",
+                    "variate": 0,
+                    "name": "function_copy_without_root",
+                    "args": {}
+                }
+            },
+            "B": {
+                "Timestamp": {
+                    "initValue": 1,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function11",
+                    "args": []
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function12",
+                    "args": []
+                },
+                "Click": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "key.ALT+key.TAB",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "Firefox",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V3_image0002.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "ImageView": [{
+                            "id": 1,
+                            "coordinates": [145, 343, 435, 479],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }]
+                    }
+                }
+            },
+            "C": {
+                "Timestamp": {
+                    "initValue": 2,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "954",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [940, 1280, 26]
+                },
+                "Coor_Y": {
+                    "initValue": "151",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [140, 800, 20]
+                },
+                "Click": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "johndoe@mail.com",
+                    "variate": 1,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "CRM",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V3_image0003.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "ImageView": [{
+                            "id": 1,
+                            "coordinates": [615, 140, 792, 159],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }]
+                    }
+                }
+            },
+            "D": {
+                "Timestamp": {
+                    "initValue": 3,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "815",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [814, 1280, 196]
+                },
+                "Coor_Y": {
+                    "initValue": "610",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [608, 800, 32]
+                },
+                "Click": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "CRM",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V3_image0004.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "TextInput": [{
+                            "id": 1,
+                            "coordinates": [615, 140, 792, 159],
+                            "name": "function22",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }],
+                        "ImageView": [{
+                            "id": 3,
+                            "coordinates": [535, 320, 709, 345],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }, {
+                            "id": 4,
+                            "coordinates": [581, 374, 730, 421],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }, {
+                            "id": 5,
+                            "coordinates": [629, 448, 823, 468],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }, {
+                            "id": 7,
+                            "coordinates": [817, 225, 1000, 408],
+                            "name": "function21",
+                            "args": ["photo_1", "photo_2", "photo_3", "photo_4", "photo_5", "photo_6", "photo_7", "photo_8", "photo_9", "photo_10", "photo_11", "photo_12", "photo_13", "photo_14", "photo_15", "photo_16", "photo_17", "photo_18", "photo_19", "photo_20", "photo_21", "photo_22", "photo_23", "photo_24"]
+                        }],
+                        "Checkbox": [{
+                            "id": 8,
+                            "coordinates": [756, 498, 789, 530],
+                            "name": "function21",
+                            "args": ["checked_1", "checked_2", "checked_3", "checked_4", "checked_5", "checked_6", "checked_7", "checked_8", "checked_9", "checked_10", "checked_11", "checked_12", "checked_13", "checked_14", "checked_15", "checked_16", "checked_17", "checked_18", "checked_19", "checked_20", "checked_21", "checked_22", "checked_23", "checked_24", "checked_25", "checked_26", "checked_27", "checked_28", "checked_29", "checked_30", "checked_31"]
+                        }]
+                    }
+                }
+            },
+            "E": {
+                "Timestamp": {
+                    "initValue": 4,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "603",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [597, 1280, 74]
+                },
+                "Coor_Y": {
+                    "initValue": "423",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [413, 800, 31]
+                },
+                "Click": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "CRM",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V3_image0005.png",
+                    "variate": 0,
+                    "name": "function_copy_without_root",
+                    "args": {}
+                }
+            },
+            "F": {
+                "Timestamp": {
+                    "initValue": 4,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "603",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [597, 1280, 74]
+                },
+                "Coor_Y": {
+                    "initValue": "423",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [413, 800, 32]
+                },
+                "Click": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "CRM",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V3_image0006.png",
+                    "variate": 0,
+                    "name": "function_copy_without_root",
+                    "args": {}
+                }
+            }
+        },
+        "4": {
+            "A": {
+                "Timestamp": {
+                    "initValue": 0,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "580",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [496, 1280, 27]
+                },
+                "Coor_Y": {
+                    "initValue": "200",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [189, 800, 23]
+                },
+                "Click": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "Firefox",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V4_image0001.png",
+                    "variate": 0,
+                    "name": "function_copy_without_root",
+                    "args": {}
+                }
+            },
+            "B": {
+                "Timestamp": {
+                    "initValue": 1,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function11",
+                    "args": []
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function12",
+                    "args": []
+                },
+                "Click": {
+                    "initValue": 1,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "key.ALT+key.TAB",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "Firefox",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V4_image0002.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "ImageView": [{
+                            "id": 1,
+                            "coordinates": [145, 343, 435, 479],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }]
+                    }
+                }
+            },
+            "C": {
+                "Timestamp": {
+                    "initValue": 2,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "954",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [940, 1280, 26]
+                },
+                "Coor_Y": {
+                    "initValue": "151",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [140, 800, 20]
+                },
+                "Click": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "johndoe@mail.com",
+                    "variate": 1,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "CRM",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V4_image0003.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "ImageView": [{
+                            "id": 1,
+                            "coordinates": [615, 140, 792, 159],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }]
+                    }
+                }
+            },
+            "D": {
+                "Timestamp": {
+                    "initValue": 3,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "815",
+                    "variate": 1,
+                    "name": "function11",
+                    "args": [814, 1280, 196]
+                },
+                "Coor_Y": {
+                    "initValue": "610",
+                    "variate": 1,
+                    "name": "function12",
+                    "args": [608, 800, 32]
+                },
+                "Click": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "CRM",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V4_image0004.png",
+                    "variate": 1,
+                    "name": "",
+                    "args": {
+                        "TextInput": [{
+                            "id": 1,
+                            "coordinates": [615, 140, 792, 159],
+                            "name": "function22",
+                            "dependency": {
+                                "Activity": "C",
+                                "V": 1,
+                                "id": 1
+                            },
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }],
+                        "ImageView": [{
+                            "id": 3,
+                            "coordinates": [535, 320, 709, 345],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }, {
+                            "id": 4,
+                            "coordinates": [581, 374, 730, 421],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }, {
+                            "id": 5,
+                            "coordinates": [629, 448, 823, 468],
+                            "name": "function_random_words",
+                            "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+                        }, {
+                            "id": 7,
+                            "coordinates": [817, 225, 1000, 408],
+                            "name": "function21",
+                            "args": ["photo_1", "photo_2", "photo_3", "photo_4", "photo_5", "photo_6", "photo_7", "photo_8", "photo_9", "photo_10", "photo_11", "photo_12", "photo_13", "photo_14", "photo_15", "photo_16", "photo_17", "photo_18", "photo_19", "photo_20", "photo_21", "photo_22", "photo_23", "photo_24"]
+                        }],
+                        "Checkbox": [{
+                            "id": 6,
+                            "coordinates": [753, 490, 791, 532],
+                            "name": "function21",
+                            "args": ["alert_1", "alert_2", "alert_3", "alert_4", "alert_5", "alert_6", "alert_7", "alert_8", "alert_9", "alert_10"]
+                        }]
+                    }
+                }
+            },
+            "G": {
+                "Timestamp": {
+                    "initValue": 2,
+                    "variate": 1,
+                    "name": "function10",
+                    "args": []
+                },
+                "MorKeyb": {
+                    "initValue": 0,
+                    "variate": 0,
+                    "name": "function1",
+                    "args": []
+                },
+                "Coor_X": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function11",
+                    "args": [940, 1280, 26]
+                },
+                "Coor_Y": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "function12",
+                    "args": [140, 800, 20]
+                },
+                "Click": {
+                    "initValue": "NaN",
+                    "variate": 0,
+                    "name": "",
+                    "args": []
+                },
+                "TextInput": {
+                    "initValue": "key.ENTER",
+                    "variate": 0,
+                    "name": "function3",
+                    "args": []
+                },
+                "NameApp": {
+                    "initValue": "Firefox",
+                    "variate": 0,
+                    "name": "function9",
+                    "args": []
+                },
+                "Screenshot": {
+                    "initValue": "mockups\\advanced\\V4_image0005.png",
+                    "variate": 0,
+                    "name": "function_copy_without_root",
+                    "args": {}
+                }
+            }
+        }
+
+    }
+}
