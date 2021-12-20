@@ -13,8 +13,8 @@ for category in os.scandir('plugins'):
     for entry in os.scandir('plugins/'+category.name):
         if entry.is_file():
             filename = f'{entry.name}'[:-3]
-            string = f'from plugins.{category.name}.{filename} import *'
-            exec (string)
+            import_path = f'from plugins.{category.name}.{filename} import *'
+            exec (import_path)
 
 
 def detect_function(text):
