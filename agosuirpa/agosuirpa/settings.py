@@ -45,8 +45,7 @@ INSTALLED_APPS = [
     'categories.editor',
     'private_storage',
     'products',
-    'api',
-    'user',
+    'api'
 ]
 
 MIDDLEWARE = [
