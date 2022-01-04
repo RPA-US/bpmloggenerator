@@ -129,6 +129,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# VS code
+.vscode
+
 CSV_sample_exit.csv
 CSV_sample_exit_csv
 CSV_exit
