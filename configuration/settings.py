@@ -1,22 +1,24 @@
 # OS configuration 
 
 # operating_system = "linux"
-operating_system = "windows"
+operating_system = "linux"
 
 function_trace = "function_trace.json"
 if operating_system == "windows":
     sep = "\\"
     element_trace = "element_trace.json"
+    scenarios_foldername = "scenarios_json"
 else:
     sep = "/"
-    element_trace = "configuration_linux/element_trace_linux.json"
+    element_trace = "scenarios_json_linux/element_trace_linux.json"
+    scenarios_foldername = "scenarios_json_linux"
 
 ###########################
 # Generator configuration #
 ###########################
 output = "CSV_exit" # Output location
 
-scenarios_json = "resources"+sep+"scenarios_json"+sep+"scenarios.json"# Scenarios variations json location
+scenarios_json = "resources"+sep+scenarios_foldername+sep+"scenarios.json"# Scenarios variations json location
 scenario_size = 3
 decision_activity = "D"
 # Column names
@@ -38,7 +40,7 @@ default_basic_conf = {
     # Specify secuence of log sizes to automatic generation of experiments
     "size_secuence": [10,25],#50,100],
     "families": {
-        "Basic": "resources"+sep+"scenarios_json"+sep+"Basic_Act5_Var2_DesElem2.json",
+        "Basic": "resources"+sep+scenarios_foldername+sep+"Basic_Act5_Var2_DesElem2.json",
     }
 }
 
@@ -52,7 +54,7 @@ default_intermediate_conf = {
     # "size_secuence": [25,50,100],
     "size_secuence": [10,25,50,100],
     "families": {
-        "Intermediate": "resources"+sep+"scenarios_json"+sep+"Intermediate_Act8_Var2_DesElem2.json",
+        "Intermediate": "resources"+sep+scenarios_foldername+sep+"Intermediate_Act8_Var2_DesElem2.json",
     }
 }
 
@@ -65,7 +67,7 @@ default_advanced_conf = {
     # Specify secuence of log sizes to automatic generation of experiments
     "size_secuence": [10,25,50,100],
     "families": {
-        "Advanced": "resources"+sep+"scenarios_json"+sep+"Advanced_Act10_Var2_DesElem4.json"
+        "Advanced": "resources"+sep+scenarios_foldername+sep+"Advanced_Act10_Var2_DesElem4.json"
     }
 }
 

@@ -10,7 +10,7 @@ from plugins.screenshot.create_screenshot import generate_capture, generate_scen
 from plugins.screenshot.replace_gui_component import generate_copied_capture_without_root, generate_copied_capture
 from tools.generic_utils import detect_function
 from tools.database import init_database
-from configuration.settings import sep, default_scenario_configurations, scenarios_json, colnames, output, autoanalize, melrpa_case_study, decision_activity, scenario_size
+from configuration.settings import sep, scenarios_foldername, default_scenario_configurations, scenarios_json, colnames, output, autoanalize, melrpa_case_study, decision_activity, scenario_size
 
 def validation_params(json_path,generate_path,number_logs,percent_per_trace):   
     '''
@@ -355,7 +355,7 @@ if __name__ == '__main__':
     param_mode =                            sys.argv[1] if len(sys.argv) > 1 else "autoscenario_mode"
     autogeneration_conf_family =            sys.argv[2] if len(sys.argv) > 2 else "Basic"
     additional_balance =                    sys.argv[3] if len(sys.argv) > 3 else None
-    json_log_path =                         sys.argv[4] if len(sys.argv) > 4 else "resources"+sep+"scenarios_json"+sep+"Basic_Act5_Var2_DesElem2.json"  # not relevant for autogeneration/autoscenario modes
+    json_log_path =                         sys.argv[4] if len(sys.argv) > 4 else "resources"+sep+scenarios_foldername+sep+"Basic_Act5_Var2_DesElem2.json"  # not relevant for autogeneration/autoscenario modes
     generate_path =                         sys.argv[5] if len(sys.argv) > 5 else output
     special_colnames =                      sys.argv[6] if len(sys.argv) > 6 else colnames # It must coincide with the column in the seed log
     screenshot_name_generation_function =   sys.argv[7] if len(sys.argv) > 7 else "function25" # Use function8 to obtain complete paths
