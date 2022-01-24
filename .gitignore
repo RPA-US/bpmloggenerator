@@ -137,7 +137,7 @@ dmypy.json
 
 # Custom Folders
 CSV_exit
-resources
+resources/
 mockups
 
 # SQLite Database
