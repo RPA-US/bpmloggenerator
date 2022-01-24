@@ -3,7 +3,7 @@
         "1": {
             "A": {
                 "Screenshot": {
-                    "initValue": "mockups/basic/V1_image0001.png",
+                    "initValue": "resources/mockups/basic/V1_image0001.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -99,7 +99,7 @@
             },
             "B": {
                 "Screenshot": {
-                    "initValue": "mockups/basic/V1_image0003.png",
+                    "initValue": "resources/mockups/basic/V1_image0003.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -154,7 +154,7 @@
             },
             "C": {
                 "Screenshot": {
-                    "initValue": "mockups/basic/V1_image0004.png",
+                    "initValue": "resources/mockups/basic/V1_image0004.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -214,7 +214,7 @@
             },
             "D": {
                 "Screenshot": {
-                    "initValue": "mockups/basic/V1_image0005.png",
+                    "initValue": "resources/mockups/basic/V1_image0005.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -282,16 +282,16 @@
         "2": {
             "A": {
                 "Screenshot": {
-                    "initValue": "mockups/basic/V2_image0001.png",
+                    "initValue": "resources/mockups/basic/V2_image0001.png",
                     "variate": 0,
                     "name": "function_copy",
-                    "image_to_duplicate": "mockups/basic/V1_image0001.png",
+                    "image_to_duplicate": "resources/mockups/basic/V1_image0001.png",
                     "args": {}
                 }
             },
             "B": {
                 "Screenshot": {
-                    "initValue": "mockups/basic/V2_image0003.png",
+                    "initValue": "resources/mockups/basic/V2_image0003.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -351,7 +351,7 @@
             },
             "E": {
                 "Screenshot": {
-                    "initValue": "mockups/basic/V2_image0004.png",
+                    "initValue": "resources/mockups/basic/V2_image0004.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -415,7 +415,7 @@
         "1": {
             "A": {
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V1_image0001.png",
+                    "initValue": "resources/mockups/intermediate/V1_image0001.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -511,7 +511,7 @@
             },
             "B": {
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V1_image0002.png",
+                    "initValue": "resources/mockups/intermediate/V1_image0002.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -566,7 +566,7 @@
             },
             "C": {
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V1_image0003.png",
+                    "initValue": "resources/mockups/intermediate/V1_image0003.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -587,7 +587,7 @@
             },
             "D": {
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V1_image0004.png",
+                    "initValue": "resources/mockups/intermediate/V1_image0004.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -623,7 +623,7 @@
             },
             "E": {
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V1_image0005.png",
+                    "initValue": "resources/mockups/intermediate/V1_image0005.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -643,7 +643,7 @@
             },
             "F": {
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V1_image0006.png",
+                    "initValue": "resources/mockups/intermediate/V1_image0006.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -676,7 +676,7 @@
         "2": {
             "A": {
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V2_image0001.png",
+                    "initValue": "resources/mockups/intermediate/V2_image0001.png",
                     "variate": 0,
                     "name": "function_copy",
                     "image_to_duplicate": "V1_image0001.png",
@@ -685,7 +685,7 @@
             },
             "B": {
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V2_image0002.png",
+                    "initValue": "resources/mockups/intermediate/V2_image0002.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -745,7 +745,7 @@
             },
             "C": {
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V2_image0003.png",
+                    "initValue": "resources/mockups/intermediate/V2_image0003.png",
                     "variate": 0,
                     "name": "function_copy",
                     "image_to_duplicate": "V1_image0003.png",
@@ -754,7 +754,7 @@
             },
             "D": {
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V2_image0003.png",
+                    "initValue": "resources/mockups/intermediate/V2_image0003.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -785,7 +785,7 @@
             },
             "E": {
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V2_image0005.png",
+                    "initValue": "resources/mockups/intermediate/V2_image0005.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -849,7 +849,7 @@
         "1": {
             "A": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V1_image0001.png",
+                    "initValue": "resources/mockups/advanced/V1_image0001.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -945,7 +945,7 @@
             },
             "B": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V1_image0002.png",
+                    "initValue": "resources/mockups/advanced/V1_image0002.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -1000,7 +1000,7 @@
             },
             "C": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V1_image0003.png",
+                    "initValue": "resources/mockups/advanced/V1_image0003.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -1021,7 +1021,7 @@
             },
             "D": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V1_image0004.png",
+                    "initValue": "resources/mockups/advanced/V1_image0004.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -1057,7 +1057,7 @@
             },
             "E": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V1_image0005.png",
+                    "initValue": "resources/mockups/advanced/V1_image0005.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -1077,7 +1077,7 @@
             },
             "F": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V1_image0006.png",
+                    "initValue": "resources/mockups/advanced/V1_image0006.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -1110,7 +1110,7 @@
         "2": {
             "A": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V2_image0001.png",
+                    "initValue": "resources/mockups/advanced/V2_image0001.png",
                     "variate": 0,
                     "name": "function_copy",
                     "image_to_duplicate": "V1_image0001.png",
@@ -1119,7 +1119,7 @@
             },
             "B": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V2_image0002.png",
+                    "initValue": "resources/mockups/advanced/V2_image0002.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -1179,7 +1179,7 @@
             },
             "C": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V2_image0003.png",
+                    "initValue": "resources/mockups/advanced/V2_image0003.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -1210,7 +1210,7 @@
             },
             "D": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V2_image0004.png",
+                    "initValue": "resources/mockups/advanced/V2_image0004.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -1246,7 +1246,7 @@
             },
             "G": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V2_image0005.png",
+                    "initValue": "resources/mockups/advanced/V2_image0005.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -1308,7 +1308,7 @@
         "3": {
             "A": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V3_image0001.png",
+                    "initValue": "resources/mockups/advanced/V3_image0001.png",
                     "variate": 0,
                     "name": "function_copy",
                     "image_to_duplicate": "V1_image0001.png",
@@ -1317,7 +1317,7 @@
             },
             "B": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V3_image0002.png",
+                    "initValue": "resources/mockups/advanced/V3_image0002.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -1377,7 +1377,7 @@
             },
             "C": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V3_image0003.png",
+                    "initValue": "resources/mockups/advanced/V3_image0003.png",
                     "variate": 0,
                     "name": "function_copy",
                     "image_to_duplicate": "V1_image0003.png",
@@ -1386,7 +1386,7 @@
             },
             "D": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V3_image0004.png",
+                    "initValue": "resources/mockups/advanced/V3_image0004.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -1422,7 +1422,7 @@
             },
             "E": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V3_image0005.png",
+                    "initValue": "resources/mockups/advanced/V3_image0005.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -1442,7 +1442,7 @@
             },
             "F": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V3_image0006.png",
+                    "initValue": "resources/mockups/advanced/V3_image0006.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -1475,7 +1475,7 @@
         "4": {
             "A": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V4_image0001.png",
+                    "initValue": "resources/mockups/advanced/V4_image0001.png",
                     "variate": 0,
                     "name": "function_copy",
                     "image_to_duplicate": "V1_image0001.png",
@@ -1484,7 +1484,7 @@
             },
             "B": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V4_image0002.png",
+                    "initValue": "resources/mockups/advanced/V4_image0002.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -1544,7 +1544,7 @@
             },
             "C": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V4_image0003.png",
+                    "initValue": "resources/mockups/advanced/V4_image0003.png",
                     "variate": 0,
                     "name": "function_copy",
                     "image_to_duplicate": "V1_image0003.png",
@@ -1553,7 +1553,7 @@
             },
             "D": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V4_image0004.png",
+                    "initValue": "resources/mockups/advanced/V4_image0004.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -1589,7 +1589,7 @@
             },
             "G": {
                 "Screenshot": {
-                    "initValue": "mockups/advanced/V4_image0005.png",
+                    "initValue": "resources/mockups/advanced/V4_image0005.png",
                     "variate": 1,
                     "name": "",
                     "args": {

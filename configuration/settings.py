@@ -18,7 +18,7 @@ else:
 ###########################
 output = "CSV_exit" # Output location
 
-scenarios_json = "resources"+sep+scenarios_foldername+sep+"scenarios.json"# Scenarios variations json location
+scenarios_json = "configuration"+sep+scenarios_foldername+sep+"scenarios.json"# Scenarios variations json location
 scenario_size = 3
 decision_activity = "D"
 # Column names
@@ -38,9 +38,9 @@ default_basic_conf = {
         "Imbalanced": [0.25,0.75]
     },
     # Specify secuence of log sizes to automatic generation of experiments
-    "size_secuence": [10,25],#50,100],
+    "size_secuence": [10],#25,50,100],
     "families": {
-        "Basic": "resources"+sep+scenarios_foldername+sep+"Basic_Act5_Var2_DesElem2.json",
+        "Basic": "configuration"+sep+scenarios_foldername+sep+"Basic_Act5_Var2_DesElem2.json",
     }
 }
 
@@ -54,7 +54,7 @@ default_intermediate_conf = {
     # "size_secuence": [25,50,100],
     "size_secuence": [10,25,50,100],
     "families": {
-        "Intermediate": "resources"+sep+scenarios_foldername+sep+"Intermediate_Act8_Var2_DesElem2.json",
+        "Intermediate": "configuration"+sep+scenarios_foldername+sep+"Intermediate_Act8_Var2_DesElem2.json",
     }
 }
 
@@ -67,7 +67,7 @@ default_advanced_conf = {
     # Specify secuence of log sizes to automatic generation of experiments
     "size_secuence": [10,25,50,100],
     "families": {
-        "Advanced": "resources"+sep+scenarios_foldername+sep+"Advanced_Act10_Var2_DesElem4.json"
+        "Advanced": "configuration"+sep+scenarios_foldername+sep+"Advanced_Act10_Var2_DesElem4.json"
     }
 }
 

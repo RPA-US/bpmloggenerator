@@ -52,7 +52,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V1_image0001.png",
+                    "initValue": "resources/mockups/intermediate/V1_image0001.png",
                     "variate": 0,
                     "name": "function_copy_without_root",
                     "args": {}
@@ -102,7 +102,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V1_image0002.png",
+                    "initValue": "resources/mockups/intermediate/V1_image0002.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -159,7 +159,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V1_image0003.png",
+                    "initValue": "resources/mockups/intermediate/V1_image0003.png",
                     "variate": 0,
                     "name": "function_copy_without_root",
                     "args": {}
@@ -209,7 +209,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V1_image0004.png",
+                    "initValue": "resources/mockups/intermediate/V1_image0004.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -303,7 +303,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V1_image0005.png",
+                    "initValue": "resources/mockups/intermediate/V1_image0005.png",
                     "variate": 0,
                     "name": "function_copy_without_root",
                     "args": {}
@@ -353,7 +353,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V1_image0006.png",
+                    "initValue": "resources/mockups/intermediate/V1_image0006.png",
                     "variate": 0,
                     "name": "function_copy_without_root",
                     "args": {}
@@ -405,7 +405,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V2_image0001.png",
+                    "initValue": "resources/mockups/intermediate/V2_image0001.png",
                     "variate": 0,
                     "name": "function_copy_without_root",
                     "args": {}
@@ -455,7 +455,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V2_image0002.png",
+                    "initValue": "resources/mockups/intermediate/V2_image0002.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -512,7 +512,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V2_image0003.png",
+                    "initValue": "resources/mockups/intermediate/V2_image0003.png",
                     "variate": 0,
                     "name": "function_copy_without_root",
                     "args": {}
@@ -562,7 +562,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V2_image0004.png",
+                    "initValue": "resources/mockups/intermediate/V2_image0004.png",
                     "variate": 1,
                     "name": "",
                     "args": {
@@ -619,7 +619,7 @@
                     "args": []
                 },
                 "Screenshot": {
-                    "initValue": "mockups/intermediate/V2_image0005.png",
+                    "initValue": "resources/mockups/intermediate/V2_image0005.png",
                     "variate": 1,
                     "name": "",
                     "args": {

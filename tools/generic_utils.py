@@ -24,7 +24,7 @@ def detect_function(text):
         text: function to be detected
     '''
     # Search the function by key in the json
-    f = open('resources'+sep+function_trace)
+    f = open('configuration'+sep+function_trace)
     json_func = json.load(f)
     return eval(json_func[text])
 
@@ -35,7 +35,7 @@ def detect_element(text):
         text: element to be detected
     '''
     # Search the function by key in the json
-    f = open('resources'+sep+element_trace)
+    f = open('configuration'+sep+element_trace)
     json_func = json.load(f)
     return json_func[text]
 
