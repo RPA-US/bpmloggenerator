@@ -48,13 +48,26 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # 3rd Party Apps
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_auth.registration',
+    'corsheaders',
     'drf_spectacular',
     'drf_spectacular_sidecar',  # required for Django collectstatic discovery
     'categories',
     'categories.editor',
     'private_storage',
-    'api'
+
+    # Local Apps
+    'users',
+    'experiments'
 ]
 
 MIDDLEWARE = [
@@ -65,6 +78,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Add the corsheaders middleware to the top of the
+    # middleware list. The middleware list will already
+    # exists and have other items in it.
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'agosuirpa.urls'
@@ -80,6 +98,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -151,14 +170,22 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-#CUSTOM
+# CUSTOM
 
+API_VERSION = 'api/v1/'
+
+# Rest Framework
 REST_FRAMEWORK = {
-'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.PageNumberPagination',
-'PAGE_SIZE': 10,
-'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DATETIME_FORMAT': "%m/%d/%Y %I:%M%P",
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        ],
 }
 
+# Drsf spectacular
 SPECTACULAR_SETTINGS = {
     'TITLE': 'AGOSUIRPA API',
     'DESCRIPTION': 'Automatic generation of sintetic UI log in RPA context introducing variability',
@@ -170,5 +197,41 @@ SPECTACULAR_SETTINGS = {
     # OTHER SETTINGS
 }
 
+# Private storage
 PRIVATE_STORAGE_ROOT = os.path.join(BASE_DIR, "privatefiles")
-PRIVATE_STORAGE_AUTH_FUNCTION = 'products.permissions.allow_staff'
+PRIVATE_STORAGE_AUTH_FUNCTION = 'experiments.permissions.allow_staff'
+
+# Abstract User
+AUTH_USER_MODEL = 'users.CustomUser'
+
+
+# Specifies localhost port 3000 where the React
+# server will be running is safe to receive requests
+# from. All all of this.
+CORS_ALLOWED_ORIGINS = [    
+'http://localhost:3000'
+]
+
+# Django All Auth config. Add all of this.
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SITE_ID = 1 
+
+#django-allauth registraion settings
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS =1
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+  
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_UNIQUE_EMAIL = True
+
+# 1 day
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400

@@ -1,7 +1,19 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User, Group
-from rest_framework import serializers
-from .models import VariabilityTraceability, Generator, GUIComponent, GUIComponentCategory, VariabilityConfiguration, VariabilityFunction, VariabilityFunctionCategory, ExecutionConfiguration, ExecutionResult
+from .models import Experiment, VariabilityTraceability, Generator, GUIComponent, GUIComponentCategory, VariabilityConfiguration, VariabilityFunction, VariabilityFunctionCategory, ExecutionConfiguration, ExecutionResult
+
+
+class ExperimentSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Experiment
+        fields = [
+            'size_balance', 
+            'variability_conf',
+            'generation_mode', 
+            'generate_path', 
+            'special_colnames', 
+            'screenshot_name_generation_function'
+        ]
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

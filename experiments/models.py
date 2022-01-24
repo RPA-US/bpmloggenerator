@@ -1,9 +1,38 @@
 from django.db import models
 from categories.models import CategoryBase
-from django.contrib.auth.models import User
+from users.models import CustomUser
 from django.core.exceptions import ValidationError
 # from django.contrib.postgres.fields import ArrayField
 # Create your models here.
+
+default_conf = { 
+    "balance":{
+        "Balanced": [0.5,0.5],
+        "Imbalanced": [0.25,0.75]
+    },
+    # Specify secuence of log sizes to automatic generation of experiments
+    "size_secuence": [10,25],#50,100],
+}
+
+class Experiment(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    launched_at = models.DateTimeField()
+    finished_at = models.DateTimeField()
+    size_balance = models.JSONField()#"SizeBalanceConfiguration", default=dict(default_conf)
+    name = models.CharField(max_length=255)
+    description = models.CharField(max_length=255)
+    number_scenarios = models.IntegerField()
+    variability_conf = models.JSONField()
+    generation_mode = models.CharField(max_length=255)
+    # autogeneration_conf
+    # autogeneration_conf_family 
+    generate_path = models.CharField(max_length=255)
+    special_colnames = models.CharField(max_length=255)
+    screenshot_name_generation_function = models.CharField(max_length=255)
+    is_active=models.BooleanField(default=True)
+    
+    def __str__(self):
+        return self.filename
 
 
 class Generator(models.Model):
@@ -13,12 +42,11 @@ class Generator(models.Model):
     path = models.CharField(max_length=255)
     description = models.TextField()
     owner = models.ForeignKey(
-        User, verbose_name="Owner", on_delete=models.CASCADE
+        CustomUser, verbose_name="Owner", on_delete=models.CASCADE
     )
 
     def __str__(self):
         return self.filename
-
 
 class ExecutionResult(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
