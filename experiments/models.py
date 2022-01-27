@@ -16,8 +16,7 @@ default_conf = {
 
 class Experiment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
-    launched_at = models.DateTimeField()
-    finished_at = models.DateTimeField()
+    # finished_at = models.DateTimeField(null=True, blank=True)
     size_balance = models.JSONField()#"SizeBalanceConfiguration", default=dict(default_conf)
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
@@ -27,12 +26,15 @@ class Experiment(models.Model):
     # autogeneration_conf
     # autogeneration_conf_family 
     generate_path = models.CharField(max_length=255)
-    special_colnames = models.CharField(max_length=255)
+    foldername = models.CharField(null=True, blank=True, max_length=255)
+    special_colnames = models.JSONField()
     screenshot_name_generation_function = models.CharField(max_length=255)
+    is_being_processed=models.BooleanField(default=True)
     is_active=models.BooleanField(default=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='ExperimentOwner')
     
     def __str__(self):
-        return self.filename
+        return self.generate_path
 
 
 class Generator(models.Model):
@@ -190,3 +192,17 @@ class VariabilityFunction(models.Model):
 
     def __str__(self):
         return self.filename
+
+
+class Variations(models.Model):
+    case_id = models.CharField(max_length=255)
+    scenario = models.CharField(max_length=255)
+    case_variation_id = models.CharField(max_length=255)
+    activity = models.CharField(max_length=255)
+    variant = models.CharField(max_length=255)
+    function_name = models.CharField(max_length=255)
+    gui_element = models.CharField(max_length=255)
+    experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.case_variation_id

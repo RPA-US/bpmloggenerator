@@ -8,48 +8,28 @@ import json
 from colorama import Back,Style, Fore
 from plugins.screenshot.create_screenshot import generate_capture, generate_scenario_capture
 from plugins.screenshot.replace_gui_component import generate_copied_capture_without_root, generate_copied_capture
-from tools.generic_utils import detect_function
-from tools.database import init_database
-from configuration.settings import sep, scenarios_foldername, default_scenario_configurations, scenarios_json, colnames, output, autoanalize, melrpa_case_study, decision_activity, scenario_size
+from agosuirpa.generic_utils import detect_function
+from configuration.settings import sep, scenario_size
 
-def validation_params(json_path,generate_path,number_logs,percent_per_trace):   
+def validation_params(json,generate_path,number_logs,percent_per_trace):   
     '''
     Validate the user inputs
     args:
-        json_path: path of the json generated with the trace
+        json: json generated with the trace
         generate_path: log generation destination path
         number_logs: number of log case to generate
         percent_per_trace: percentage of cases for the two possible json traces
     '''
-    actual_path = os.getcwd()
-    res = True
-    if os.path.exists(actual_path+ sep +json_path):
+    # actual_path = os.getcwd()
+    if (len(percent_per_trace) >= 2) and (number_logs and number_logs > 0) and generate_path != "":
         res = True
     else:
-        return False
-    # Check if it is a binary decision (2 variants)
-    # if len(percent_per_trace) == 2:
-    #     res = True
-    # else:
-    #     return False
-    # acu = 0
-    # for i in percent_per_trace:
-    #     acu += i
-    # if acu == 1:
-    #     res = True
-    # else:
-    #     return False
-    if number_logs > 0 and number_logs:
-        res = True
-    else:
-        return False
-    if generate_path == "":
-        res = True
+        res = False
     return res
 
 
 
-def generate_row(generate_path,dict,acu,case,variant, screenshot_column_name, screenshot_name_generation_function,database_name):
+def generate_row(generate_path,dict,acu,case,variant, screenshot_column_name, screenshot_name_generation_function,experiment):
     '''
     Generate row reading the json
     args:
@@ -76,7 +56,7 @@ def generate_row(generate_path,dict,acu,case,variant, screenshot_column_name, sc
                                         
                     if variate == 1:
                         if i==screenshot_column_name:
-                            val = generate_capture(columns_ui,columns,element,acu,case,generate_path,attr, key, variant, screenshot_name_generation_function,database_name)
+                            val = generate_capture(experiment, columns_ui,columns,element,acu,case,generate_path,attr, key, variant, screenshot_name_generation_function)
                         else:
                             val = detect_function(name)(args)
                     elif variate == 0:
@@ -130,7 +110,7 @@ def number_rows_by_number_of_activities(dict, number_logs, percent_per_trace):
         list_percents = [1]
     return list_percents
 
-def case_generation(json_log_path,generate_path,number_logs,percent_per_trace, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, screenshot_name_generation_function, path, database_name):
+def case_generation(json_log,generate_path,number_logs,percent_per_trace, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, screenshot_name_generation_function, path, experiment):
     '''
     The main function to generate logs for a case
         args:
@@ -139,14 +119,10 @@ def case_generation(json_log_path,generate_path,number_logs,percent_per_trace, a
             number_logs: number of log case to generate
             percent_per_trace: percentage of cases for the two possible json traces
     '''
-    #try:
-    if validation_params(json_log_path,generate_path,number_logs[1],percent_per_trace):
-        if database_name:
-            init_database(database_name)
-        else:
-            init_database(None)
-        json_log = open(json_log_path)
-        json_act_path = json.load(json_log)
+    if validation_params(json_log,generate_path,number_logs[1],percent_per_trace):
+        # json_log = open(json_log_path)
+        # json_act_path = json.load(json_log)
+        json_act_path = json_log
      
         if number_logs[0] == "log_size":
             list_percents = number_rows_by_number_of_activities(json_act_path["trace"], number_logs[1], percent_per_trace)
@@ -173,7 +149,7 @@ def case_generation(json_log_path,generate_path,number_logs,percent_per_trace, a
     
         random.shuffle(total_variants)
         for variant in total_variants:
-            rows,acu = generate_row(generate_path,json_act_path,acu,case,variant,screenshot_column_name, screenshot_name_generation_function,database_name)
+            rows,acu = generate_row(generate_path,json_act_path,acu,case,variant,screenshot_column_name, screenshot_name_generation_function,experiment)
             case += 1
             for row in rows:
                 writer.writerow(row)
@@ -183,7 +159,7 @@ def case_generation(json_log_path,generate_path,number_logs,percent_per_trace, a
     except:
         logging.warning("Json structure")'''
 
-def automatic_experiments(generate_path, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, balance, size_secuence, families, scenario, screenshot_name_generation_function,database_name):
+def automatic_experiments(generate_path, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, balance, size_secuence, variability_conf, scenario, screenshot_name_generation_function,experiment, folder_name):
     if scenario:
         version_path = generate_path + sep + scenario
     else: 
@@ -191,52 +167,35 @@ def automatic_experiments(generate_path, activity_column_name, variant_column_na
         os.makedirs(version_path)
     
     # os.system("cd " + param_path_log_generator)
-    for family in families.keys():
-        for i in size_secuence:
-            for b in balance:
-                size = ['log_size',i]
-                output_path = version_path + sep + family + "_" + str(i) + "_" + b + sep
-                case_generation(families[family], generate_path, size, balance[b], activity_column_name, variant_column_name, case_column_name, screenshot_column_name, screenshot_name_generation_function, output_path,database_name)
+    for i in size_secuence:
+        for b in balance:
+            size = ['log_size',i]
+            output_path = version_path + sep + folder_name + "_" + str(i) + "_" + b + sep
+            case_generation(variability_conf, generate_path, size, balance[b], activity_column_name, variant_column_name, case_column_name, screenshot_column_name, screenshot_name_generation_function, output_path,experiment)
+    return version_path
 
-# def refactor_json_image_path(image_mapping, variation_json_seed_per_family, scenario):
-#     # After that, we modify each JSON of autogeneration_conf["families"]. Substitution of original image name by variation image name
-#     conf = {}
-#     for family in image_mapping:
-#         for variant in image_mapping[family]:
-#             json_log = open(variation_json_seed_per_family[family])
-#             original_json = json.load(json_log)
-#             json_object = {}
-#             json_object = json.dumps(original_json[variant], indent = 4)
-#             for original, replacement in image_mapping[family][variant].items():
-#                 json_object = json_object.replace(original, replacement)
-            
-#             original_json[variant] = json.loads(json_object)
-        
-#         # Serializing json 
-#         json_to_write = json.dumps(original_json, indent = 4)
-#         # Writing to .json
-#         filename = scenario+"_"+variation_json_seed_per_family[family]
-#         with open(filename, "w") as outfile:
-#             outfile.write(json_to_write)
-#         conf[family] = filename
-#     return conf
 
-def scenario_generation(scenarios_json, generate_path, scenario_size, colnames, autogeneration_conf, screenshot_name_generation_function,folder_name):
+def scenario_generation(scenarios_conf, 
+                        generate_path, 
+                        scenario_size, 
+                        colnames, 
+                        variability_conf,
+                        autogeneration_conf, 
+                        screenshot_name_generation_function,
+                        experiment):
+    folder_name=experiment.name
     activity_column_name = colnames["Activity"]
     variant_column_name = colnames["Variant"]
     case_column_name = colnames["Case"]
     screenshot_column_name = colnames["Screenshot"]
     prefix_scenario = "scenario_"
-    variation_json_seed_per_family = autogeneration_conf["families"]
     
     if folder_name:
         version_subpath = folder_name+str(round(time.time() * 1000))
     else:
         version_subpath = "version"+str(round(time.time() * 1000))
     database_name = prefix_scenario + version_subpath
-    
-    init_database(database_name)
-    
+
     # We established a common path to store all scenarios information 
     path = generate_path + sep + "resources" + sep + version_subpath
     if not os.path.exists(path):
@@ -245,8 +204,8 @@ def scenario_generation(scenarios_json, generate_path, scenario_size, colnames, 
     
     # Scenario variability: screenshot seeds to later generate case variability are generated 
     image_names_conf = {}
-    json_log = open(scenarios_json)
-    scenario_json = json.load(json_log)
+    # scenario_json = json.load(scenarios_conf)
+    scenario_json = scenarios_conf
     
     n_scenario_seed_logs = []
     image_mapping = {}
@@ -254,48 +213,41 @@ def scenario_generation(scenarios_json, generate_path, scenario_size, colnames, 
     for scenario_i in range(0, scenario_size+1):
         scenario_iteration_path = prefix_scenario + str(scenario_i)
         image_names_conf[scenario_i] = {}
-        for family in autogeneration_conf["families"]:
-            image_names_conf[scenario_i][family] = {}
-            # Loading json to modify
-            original_json = json.load(open(variation_json_seed_per_family[family]))
+        # Loading json to modify
+        original_json = variability_conf
+        
+        for variant in range(1,len(list(autogeneration_conf["balance"].values())[0])+1):
+            image_names_conf[scenario_i][variant] = {}
+            json_list = scenario_json[str(variant)]
+            for key in json_list:
+                element = json_list[key][screenshot_column_name]
+                if element is not None:
+                    initValue = element["initValue"]
+                    variate = element["variate"]
+                    
+                    new_init_value = select_last_item(initValue, sep)
+                    
+                    new_image = path + sep + scenario_iteration_path + sep + scenario_iteration_path + "_" +new_init_value
+                    if not os.path.exists(path + sep + scenario_iteration_path):
+                        os.makedirs(path + sep + scenario_iteration_path)
+                        
+                    if variate == 1:
+                            val = generate_scenario_capture(experiment,element,0,generate_path,key,variant,new_image,scenario_i)
+                    elif variate == 0:
+                        if initValue !="":
+                            image_to_duplicate = path + sep + scenario_iteration_path + sep + scenario_iteration_path + "_" + select_last_item(element["image_to_duplicate"],sep)
+                            val = generate_copied_capture([image_to_duplicate,path + sep + scenario_iteration_path + sep,scenario_iteration_path + "_" +new_init_value])
+                        else:
+                            val="NaN"
+                    original_json["trace"][str(variant)][key][screenshot_column_name]["initValue"] = str(val)
             
-            for variant in range(1,len(list(autogeneration_conf["balance"].values())[0])+1):
-                image_names_conf[scenario_i][family][variant] = {}
-                json_list = scenario_json[family][str(variant)]
-                for key in json_list:
-                    element = json_list[key][screenshot_column_name]
-                    if element is not None:
-                        initValue = element["initValue"]
-                        variate = element["variate"]
-                        
-                        new_init_value = select_last_item(initValue, sep)
-                        
-                        new_image = path + sep + scenario_iteration_path + sep + scenario_iteration_path + "_" +new_init_value
-                        if not os.path.exists(path + sep + scenario_iteration_path):
-                            os.makedirs(path + sep + scenario_iteration_path)
-                            
-                        if variate == 1:
-                                val = generate_scenario_capture(element,0,generate_path,key,variant,new_image,scenario_i,database_name)
-                        elif variate == 0:
-                            if initValue !="":
-                                image_to_duplicate = path + sep + scenario_iteration_path + sep + scenario_iteration_path + "_" + select_last_item(element["image_to_duplicate"],sep)
-                                val = generate_copied_capture([image_to_duplicate,path + sep + scenario_iteration_path + sep,scenario_iteration_path + "_" +new_init_value])
-                            else:
-                                val="NaN"
-                        # image_names_conf[scenario_i][family][variant][initValue] = str(val)
-                        original_json["trace"][str(variant)][key][screenshot_column_name]["initValue"] = str(val)
-                
-                # json_object = json.dumps(original_json["trace"][str(variant)], indent = 4)
-                # for original, replacement in image_names_conf[scenario_i][family][variant].items():
-                #     refactored_json = json.dumps(original_json["trace"][str(variant)]).replace(original, replacement)                                 
-                # original_json["trace"][str(variant)] = json.loads(refactored_json)
-            # Serializing json 
-            json_to_write = json.dumps(original_json, indent = 4)
-            # Writing to .json
-            filename = path + sep + prefix_scenario + str(scenario_i) + "_" + select_last_item(variation_json_seed_per_family[family], sep)
-            with open(filename, "w") as outfile:
-                outfile.write(json_to_write)
-            image_mapping[family] = filename
+        # Serializing json 
+        json_to_write = json.dumps(original_json, indent = 4)
+        # Writing to .json
+        filename = path + sep + prefix_scenario + str(scenario_i) + "_" + folder_name
+        with open(filename, "w") as outfile:
+            outfile.write(json_to_write)
+        image_mapping = filename
             
         n_scenario_seed_logs.append(image_mapping)
         image_mapping = {}
@@ -309,11 +261,10 @@ def scenario_generation(scenarios_json, generate_path, scenario_size, colnames, 
     
     # For each different scenario generate case variability as indicate in "trace" inside "json_case_variability"
     for index, scenario_conf in enumerate(n_scenario_seed_logs):
-        autogeneration_conf["families"] = scenario_conf
         print(Fore.GREEN + " Scenario " + str(index))
         print(Style.RESET_ALL)
-        automatic_experiments(path, activity_column_name, variant_column_name, case_column_name, screenshot_column_name,  autogeneration_conf["balance"], autogeneration_conf["size_secuence"], autogeneration_conf["families"], 
-                            prefix_scenario+str(index), screenshot_name_generation_function,database_name)
+        automatic_experiments(path, activity_column_name, variant_column_name, case_column_name, screenshot_column_name,  autogeneration_conf["balance"], autogeneration_conf["size_secuence"], scenario_conf, 
+                            prefix_scenario+str(index), screenshot_name_generation_function,experiment,folder_name)
         
     return version_subpath#path
 
@@ -325,24 +276,21 @@ def select_last_item(initValue, sep):
         new_init_value = splitted[len(splitted)-1]
     return new_init_value
 
-def execute_experiment(param_mode, autogeneration_conf,autogeneration_conf_family, generate_path, special_colnames, screenshot_name_generation_function):
-    
-    if param_mode == "autogeneration_mode":
-        # To use this mode execute: python main.py autogeneration_mode
+def execute_experiment(experiment, param_mode, number_scenarios, variability_conf, autogeneration_conf, scenarios_conf, generate_path, special_colnames, screenshot_name_generation_function):
+    if param_mode == "unique_scenario":
         database_name = "experiment_"+str(round(time.time() * 1000))+"_"
-        automatic_experiments(generate_path, special_colnames["Activity"], special_colnames["Variant"], special_colnames["Case"],
-                              special_colnames["Screenshot"], autogeneration_conf[autogeneration_conf_family]["balance"],
-                              autogeneration_conf[autogeneration_conf_family]["size_secuence"], autogeneration_conf[autogeneration_conf_family]["families"], None, screenshot_name_generation_function,database_name)
-    elif param_mode == "autoscenario_mode":
-        final_path = []
-        for family in autogeneration_conf.keys():
-            print(Back.GREEN + family)
-            print(Style.RESET_ALL)
-            path_aux = scenario_generation(scenarios_json, generate_path, scenario_size, colnames, autogeneration_conf[family], screenshot_name_generation_function, family)
-            final_path.append(path_aux)
-        
-        if autoanalize:
-            for familypath in final_path:
-                s = "python " + melrpa_case_study + " " + familypath + " " + decision_activity + " both"  
-                os.system(s)
-            
+        foldername = automatic_experiments(generate_path, special_colnames["Activity"], special_colnames["Variant"], special_colnames["Case"],
+                              special_colnames["Screenshot"], autogeneration_conf["balance"],
+                              autogeneration_conf["size_secuence"], None, screenshot_name_generation_function,experiment)
+    else:    
+        print(Back.GREEN + experiment.name)
+        print(Style.RESET_ALL)
+        foldername = scenario_generation(scenarios_conf, 
+                                         generate_path, 
+                                         number_scenarios, 
+                                         special_colnames, 
+                                         variability_conf, 
+                                         autogeneration_conf, 
+                                         screenshot_name_generation_function, 
+                                         experiment)
+    return foldername

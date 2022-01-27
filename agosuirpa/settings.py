@@ -21,11 +21,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
 environ.Env.read_env()
 
-DB_NAME = env('DB_NAME')
-DB_HOST = env('DB_HOST')
-DB_PORT = env('DB_PORT')
-DB_USER = env('DB_USER')
-DB_PASSWORD = env('DB_PASSWORD')
+DB_NAME =       env('DB_NAME')
+DB_HOST =       env('DB_HOST')
+DB_PORT =       env('DB_PORT')
+DB_USER =       env('DB_USER')
+DB_PASSWORD =   env('DB_PASSWORD')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -179,7 +179,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    'DATETIME_FORMAT': "%m/%d/%Y %I:%M%P",
+    # 'DATETIME_FORMAT': "%m/%d/%Y %I:%M%P",
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
         ],
@@ -223,9 +223,9 @@ AUTHENTICATION_BACKENDS = (
 SITE_ID = 1 
 
 #django-allauth registraion settings
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS =1
+# ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS =1
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+# ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
   
 ACCOUNT_USERNAME_REQUIRED = False
