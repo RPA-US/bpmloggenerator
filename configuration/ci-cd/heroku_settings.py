@@ -13,27 +13,19 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import sys
+import django_heroku
+import psycopg2
 
 # AGOSUIRPA API version
 API_VERSION = 'api/v1/'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".herokuapp.com"]
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-# Initialise environment variables
-DB_NAME =       os.environ.get('DB_NAME')
-DB_HOST =       os.environ.get('DB_HOST')
-DB_PORT =       os.environ.get('DB_PORT')
-DB_USER =       os.environ.get('DB_USER')
-DB_PASSWORD =   os.environ.get('DB_PASSWORD')
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECRECT KEY
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
@@ -160,11 +152,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = True
+
 
 
 # ========== 3rd Party Apps: Additional functionality ==========
@@ -248,3 +246,5 @@ if "linux" in operating_system:
 else:
     sep = "\\"
     element_trace = "configuration/element_trace.json"
+    
+django_heroku.settings(locals())

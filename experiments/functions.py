@@ -9,7 +9,7 @@ from colorama import Back,Style, Fore
 from plugins.screenshot.create_screenshot import generate_capture, generate_scenario_capture
 from plugins.screenshot.replace_gui_component import generate_copied_capture_without_root, generate_copied_capture
 from agosuirpa.generic_utils import detect_function
-from configuration.settings import sep, scenario_size
+from agosuirpa.settings import sep
 
 def validation_params(json,generate_path,number_logs,percent_per_trace):   
     '''

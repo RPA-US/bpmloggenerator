@@ -1,7 +1,7 @@
 import json
 import random
 import os
-from configuration.settings import sep, function_trace, element_trace
+from agosuirpa.settings import sep, function_trace, element_trace
 # from plugins.string.random_text_lorem import generate_DNI,generate_paragraph,generate_path,generate_random_entity,generate_sentence,generate_words
 # from plugins.list.coordenates_in_range import generate_mouse_position, generate_mouse_position_x,generate_mouse_position_y
 # from plugins.list.mouse_tipe import generate_mousekeyboard
