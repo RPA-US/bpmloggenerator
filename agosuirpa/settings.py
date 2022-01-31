@@ -13,6 +13,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import sys
+import environ
+
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 # AGOSUIRPA API version
 API_VERSION = 'api/v1/'
@@ -25,18 +30,17 @@ ALLOWED_HOSTS = []
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Initialise environment variables
-DB_NAME =       os.environ.get('DB_NAME')
-DB_HOST =       os.environ.get('DB_HOST')
-DB_PORT =       os.environ.get('DB_PORT')
-DB_USER =       os.environ.get('DB_USER')
-DB_PASSWORD =   os.environ.get('DB_PASSWORD')
+DB_NAME =       env('DB_NAME')
+DB_HOST =       env('DB_HOST')
+DB_PORT =       env('DB_PORT')
+DB_USER =       env('DB_USER')
+DB_PASSWORD =   env('DB_PASSWORD')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# SECRECT KEY
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # Application definition
 INSTALLED_APPS = [
