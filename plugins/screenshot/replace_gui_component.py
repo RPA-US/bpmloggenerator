@@ -5,9 +5,9 @@ from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw 
 from lorem_text import lorem
-import tools.generic_utils as util
+import agosuirpa.generic_utils as util
 import sqlite3 as sl
-from configuration.settings import sep
+from agosuirpa.settings import sep
 import random
 
 def resize_respecting_ratio(width_size, height_size, image):

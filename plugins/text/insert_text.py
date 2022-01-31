@@ -1,6 +1,5 @@
 import random
 
-
 def insert_text(text, key):
     '''
     Insert one text in another text.
