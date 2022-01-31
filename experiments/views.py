@@ -112,7 +112,7 @@ class ExperimentView(generics.ListCreateAPIView):
             screenshot_name_generation_function=request.data.get(
                 'screenshot_name_generation_function')
             
-            experiment = Experiment.create(
+            experiment = Experiment(
                 size_balance=size_balance,
                 name=name,
                 description=description,
@@ -126,6 +126,7 @@ class ExperimentView(generics.ListCreateAPIView):
                 user=user,
                 screenshot_name_generation_function=screenshot_name_generation_function
             )
+            experiment.save()
 
             foldername = execute_experiment(experiment,
                                 generation_mode,

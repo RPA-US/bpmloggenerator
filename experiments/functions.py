@@ -278,7 +278,7 @@ def select_last_item(initValue, sep):
 
 def execute_experiment(experiment, param_mode, number_scenarios, variability_conf, autogeneration_conf, scenarios_conf, generate_path, special_colnames, screenshot_name_generation_function):
     if param_mode == "unique_scenario":
-        database_name = "experiment_"+str(round(time.time() * 1000))+"_"
+        # database_name = "experiment_"+str(round(time.time() * 1000))+"_"
         foldername = automatic_experiments(generate_path, special_colnames["Activity"], special_colnames["Variant"], special_colnames["Case"],
                               special_colnames["Screenshot"], autogeneration_conf["balance"],
                               autogeneration_conf["size_secuence"], None, screenshot_name_generation_function,experiment)
