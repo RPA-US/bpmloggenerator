@@ -120,9 +120,9 @@ def case_generation(json_log,generate_path,number_logs,percent_per_trace, activi
             percent_per_trace: percentage of cases for the two possible json traces
     '''
     if validation_params(json_log,generate_path,number_logs[1],percent_per_trace):
-        # json_log = open(json_log_path)
-        # json_act_path = json.load(json_log)
-        json_act_path = json_log
+        json_log = open(json_log)
+        json_act_path = json.load(json_log)
+        # json_act_path = json_log
      
         if number_logs[0] == "log_size":
             list_percents = number_rows_by_number_of_activities(json_act_path["trace"], number_logs[1], percent_per_trace)
@@ -244,7 +244,7 @@ def scenario_generation(scenarios_conf,
         # Serializing json 
         json_to_write = json.dumps(original_json, indent = 4)
         # Writing to .json
-        filename = path + sep + prefix_scenario + str(scenario_i) + "_" + folder_name
+        filename = path + sep + prefix_scenario + str(scenario_i) + "_" + folder_name + ".json"
         with open(filename, "w") as outfile:
             outfile.write(json_to_write)
         image_mapping = filename

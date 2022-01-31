@@ -138,11 +138,12 @@ class ExperimentView(generics.ListCreateAPIView):
                                 special_colnames,
                                 screenshot_name_generation_function)
             
-            Experiment.objects.get(id=experiment.id).update(
-                is_being_processed=False,
-                is_active=True,
-                foldername=foldername
-            )
+            
+            experiment.is_being_processed=False
+            experiment.is_active=True
+            experiment.foldername=foldername
+            experiment.save()
+            
 
         except Exception as e:
             msg = 'Some of atributes are invalid: ' + str(e)
