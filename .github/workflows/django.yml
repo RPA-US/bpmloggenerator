@@ -1,4 +1,4 @@
-name: CD
+name: AGOSUIRPA Heroku CD
 
 # Controls when the workflow will run
 on:
@@ -22,13 +22,16 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.7
+          python-version: 3.9.2
 
       - name: Install Dependencies
         run: |
+          rm agosuirpa/settings.py
           cp configuration/ci-cd/heroku_settings.py agosuirpa/settings.py
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          python manage.py makemigrations
+          python manage.py migrate
 
   deploy:
     name: Deploy to Heroku
@@ -46,4 +49,4 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
       - name: Deployed successfully
         run: |
-          echo Deployed!!
+          echo AGOSUIRPA Platform Deployed!!
