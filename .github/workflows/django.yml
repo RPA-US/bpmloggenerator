@@ -30,8 +30,6 @@ jobs:
           cp configuration/ci-cd/heroku_settings.py agosuirpa/settings.py
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          python manage.py makemigrations
-          python manage.py migrate
 
   deploy:
     name: Deploy to Heroku
