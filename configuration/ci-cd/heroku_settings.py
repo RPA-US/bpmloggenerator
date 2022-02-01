@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import sys
 import django_heroku
+import dj_database_url
 import psycopg2
 
 # AGOSUIRPA API version
@@ -93,26 +94,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'agosuirpa.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': DB_NAME,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
-    }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
