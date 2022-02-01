@@ -168,7 +168,7 @@ class ListPaginatedExperimentAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        if(user.is_anonymous is False and user.authority == 'BAR'):
+        if(user.is_anonymous is False):
             user_id = CustomUser.objects.get(user_account=self.request.user).id
             queryset = Experiment.objects.filter(user=user_id, is_active=True)
         return queryset

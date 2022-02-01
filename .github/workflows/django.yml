@@ -1,12 +1,10 @@
-name: Django-Heroku CD
+name: AGOSUIRPA Heroku CD
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push request events but only for the main branch
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches: [ develop ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -24,10 +22,11 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8.10
+          python-version: 3.9.2
 
       - name: Install Dependencies
         run: |
+          rm agosuirpa/settings.py
           cp configuration/ci-cd/heroku_settings.py agosuirpa/settings.py
           python -m pip install --upgrade pip
           pip install -r requirements.txt
@@ -40,19 +39,12 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps: 
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
-          fetch-depth: 0
-      - name: login
-        uses: actions/heroku@master
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        with:
-          args: container:login
-      - name: set remote
-        run: git remote set-url origin https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/{{secrets.APP_NAME }}.git
-      - name: push and deploy
-        run: git push origin HEAD:master -f
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP}} #Must be unique in Heroku
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
       - name: Deployed successfully
         run: |
-          echo AGOSUIRPA Deployed!!
+          echo AGOSUIRPA Platform Deployed!!

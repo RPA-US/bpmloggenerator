@@ -13,8 +13,16 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import sys
+import environ
 import django_heroku
+import dj_database_url
 import psycopg2
+from django.core.management.utils import get_random_secret_key
+
+
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
 
 # AGOSUIRPA API version
 API_VERSION = 'api/v1/'
@@ -22,13 +30,13 @@ API_VERSION = 'api/v1/'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [".herokuapp.com"]
+ALLOWED_HOSTS = ['agosuirpa.herokuapp.com', '0.0.0.0', '127.0.0.1']
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECRECT KEY
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+SECRET_KEY = get_random_secret_key()
 
 # Application definition
 INSTALLED_APPS = [
@@ -53,6 +61,8 @@ INSTALLED_APPS = [
     'categories',
     'categories.editor',
     'private_storage',
+    # Heroku cd apps
+    'whitenoise.runserver_nostatic',
     # Local Apps
     'users',
     'experiments'
@@ -95,24 +105,20 @@ TEMPLATES = [
 WSGI_APPLICATION = 'agosuirpa.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': DB_NAME,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
+        'NAME':         env('DB_NAME'),
+        'HOST':         env('DB_HOST'),
+        'PORT':         env('DB_PORT'),
+        'USER':         env('DB_USER'),
+        'PASSWORD':     env('DB_PASSWORD'),
     }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
 }
 
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -131,7 +137,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -152,7 +157,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -246,5 +251,5 @@ else:
     element_trace = "configuration"+sep+"element_trace.json"
 # Function specification filename
 function_trace = "configuration"+sep+"function_trace.json"
-    
+
 django_heroku.settings(locals())
