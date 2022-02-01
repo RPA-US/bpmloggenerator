@@ -7,7 +7,9 @@ from rest_framework.pagination import PageNumberPagination
 from .models import Experiment, VariabilityTraceability, VariabilityConfiguration, VariabilityFunction, VariabilityFunctionCategory, ExecutionConfiguration, ExecutionResult, GUIComponent, GUIComponentCategory, Generator
 from .serializers import ExperimentSerializer, VariabilityTraceabilitySerializer, VariabilityConfigurationSerializer, VariabilityFunctionSerializer, VariabilityFunctionCategorySerializer, ExecutionConfigurationSerializer, ExecutionResultSerializer, GUIComponentSerializer, GUIComponentCategorySerializer, GeneratorSerializer
 from users.models import CustomUser
-from .functions import execute_experiment
+from .functions import execute_experiment, compress_experiment
+from django.http import HttpResponse
+from django.http import FileResponse
 
 # class VariabilityTraceabilityViewSet(viewsets.ModelViewSet):
 #     queryset = VariabilityTraceability.objects.all()
@@ -170,3 +172,30 @@ class ListPaginatedExperimentAPIView(generics.ListAPIView):
             user_id = CustomUser.objects.get(user_account=self.request.user).id
             queryset = Experiment.objects.filter(user=user_id, is_active=True)
         return queryset
+
+class DownloadExperiment(generics.RetrieveAPIView):
+    """
+    Download compress experiment
+    """
+    def get(self, request, *args, **kwargs):
+        user = self.request.user
+        if(user.is_anonymous is False):
+            try:
+                user = CustomUser.objects.get(id=self.request.user.id)
+            except:
+                return Response({"message": "No user found"}, status=status.HTTP_404_NOT_FOUND)
+            #user=user.id, dentro cuando pueda hacer experimentos 
+            try:
+                experiment = Experiment.objects.get(id=kwargs["pk"])    
+            except:
+                return Response({"message": "No experiment found"}, status=status.HTTP_404_NOT_FOUND)    
+            try:        
+                zip_experiment = compress_experiment(experiment)
+                filename = experiment.name+".zip"
+                response = FileResponse(open(zip_experiment, 'rb'))
+                response['Content-Disposition'] = 'attachment; filename="%s"' % filename  
+            except:
+                return Response({"message": "Experiment error try another"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+            return response
+        else:
+            return Response({"message": "No user valid"}, status=status.HTTP_401_UNAUTHORIZED)
