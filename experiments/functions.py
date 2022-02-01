@@ -268,7 +268,7 @@ def scenario_generation(scenarios_conf,
         automatic_experiments(path, activity_column_name, variant_column_name, case_column_name, screenshot_column_name,  autogeneration_conf["balance"], autogeneration_conf["size_secuence"], scenario_conf, 
                             prefix_scenario+str(index), screenshot_name_generation_function,experiment,folder_name)
         
-    return version_subpath#path
+    return path
 
 
 def select_last_item(initValue, sep):
@@ -299,9 +299,12 @@ def execute_experiment(experiment, param_mode, number_scenarios, variability_con
 
 def compress_experiment(experiment):
     foldername = experiment.foldername
-    generate_path = experiment.generate_path
-    folder_path=generate_path+sep+foldername
+    if "/" in foldername:
+        splitted = foldername.split("/")
+    if "\\" in foldername:
+        splitted = foldername.split("\\")
+    folder_path = sep.join(splitted)
     zip_file = folder_path+".zip"
-    if os.path.exists(folder_path+".zip"):
+    if not os.path.exists(zip_file):
         zip_file = shutil.make_archive(folder_path, 'zip', os.path.abspath(folder_path))
     return zip_file

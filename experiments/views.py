@@ -186,7 +186,7 @@ class DownloadExperiment(generics.RetrieveAPIView):
                 return Response({"message": "No user found"}, status=status.HTTP_404_NOT_FOUND)
             #user=user.id, dentro cuando pueda hacer experimentos 
             try:
-                experiment = Experiment.objects.get(id=kwargs["pk"])    
+                experiment = Experiment.objects.get(user=user.id,id=kwargs["pk"])    
             except:
                 return Response({"message": "No experiment found"}, status=status.HTTP_404_NOT_FOUND)    
             try:        
