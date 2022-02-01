@@ -13,9 +13,15 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import sys
+import environ
 import django_heroku
 import dj_database_url
 import psycopg2
+
+
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
 
 # AGOSUIRPA API version
 API_VERSION = 'api/v1/'
@@ -29,7 +35,7 @@ ALLOWED_HOSTS = ["agosuirpa.herokuapp.com", "127.0.0.1"]
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECRECT KEY
-SECRET_KEY = "gGy)Q&y#iC55_*=¨jeo[y>Hg?WaDer"
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # Application definition
 INSTALLED_APPS = [
@@ -102,11 +108,11 @@ WSGI_APPLICATION = 'agosuirpa.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME':         os.environ('DB_NAME'),
-        'HOST':         os.environ('DB_HOST'),
-        'PORT':         os.environ('DB_PORT'),
-        'USER':         os.environ('DB_USER'),
-        'PASSWORD':     os.environ('DB_PASSWORD'),
+        'NAME':         env('DB_NAME'),
+        'HOST':         env('DB_HOST'),
+        'PORT':         env('DB_PORT'),
+        'USER':         env('DB_USER'),
+        'PASSWORD':     env('DB_PASSWORD'),
     }
 }
 
