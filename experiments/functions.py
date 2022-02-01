@@ -5,6 +5,8 @@ import time
 import json
 import random
 import json
+import zipfile
+import shutil
 from colorama import Back,Style, Fore
 from plugins.screenshot.create_screenshot import generate_capture, generate_scenario_capture
 from plugins.screenshot.replace_gui_component import generate_copied_capture_without_root, generate_copied_capture
@@ -294,3 +296,12 @@ def execute_experiment(experiment, param_mode, number_scenarios, variability_con
                                          screenshot_name_generation_function, 
                                          experiment)
     return foldername
+
+def compress_experiment(experiment):
+    foldername = experiment.foldername
+    generate_path = experiment.generate_path
+    folder_path=generate_path+sep+foldername
+    zip_file = folder_path+".zip"
+    if os.path.exists(folder_path+".zip"):
+        zip_file = shutil.make_archive(folder_path, 'zip', os.path.abspath(folder_path))
+    return zip_file
