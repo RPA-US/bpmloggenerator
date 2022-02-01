@@ -17,6 +17,8 @@ import django_heroku
 import dj_database_url
 import psycopg2
 
+django_heroku.settings(locals())
+
 # AGOSUIRPA API version
 API_VERSION = 'api/v1/'
 
@@ -30,7 +32,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECRECT KEY
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
-
+print(SECRET_KEY)
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -239,5 +241,3 @@ else:
     element_trace = "configuration"+sep+"element_trace.json"
 # Function specification filename
 function_trace = "configuration"+sep+"function_trace.json"
-    
-django_heroku.settings(locals())
