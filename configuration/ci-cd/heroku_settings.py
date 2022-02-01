@@ -29,8 +29,8 @@ ALLOWED_HOSTS = ["agosuirpa.herokuapp.com", "127.0.0.1"]
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECRECT KEY
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
-print(SECRET_KEY)
+SECRET_KEY = "gGy)Q&y#iC55_*=¨jeo[y>Hg?WaDer"
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
