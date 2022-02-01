@@ -17,8 +17,6 @@ import django_heroku
 import dj_database_url
 import psycopg2
 
-django_heroku.settings(locals())
-
 # AGOSUIRPA API version
 API_VERSION = 'api/v1/'
 
@@ -241,3 +239,5 @@ else:
     element_trace = "configuration"+sep+"element_trace.json"
 # Function specification filename
 function_trace = "configuration"+sep+"function_trace.json"
+
+django_heroku.settings(locals())
