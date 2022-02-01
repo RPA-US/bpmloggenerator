@@ -108,17 +108,11 @@ WSGI_APPLICATION = 'agosuirpa.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME':         env('DB_NAME'),
-        'HOST':         env('DB_HOST'),
-        'PORT':         env('DB_PORT'),
-        'USER':         env('DB_USER'),
-        'PASSWORD':     env('DB_PASSWORD'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2'
     }
 }
 
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
+DATABASES['default'].update(dj_database_url.config())
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
