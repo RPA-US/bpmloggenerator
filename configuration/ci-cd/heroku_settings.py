@@ -30,7 +30,7 @@ API_VERSION = 'api/v1/'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['agosuirpa.herokuapp.com']
+ALLOWED_HOSTS = ['http://agosuirpa.herokuapp.com', 'https://agosuirpa.herokuapp.com']
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
