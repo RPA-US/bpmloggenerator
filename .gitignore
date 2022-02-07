@@ -134,6 +134,7 @@ dmypy.json
 
 # VS code
 .vscode
+.ssh
 
 # Custom Folders
 CSV_exit
