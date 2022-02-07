@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-import sys
+
 import environ
 import django_heroku
 import dj_database_url
@@ -23,9 +23,6 @@ from django.core.management.utils import get_random_secret_key
 env = environ.Env()
 # reading .env file
 environ.Env.read_env()
-
-# AGOSUIRPA API version
-API_VERSION = 'api/v1/'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -237,20 +234,5 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
 # 1 day
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
-
-
-# AGOSUIRPA platform settings
-# OS 
-operating_system =sys.platform
-print("Operating system detected: " + operating_system)
-# Element specification filename and path separator (depends on OS)
-if "linux" in operating_system:
-    sep = "/"
-    element_trace = "configuration"+sep+"element_trace_linux.json"
-else:
-    sep = "\\"
-    element_trace = "configuration"+sep+"element_trace.json"
-# Function specification filename
-function_trace = "configuration"+sep+"function_trace.json"
 
 django_heroku.settings(locals())

@@ -2,7 +2,7 @@ import os
 import agosuirpa.generic_utils as util
 from experiments.models import Variations
 from agosuirpa.generic_utils import detect_function
-from agosuirpa.settings import sep
+from agosuirpa.system_configuration import sep
 
 def manage_dependency(experiment, name, arguments, j, case, scenario, activity, variant):
     if "dependency" in j:

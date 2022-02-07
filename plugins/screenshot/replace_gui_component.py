@@ -7,7 +7,7 @@ from PIL import ImageDraw
 from lorem_text import lorem
 import agosuirpa.generic_utils as util
 import sqlite3 as sl
-from agosuirpa.settings import sep
+from agosuirpa.system_configuration import sep
 import random
 
 def resize_respecting_ratio(width_size, height_size, image):
