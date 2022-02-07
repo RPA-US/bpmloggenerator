@@ -1,6 +1,7 @@
 from django.db import models
 from categories.models import CategoryBase
 from users.models import CustomUser
+from private_storage.fields import PrivateFileField
 from django.core.exceptions import ValidationError
 # from django.contrib.postgres.fields import ArrayField
 # Create your models here.
@@ -31,6 +32,7 @@ class Experiment(models.Model):
     screenshot_name_generation_function = models.CharField(max_length=255)
     is_being_processed=models.BooleanField(default=True)
     is_active=models.BooleanField(default=True)
+    screenshots = PrivateFileField("Screenshots")
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='ExperimentOwner')
     
     def __str__(self):

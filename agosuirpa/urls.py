@@ -32,14 +32,11 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, Sp
 # router.register(r"execution-configuration", views.ExecutionConfigurationViewSet)
 # router.register(r"execution-result", views.ExecutionResultViewSet)
 
-import experiments.views as v
-from django.conf.urls import url
 urlpatterns = [
     # path(API_VERSION, include(router.urls)),
     path(API_VERSION+'admin/', admin.site.urls),
     path(API_VERSION+'users/', include('users.urls')),
     path(API_VERSION+'experiments/', include('experiments.urls')),
-    url(API_VERSION+r'experiments/download/(?P<pk>[0-9]+)/$', v.DownloadExperiment.as_view()),
     path(API_VERSION+'api-auth/', include("rest_framework.urls", namespace="rest_framework")),
     path(API_VERSION+'schema/', SpectacularAPIView.as_view(), name="schema"),
     # Optional UI:
