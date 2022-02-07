@@ -1,2 +1,2 @@
-release: cp configuration/ci-cd/heroku_settings.py agosuirpa/settings.py && python manage.py makemigrations && python manage.py migrate
+release: configuration/ci-cd/initial_deploy.sh
 web: gunicorn agosuirpa.wsgi:application
