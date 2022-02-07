@@ -12,8 +12,8 @@ from django.http import HttpResponse
 from django.http import FileResponse
 # from django.core.files.storage import FileSystemStorage
 import json
-from agosuirpa.system_configuration import generate_path
-
+from agosuirpa.system_configuration import generate_path, sep
+from .utils import upload_mockups
 # class VariabilityTraceabilityViewSet(viewsets.ModelViewSet):
 #     queryset = VariabilityTraceability.objects.all()
 #     serializer_class = VariabilityTraceabilitySerializer
@@ -136,7 +136,7 @@ class ExperimentView(generics.ListCreateAPIView):
             
             
             experiment.save()
-
+            upload_mockups('privatefiles'+sep+screenshots.name)
             foldername = execute_experiment(experiment,
                                 generation_mode,
                                 number_scenarios,
