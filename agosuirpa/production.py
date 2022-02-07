@@ -37,7 +37,7 @@ SECRET_KEY = get_random_secret_key()
 
 # Application definition
 INSTALLED_APPS = [
-        'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
