@@ -140,6 +140,7 @@ dmypy.json
 CSV_exit
 resources/
 mockups
+privatefiles/
 
 # SQLite Database
 loggenerator.db

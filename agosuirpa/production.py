@@ -37,14 +37,13 @@ SECRET_KEY = get_random_secret_key()
 
 # Application definition
 INSTALLED_APPS = [
-    'django.contrib.admin',
+        'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 3rd Party Apps
-    'rest_framework',
+    'rest_framework', # 3rd Party Apps
     'rest_framework.authtoken',
     'rest_auth',
     'django.contrib.sites',
@@ -58,11 +57,9 @@ INSTALLED_APPS = [
     'categories',
     'categories.editor',
     'private_storage',
-    # Heroku cd apps
-    'whitenoise.runserver_nostatic',
-    # Local Apps
-    'users',
-    'experiments'
+    'users', # Local App
+    'experiments', # Local App
+    'whitenoise.runserver_nostatic', # Heroku cd apps
 ]
 
 MIDDLEWARE = [

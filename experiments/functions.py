@@ -13,7 +13,7 @@ from plugins.screenshot.replace_gui_component import generate_copied_capture_wit
 from agosuirpa.generic_utils import detect_function
 from agosuirpa.system_configuration import sep
 
-def validation_params(json,generate_path,number_logs,percent_per_trace):   
+def validation_params(json,number_logs,percent_per_trace):   
     '''
     Validate the user inputs
     args:
@@ -23,7 +23,7 @@ def validation_params(json,generate_path,number_logs,percent_per_trace):
         percent_per_trace: percentage of cases for the two possible json traces
     '''
     # actual_path = os.getcwd()
-    if (len(percent_per_trace) >= 2) and (number_logs and number_logs > 0) and generate_path != "":
+    if (len(percent_per_trace) >= 2) and (number_logs and number_logs > 0):
         res = True
     else:
         res = False
@@ -121,7 +121,7 @@ def case_generation(json_log,generate_path,number_logs,percent_per_trace, activi
             number_logs: number of log case to generate
             percent_per_trace: percentage of cases for the two possible json traces
     '''
-    if validation_params(json_log,generate_path,number_logs[1],percent_per_trace):
+    if validation_params(json_log,number_logs[1],percent_per_trace):
         json_log = open(json_log)
         json_act_path = json.load(json_log)
         # json_act_path = json_log

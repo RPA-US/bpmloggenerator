@@ -47,8 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 3rd Party Apps
-    'rest_framework',
+    'rest_framework', # 3rd Party Apps
     'rest_framework.authtoken',
     'rest_auth',
     'django.contrib.sites',
@@ -62,9 +61,8 @@ INSTALLED_APPS = [
     'categories',
     'categories.editor',
     'private_storage',
-    # Local Apps
-    'users',
-    'experiments'
+    'users', # Local App
+    'experiments', # Local App
 ]
 
 MIDDLEWARE = [

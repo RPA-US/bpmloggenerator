@@ -10,6 +10,9 @@ from users.models import CustomUser
 from .functions import execute_experiment, compress_experiment
 from django.http import HttpResponse
 from django.http import FileResponse
+# from django.core.files.storage import FileSystemStorage
+import json
+from agosuirpa.system_configuration import generate_path
 
 # class VariabilityTraceabilityViewSet(viewsets.ModelViewSet):
 #     queryset = VariabilityTraceability.objects.all()
@@ -90,7 +93,7 @@ class ExperimentView(generics.ListCreateAPIView):
         st = status.HTTP_201_CREATED
         msg = 'ok, created'
 
-        for data in ['size_balance', 'name', 'description', 'number_scenarios', 'variability_conf', 'generation_mode', 'generate_path', 'special_colnames', 'screenshot_name_generation_function']:
+        for data in ['size_balance', 'name', 'description', 'number_scenarios', 'variability_conf', 'generation_mode', 'screenshots', 'special_colnames', 'screenshot_name_generation_function']:
             if not data in request.data:
                 return Response({"message": "Incomplete data"}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -100,19 +103,21 @@ class ExperimentView(generics.ListCreateAPIView):
             return Response({"message": "No user found"}, status=status.HTTP_404_NOT_FOUND)
 
         try:
-            # finished_at=request.data.get('finished_at')                   
-            size_balance=request.data.get('size_balance')
+            size_balance=json.loads(request.data.get('size_balance'))
             number_scenarios=request.data.get('number_scenarios')
-            name=request.data.get('name')                              
-            description=request.data.get('description')                              
-            number_scenarios=request.data.get('number_scenarios')                                  
-            variability_conf=request.data.get('variability_conf')  
-            scenarios_conf=request.data.get('scenarios_conf')                                                                          
+            name=request.data.get('name')
+            description=request.data.get('description')
+            number_scenarios=int(request.data.get('number_scenarios'))
+            variability_conf=json.loads(request.data.get('variability_conf'))
+            scenarios_conf=json.loads(request.data.get('scenarios_conf'))
             generation_mode=request.data.get('generation_mode')
-            generate_path=request.data.get('generate_path')                                      
-            special_colnames=request.data.get('special_colnames')                                          
-            screenshot_name_generation_function=request.data.get(
-                'screenshot_name_generation_function')
+            screenshots=request.data.get('screenshots')
+            special_colnames=json.loads(request.data.get('special_colnames'))
+            screenshot_name_generation_function=request.data.get('screenshot_name_generation_function')
+            
+            # fs = FileSystemStorage()
+            # name = fs.save(uploaded_file.name, uploaded_file)
+
             
             experiment = Experiment(
                 size_balance=size_balance,
@@ -121,13 +126,15 @@ class ExperimentView(generics.ListCreateAPIView):
                 number_scenarios=number_scenarios,
                 variability_conf=variability_conf,
                 generation_mode=generation_mode,
-                generate_path=generate_path,
                 special_colnames=special_colnames,
+                screenshots=screenshots,
                 is_being_processed=True,
                 is_active=False,
                 user=user,
                 screenshot_name_generation_function=screenshot_name_generation_function
             )
+            
+            
             experiment.save()
 
             foldername = execute_experiment(experiment,

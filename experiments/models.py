@@ -6,14 +6,14 @@ from django.core.exceptions import ValidationError
 # from django.contrib.postgres.fields import ArrayField
 # Create your models here.
 
-default_conf = { 
-    "balance":{
-        "Balanced": [0.5,0.5],
-        "Imbalanced": [0.25,0.75]
-    },
-    # Specify secuence of log sizes to automatic generation of experiments
-    "size_secuence": [10,25],#50,100],
-}
+# default_conf = { 
+#     "balance":{
+#         "Balanced": [0.5,0.5],
+#         "Imbalanced": [0.25,0.75]
+#     },
+#     # Specify secuence of log sizes to automatic generation of experiments
+#     "size_secuence": [10,25],#50,100],
+# }
 
 class Experiment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -26,7 +26,6 @@ class Experiment(models.Model):
     generation_mode = models.CharField(max_length=255)
     # autogeneration_conf
     # autogeneration_conf_family 
-    generate_path = models.CharField(max_length=255)
     foldername = models.CharField(null=True, blank=True, max_length=255)
     special_colnames = models.JSONField()
     screenshot_name_generation_function = models.CharField(max_length=255)
@@ -36,7 +35,7 @@ class Experiment(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='ExperimentOwner')
     
     def __str__(self):
-        return self.generate_path
+        return self.foldername
 
 
 class Generator(models.Model):
@@ -59,7 +58,7 @@ class ExecutionResult(models.Model):
     size = models.CharField(max_length=255)
     balance = models.CharField(max_length=255)
     generator = models.ForeignKey(Generator, on_delete=models.CASCADE)
-
+        
     def __str__(self):
         return self.scenario_id+":"+self.family+"_"+self.size+"_"+self.balance
 
@@ -78,7 +77,7 @@ class ExecutionResult(models.Model):
 class ExecutionConfiguration(models.Model):
     path = models.CharField(max_length=255)
     generator = models.ForeignKey(Generator, on_delete=models.CASCADE)
-
+        
     def __str__(self):
         return self.path
 
@@ -88,7 +87,7 @@ class UILog(models.Model):
     path = models.CharField(max_length=255)
     execution_result = models.ForeignKey(
         ExecutionResult, on_delete=models.CASCADE)
-
+        
     def __str__(self):
         return self.path
 
@@ -177,7 +176,7 @@ class GUIComponent(models.Model):
     gui_component_category = models.ForeignKey(
         GUIComponentCategory, on_delete=models.CASCADE, blank=True, null=True, limit_choices_to={'active': True},
     )
-
+    
     def __str__(self):
         return self.filename
 
@@ -191,7 +190,7 @@ class VariabilityFunction(models.Model):
     variability_function_category = models.ForeignKey(
         VariabilityFunctionCategory, on_delete=models.CASCADE, blank=True, null=True, limit_choices_to={'active': True},
     )
-
+        
     def __str__(self):
         return self.filename
 
