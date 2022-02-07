@@ -298,12 +298,7 @@ def execute_experiment(experiment, param_mode, number_scenarios, variability_con
     return foldername
 
 def compress_experiment(experiment):
-    foldername = experiment.foldername
-    if "/" in foldername:
-        splitted = foldername.split("/")
-    if "\\" in foldername:
-        splitted = foldername.split("\\")
-    folder_path = sep.join(splitted)
+    folder_path = split_name_system(foldername)       
     zip_file = folder_path+".zip"
     if not os.path.exists(zip_file):
         zip_file = shutil.make_archive(folder_path, 'zip', os.path.abspath(folder_path))
