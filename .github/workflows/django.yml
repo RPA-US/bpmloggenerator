@@ -26,8 +26,6 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          rm agosuirpa/settings.py
-          cp configuration/ci-cd/heroku_settings.py agosuirpa/settings.py
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
