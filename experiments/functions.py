@@ -10,7 +10,7 @@ import shutil
 from colorama import Back,Style, Fore
 from plugins.screenshot.create_screenshot import generate_capture, generate_scenario_capture
 from plugins.screenshot.replace_gui_component import generate_copied_capture_without_root, generate_copied_capture
-from agosuirpa.generic_utils import detect_function
+from agosuirpa.generic_utils import detect_function, split_name_system
 from agosuirpa.system_configuration import sep
 
 def validation_params(json,number_logs,percent_per_trace):   
@@ -173,7 +173,7 @@ def automatic_experiments(generate_path, activity_column_name, variant_column_na
         for b in balance:
             size = ['log_size',i]
             output_path = version_path + sep + folder_name + "_" + str(i) + "_" + b + sep
-            case_generation(variability_conf, generate_path, size, balance[b], activity_column_name, variant_column_name, case_column_name, screenshot_column_name, screenshot_name_generation_function, output_path,experiment)
+            case_generation(variability_conf, generate_path, size, balance[b], activity_column_name, variant_column_name, case_column_name, screenshot_column_name, screenshot_name_generation_function, output_path, experiment)
     return version_path
 
 
@@ -184,7 +184,8 @@ def scenario_generation(scenarios_conf,
                         variability_conf,
                         autogeneration_conf, 
                         screenshot_name_generation_function,
-                        experiment):
+                        experiment,
+                        attachments_path):
     folder_name=experiment.name
     activity_column_name = colnames["Activity"]
     variant_column_name = colnames["Variant"]
@@ -196,7 +197,7 @@ def scenario_generation(scenarios_conf,
         version_subpath = folder_name+str(round(time.time() * 1000))
     else:
         version_subpath = "version"+str(round(time.time() * 1000))
-    database_name = prefix_scenario + version_subpath
+    # database_name = prefix_scenario + version_subpath
 
     # We established a common path to store all scenarios information 
     path = generate_path + sep + "resources" + sep + version_subpath
@@ -234,7 +235,7 @@ def scenario_generation(scenarios_conf,
                         os.makedirs(path + sep + scenario_iteration_path)
                         
                     if variate == 1:
-                            val = generate_scenario_capture(experiment,element,0,generate_path,key,variant,new_image,scenario_i)
+                            val = generate_scenario_capture(experiment,element,0,generate_path,key,variant,new_image,scenario_i,attachments_path)
                     elif variate == 0:
                         if initValue !="":
                             image_to_duplicate = path + sep + scenario_iteration_path + sep + scenario_iteration_path + "_" + select_last_item(element["image_to_duplicate"],sep)
@@ -278,27 +279,28 @@ def select_last_item(initValue, sep):
         new_init_value = splitted[len(splitted)-1]
     return new_init_value
 
-def execute_experiment(experiment, param_mode, number_scenarios, variability_conf, autogeneration_conf, scenarios_conf, generate_path, special_colnames, screenshot_name_generation_function):
-    if param_mode == "unique_scenario":
-        # database_name = "experiment_"+str(round(time.time() * 1000))+"_"
-        foldername = automatic_experiments(generate_path, special_colnames["Activity"], special_colnames["Variant"], special_colnames["Case"],
-                              special_colnames["Screenshot"], autogeneration_conf["balance"],
-                              autogeneration_conf["size_secuence"], None, screenshot_name_generation_function,experiment)
-    else:    
-        print(Back.GREEN + experiment.name)
-        print(Style.RESET_ALL)
-        foldername = scenario_generation(scenarios_conf, 
-                                         generate_path, 
-                                         number_scenarios, 
-                                         special_colnames, 
-                                         variability_conf, 
-                                         autogeneration_conf, 
-                                         screenshot_name_generation_function, 
-                                         experiment)
+def execute_experiment(experiment, param_mode, number_scenarios, variability_conf, autogeneration_conf, scenarios_conf, generate_path, special_colnames, attachments_path, screenshot_name_generation_function):
+    # if param_mode == "unique_scenario":
+    #     # database_name = "experiment_"+str(round(time.time() * 1000))+"_"
+    #     foldername = automatic_experiments(generate_path, special_colnames["Activity"], special_colnames["Variant"], special_colnames["Case"],
+    #                           special_colnames["Screenshot"], autogeneration_conf["balance"],
+    #                           autogeneration_conf["size_secuence"], None, screenshot_name_generation_function,experiment) # TODO: attachments_path
+    # else:    
+    print(Back.GREEN + experiment.name)
+    print(Style.RESET_ALL)
+    foldername = scenario_generation(scenarios_conf, 
+                                    generate_path, 
+                                    number_scenarios, 
+                                    special_colnames, 
+                                    variability_conf, 
+                                    autogeneration_conf, 
+                                    screenshot_name_generation_function, 
+                                    experiment,
+                                    attachments_path)
     return foldername
 
 def compress_experiment(experiment):
-    folder_path = split_name_system(foldername)       
+    folder_path = split_name_system(experiment.foldername)       
     zip_file = folder_path+".zip"
     if not os.path.exists(zip_file):
         zip_file = shutil.make_archive(folder_path, 'zip', os.path.abspath(folder_path))

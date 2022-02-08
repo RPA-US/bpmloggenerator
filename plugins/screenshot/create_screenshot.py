@@ -21,7 +21,7 @@ def generate_capture(experiment, columns_ui,columns,element,acu,case,generate_pa
         variante: if use the initial value or the generate
     '''    
     # actual_path = os.getcwd()
-    capture_path= element["initValue"]
+    capture_path = element["initValue"]
     args_tmp = element["args"]
     args = [generate_path,acu]
     #new_image = generate_screenshot_demo(args)
@@ -70,7 +70,7 @@ def generate_capture(experiment, columns_ui,columns,element,acu,case,generate_pa
         new_image = "NaN"
     return new_image
 
-def generate_scenario_capture(experiment,element,case,generate_path,activity,variant,new_image,scenario):
+def generate_scenario_capture(experiment,element,case,generate_path,activity,variant,new_image,scenario,attachments_path):
     '''
     Generate row reading the json
     args:
@@ -78,7 +78,7 @@ def generate_scenario_capture(experiment,element,case,generate_path,activity,var
         case: number of the case
         variante: if use the initial value or the generate
     '''
-    capture_path= element["initValue"]
+    capture_path = attachments_path + sep + element["initValue"]
     json_args = element["args"]
     args = [generate_path,case]
 

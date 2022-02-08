@@ -2,6 +2,11 @@ import json
 import random
 import os
 from agosuirpa.system_configuration import function_trace, element_trace
+import secrets
+import os
+import zipfile
+import shutil
+from agosuirpa.system_configuration import sep
 # from plugins.string.random_text_lorem import generate_DNI,generate_paragraph,generate_path,generate_random_entity,generate_sentence,generate_words
 # from plugins.list.coordenates_in_range import generate_mouse_position, generate_mouse_position_x,generate_mouse_position_y
 # from plugins.list.mouse_tipe import generate_mousekeyboard
@@ -47,3 +52,22 @@ def select_random_list(objects):
     '''
     index = random.randint(0,len(objects)-1)      
     return objects[index]
+
+
+def split_name_system(root_path):
+    if "/" in root_path:
+        splitted = root_path.split("/")
+    if "\\" in root_path:
+        splitted = root_path.split("\\")
+    if "/" in root_path or "\\" in root_path:
+        folder_path = sep.join(splitted)
+    else:
+        folder_path = root_path   
+    return folder_path  
+
+def upload_mockups(zip_path):
+    zip_path = split_name_system(zip_path)
+    path_without_fileextension = zip_path.split('.')[0] 
+    with zipfile.ZipFile(zip_path, 'r') as zip_file:
+        zip_file.extractall(path_without_fileextension)
+    return path_without_fileextension
