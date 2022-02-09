@@ -9,6 +9,11 @@ class ExperimentSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['size_balance', 'name', 'description', 'number_scenarios', 'variability_conf',
                   'generation_mode', 'special_colnames', 'screenshot_name_generation_function']
 
+class ExperimentCompleteSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Experiment
+        fields = ['size_balance', 'name', 'description', 'number_scenarios', 'variability_conf',
+                  'generation_mode', 'special_colnames', 'screenshot_name_generation_function',"screenshots","foldername"]
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
