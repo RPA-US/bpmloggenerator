@@ -12,7 +12,7 @@ from users.models import CustomUser
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core import serializers
-from experiments.serializers import ExperimentCompleteSerializer
+
 # from plugins.string.random_text_lorem import generate_DNI,generate_paragraph,generate_path,generate_random_entity,generate_sentence,generate_words
 # from plugins.list.coordenates_in_range import generate_mouse_position, generate_mouse_position_x,generate_mouse_position_y
 # from plugins.list.mouse_tipe import generate_mousekeyboard
@@ -85,13 +85,11 @@ def create_user_experiment(sender, instance, created, **kwargs):
         associate_experiment(user=instance)
 
 def associate_experiment(user):
-    serializer_class = ExperimentCompleteSerializer
 
     experiments = Experiment.objects.filter(user=user.id, is_active=True)
     if experiments == None or not experiments:
         data_complete = json.load(open('resources'+sep+'template_experiments'+sep+'experiments_template.json'))
         for data in data_complete['results']:
-            #experiment = ExperimentCompleteSerializer(data=data)
             size_balance=data['size_balance']
             name=data['name']
             description=data['description']
