@@ -12,32 +12,27 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-import sys
+
 import environ
+import django_heroku
+import dj_database_url
+import psycopg2
 from django.core.management.utils import get_random_secret_key
 
-# Initialise environment variables
+
 env = environ.Env()
+# reading .env file
 environ.Env.read_env()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'agosuirpa.herokuapp.com']
+ALLOWED_HOSTS = ['agosuirpa.herokuapp.com', '0.0.0.0', '127.0.0.1']
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DB_NAME =       env('DB_NAME')
-DB_HOST =       env('DB_HOST')
-DB_PORT =       env('DB_PORT')
-DB_USER =       env('DB_USER')
-DB_PASSWORD =   env('DB_PASSWORD')
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
+# SECRECT KEY
 SECRET_KEY = get_random_secret_key()
 
 # Application definition
@@ -64,6 +59,7 @@ INSTALLED_APPS = [
     'private_storage',
     'users', # Local App
     'experiments', # Local App
+    'whitenoise.runserver_nostatic', # Heroku cd apps
 ]
 
 MIDDLEWARE = [
@@ -103,21 +99,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'agosuirpa.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+db_from_env = dj_database_url.config()
+# DATABASES['default'].update(db_from_env)
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': DB_NAME,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
-    }
+    'default': db_from_env
     # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME':         env('DB_NAME'),
+    #     'HOST':         env('DB_HOST'),
+    #     'PORT':         env('DB_PORT'),
+    #     'USER':         env('DB_USER'),
+    #     'PASSWORD':     env('DB_PASSWORD'),
     # }
 }
 
@@ -140,7 +133,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -160,11 +152,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = True
+
 
 
 # ========== 3rd Party Apps: Additional functionality ==========
@@ -177,7 +175,7 @@ REST_FRAMEWORK = {
     # 'DATETIME_FORMAT': "%m/%d/%Y %I:%M%P",
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-    ],
+        ],
 }
 
 # - Drsf spectacular
@@ -233,3 +231,5 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
 # 1 day
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
+
+django_heroku.settings(locals())

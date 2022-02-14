@@ -176,7 +176,7 @@ REST_FRAMEWORK = {
     # 'DATETIME_FORMAT': "%m/%d/%Y %I:%M%P",
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-        ],
+    ],
 }
 
 # - Drsf spectacular
