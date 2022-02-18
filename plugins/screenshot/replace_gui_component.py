@@ -31,7 +31,10 @@ def replace_gui_element_by_other(args):
         id_element: id of the visual element to be inserted
         image_path_to_save: path where to save the image
     '''
-    if isinstance(args[0], list):
+    if len(args) > 4:
+        selected_element = args[4]
+        image_element = util.detect_element(selected_element)       
+    elif isinstance(args[0], list):
         selected_element = util.select_random_list(args[0])
         image_element = util.detect_element(selected_element)
     else:
@@ -40,9 +43,6 @@ def replace_gui_element_by_other(args):
     capture = args[2]
     coordenates = args[3]
 
-    if len(args) > 4:
-        selected_element = args[4]
-        image_element = util.detect_element(selected_element)       
 
     # Coordenates x and y
     left_top_x = coordenates[0]
@@ -105,14 +105,14 @@ def replace_gui_element_various_places(args):
         id_element: id of the visual element to be inserted
         image_path_to_save: path where to save the image
     '''
-    selected_element = util.select_random_list(args[0])
+    if len(args) > 4:
+        selected_element = args[4]
+    else:
+        selected_element = util.select_random_list(args[0])
     image_path_to_save = args[1]
     capture = args[2]
     coordenates = args[3]
 
-    if len(args) > 4:
-        selected_element = args[4]
-        
     image_element = util.detect_element(selected_element)
 
     # Open capture: can be abstracted not using replace_gui_element_and_save

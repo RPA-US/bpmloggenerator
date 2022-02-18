@@ -5,8 +5,8 @@ from agosuirpa.generic_utils import detect_function
 from agosuirpa.system_configuration import sep
 
 def manage_dependency(experiment, name, arguments, j, case, scenario, activity, variant):
-    if "dependency" in j:
-        dependant_row = Variations.objects.get(experiment=experiment, case_id=case, scenario=scenario, activity=j["dependency"]["Activity"], case_variation_id=j["dependency"]["id"], variant=j["dependency"]["V"])
+    if "args_dependency" in j:
+        dependant_row = Variations.objects.get(experiment=experiment, case_id=case, scenario=scenario, activity=j["args_dependency"]["Activity"], case_variation_id=j["args_dependency"]["id"], variant=j["args_dependency"]["V"])
         arguments.append(dependant_row.gui_element)                                
     image_element = util.detect_function(name)(arguments)
     if type(image_element) == str:

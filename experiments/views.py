@@ -93,7 +93,9 @@ class ExperimentView(generics.ListCreateAPIView):
         st = status.HTTP_201_CREATED
         msg = 'ok, created'
 
-        for data in ['size_balance', 'name', 'description', 'number_scenarios', 'variability_conf', 'generation_mode', 'screenshots', 'special_colnames', 'screenshot_name_generation_function']:
+        for data in ['size_balance', 'name', 'description', 'number_scenarios', 
+                     'variability_conf', 'generation_mode', 'screenshots', 
+                     'special_colnames', 'screenshot_name_generation_function']:
             if not data in request.data:
                 return Response({"message": "Incomplete data"}, status=status.HTTP_400_BAD_REQUEST)
 
