@@ -10,11 +10,11 @@ experiment_results_path = "CSV_exit"
 operating_system =sys.platform
 print("Operating system detected: " + operating_system)
 # Element specification filename and path separator (depends on OS)
-if "linux" in operating_system:
-    sep = "/"
-    element_trace = "configuration"+sep+"element_trace_linux.json"
-else:
+if "windows" in operating_system:
     sep = "\\"
     element_trace = "configuration"+sep+"element_trace.json"
+else:
+    sep = "/"
+    element_trace = "configuration"+sep+"element_trace_linux.json"
 # Function specification filename
 function_trace = "configuration"+sep+"function_trace.json"
