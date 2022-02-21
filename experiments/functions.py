@@ -199,7 +199,7 @@ def execute_experiment(experiment):
     autogeneration_conf = experiment.size_balance
     scenarios_conf = experiment.scenarios_conf
     colnames = experiment.special_colnames
-    attachments_path = experiment.path_without_fileextension
+    attachments_path = experiment.screenshots_path
     screenshot_name_generation_function = experiment.screenshot_name_generation_function
     generate_path = experiment_results_path
     

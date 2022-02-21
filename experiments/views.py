@@ -147,7 +147,7 @@ class ExperimentView(generics.ListCreateAPIView):
             msg = 'Some of atributes are invalid: ' + str(e)
             st = status.HTTP_422_UNPROCESSABLE_ENTITY
 
-        return Response(msg, status=st)
+        return Response({"message": msg, "id": experiment.id}, status=st)
 
    
    
