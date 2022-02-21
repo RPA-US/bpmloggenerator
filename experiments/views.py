@@ -12,8 +12,10 @@ from django.http import HttpResponse
 from django.http import FileResponse
 # from django.core.files.storage import FileSystemStorage
 import json
-from agosuirpa.system_configuration import generate_path, sep
+from agosuirpa.system_configuration import sep
 from agosuirpa.generic_utils import upload_mockups
+from django.shortcuts import get_object_or_404
+from experiments import serializers
 # class VariabilityTraceabilityViewSet(viewsets.ModelViewSet):
 #     queryset = VariabilityTraceability.objects.all()
 #     serializer_class = VariabilityTraceabilitySerializer
@@ -94,7 +96,7 @@ class ExperimentView(generics.ListCreateAPIView):
         msg = 'ok, created'
 
         for data in ['size_balance', 'name', 'description', 'number_scenarios', 
-                     'variability_conf', 'generation_mode', 'screenshots', 
+                     'variability_conf', 'screenshots',
                      'special_colnames', 'screenshot_name_generation_function']:
             if not data in request.data:
                 return Response({"message": "Incomplete data"}, status=status.HTTP_400_BAD_REQUEST)
@@ -106,20 +108,15 @@ class ExperimentView(generics.ListCreateAPIView):
 
         try:
             size_balance=json.loads(request.data.get('size_balance'))
-            number_scenarios=request.data.get('number_scenarios')
             name=request.data.get('name')
             description=request.data.get('description')
             number_scenarios=int(request.data.get('number_scenarios'))
             variability_conf=json.loads(request.data.get('variability_conf'))
             scenarios_conf=json.loads(request.data.get('scenarios_conf'))
-            generation_mode=request.data.get('generation_mode')
             screenshots=request.data.get('screenshots')
             special_colnames=json.loads(request.data.get('special_colnames'))
             screenshot_name_generation_function=request.data.get('screenshot_name_generation_function')
-            
-            # fs = FileSystemStorage()
-            # name = fs.save(uploaded_file.name, uploaded_file)
-
+            execute_mode=request.data.get('execute_mode')
             
             experiment = Experiment(
                 size_balance=size_balance,
@@ -127,35 +124,24 @@ class ExperimentView(generics.ListCreateAPIView):
                 description=description,
                 number_scenarios=number_scenarios,
                 variability_conf=variability_conf,
-                generation_mode=generation_mode,
+                scenarios_conf=scenarios_conf,
                 special_colnames=special_colnames,
                 screenshots=screenshots,
-                is_being_processed=True,
-                is_active=False,
                 user=user,
                 screenshot_name_generation_function=screenshot_name_generation_function
             )
-            
-            
             experiment.save()
+            
             path_without_fileextension = upload_mockups('privatefiles'+sep+experiment.screenshots.name)
-            foldername = execute_experiment(experiment,
-                                generation_mode,
-                                number_scenarios,
-                                variability_conf,
-                                size_balance,
-                                scenarios_conf,
-                                generate_path,
-                                special_colnames,
-                                path_without_fileextension,
-                                screenshot_name_generation_function)
-            
-            
-            experiment.is_being_processed=False
-            experiment.is_active=True
-            experiment.foldername=foldername
+            experiment.screenshots_path=path_without_fileextension
             experiment.save()
             
+            if execute_mode:
+                foldername = execute_experiment(experiment)
+                experiment.is_being_processed=100
+                experiment.is_active=True
+                experiment.foldername=foldername
+                experiment.save()
 
         except Exception as e:
             msg = 'Some of atributes are invalid: ' + str(e)
@@ -163,6 +149,45 @@ class ExperimentView(generics.ListCreateAPIView):
 
         return Response(msg, status=st)
 
+   
+   
+class ExperimentUpdate(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = ExperimentSerializer
+    queryset = Experiment.objects.all()
+    lookup_field = 'id'
+    
+    def put(self, request, id, *args, **kwars):
+        experiment = get_object_or_404(Experiment, user=request.user, pk=id)
+        st = status.HTTP_200_OK
+        msg = 'Executed'
+
+        try:
+            if experiment.is_being_processed==100:
+                msg = 'Experiment have been already executed'
+            else:    
+                foldername = execute_experiment(experiment)
+                experiment.is_being_processed=100
+                experiment.is_active=True
+                experiment.foldername=foldername
+                experiment.save()
+        except Exception as e:
+            msg = 'Some of atributes are invalid' + str(e)
+            st = status.HTTP_422_UNPROCESSABLE_ENTITY
+
+        return Response(msg, status=st)
+        
+    def delete(self, request, id, *args, **kwars):
+        st = status.HTTP_200_OK
+        msg = 'deleted'
+
+        try:
+            experiment = get_object_or_404(Experiment, pk=id, user=request.user.id)
+            experiment.delete()
+        except Exception as e:
+            msg = 'Cannot delete experiment: ' + str(e)
+            st = status.HTTP_409_CONFLICT
+
+        return Response(msg, status=st)
 
 class SmallPagesPagination(PageNumberPagination):
     page_size = 8
@@ -196,16 +221,17 @@ class DownloadExperiment(generics.RetrieveAPIView):
                 return Response({"message": "No user found"}, status=status.HTTP_404_NOT_FOUND)
             #user=user.id, dentro cuando pueda hacer experimentos 
             try:
-                experiment = Experiment.objects.get(user=user.id,id=kwargs["pk"])    
-            except:
-                return Response({"message": "No experiment found"}, status=status.HTTP_404_NOT_FOUND)    
+                experiment = Experiment.objects.get(user=user.id, is_being_processed=100, id=kwargs["pk"])    
+            except Exception as e:
+                return Response({"message": "No experiment found: " + str(e)}, status=status.HTTP_404_NOT_FOUND)    
+            
             try:        
                 zip_experiment = compress_experiment(experiment)
                 filename = experiment.name+".zip"
                 response = FileResponse(open(zip_experiment, 'rb'))
                 response['Content-Disposition'] = 'attachment; filename="%s"' % filename  
-            except:
-                return Response({"message": "Experiment error try another"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+            except Exception as e:
+                return Response({"message": "Experiment error: " + str(e)}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
             return response
         else:
             return Response({"message": "No user valid"}, status=status.HTTP_401_UNAUTHORIZED)

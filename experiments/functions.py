@@ -11,7 +11,7 @@ from colorama import Back,Style, Fore
 from plugins.screenshot.create_screenshot import generate_capture, generate_scenario_capture
 from plugins.screenshot.replace_gui_component import generate_copied_capture_without_root, generate_copied_capture
 from agosuirpa.generic_utils import detect_function, split_name_system
-from agosuirpa.system_configuration import sep
+from agosuirpa.system_configuration import sep, experiment_results_path
 
 def validation_params(json,number_logs,percent_per_trace):   
     '''
@@ -68,9 +68,9 @@ def generate_row(generate_path,dict,acu,case,variant, screenshot_column_name, sc
                             else:
                                 val = initValue 
                         else:
-                            val="NaN"
+                            val=""
                 else:
-                    val="NaN"
+                    val=""
             attr.append(val)
         rows.append(tuple([case,key,variant] + attr))
     return rows,acu
@@ -177,15 +177,35 @@ def automatic_experiments(generate_path, activity_column_name, variant_column_na
     return version_path
 
 
-def scenario_generation(scenarios_conf, 
-                        generate_path, 
-                        scenario_size, 
-                        colnames, 
-                        variability_conf,
-                        autogeneration_conf, 
-                        screenshot_name_generation_function,
-                        experiment,
-                        attachments_path):
+
+def select_last_item(initValue, sep):
+    new_init_value = initValue
+    if sep in initValue:
+        splitted = initValue.split(sep)
+        new_init_value = splitted[len(splitted)-1]
+    return new_init_value
+
+def compress_experiment(experiment):
+    folder_path = split_name_system(experiment.foldername)       
+    zip_file = folder_path+".zip"
+    if not os.path.exists(zip_file):
+        zip_file = shutil.make_archive(folder_path, 'zip', os.path.abspath(folder_path))
+    return zip_file
+
+
+def execute_experiment(experiment):
+    scenario_size = experiment.number_scenarios
+    variability_conf = experiment.variability_conf
+    autogeneration_conf = experiment.size_balance
+    scenarios_conf = experiment.scenarios_conf
+    colnames = experiment.special_colnames
+    attachments_path = experiment.path_without_fileextension
+    screenshot_name_generation_function = experiment.screenshot_name_generation_function
+    generate_path = experiment_results_path
+    
+    print(Back.GREEN + experiment.name)
+    print(Style.RESET_ALL)
+    
     folder_name=experiment.name
     activity_column_name = colnames["Activity"]
     variant_column_name = colnames["Variant"]
@@ -203,7 +223,6 @@ def scenario_generation(scenarios_conf,
     path = generate_path + sep + "resources" + sep + version_subpath
     if not os.path.exists(path):
         os.makedirs(path)
-    
     
     # Scenario variability: screenshot seeds to later generate case variability are generated 
     image_names_conf = {}
@@ -241,7 +260,7 @@ def scenario_generation(scenarios_conf,
                             image_to_duplicate = path + sep + scenario_iteration_path + sep + scenario_iteration_path + "_" + select_last_item(element["image_to_duplicate"],sep)
                             val = generate_copied_capture([image_to_duplicate,path + sep + scenario_iteration_path + sep,scenario_iteration_path + "_" +new_init_value])
                         else:
-                            val="NaN"
+                            val=""
                     original_json["trace"][str(variant)][key][screenshot_column_name]["initValue"] = str(val)
             
         # Serializing json 
@@ -270,38 +289,3 @@ def scenario_generation(scenarios_conf,
                             prefix_scenario+str(index), screenshot_name_generation_function,experiment,folder_name)
         
     return path
-
-
-def select_last_item(initValue, sep):
-    new_init_value = initValue
-    if sep in initValue:
-        splitted = initValue.split(sep)
-        new_init_value = splitted[len(splitted)-1]
-    return new_init_value
-
-def execute_experiment(experiment, param_mode, number_scenarios, variability_conf, autogeneration_conf, scenarios_conf, generate_path, special_colnames, attachments_path, screenshot_name_generation_function):
-    # if param_mode == "unique_scenario":
-    #     # database_name = "experiment_"+str(round(time.time() * 1000))+"_"
-    #     foldername = automatic_experiments(generate_path, special_colnames["Activity"], special_colnames["Variant"], special_colnames["Case"],
-    #                           special_colnames["Screenshot"], autogeneration_conf["balance"],
-    #                           autogeneration_conf["size_secuence"], None, screenshot_name_generation_function,experiment) # TODO: attachments_path
-    # else:    
-    print(Back.GREEN + experiment.name)
-    print(Style.RESET_ALL)
-    foldername = scenario_generation(scenarios_conf, 
-                                    generate_path, 
-                                    number_scenarios, 
-                                    special_colnames, 
-                                    variability_conf, 
-                                    autogeneration_conf, 
-                                    screenshot_name_generation_function, 
-                                    experiment,
-                                    attachments_path)
-    return foldername
-
-def compress_experiment(experiment):
-    folder_path = split_name_system(experiment.foldername)       
-    zip_file = folder_path+".zip"
-    if not os.path.exists(zip_file):
-        zip_file = shutil.make_archive(folder_path, 'zip', os.path.abspath(folder_path))
-    return zip_file

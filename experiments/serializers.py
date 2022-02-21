@@ -6,8 +6,8 @@ from .models import Experiment, VariabilityTraceability, Generator, GUIComponent
 class ExperimentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Experiment
-        fields = ['size_balance', 'name', 'description', 'number_scenarios', 'variability_conf',
-                  'generation_mode', 'special_colnames', 'screenshot_name_generation_function']
+        fields = ['id', 'created_at','size_balance','name','description','number_scenarios','variability_conf','scenarios_conf','special_colnames','is_being_processed','is_active','screenshots_path','foldername','screenshot_name_generation_function']
+
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

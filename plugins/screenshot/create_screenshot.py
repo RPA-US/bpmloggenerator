@@ -57,17 +57,15 @@ def generate_capture(experiment, columns_ui,columns,element,acu,case,generate_pa
                             
                             manage_dependency(experiment, name, arguments, j, case, 0, activity, variant)
                         else:
-                            new_image="NaN"
+                            new_image=""
                         arguments = []
             except Exception as e:
-                # print("Unexpected error: print in create_screenshot.py line 62")
-                # print(e)
+                # print("Unexpected error: " + str(e)) // TODO
                 arguments = []
     except Exception as e:
-        print("Unexpected error: print in create_screenshot.py line 66")
+        print("Unexpected error: " + str(e))
         # func = args_tmp[i] or content = attr[ind_text]: list out of range
-        print(e)
-        new_image = "NaN"
+        new_image = ""
     return new_image
 
 def generate_scenario_capture(experiment,element,case,generate_path,activity,variant,new_image,scenario,attachments_path):
@@ -105,7 +103,7 @@ def generate_scenario_capture(experiment,element,case,generate_path,activity,var
                 
                 manage_dependency(experiment, name, arguments, variation_conf, case, scenario, activity, variant)
             else:
-                new_image="NaN"
+                new_image=""
             arguments = []
     
     return new_image

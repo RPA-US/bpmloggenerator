@@ -3,7 +3,7 @@ import sys
 # AGOSUIRPA API version
 API_VERSION = 'api/v1/'
 
-generate_path = "CSV_exit"
+experiment_results_path = "CSV_exit"
 
 # AGOSUIRPA platform settings
 # OS 

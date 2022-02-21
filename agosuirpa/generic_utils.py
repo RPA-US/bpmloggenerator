@@ -95,7 +95,6 @@ def associate_experiment(user):
             description=data['description']
             number_scenarios=int(data['number_scenarios'])
             variability_conf=data['variability_conf']
-            generation_mode=data['generation_mode']
             screenshots=data['screenshots']
             special_colnames=data['special_colnames']
             screenshot_name_generation_function=data['screenshot_name_generation_function']
@@ -107,7 +106,6 @@ def associate_experiment(user):
                 description=description,
                 number_scenarios=number_scenarios,
                 variability_conf=variability_conf,
-                generation_mode=generation_mode,
                 special_colnames=special_colnames,
                 screenshots=screenshots,
                 foldername=foldername,

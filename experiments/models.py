@@ -23,15 +23,14 @@ class Experiment(models.Model):
     description = models.CharField(max_length=255)
     number_scenarios = models.IntegerField()
     variability_conf = models.JSONField()
-    generation_mode = models.CharField(max_length=255)
-    # autogeneration_conf
-    # autogeneration_conf_family 
-    foldername = models.CharField(null=True, blank=True, max_length=255)
+    scenarios_conf = models.JSONField(null=True, blank=True)
     special_colnames = models.JSONField()
     screenshot_name_generation_function = models.CharField(max_length=255)
-    is_being_processed=models.BooleanField(default=True)
+    is_being_processed=models.IntegerField(default=0)
     is_active=models.BooleanField(default=True)
     screenshots = PrivateFileField("Screenshots")
+    screenshots_path = models.CharField(null=True, blank=True, max_length=255)
+    foldername = models.CharField(null=True, blank=True, max_length=255)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='ExperimentOwner')
     
     def __str__(self):
