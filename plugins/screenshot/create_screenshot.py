@@ -12,7 +12,7 @@ def manage_dependency(experiment, name, arguments, j, case, scenario, activity, 
     if type(image_element) == str:
         Variations.objects.create(experiment=experiment, case_id=case, scenario=scenario, case_variation_id=j["id"], activity=activity, variant=variant, function_name=name, gui_element=image_element)
 
-def generate_capture(experiment, columns_ui,columns,element,acu,case,generate_path,attr, activity, variant, screenshot_name_generation_function):
+def generate_capture(experiment, columns_ui, columns, element, acu, case, generate_path, attr, activity, variant):
     '''
     Generate row reading the json
     args:
@@ -25,7 +25,7 @@ def generate_capture(experiment, columns_ui,columns,element,acu,case,generate_pa
     args_tmp = element["args"]
     args = [generate_path,acu]
     #new_image = generate_screenshot_demo(args)
-    new_image = detect_function(screenshot_name_generation_function)(args)
+    new_image = detect_function(experiment.screenshot_name_generation_function)(args)
     try:
         for i in columns_ui:
             try:

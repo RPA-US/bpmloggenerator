@@ -1,11 +1,9 @@
 import csv
 import os
-import sys
 import time
 import json
 import random
 import json
-import zipfile
 import shutil
 from colorama import Back,Style, Fore
 from plugins.screenshot.create_screenshot import generate_capture, generate_scenario_capture
@@ -31,7 +29,7 @@ def validation_params(json,number_logs,percent_per_trace):
 
 
 
-def generate_row(generate_path,dict,acu,case,variant, screenshot_column_name, screenshot_name_generation_function,experiment):
+def generate_row(experiment, generate_path, dict, acu, case, variant):
     '''
     Generate row reading the json
     args:
@@ -39,6 +37,8 @@ def generate_row(generate_path,dict,acu,case,variant, screenshot_column_name, sc
         acu: number of the case
         variante: if use the initial value or the generate
     '''
+    screenshot_column_name = experiment.special_colnames["Screenshot"]
+    
     rows = []
     columns= dict["columnsNames"]
     columns_ui= dict["GUIElements"]
@@ -58,12 +58,14 @@ def generate_row(generate_path,dict,acu,case,variant, screenshot_column_name, sc
                                         
                     if variate == 1:
                         if i==screenshot_column_name:
-                            val = generate_capture(experiment, columns_ui,columns,element,acu,case,generate_path,attr, key, variant, screenshot_name_generation_function)
+                            val = generate_capture(experiment, columns_ui, columns, element, acu, case, generate_path, attr, key, variant)
                         else:
                             val = detect_function(name)(args)
                     elif variate == 0:
                         if initValue !="":
                             if i==screenshot_column_name:
+                                if experiment.number_scenarios == 0:
+                                    initValue = experiment.screenshots_path + sep + initValue
                                 val = generate_copied_capture_without_root([initValue,generate_path,acu])
                             else:
                                 val = initValue 
@@ -112,7 +114,7 @@ def number_rows_by_number_of_activities(dict, number_logs, percent_per_trace):
         list_percents = [1]
     return list_percents
 
-def case_generation(json_log,generate_path,number_logs,percent_per_trace, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, screenshot_name_generation_function, path, experiment):
+def case_generation(experiment, json_log, generate_path, number_logs, percent_per_trace, path):
     '''
     The main function to generate logs for a case
         args:
@@ -121,13 +123,14 @@ def case_generation(json_log,generate_path,number_logs,percent_per_trace, activi
             number_logs: number of log case to generate
             percent_per_trace: percentage of cases for the two possible json traces
     '''
+    
+    activity_column_name = experiment.special_colnames["Activity"]
+    variant_column_name = experiment.special_colnames["Variant"]
+    case_column_name = experiment.special_colnames["Case"]
+    
     if validation_params(json_log,number_logs[1],percent_per_trace):
-        json_log = open(json_log)
-        json_act_path = json.load(json_log)
-        # json_act_path = json_log
-     
         if number_logs[0] == "log_size":
-            list_percents = number_rows_by_number_of_activities(json_act_path["trace"], number_logs[1], percent_per_trace)
+            list_percents = number_rows_by_number_of_activities(json_log["trace"], number_logs[1], percent_per_trace)
         else:
             list_percents = number_rows_by_cases(number_logs[1],percent_per_trace)
         
@@ -141,7 +144,7 @@ def case_generation(json_log,generate_path,number_logs,percent_per_trace, activi
         f = open(generate_path+"log.csv", 'w',newline='')
 
         writer = csv.writer(f)
-        columns = [case_column_name, activity_column_name, variant_column_name] + json_act_path["columnsNames"]
+        columns = [case_column_name, activity_column_name, variant_column_name] + json_log["columnsNames"]
         writer.writerow(tuple(columns))
         acu = 0
         case = 1
@@ -151,7 +154,8 @@ def case_generation(json_log,generate_path,number_logs,percent_per_trace, activi
     
         random.shuffle(total_variants)
         for variant in total_variants:
-            rows,acu = generate_row(generate_path,json_act_path,acu,case,variant,screenshot_column_name, screenshot_name_generation_function,experiment)
+            rows, acu = generate_row(experiment,
+                generate_path, json_log, acu, case, variant)
             case += 1
             for row in rows:
                 writer.writerow(row)
@@ -161,10 +165,17 @@ def case_generation(json_log,generate_path,number_logs,percent_per_trace, activi
     except:
         logging.warning("Json structure")'''
 
-def automatic_experiments(generate_path, activity_column_name, variant_column_name, case_column_name, screenshot_column_name, balance, size_secuence, variability_conf, scenario, screenshot_name_generation_function,experiment, folder_name):
+def automatic_experiments(experiment, generate_path, variability_conf, scenario):
+    folder_name = experiment.name
+    balance = experiment.size_balance["balance"]
+    size_secuence = experiment.size_balance["size_secuence"]
+    
     if scenario:
         version_path = generate_path + sep + scenario
+        json_log = open(variability_conf)
+        json_act_path = json.load(json_log)
     else: 
+        json_act_path = experiment.variability_conf
         version_path = generate_path + sep + "version"+str(round(time.time() * 1000))
         os.makedirs(version_path)
     
@@ -173,7 +184,7 @@ def automatic_experiments(generate_path, activity_column_name, variant_column_na
         for b in balance:
             size = ['log_size',i]
             output_path = version_path + sep + folder_name + "_" + str(i) + "_" + b + sep
-            case_generation(variability_conf, generate_path, size, balance[b], activity_column_name, variant_column_name, case_column_name, screenshot_column_name, screenshot_name_generation_function, output_path, experiment)
+            case_generation(experiment, json_act_path, generate_path, size, balance[b], output_path)
     return version_path
 
 
@@ -196,21 +207,15 @@ def compress_experiment(experiment):
 def execute_experiment(experiment):
     scenario_size = experiment.number_scenarios
     variability_conf = experiment.variability_conf
-    autogeneration_conf = experiment.size_balance
     scenarios_conf = experiment.scenarios_conf
-    colnames = experiment.special_colnames
     attachments_path = experiment.screenshots_path
-    screenshot_name_generation_function = experiment.screenshot_name_generation_function
     generate_path = experiment_results_path
+    screenshot_column_name = experiment.special_colnames["Screenshot"]
+    folder_name = experiment.name
     
     print(Back.GREEN + experiment.name)
     print(Style.RESET_ALL)
     
-    folder_name=experiment.name
-    activity_column_name = colnames["Activity"]
-    variant_column_name = colnames["Variant"]
-    case_column_name = colnames["Case"]
-    screenshot_column_name = colnames["Screenshot"]
     prefix_scenario = "scenario_"
     
     if folder_name:
@@ -232,13 +237,13 @@ def execute_experiment(experiment):
     n_scenario_seed_logs = []
     image_mapping = {}
     # Call scenario variation: "size" variations 
-    for scenario_i in range(0, scenario_size+1):
+    for scenario_i in range(1, scenario_size+1):
         scenario_iteration_path = prefix_scenario + str(scenario_i)
         image_names_conf[scenario_i] = {}
         # Loading json to modify
         original_json = variability_conf
         
-        for variant in range(1,len(list(autogeneration_conf["balance"].values())[0])+1):
+        for variant in range(1,len(list(experiment.size_balance["balance"].values())[0])+1):
             image_names_conf[scenario_i][variant] = {}
             json_list = scenario_json[str(variant)]
             for key in json_list:
@@ -280,12 +285,15 @@ def execute_experiment(experiment):
     
     # f = open(generate_path+"log.csv", 'w',newline='')
     # writer = csv.writer(f)
-    
-    # For each different scenario generate case variability as indicate in "trace" inside "json_case_variability"
-    for index, scenario_conf in enumerate(n_scenario_seed_logs):
-        print(Fore.GREEN + " Scenario " + str(index))
-        print(Style.RESET_ALL)
-        automatic_experiments(path, activity_column_name, variant_column_name, case_column_name, screenshot_column_name,  autogeneration_conf["balance"], autogeneration_conf["size_secuence"], scenario_conf, 
-                            prefix_scenario+str(index), screenshot_name_generation_function,experiment,folder_name)
+    if scenario_size > 0:
+        # For each different scenario generate case variability as indicate in "trace" inside "json_case_variability"
+        for index, scenario_conf in enumerate(n_scenario_seed_logs):
+            print(Fore.GREEN + " Scenario " + str(index))
+            print(Style.RESET_ALL)
+            automatic_experiments(experiment, path, scenario_conf, prefix_scenario+str(index))
+    else:
+            print(Fore.GREEN + " Single Experiment")
+            print(Style.RESET_ALL)
+            automatic_experiments(experiment, path, experiment.variability_conf, None)
         
     return path
