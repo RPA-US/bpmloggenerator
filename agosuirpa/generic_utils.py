@@ -111,7 +111,7 @@ def associate_experiment(user):
                 special_colnames=special_colnames,
                 screenshots=screenshots,
                 foldername=foldername,
-                is_being_processed=False,
+                is_being_processed=100,
                 is_active=True,
                 user=user,
                 screenshot_name_generation_function=screenshot_name_generation_function,
