@@ -85,10 +85,10 @@ def create_user_experiment(sender, instance, created, **kwargs):
         associate_experiment(user=instance)
 
 def associate_experiment(user):
-
+    basic_path_template_experiments='resources'+sep+'template_experiments'+sep
     experiments = Experiment.objects.filter(user=user.id, is_active=True)
     if experiments == None or not experiments:
-        data_complete = json.load(open('resources'+sep+'template_experiments'+sep+'experiments_template.json'))
+        data_complete = json.load(open(basic_path_template_experiments+'experiments_template.json'))
         for data in data_complete['results']:
             size_balance=data['size_balance']
             name=data['name']
@@ -99,8 +99,10 @@ def associate_experiment(user):
             special_colnames=data['special_colnames']
             screenshot_name_generation_function=data['screenshot_name_generation_function']
             foldername=data['foldername']
+            scenarios_conf=data['scenarios_conf']
 
             experiment = Experiment(
+                scenarios_conf=scenarios_conf,
                 size_balance=size_balance,
                 name=name,
                 description=description,
@@ -112,8 +114,8 @@ def associate_experiment(user):
                 is_being_processed=False,
                 is_active=True,
                 user=user,
-                screenshot_name_generation_function=screenshot_name_generation_function
+                screenshot_name_generation_function=screenshot_name_generation_function,
+                screenshots_path=basic_path_template_experiments+(screenshots)
             )
             experiment.user=user
             experiment.save()
-
