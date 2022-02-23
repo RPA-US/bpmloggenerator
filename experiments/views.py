@@ -1,79 +1,27 @@
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework import generics, viewsets, permissions, status
+from rest_framework import generics, status, viewsets #, permissions
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
-from .models import Experiment, VariabilityTraceability, VariabilityConfiguration, VariabilityFunction, VariabilityFunctionCategory, ExecutionConfiguration, ExecutionResult, GUIComponent, GUIComponentCategory, Generator
-from .serializers import ExperimentSerializer, VariabilityTraceabilitySerializer, VariabilityConfigurationSerializer, VariabilityFunctionSerializer, VariabilityFunctionCategorySerializer, ExecutionConfigurationSerializer, ExecutionResultSerializer, GUIComponentSerializer, GUIComponentCategorySerializer, GeneratorSerializer
+from .models import Experiment, Variations
+from .serializers import ExperimentSerializer, VariationsSerializer
 from users.models import CustomUser
 from .functions import execute_experiment, compress_experiment
-from django.http import HttpResponse
-from django.http import FileResponse
+# from django.http import HttpResponse
 # from django.core.files.storage import FileSystemStorage
+from django.http import FileResponse
 import json
 from agosuirpa.system_configuration import sep
 from agosuirpa.generic_utils import upload_mockups
 from django.shortcuts import get_object_or_404
-from experiments import serializers
-# class VariabilityTraceabilityViewSet(viewsets.ModelViewSet):
-#     queryset = VariabilityTraceability.objects.all()
-#     serializer_class = VariabilityTraceabilitySerializer
 
 
-# class GeneratorViewSet(viewsets.ModelViewSet):
-#     queryset = Generator.objects.all()
-#     serializer_class = GeneratorSerializer
-
-
-# class ExecutionResultViewSet(viewsets.ModelViewSet):
-#     queryset = ExecutionResult.objects.all()
-#     serializer_class = ExecutionResultSerializer
-
-
-# class ExecutionConfigurationViewSet(viewsets.ModelViewSet):
-#     queryset = ExecutionConfiguration.objects.all()
-#     serializer_class = ExecutionConfigurationSerializer
-
-
-# class VariabilityConfigurationViewSet(viewsets.ModelViewSet):
-#     queryset = VariabilityConfiguration.objects.all()
-#     serializer_class = VariabilityConfigurationSerializer
-
-
-# class VariabilityTraceabilityViewSet(viewsets.ModelViewSet):
-#     queryset = VariabilityTraceability.objects.all()
-#     serializer_class = VariabilityTraceabilitySerializer
-
-
-# class GUIComponentCategoryViewSet(viewsets.ModelViewSet):
-#     queryset = GUIComponentCategory.objects.all()
-#     serializer_class = GUIComponentCategorySerializer
-
-
-# class VariabilityFunctionCategoryViewSet(viewsets.ModelViewSet):
-#     queryset = VariabilityFunctionCategory.objects.all()
-#     serializer_class = VariabilityFunctionCategorySerializer
-
-
-# class GUIComponentViewSet(viewsets.ModelViewSet):
-#     queryset = GUIComponent.objects.all()
-#     serializer_class = GUIComponentSerializer
-
-
-# class VariabilityFunctionViewSet(viewsets.ModelViewSet):
-#     queryset = VariabilityFunction.objects.all()
-#     serializer_class = VariabilityFunctionSerializer
-
-
-# class VariabilityTraceabilityList(generics.ListCreateAPIView):
-#     queryset = VariabilityTraceability.objects.all()
-#     serializer_class = VariabilityTraceabilitySerializer
-
-# class VariabilityTraceabilityDetail(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = VariabilityTraceability.objects.all()
-#     serializer_class = VariabilityTraceabilitySerializer
-
+class VariationsViewSet(viewsets.ModelViewSet):
+    # permission_classes = [IsAuthenticatedUser]
+    queryset = Variations.objects.all()
+    serializer_class = VariationsSerializer
+    
 class ExperimentView(generics.ListCreateAPIView):
     # permission_classes = [IsAuthenticatedUser]
     serializer_class = ExperimentSerializer

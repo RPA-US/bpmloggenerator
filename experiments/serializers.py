@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User, Group
-from .models import Experiment, VariabilityTraceability, Generator, GUIComponent, GUIComponentCategory, VariabilityConfiguration, VariabilityFunction, VariabilityFunctionCategory, ExecutionConfiguration, ExecutionResult
+from .models import Experiment, Variations
 
 
 class ExperimentSerializer(serializers.HyperlinkedModelSerializer):
@@ -21,71 +21,14 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 
-class VariabilityTraceabilitySerializer(serializers.ModelSerializer):
+class VariationsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = VariabilityTraceability
-        fields = ('case_id',
+        model = Variations
+        fields = ('case_variation_id',
+                  'case_id',
                   'scenario',
-                  'case_variation_id',
                   'activity',
                   'variant',
                   'function_name',
-                  'gui_element')
-
-
-class GeneratorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Generator
-        fields = ['created_at', 'function_name',
-                  'filename', 'path', 'description', 'owner', ]
-
-
-class ExecutionResultSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ExecutionResult
-        fields = ['scenario_id', 'family', 'size', 'balance', 'generator']
-
-
-class ExecutionConfigurationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ExecutionConfiguration
-        fields = ['path', 'generator']
-
-
-class VariabilityConfigurationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = VariabilityConfiguration
-        fields = ['path', 'is_scenario']
-
-
-class VariabilityTraceabilitySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = VariabilityTraceability
-        fields = ['case_id', 'scenario', 'case_variation_id',
-                  'activity', 'variant', 'function_name', 'gui_element']
-
-
-class GUIComponentCategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = GUIComponentCategory
-        fields = ['name']
-
-
-class VariabilityFunctionCategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = VariabilityFunctionCategory
-        fields = ['name']
-
-
-class GUIComponentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = GUIComponent
-        fields = ['id_code', 'filename', 'path',
-                  'description', 'gui_component_category']
-
-
-class VariabilityFunctionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = VariabilityFunction
-        fields = ['id_code', 'filename', 'path',
-                  'description', 'variability_function_category']
+                  'gui_element',
+                  'experiment')

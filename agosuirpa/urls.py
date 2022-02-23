@@ -16,30 +16,22 @@ Including another URLconf
 from .system_configuration import API_VERSION
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework import routers
 # from rest_framework.schemas import get_schema_view
-# from rest_framework import routers
 # from experiments import views
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
-# router = routers.DefaultRouter()
-# router.register(r"variations-traceability", views.VariabilityTraceabilityViewSet)
-# router.register(r"generator", views.GeneratorViewSet)
-# router.register(r"gui-component", views.GUIComponentViewSet)
-# router.register(r"category-gui-component", views.GUIComponentCategoryViewSet)
-# router.register(r"variability-configuration", views.VariabilityConfigurationViewSet)
-# router.register(r"variability-function", views.VariabilityFunctionViewSet)
-# router.register(r"category-variability-function", views.VariabilityFunctionCategoryViewSet)
-# router.register(r"execution-configuration", views.ExecutionConfigurationViewSet)
-# router.register(r"execution-result", views.ExecutionResultViewSet)
+router = routers.DefaultRouter()
 
 urlpatterns = [
-    # path(API_VERSION, include(router.urls)),
     path(API_VERSION+'admin/', admin.site.urls),
     path(API_VERSION+'users/', include('users.urls')),
     path(API_VERSION+'experiments/', include('experiments.urls')),
+    path(API_VERSION+'wizard/', include('wizard.urls')),
     path(API_VERSION+'api-auth/', include("rest_framework.urls", namespace="rest_framework")),
     path(API_VERSION+'schema/', SpectacularAPIView.as_view(), name="schema"),
     # Optional UI:
     path(API_VERSION+'docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path(API_VERSION+'redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    path(API_VERSION, include(router.urls)),
 ]

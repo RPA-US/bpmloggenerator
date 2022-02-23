@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'private_storage',
     'users', # Local App
     'experiments', # Local App
+    'wizard', # Local App
 ]
 
 MIDDLEWARE = [

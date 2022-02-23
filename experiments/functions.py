@@ -178,7 +178,7 @@ def automatic_experiments(experiment, generate_path, variability_conf, scenario)
     else:
         original_experiment = True
         json_act_path = experiment.variability_conf
-        version_path = generate_path + sep + "single_experiment"+str(round(time.time() * 1000))
+        version_path = generate_path + sep + "sc0"
         os.makedirs(version_path)
     
     # os.system("cd " + param_path_log_generator)
@@ -232,7 +232,7 @@ def execute_experiment(experiment):
         os.makedirs(path)
     
     # Original Experiment Generation
-    print(Fore.GREEN + " Single Experiment")
+    print(Fore.GREEN + " Original Experiment")
     print(Style.RESET_ALL)
     automatic_experiments(experiment, path, experiment.variability_conf, None)
     
