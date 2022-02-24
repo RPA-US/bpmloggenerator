@@ -123,7 +123,7 @@ def case_generation(experiment, json_log, generate_path, number_logs, percent_pe
             number_logs: number of log case to generate
             percent_per_trace: percentage of cases for the two possible json traces
     '''
-    
+    generate_path = path
     activity_column_name = experiment.special_colnames["Activity"]
     variant_column_name = experiment.special_colnames["Variant"]
     case_column_name = experiment.special_colnames["Case"]
@@ -141,6 +141,8 @@ def case_generation(experiment, json_log, generate_path, number_logs, percent_pe
             generate_path += sep+str(round(time.time() * 1000))+"logs"+sep
         if not os.path.exists(generate_path):
             os.makedirs(generate_path)
+
+        # Generate CSV
         f = open(generate_path+"log.csv", 'w',newline='')
 
         writer = csv.writer(f)
@@ -166,7 +168,6 @@ def case_generation(experiment, json_log, generate_path, number_logs, percent_pe
         logging.warning("Json structure")'''
 
 def automatic_experiments(experiment, generate_path, variability_conf, scenario):
-    folder_name = experiment.name.replace(" ", "_")
     balance = experiment.size_balance["balance"]
     size_secuence = experiment.size_balance["size_secuence"]
     
@@ -178,15 +179,15 @@ def automatic_experiments(experiment, generate_path, variability_conf, scenario)
     else:
         original_experiment = True
         json_act_path = experiment.variability_conf
-        version_path = generate_path + sep + "sc0"
-        os.makedirs(version_path)
+        version_path = generate_path + sep + "sc_0"
+        # os.makedirs(version_path)
     
     # os.system("cd " + param_path_log_generator)
     for i in size_secuence:
-        for b in balance:
+        for bal_imb in balance:
             size = ['log_size',i]
-            output_path = version_path + sep + folder_name + "_" + str(i) + "_" + b + sep
-            case_generation(experiment, json_act_path, generate_path, size, balance[b], output_path, original_experiment)
+            output_path = version_path + "_size" + str(i) + "_" + bal_imb + sep
+            case_generation(experiment, json_act_path, generate_path, size, balance[bal_imb], output_path, original_experiment)
     return version_path
 
 
@@ -214,25 +215,22 @@ def execute_experiment(experiment):
     generate_path = experiment_results_path
     screenshot_column_name = experiment.special_colnames["Screenshot"]
     folder_name = experiment.name.replace(" ", "_")
+    prefix_scenario = "sc_"
     
     print(Back.GREEN + experiment.name)
     print(Style.RESET_ALL)
-    
-    prefix_scenario = "scenario_"
-    
-    if folder_name:
-        version_subpath = folder_name + str(round(time.time() * 1000))
-    else:
-        version_subpath = "experiment_version"+str(round(time.time() * 1000))
-    # database_name = prefix_scenario + version_subpath
 
     # We established a common path to store all scenarios information 
-    path = generate_path + sep + version_subpath
+    path = generate_path + sep + folder_name + "_" + str(experiment.id)
     if not os.path.exists(path):
         os.makedirs(path)
+        
+    resources_folder = path + sep + "resources"
+    if not os.path.exists(resources_folder):
+        os.makedirs(resources_folder)
     
     # Original Experiment Generation
-    print(Fore.GREEN + " Original Experiment")
+    print(Fore.GREEN + "=> Original Experiment")
     print(Style.RESET_ALL)
     automatic_experiments(experiment, path, experiment.variability_conf, None)
     
@@ -246,14 +244,14 @@ def execute_experiment(experiment):
         n_scenario_seed_logs = []
         image_mapping = {}
         # Call scenario variation: "size" variations 
-        for scenario_i in range(0, scenario_size):
+        for scenario_i in range(1, scenario_size+1):
             scenario_iteration_path = prefix_scenario + str(scenario_i)
-            image_names_conf[scenario_i] = {}
+            image_names_conf[scenario_i-1] = {}
             # Loading json to modify
             original_json = variability_conf
             
             for variant in range(1,len(list(experiment.size_balance["balance"].values())[0])+1):
-                image_names_conf[scenario_i][variant] = {}
+                image_names_conf[scenario_i-1][variant] = {}
                 json_list = scenario_json[str(variant)]
                 for key in json_list:
                     element = json_list[key][screenshot_column_name]
@@ -261,18 +259,15 @@ def execute_experiment(experiment):
                         initValue = element["initValue"]
                         variate = element["variate"]
                         
-                        new_init_value = select_last_item(initValue, sep)
-                        
-                        new_image = path + sep + scenario_iteration_path + sep + scenario_iteration_path + "_" +new_init_value
-                        if not os.path.exists(path + sep + scenario_iteration_path):
-                            os.makedirs(path + sep + scenario_iteration_path)
+                        image_prefix = resources_folder + sep + scenario_iteration_path + "_"
+                        init_value_original_screenshot = select_last_item(initValue, sep)
                             
                         if variate == 1:
-                                val = generate_scenario_capture(experiment,element,0,generate_path,key,variant,new_image,scenario_i,attachments_path)
+                                val = generate_scenario_capture(experiment, element, 0, generate_path, key, variant, image_prefix + init_value_original_screenshot, scenario_i, attachments_path)
                         elif variate == 0:
                             if initValue !="":
-                                image_to_duplicate = path + sep + scenario_iteration_path + sep + scenario_iteration_path + "_" + select_last_item(element["image_to_duplicate"],sep)
-                                val = generate_copied_capture([image_to_duplicate,path + sep + scenario_iteration_path + sep,scenario_iteration_path + "_" +new_init_value])
+                                image_to_duplicate = image_prefix + select_last_item(element["image_to_duplicate"], sep)
+                                val = generate_copied_capture([image_to_duplicate, resources_folder + sep, scenario_iteration_path + "_" + init_value_original_screenshot])
                             else:
                                 val=""
                         original_json["trace"][str(variant)][key][screenshot_column_name]["initValue"] = str(val)
@@ -280,7 +275,7 @@ def execute_experiment(experiment):
             # Serializing json 
             json_to_write = json.dumps(original_json, indent = 4)
             # Writing to .json
-            filename = path + sep + prefix_scenario + str(scenario_i) + "_" + folder_name + ".json"
+            filename = resources_folder + sep + prefix_scenario + str(scenario_i) + ".json"
             with open(filename, "w") as outfile:
                 outfile.write(json_to_write)
             image_mapping = filename
@@ -297,8 +292,8 @@ def execute_experiment(experiment):
         
         # For each different scenario generate case variability as indicate in "trace" inside "json_case_variability"
         for index, scenario_conf in enumerate(n_scenario_seed_logs):
-            print(Fore.GREEN + " Scenario " + str(index))
+            print(Fore.GREEN + "=> Scenario " + str(index+1))
             print(Style.RESET_ALL)
-            automatic_experiments(experiment, path, scenario_conf, prefix_scenario+str(index))
+            automatic_experiments(experiment, path, scenario_conf, prefix_scenario + str(index+1))
             
     return path
