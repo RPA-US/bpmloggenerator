@@ -200,10 +200,11 @@ def select_last_item(initValue, sep):
     return new_init_value
 
 def compress_experiment(path, file_name):
-    folder_path = split_name_system(path) + sep + ui_logs_foldername
+    folder_path = split_name_system(path)
     zip_file = folder_path + sep + file_name + ".zip"
+    abs_path = os.path.abspath(folder_path + sep + ui_logs_foldername)
     if not os.path.exists(zip_file):
-        zip_file = shutil.make_archive(file_name, 'zip', os.path.abspath(folder_path))
+        zip_file = shutil.make_archive(zip_file, 'zip', abs_path)
     return zip_file
 
 def execute_experiment(experiment):
