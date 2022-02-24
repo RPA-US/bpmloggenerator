@@ -225,7 +225,7 @@ def execute_experiment(experiment):
     if not os.path.exists(path):
         os.makedirs(path)
         
-    resources_folder = path + sep + "resources"
+    resources_folder = path + sep + "additional_scenarios_resources"
     if not os.path.exists(resources_folder):
         os.makedirs(resources_folder)
     
