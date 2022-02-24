@@ -69,7 +69,7 @@ def split_name_system(root_path):
         folder_path = sep.join(splitted)
     else:
         folder_path = root_path   
-    return folder_path  
+    return folder_path
 
 def upload_mockups(zip_path):
     zip_path = split_name_system(zip_path)

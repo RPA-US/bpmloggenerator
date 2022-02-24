@@ -12,7 +12,7 @@ from .functions import execute_experiment, compress_experiment
 # from django.core.files.storage import FileSystemStorage
 from django.http import FileResponse
 import json
-from agosuirpa.system_configuration import sep
+from agosuirpa.system_configuration import sep, ui_logs_foldername
 from agosuirpa.generic_utils import upload_mockups
 from django.shortcuts import get_object_or_404
 
@@ -174,8 +174,8 @@ class DownloadExperiment(generics.RetrieveAPIView):
                 return Response({"message": "No experiment found: " + str(e)}, status=status.HTTP_404_NOT_FOUND)    
             
             try:        
-                zip_experiment = compress_experiment(experiment)
-                filename = experiment.name+".zip"
+                zip_experiment = compress_experiment(experiment.foldername, experiment.name.replace(" ", "_") + "_" + str(experiment.id))
+                filename = experiment.name.replace(" ", "_") + "_" + str(experiment.id) + ".zip"
                 response = FileResponse(open(zip_experiment, 'rb'))
                 response['Content-Disposition'] = 'attachment; filename="%s"' % filename  
             except Exception as e:

@@ -9,7 +9,7 @@ from colorama import Back,Style, Fore
 from plugins.screenshot.create_screenshot import generate_capture, generate_scenario_capture
 from plugins.screenshot.replace_gui_component import generate_copied_capture_without_root, generate_copied_capture
 from agosuirpa.generic_utils import detect_function, split_name_system
-from agosuirpa.system_configuration import sep, experiment_results_path
+from agosuirpa.system_configuration import sep, experiment_results_path, ui_logs_foldername, additional_scenarios_resources_foldername
 
 def validation_params(json,number_logs,percent_per_trace):   
     '''
@@ -199,13 +199,12 @@ def select_last_item(initValue, sep):
         new_init_value = splitted[len(splitted)-1]
     return new_init_value
 
-def compress_experiment(experiment):
-    folder_path = split_name_system(experiment.foldername)       
-    zip_file = folder_path+".zip"
+def compress_experiment(path, file_name):
+    folder_path = split_name_system(path) + sep + ui_logs_foldername
+    zip_file = folder_path + sep + file_name + ".zip"
     if not os.path.exists(zip_file):
-        zip_file = shutil.make_archive(folder_path, 'zip', os.path.abspath(folder_path))
+        zip_file = shutil.make_archive(file_name, 'zip', os.path.abspath(folder_path))
     return zip_file
-
 
 def execute_experiment(experiment):
     scenario_size = experiment.number_scenarios
@@ -221,11 +220,14 @@ def execute_experiment(experiment):
     print(Style.RESET_ALL)
 
     # We established a common path to store all scenarios information 
-    path = generate_path + sep + folder_name + "_" + str(experiment.id)
+    experiment_path = generate_path + sep + folder_name + "_" + str(experiment.id)
+    resources_folder = experiment_path + sep + additional_scenarios_resources_foldername
+    if not os.path.exists(experiment_path):
+        os.makedirs(experiment_path)
+    path = experiment_path + sep + ui_logs_foldername
     if not os.path.exists(path):
         os.makedirs(path)
         
-    resources_folder = path + sep + "additional_scenarios_resources"
     if not os.path.exists(resources_folder):
         os.makedirs(resources_folder)
     
@@ -292,8 +294,8 @@ def execute_experiment(experiment):
         
         # For each different scenario generate case variability as indicate in "trace" inside "json_case_variability"
         for index, scenario_conf in enumerate(n_scenario_seed_logs):
-            print(Fore.GREEN + "=> Scenario " + str(index+1))
+            print(Fore.GREEN + "\n=> Additional Scenario " + str(index+1))
             print(Style.RESET_ALL)
             automatic_experiments(experiment, path, scenario_conf, prefix_scenario + str(index+1))
             
-    return path
+    return experiment_path

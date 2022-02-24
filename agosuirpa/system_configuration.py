@@ -4,6 +4,8 @@ import sys
 API_VERSION = 'api/v1/'
 
 experiment_results_path = "CSV_exit"
+ui_logs_foldername = "UI_logs"
+additional_scenarios_resources_foldername = "additional_scenarios_resources"
 
 # AGOSUIRPA platform settings
 # OS 
