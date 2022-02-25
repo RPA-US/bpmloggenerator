@@ -30,13 +30,8 @@ class ExperimentView(generics.ListCreateAPIView):
         experiments = []
         if(user.is_anonymous is False):
             user = CustomUser.objects.get(id=self.request.user.id)
-            experiments = Experiment.objects.filter(user=user.id, is_active=True)
+            experiments = Experiment.objects.filter(user=user.id, is_active=True).order_by("-created_at")
         return experiments
-
-    def get(self, request, *args, **kwargs):
-        user = get_object_or_404(CustomUser, id=request.user.id)
-        experiment = get_object_or_404(Experiment, user=user.id, is_active=True, id=kwargs["id"])
-        return Response(ExperimentSerializer(experiment).data)
 
     def post(self, request, *args, **kwargs):
         st = status.HTTP_201_CREATED
@@ -88,9 +83,20 @@ class ExperimentView(generics.ListCreateAPIView):
 
         return Response({"message": msg, "id": experiment.id}, status=st)
 
+   
+class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = ExperimentSerializer
+    queryset = Experiment.objects.all()
+    lookup_field = 'id'
+    
+    def get(self, request, id, *args, **kwargs):
+        experiment = get_object_or_404(Experiment, user=request.user.id, id=id)
+        return Response(ExperimentSerializer(experiment).data)
+    
     def put(self, request, id, *args, **kwars):
         user = request.user
         st = status.HTTP_200_OK
+        msg = "Experiment updated"
         
         if(user.is_anonymous is False):
             user = get_object_or_404(CustomUser, id=request.user.id)
@@ -119,40 +125,6 @@ class ExperimentView(generics.ListCreateAPIView):
                 experiment.is_being_processed=100
                 experiment.is_active=True
                 experiment.status=ExperimentStatusChoice.LA.value
-            
-        else:
-            msg = "No user valid"
-            st=status.HTTP_401_UNAUTHORIZED
-        
-        return Response({"message": msg}, status=st)
-   
-class LaunchExperiment(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = ExperimentSerializer
-    queryset = Experiment.objects.all()
-    lookup_field = 'id'
-    
-    def put(self, request, id, *args, **kwars):
-        user = request.user
-        st = status.HTTP_200_OK
-        
-        if(user.is_anonymous is False):
-            user = get_object_or_404(CustomUser, id=request.user.id)
-            experiment = get_object_or_404(Experiment, user=user.id, is_being_processed=100, id=id)
-            
-            try:        
-                if experiment.is_being_processed==100:
-                    msg = 'Experiment have been already executed'
-                else:    
-                    foldername = execute_experiment(experiment)
-                    experiment.is_being_processed=100
-                    experiment.is_active=True
-                    experiment.foldername=foldername
-                    experiment.status=ExperimentStatusChoice.LA
-                    experiment.save()
-
-            except Exception as e:
-                msg = "Experiment launching error: " + str(e)
-                st=status.HTTP_422_UNPROCESSABLE_ENTITY
             
         else:
             msg = "No user valid"
