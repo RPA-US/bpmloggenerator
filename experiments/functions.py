@@ -4,11 +4,10 @@ import time
 import json
 import random
 import json
-import shutil
 from colorama import Back,Style, Fore
 from plugins.screenshot.create_screenshot import generate_capture, generate_scenario_capture
 from plugins.screenshot.replace_gui_component import generate_copied_capture_without_root, generate_copied_capture
-from agosuirpa.generic_utils import detect_function, split_name_system
+from agosuirpa.generic_utils import detect_function
 from agosuirpa.system_configuration import sep, experiment_results_path, ui_logs_foldername, additional_scenarios_resources_foldername
 
 def validation_params(json,number_logs,percent_per_trace):   
@@ -190,22 +189,12 @@ def automatic_experiments(experiment, generate_path, variability_conf, scenario)
             case_generation(experiment, json_act_path, generate_path, size, balance[bal_imb], output_path, original_experiment)
     return version_path
 
-
-
 def select_last_item(initValue, sep):
     new_init_value = initValue
     if sep in initValue:
         splitted = initValue.split(sep)
         new_init_value = splitted[len(splitted)-1]
     return new_init_value
-
-def compress_experiment(path, file_name):
-    folder_path = split_name_system(path)
-    zip_file = folder_path + sep + file_name + ".zip"
-    abs_path = os.path.abspath(folder_path + sep + ui_logs_foldername)
-    if not os.path.exists(zip_file):
-        zip_file = shutil.make_archive(zip_file, 'zip', abs_path)
-    return zip_file
 
 def execute_experiment(experiment):
     scenario_size = experiment.number_scenarios

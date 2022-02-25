@@ -1,3 +1,4 @@
+from email.mime import image
 from django.db import models
 from categories.models import CategoryBase
 from django.core.exceptions import ValidationError
@@ -68,3 +69,11 @@ class VariabilityFunction(models.Model):
         
     def __str__(self):
         return self.filename
+    
+    
+    # GUI Variation
+    #     image
+    #     coordenates
+    #     variability_function
+    #     gui_type
+    #     experiment
