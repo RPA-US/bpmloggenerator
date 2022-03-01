@@ -40,7 +40,7 @@ class Experiment(models.Model):
         return self.name
         
     def clean(self):
-        if self.status == ExperimentStatusChoice.PR:
+        if self.status == ExperimentStatusChoice.PR.value:
             if not hasattr(self, 'screenshots'):
                 raise ValidationError(
                     "To use wizard, experiment must contains its associated screenshots"

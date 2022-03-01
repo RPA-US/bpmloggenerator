@@ -62,7 +62,7 @@ class VariabilityFunction(models.Model):
     filename = models.CharField(max_length=255)
     path = models.CharField(max_length=255)
     description = models.TextField()
-    params = models.ManyToManyField(FunctionParam)
+    params = models.ManyToManyField(FunctionParam, blank=True)
     variability_function_category = models.ForeignKey(
         VariabilityFunctionCategory, on_delete=models.CASCADE, blank=True, null=True, limit_choices_to={'active': True},
     )

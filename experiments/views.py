@@ -49,18 +49,28 @@ class ExperimentView(generics.ListCreateAPIView):
             return Response({"message": "No user found"}, status=status.HTTP_404_NOT_FOUND)
 
         try:
-            experiment = Experiment(
-                size_balance=json.loads(request.data.get('size_balance')),
-                name=request.data.get('name'),
-                description=request.data.get('description'),
-                number_scenarios=int(request.data.get('number_scenarios')),
-                variability_conf=json.loads(request.data.get('variability_conf')),
-                scenarios_conf=json.loads(request.data.get('scenarios_conf')),
-                special_colnames=json.loads(request.data.get('special_colnames')),
-                screenshots=request.data.get('screenshots'),
-                user=user,
-                screenshot_name_generation_function=request.data.get('screenshot_name_generation_function')
-            )
+            if request.data.get('status') == ExperimentStatusChoice.PR.value:
+                experiment = Experiment(
+                    name=request.data.get('name'),
+                    description=request.data.get('description'),
+                    special_colnames=json.loads(request.data.get('special_colnames')),
+                    screenshots=request.data.get('screenshots'),
+                    user=user,
+                    screenshot_name_generation_function=request.data.get('screenshot_name_generation_function'),
+                )    
+            else: 
+                experiment = Experiment(
+                    size_balance=json.loads(request.data.get('size_balance')),
+                    name=request.data.get('name'),
+                    description=request.data.get('description'),
+                    number_scenarios=int(request.data.get('number_scenarios')),
+                    variability_conf=json.loads(request.data.get('variability_conf')),
+                    scenarios_conf=json.loads(request.data.get('scenarios_conf')),
+                    special_colnames=json.loads(request.data.get('special_colnames')),
+                    screenshots=request.data.get('screenshots'),
+                    user=user,
+                    screenshot_name_generation_function=request.data.get('screenshot_name_generation_function'),
+                )
             execute_mode=request.data.get('execute_mode')
             experiment.save()
             
