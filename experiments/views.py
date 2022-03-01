@@ -16,6 +16,8 @@ import datetime
 from django.utils import timezone
 from .utils import compress_experiment, upload_mockups
 
+def json_attributes_load(att):
+    return json.loads(att)
 class VariationsViewSet(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticatedUser]
     queryset = Variations.objects.all()
@@ -37,41 +39,48 @@ class ExperimentView(generics.ListCreateAPIView):
         st = status.HTTP_201_CREATED
         msg = 'ok, created'
 
-        for data in ['size_balance', 'name', 'description', 'number_scenarios', 
-                     'variability_conf', 'screenshots',
-                     'special_colnames', 'screenshot_name_generation_function']:
-            if not data in request.data:
-                return Response({"message": "Incomplete data"}, status=status.HTTP_400_BAD_REQUEST)
-
         try:
             user = CustomUser.objects.get(id=self.request.user.id)
         except:
             return Response({"message": "No user found"}, status=status.HTTP_404_NOT_FOUND)
 
+        execute_mode=request.data.get('execute_mode')
         try:
             if request.data.get('status') == ExperimentStatusChoice.PR.value:
+                for data in ['name', 'description', 'screenshots',
+                     'special_colnames', 'screenshot_name_generation_function']:
+                    if not data in request.data:
+                        return Response({"message": "Incomplete data"}, status=status.HTTP_400_BAD_REQUEST)
+                
                 experiment = Experiment(
                     name=request.data.get('name'),
                     description=request.data.get('description'),
-                    special_colnames=json.loads(request.data.get('special_colnames')),
+                    special_colnames=json_attributes_load(request.data.get('special_colnames')),
                     screenshots=request.data.get('screenshots'),
                     user=user,
                     screenshot_name_generation_function=request.data.get('screenshot_name_generation_function'),
+                    status=request.data.get('status'),
                 )    
-            else: 
+            else:
+                for data in ['size_balance', 'name', 'description', 'number_scenarios', 
+                     'variability_conf', 'screenshots',
+                     'special_colnames', 'screenshot_name_generation_function']:
+                    if not data in request.data:
+                        return Response({"message": "Incomplete data"}, status=status.HTTP_400_BAD_REQUEST)
+                
                 experiment = Experiment(
-                    size_balance=json.loads(request.data.get('size_balance')),
+                    size_balance=json_attributes_load(request.data.get('size_balance')),
                     name=request.data.get('name'),
                     description=request.data.get('description'),
                     number_scenarios=int(request.data.get('number_scenarios')),
-                    variability_conf=json.loads(request.data.get('variability_conf')),
-                    scenarios_conf=json.loads(request.data.get('scenarios_conf')),
-                    special_colnames=json.loads(request.data.get('special_colnames')),
+                    variability_conf=json_attributes_load(request.data.get('variability_conf')),
+                    scenarios_conf=json_attributes_load(request.data.get('scenarios_conf')),
+                    special_colnames=json_attributes_load(request.data.get('special_colnames')),
                     screenshots=request.data.get('screenshots'),
                     user=user,
                     screenshot_name_generation_function=request.data.get('screenshot_name_generation_function'),
                 )
-            execute_mode=request.data.get('execute_mode')
+
             experiment.save()
             
             # if experiment.status == ExperimentStatusChoice.PR or experiment.status == ExperimentStatusChoice.LA:
@@ -86,12 +95,14 @@ class ExperimentView(generics.ListCreateAPIView):
                 experiment.is_being_processed=100
                 experiment.is_active=True
                 experiment.status=ExperimentStatusChoice.LA.value
+            elif request.data.get('status') != ExperimentStatusChoice.PR.value:
+                experiment.status=ExperimentStatusChoice.SA.value
             
         except Exception as e:
             msg = 'Some of atributes are invalid: ' + str(e)
             st = status.HTTP_422_UNPROCESSABLE_ENTITY
 
-        return Response({"message": msg, "id": experiment.id}, status=st)
+        return Response({"message": msg, "id": experiment.id, "status": experiment.status}, status=st)
 
    
 class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
@@ -114,13 +125,13 @@ class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
             
             execute_mode=request.data.get('execute_mode')
             
-            experiment.size_balance=json.loads(request.data.get('size_balance'))
+            experiment.size_balance=json_attributes_load(request.data.get('size_balance'))
             experiment.name=request.data.get('name')
             experiment.description=request.data.get('description')
             experiment.number_scenarios=int(request.data.get('number_scenarios'))
-            experiment.variability_conf=json.loads(request.data.get('variability_conf'))
-            experiment.scenarios_conf=json.loads(request.data.get('scenarios_conf'))
-            experiment.special_colnames=json.loads(request.data.get('special_colnames'))
+            experiment.variability_conf=json_attributes_load(request.data.get('variability_conf'))
+            experiment.scenarios_conf=json_attributes_load(request.data.get('scenarios_conf'))
+            experiment.special_colnames=json_attributes_load(request.data.get('special_colnames'))
             experiment.screenshot_name_generation_function=request.data.get('screenshot_name_generation_function')
             experiment.last_edition = datetime.datetime.now(tz=timezone.utc)
             
