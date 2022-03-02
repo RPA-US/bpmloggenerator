@@ -47,7 +47,7 @@ class ExperimentView(generics.ListCreateAPIView):
         execute_mode=request.data.get('execute_mode')
         try:
             if request.data.get('status') == ExperimentStatusChoice.PR.value:
-                for data in ['name', 'description', 'screenshots',
+                for data in ['name', 'screenshots',
                      'special_colnames', 'screenshot_name_generation_function']:
                     if not data in request.data:
                         return Response({"message": "Incomplete data"}, status=status.HTTP_400_BAD_REQUEST)
@@ -62,11 +62,17 @@ class ExperimentView(generics.ListCreateAPIView):
                     status=request.data.get('status'),
                 )    
             else:
-                for data in ['size_balance', 'name', 'description', 'number_scenarios', 
-                     'variability_conf', 'screenshots',
-                     'special_colnames', 'screenshot_name_generation_function']:
-                    if not data in request.data:
-                        return Response({"message": "Incomplete data"}, status=status.HTTP_400_BAD_REQUEST)
+                if execute_mode:
+                    for data in ['size_balance', 'name', 'description', 'number_scenarios', 
+                        'variability_conf', 'screenshots',
+                        'special_colnames', 'screenshot_name_generation_function']:
+                        if not data in request.data or (int(request.data.get('number_scenarios')) > 0 and not ('scenarios_conf' in request.data)):
+                            return Response({"message": "Incomplete data"}, status=status.HTTP_400_BAD_REQUEST)
+                else:
+                    for data in ['name', 'special_colnames', 'screenshot_name_generation_function']:
+                        if not data in request.data:
+                            return Response({"message": "Incomplete data"}, status=status.HTTP_400_BAD_REQUEST)
+       
                 
                 experiment = Experiment(
                     size_balance=json_attributes_load(request.data.get('size_balance')),
@@ -83,10 +89,11 @@ class ExperimentView(generics.ListCreateAPIView):
 
             experiment.save()
             
-            # if experiment.status == ExperimentStatusChoice.PR or experiment.status == ExperimentStatusChoice.LA:
-            path_without_fileextension = upload_mockups('privatefiles'+sep+experiment.screenshots.name)
-            experiment.screenshots_path=path_without_fileextension
-            experiment.last_edition = datetime.datetime.now(tz=timezone.utc)
+            if 'screenshots' in request.data:
+                # if experiment.status == ExperimentStatusChoice.PR or experiment.status == ExperimentStatusChoice.LA:
+                path_without_fileextension = upload_mockups('privatefiles'+sep+experiment.screenshots.name)
+                experiment.screenshots_path=path_without_fileextension
+                experiment.last_edition = datetime.datetime.now(tz=timezone.utc)
             
             if execute_mode:
                 experiment.execution_start = datetime.datetime.now(tz=timezone.utc)
@@ -97,6 +104,7 @@ class ExperimentView(generics.ListCreateAPIView):
                 experiment.status=ExperimentStatusChoice.LA.value
             elif request.data.get('status') != ExperimentStatusChoice.PR.value:
                 experiment.status=ExperimentStatusChoice.SA.value
+            experiment.save()
             
         except Exception as e:
             msg = 'Some of atributes are invalid: ' + str(e)
@@ -146,6 +154,8 @@ class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
                 experiment.is_being_processed=100
                 experiment.is_active=True
                 experiment.status=ExperimentStatusChoice.LA.value
+            elif request.data.get('status') != ExperimentStatusChoice.PR.value:
+                experiment.status=ExperimentStatusChoice.SA.value
             
         else:
             msg = "No user valid"
@@ -190,8 +200,10 @@ class DownloadExperiment(generics.RetrieveAPIView):
     Download compress experiment
     """
     def get(self, request, *args, **kwargs):
+        msg = "Experiment downloaded"
+        st=status.HTTP_200_OK
+        user = get_object_or_404(CustomUser, id=request.user.id)
         if(user.is_anonymous is False):
-            user = get_object_or_404(CustomUser, id=request.user.id)
             experiment = get_object_or_404(Experiment, user=user.id, is_being_processed=100, id=kwargs["pk"])
             try:        
                 zip_experiment = compress_experiment(experiment.foldername, experiment.name.replace(" ", "_") + "_" + str(experiment.id))
@@ -201,11 +213,13 @@ class DownloadExperiment(generics.RetrieveAPIView):
             except Exception as e:
                 msg = "Experiment error: " + str(e)
                 st=status.HTTP_405_METHOD_NOT_ALLOWED
+                response = Response({"message": msg}, status=st)
         else:
             msg = "No user valid" + str(e)
             st=status.HTTP_401_UNAUTHORIZED
+            response = Response({"message": msg}, status=st)
         
-        return Response({"message": msg}, status=st)
+        return response
 
 def associate_experiment(user):
     basic_path_template_experiments='resources'+sep+'template_experiments'+sep

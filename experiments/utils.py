@@ -23,8 +23,9 @@ def upload_mockups(zip_path):
 
 def compress_experiment(path, file_name):
     folder_path = split_name_system(path)
-    zip_file = folder_path + sep + file_name + ".zip"
+    zip_file = folder_path + sep + file_name 
     abs_path = os.path.abspath(folder_path + sep + ui_logs_foldername)
-    if not os.path.exists(zip_file):
-        zip_file = shutil.make_archive(zip_file, 'zip', abs_path)
-    return zip_file
+    zip_path = zip_file + ".zip"
+    if not os.path.exists(zip_path):
+        zip_path = shutil.make_archive(zip_file, 'zip', abs_path)
+    return zip_path
