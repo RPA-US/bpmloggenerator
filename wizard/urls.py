@@ -1,6 +1,6 @@
 from agosuirpa.urls import router
 # from django.urls import path, re_path
-from .views import VariabilityFunctionCategoryViewSet, VariabilityFunctionViewSet, GUIComponentCategoryViewSet, GUIComponentViewSet
+from .views import FunctionParamViewSet, VariabilityFunctionCategoryViewSet, VariabilityFunctionViewSet, GUIComponentCategoryViewSet, GUIComponentViewSet
 
 app_name = 'wizard'
 
@@ -8,6 +8,7 @@ router.register(r'gui-component', GUIComponentViewSet)
 router.register(r'category-gui-component', GUIComponentCategoryViewSet)
 router.register(r'variability-function', VariabilityFunctionViewSet)
 router.register(r'category-variability-function', VariabilityFunctionCategoryViewSet)
+router.register(r'function-param', FunctionParamViewSet)
 
 urlpatterns = [
 #     path('gui-component', views.GUIComponentViewSet, name='gui_component'),
