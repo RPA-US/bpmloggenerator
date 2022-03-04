@@ -1,9 +1,14 @@
 """
 Possible functions for the ``PRIVATE_STORAGE_AUTH_FUNCTION`` setting.
 """
-import experiments.models as Experiment_model
+import experiments.models as Experiments_model
 
 def allow_staff(private_file):
+    res = False
     request = private_file.request
-    exp = Experiment_model.Product.objects.filter(screenshots=private_file.relative_name, user=request.user)
-    return exp and exp.exists()
+    screenshot = Experiments_model.Screenshot.objects.filter(relative_path=private_file.relative_name)
+    if screenshot:
+        screenshot = screenshot[0]
+        user = screenshot.experiment.user_id
+        res = user == request.user.id
+    return res

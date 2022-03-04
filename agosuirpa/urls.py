@@ -29,8 +29,8 @@ urlpatterns = [
     path(API_VERSION+'users/', include('users.urls')),
     path(API_VERSION+'experiments/', include('experiments.urls')),
     path(API_VERSION+'wizard/', include('wizard.urls')),
-    path(API_VERSION+'private/', include('private_storage.urls')),
     path(API_VERSION+'api-auth/', include("rest_framework.urls", namespace="rest_framework")),
+    path(API_VERSION+'private-media/', include('private_storage.urls')),
     path(API_VERSION+'schema/', SpectacularAPIView.as_view(), name="schema"),
     # Optional UI:
     path(API_VERSION+'docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),

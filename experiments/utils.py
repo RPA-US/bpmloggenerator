@@ -6,7 +6,7 @@ from agosuirpa.system_configuration import sep, ui_logs_foldername
 def split_name_system(root_path):
     if "/" in root_path:
         splitted = root_path.split("/")
-    if "\\" in root_path:
+    elif "\\" in root_path:
         splitted = root_path.split("\\")
     if "/" in root_path or "\\" in root_path:
         folder_path = sep.join(splitted)

@@ -1,11 +1,11 @@
 from django.shortcuts import render
-import os
-
 # Create your views here.
+import os
 from rest_framework import generics, status, viewsets #, permissions
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
-from .models import Experiment, Variations, ExperimentStatusChoice
+from private_storage.views import PrivateStorageDetailView
+from .models import Experiment, Screenshot, Variations, ExperimentStatusChoice
 from .serializers import ExperimentSerializer, VariationsSerializer
 from users.models import CustomUser
 from .functions import execute_experiment
@@ -16,6 +16,7 @@ from django.shortcuts import get_object_or_404
 import datetime
 from django.utils import timezone
 from .utils import compress_experiment, upload_mockups
+from PIL import Image
 
 def json_attributes_load(att):
     if att:
@@ -96,6 +97,7 @@ class ExperimentView(generics.ListCreateAPIView):
                 # if experiment.status == ExperimentStatusChoice.PR or experiment.status == ExperimentStatusChoice.LA:
                 path_without_fileextension = upload_mockups('privatefiles'+sep+experiment.screenshots.name)
                 experiment.screenshots_path=path_without_fileextension
+                associate_screenshots_files(experiment)
                 experiment.last_edition = datetime.datetime.now(tz=timezone.utc)
             
             if execute_mode:
@@ -170,7 +172,7 @@ class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
                         # if experiment.status == ExperimentStatusChoice.PR or experiment.status == ExperimentStatusChoice.LA:
                         path_without_fileextension = upload_mockups('privatefiles'+sep+experiment.screenshots.name)
                         experiment.screenshots_path=path_without_fileextension
-                        # associate_screenshots_files(experiment)
+                        associate_screenshots_files(experiment)
                         experiment.last_edition = datetime.datetime.now(tz=timezone.utc)
                     
                     if execute_mode:
@@ -285,11 +287,28 @@ def associate_experiment(user):
             )
             experiment.user=user
             experiment.save()
-            
-# def associate_screenshots_files(experiment):
-#     for root, directories, file in os.walk(experiment.screenshots_path):
-#         for file in file:
-#             if(file.endswith(".png") or file.endswith(".jpg")):
-#                 screenshot = Screenshot(
-#                     name = file
-#                 )
+
+# https://github.com/edoburu/django-private-storage
+# class ScreenshotDownloadView(PrivateStorageDetailView):
+#     model = Screenshot
+#     model_file_field = 'image'
+
+#     def get_queryset(self):
+#         # Make sure only certain objects can be accessed.
+#         return super().get_queryset().filter(...)
+
+#     def can_access_file(self, private_file):
+#         # When the object can be accessed, the file may be downloaded.
+#         # This overrides PRIVATE_STORAGE_AUTH_FUNCTION
+#         return True
+
+def associate_screenshots_files(experiment):
+    for root, directories, file in os.walk(experiment.screenshots_path):
+        for file in file:
+            if(file.endswith(".png") or file.endswith(".jpg")):
+                image = Image.open(os.path.join(root, file))
+                aux = experiment.screenshots_path.split(sep)
+                width, height = image.size
+                relative_path = aux[len(aux)-1]+sep+file
+                screenshot = Screenshot(relative_path=relative_path, width=width, height=height, image=file, experiment=experiment)
+                screenshot.save()

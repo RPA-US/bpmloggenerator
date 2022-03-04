@@ -1,6 +1,7 @@
+from tkinter import CASCADE
 from django.db import models
 from users.models import CustomUser
-from private_storage.fields import PrivateFileField
+from private_storage.fields import PrivateFileField, PrivateImageField
 from django.core.exceptions import ValidationError
 from enum import Enum
 
@@ -61,3 +62,13 @@ class Variations(models.Model):
 
     def __str__(self):
         return self.case_variation_id
+
+class Screenshot(models.Model):
+    relative_path = models.CharField(max_length=255, unique=True)
+    width = models.PositiveSmallIntegerField(default=0)
+    height = models.PositiveSmallIntegerField(default=0)
+    image = PrivateImageField("Image", width_field='width', height_field='height', upload_to="screenshots")
+    experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.tirelative_pathtle
