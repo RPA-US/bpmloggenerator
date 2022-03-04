@@ -47,7 +47,7 @@ class VariabilityFunctionCategory(CategoryBase):
         return self.name
 
 class FunctionParam(models.Model):
-    label = models.CharField(max_length=50)
+    label = models.CharField(max_length=50, unique=True)
     placeholder = models.CharField(max_length=50)
     data_type = models.CharField(max_length=50)
     description = models.CharField(max_length=255)
@@ -69,11 +69,3 @@ class VariabilityFunction(models.Model):
         
     def __str__(self):
         return self.filename
-    
-    
-    # GUI Variation
-    #     image
-    #     coordenates
-    #     variability_function
-    #     gui_type
-    #     experiment
