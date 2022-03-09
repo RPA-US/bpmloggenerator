@@ -71,4 +71,4 @@ class Screenshot(models.Model):
     experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.tirelative_pathtle
+        return self.relative_path

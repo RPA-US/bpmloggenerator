@@ -1,4 +1,5 @@
 from email.mime import image
+from enum import unique
 from django.db import models
 from categories.models import CategoryBase
 from django.core.exceptions import ValidationError
@@ -20,8 +21,8 @@ class GUIComponentCategory(CategoryBase):
         return self.name
 
 class GUIComponent(models.Model):
+    id_code = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
-    id_code = models.CharField(max_length=255)
     filename = models.CharField(max_length=255)
     path = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
@@ -57,7 +58,7 @@ class FunctionParam(models.Model):
         return self.label    
     
 class VariabilityFunction(models.Model):
-    id_code = models.CharField(max_length=255)
+    id_code = models.CharField(max_length=255, unique=True)
     function_name = models.CharField(max_length=255)
     filename = models.CharField(max_length=255)
     path = models.CharField(max_length=255)
