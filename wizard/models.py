@@ -9,7 +9,7 @@ class GUIComponentCategory(CategoryBase):
     The GUI components categories
     """
 
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=75, unique=True)
     description = models.TextField()
 
     class Meta:
@@ -36,7 +36,7 @@ class VariabilityFunctionCategory(CategoryBase):
     """
     Variability Function categories
     """
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=75, unique=True)
     description = models.CharField(max_length=255)
 
     class Meta:
@@ -47,9 +47,9 @@ class VariabilityFunctionCategory(CategoryBase):
         return self.name
 
 class FunctionParam(models.Model):
-    label = models.CharField(max_length=50, unique=True)
-    placeholder = models.CharField(max_length=50)
-    data_type = models.CharField(max_length=50)
+    label = models.CharField(max_length=75, unique=True)
+    placeholder = models.CharField(max_length=75)
+    data_type = models.CharField(max_length=75)
     description = models.CharField(max_length=255)
     validation_needs = models.JSONField() # TODO
     
