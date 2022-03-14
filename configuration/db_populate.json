@@ -3842,11 +3842,11 @@
     "model": "wizard.variabilityfunction",
     "pk": 12,
     "fields": {
-        "id_code": "mouse_position_range",
-        "function_name": "features.experiment.function_trace.name.mouse_position_range",
+        "id_code": "mouse_position_range_x",
+        "function_name": "features.experiment.function_trace.name.mouse_position_range_x",
         "filename": "function_trace.json",
         "path": "configuration",
-        "description": "features.experiment.function_trace.description.mouse_position_range",
+        "description": "features.experiment.function_trace.description.mouse_position_range_x",
         "variability_function_category": 1,
         "params": [5]
     }
@@ -3980,6 +3980,18 @@
         "path": "configuration",
         "description": "features.experiment.function_trace.description.random_paragraph_in_image",
         "variability_function_category": 4,
+        "params": [5]
+    }
+}, {
+    "model": "wizard.variabilityfunction",
+    "pk": 25,
+    "fields": {
+        "id_code": "mouse_position_range_y",
+        "function_name": "features.experiment.function_trace.name.mouse_position_range_y",
+        "filename": "function_trace.json",
+        "path": "configuration",
+        "description": "features.experiment.function_trace.description.mouse_position_range_y",
+        "variability_function_category": 1,
         "params": [5]
     }
 }]
