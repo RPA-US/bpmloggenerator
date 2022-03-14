@@ -207,6 +207,9 @@ def delimit_characters(s, char_limit):
     return res
 
 def random_word_image(args):
+    """
+    Mandatory to have as args Font, Font size, Font color, Background color, Character delimitation, Random max number of word: "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84, 3]
+    """
     if args[0] and len(list(args[0]))>5:
         size = random.randint(1,args[0][5])
     else:
@@ -217,7 +220,7 @@ def random_word_image(args):
     
 def random_paragraph_image(args):
     """
-    Mandatory to have as args Font, Font size, Font color, Background color and Character delimitation for paragraph: "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+    Mandatory to have as args Font, Font size, Font color, Background color, Character delimitation, Random max number of paragraph: "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84, 3]
     """
     if args[0] and len(list(args[0]))>5:
         size = random.randint(1,args[0][5])
@@ -229,7 +232,7 @@ def random_paragraph_image(args):
     
 def random_sentence_image(args):
     """
-    Mandatory to have as args Font, Font size, Font color, Background color and Character delimitation for paragraph: "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+    Mandatory to have as args Font, Font size, Font color, Background color and Character delimitation for paragraph: "args[0]":["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
     """
     s = lorem.sentence()
     s_line_breaks = delimit_characters(s,args[0][4])
@@ -257,11 +260,11 @@ def insert_text_image(args):
     '''
     An input capture is obtained, and a text is inserted into it​
     args:​
+        text: the text to be inserted
+        font_configuration: path to the font type; integer of the font size; the tuple of the font color
+        new_image: path to saved image
         capture: path of the image to insert in
         coordenates: list with the top left corner. The coordenate (0,0) is the top_left in the image
-        text: the text to be inserted
-        new_image: saved image
-        configuration: path to the font type; integer of the font size; the tuple of the font color
     '''
     text = args[0]
     font = args[1][0]
