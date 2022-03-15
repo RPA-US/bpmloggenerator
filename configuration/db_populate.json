@@ -936,6 +936,20 @@
     }
 }, {
     "model": "sessions.session",
+    "pk": "7119m26rj5xpllll2035n7en41v8xvdx",
+    "fields": {
+        "session_data": ".eJxVjMEOwiAQRP-FsyHCLli86Y80yy4NjQ1NhJ6M_y41Pehx5s2blxppa3ncanqOs6irMur020XiRyo7oGXZa03M61aa_m4OXPWtp1TazNTmtdwP6-8qU839x5NB5MmiCcRnFseDGSLYCIIRfHApItjAbrh4iymgE-8lgESAqXvq_QGwJjwb:1nTqDd:cPhRzYkMmqNVaDM_hyG-SV1qEZTMXEGzrbKXL4lmDlk",
+        "expire_date": "2022-03-28T19:19:01.844Z"
+    }
+}, {
+    "model": "sessions.session",
+    "pk": "dkbbydmhl2ac563m8lv97tsctumm1o56",
+    "fields": {
+        "session_data": ".eJxVjMEOwiAQRP-FsyHCLli86Y80yy4NjQ1NhJ6M_y41Pehx5s2blxppa3ncanqOs6irMur020XiRyo7oGXZa03M61aa_m4OXPWtp1TazNTmtdwP6-8qU839x5NB5MmiCcRnFseDGSLYCIIRfHApItjAbrh4iymgE-8lgESAqXvq_QGwJjwb:1nTqDF:u-sdVWhMpkRSrquulqw2pbQweIwyGtGxh5QOp1PAcv0",
+        "expire_date": "2022-03-28T19:18:37.418Z"
+    }
+}, {
+    "model": "sessions.session",
     "pk": "jk3w5jx48dhydxgvtolyar4xmsdpldap",
     "fields": {
         "session_data": ".eJxVjMEOwiAQRP-FsyHCLli86Y80yy4NjQ1NhJ6M_y41Pehx5s2blxppa3ncanqOs6irMur020XiRyo7oGXZa03M61aa_m4OXPWtp1TazNTmtdwP6-8qU839x5NB5MmiCcRnFseDGSLYCIIRfHApItjAbrh4iymgE-8lgESAqXvq_QGwJjwb:1nTiSs:tXDlqQhm6Acz_L2MTQ1sGDwWZDDxfQrEgsZWkc3d9s0",
@@ -974,7 +988,7 @@
     "pk": 1,
     "fields": {
         "password": "pbkdf2_sha256$260000$SMejNXzmmPuX1yi7WPxOgA$FERx86AN773es9Q+iNKvapKnMxBFmylNUoLRBkNN5g4=",
-        "last_login": "2022-03-14T11:02:14.012Z",
+        "last_login": "2022-03-14T19:19:01.417Z",
         "is_superuser": true,
         "username": "admin",
         "first_name": "",
@@ -1406,7 +1420,7 @@
         "filename": "250686-android.widget.ImageButton.png",
         "path": "resources/GUI_components/menu",
         "description": "features.experiment.GUI_components.description.menu",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1417,7 +1431,7 @@
         "filename": "249444-android.widget.ImageButton.png",
         "path": "resources/GUI_components/menu",
         "description": "features.experiment.GUI_components.description.menu",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1428,7 +1442,7 @@
         "filename": "247427-android.widget.ImageButton.png",
         "path": "resources/GUI_components/menu",
         "description": "features.experiment.GUI_components.description.menu",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1439,7 +1453,7 @@
         "filename": "135975-android.widget.Button.png",
         "path": "resources/GUI_components/menu",
         "description": "features.experiment.GUI_components.description.menu",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1450,7 +1464,7 @@
         "filename": "32916-android.widget.Button.png",
         "path": "resources/GUI_components/menu",
         "description": "features.experiment.GUI_components.description.menu",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1461,7 +1475,7 @@
         "filename": "17600-android.widget.ImageView.png",
         "path": "resources/GUI_components/menu",
         "description": "features.experiment.GUI_components.description.menu",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1472,7 +1486,7 @@
         "filename": "15564-android.widget.ImageButton.png",
         "path": "resources/GUI_components/menu",
         "description": "features.experiment.GUI_components.description.menu",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1483,7 +1497,7 @@
         "filename": "6-android.widget.ImageButton.png",
         "path": "resources/GUI_components/menu",
         "description": "features.experiment.GUI_components.description.menu",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1494,7 +1508,7 @@
         "filename": "reply-message.png",
         "path": "resources/GUI_components/reply",
         "description": "features.experiment.GUI_components.description.reply",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1505,7 +1519,7 @@
         "filename": "reply.png",
         "path": "resources/GUI_components/reply",
         "description": "features.experiment.GUI_components.description.reply",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1516,7 +1530,7 @@
         "filename": "reply(3).png",
         "path": "resources/GUI_components/reply",
         "description": "features.experiment.GUI_components.description.reply",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1527,7 +1541,7 @@
         "filename": "reply(2).png",
         "path": "resources/GUI_components/reply",
         "description": "features.experiment.GUI_components.description.reply",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1538,7 +1552,7 @@
         "filename": "reply(1).png",
         "path": "resources/GUI_components/reply",
         "description": "features.experiment.GUI_components.description.reply",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1549,7 +1563,7 @@
         "filename": "239935-android.widget.Button.png",
         "path": "resources/GUI_components/reload",
         "description": "features.experiment.GUI_components.description.reload",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1560,7 +1574,7 @@
         "filename": "188872-android.widget.Button.png",
         "path": "resources/GUI_components/reload",
         "description": "features.experiment.GUI_components.description.reload",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1571,7 +1585,7 @@
         "filename": "138968-android.widget.Button.png",
         "path": "resources/GUI_components/reload",
         "description": "features.experiment.GUI_components.description.reload",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1582,7 +1596,7 @@
         "filename": "62324-android.widget.Button.png",
         "path": "resources/GUI_components/reload",
         "description": "features.experiment.GUI_components.description.reload",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1593,7 +1607,7 @@
         "filename": "16411-android.widget.TextView.png",
         "path": "resources/GUI_components/reload",
         "description": "features.experiment.GUI_components.description.reload",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1604,7 +1618,7 @@
         "filename": "trash_b.png",
         "path": "resources/GUI_components/trash",
         "description": "features.experiment.GUI_components.description.trash",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1615,7 +1629,7 @@
         "filename": "trash.png",
         "path": "resources/GUI_components/trash",
         "description": "features.experiment.GUI_components.description.trash",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1626,7 +1640,7 @@
         "filename": "trash(2).png",
         "path": "resources/GUI_components/trash",
         "description": "features.experiment.GUI_components.description.trash",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1637,7 +1651,7 @@
         "filename": "trash(1).png",
         "path": "resources/GUI_components/trash",
         "description": "features.experiment.GUI_components.description.trash",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1648,7 +1662,7 @@
         "filename": "garbage.png",
         "path": "resources/GUI_components/trash",
         "description": "features.experiment.GUI_components.description.trash",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1659,7 +1673,7 @@
         "filename": "190610-android.widget.Button.png",
         "path": "resources/GUI_components/trash",
         "description": "features.experiment.GUI_components.description.trash",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1670,7 +1684,7 @@
         "filename": "149263-android.widget.Button.png",
         "path": "resources/GUI_components/mail",
         "description": "features.experiment.GUI_components.description.mail",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1681,7 +1695,7 @@
         "filename": "17792-android.widget.ImageView.png",
         "path": "resources/GUI_components/mail",
         "description": "features.experiment.GUI_components.description.mail",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1692,7 +1706,7 @@
         "filename": "17760-android.widget.ImageView.png",
         "path": "resources/GUI_components/mail",
         "description": "features.experiment.GUI_components.description.mail",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1703,7 +1717,7 @@
         "filename": "16907-android.widget.TextView.png",
         "path": "resources/GUI_components/mail",
         "description": "features.experiment.GUI_components.description.mail",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1714,7 +1728,7 @@
         "filename": "15988-android.widget.TextView.png",
         "path": "resources/GUI_components/mail",
         "description": "features.experiment.GUI_components.description.mail",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1725,7 +1739,7 @@
         "filename": "15712-android.widget.TextView.png",
         "path": "resources/GUI_components/mail",
         "description": "features.experiment.GUI_components.description.mail",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1736,7 +1750,7 @@
         "filename": "15540-android.widget.TextView.png",
         "path": "resources/GUI_components/mail",
         "description": "features.experiment.GUI_components.description.mail",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1747,7 +1761,7 @@
         "filename": "15486-android.widget.TextView.png",
         "path": "resources/GUI_components/mail",
         "description": "features.experiment.GUI_components.description.mail",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1758,7 +1772,7 @@
         "filename": "15317-android.widget.TextView.png",
         "path": "resources/GUI_components/mail",
         "description": "features.experiment.GUI_components.description.mail",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1769,7 +1783,7 @@
         "filename": "247887-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1780,7 +1794,7 @@
         "filename": "247925-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1791,7 +1805,7 @@
         "filename": "249391-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1802,7 +1816,7 @@
         "filename": "250749-android.widget.Button.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1813,7 +1827,7 @@
         "filename": "17642-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1824,7 +1838,7 @@
         "filename": "17649-android.widget.Button.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1835,7 +1849,7 @@
         "filename": "17675-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1846,7 +1860,7 @@
         "filename": "57478-android.widget.Button.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1857,7 +1871,7 @@
         "filename": "166430-android.widget.Button.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1868,7 +1882,7 @@
         "filename": "176216-android.widget.Button.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1879,7 +1893,7 @@
         "filename": "180721-android.widget.Button.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1890,7 +1904,7 @@
         "filename": "228740-android.widget.Button.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1901,7 +1915,7 @@
         "filename": "234976-android.widget.Button.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1912,7 +1926,7 @@
         "filename": "250749-android.widget.Button.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1923,7 +1937,7 @@
         "filename": "16912-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1934,7 +1948,7 @@
         "filename": "16189-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1945,7 +1959,7 @@
         "filename": "15994-android.widget.TextView.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1956,7 +1970,7 @@
         "filename": "15700-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1967,7 +1981,7 @@
         "filename": "15232-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1978,7 +1992,7 @@
         "filename": "17043-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1989,7 +2003,7 @@
         "filename": "17239-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2000,7 +2014,7 @@
         "filename": "17314-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2011,7 +2025,7 @@
         "filename": "17367-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2022,7 +2036,7 @@
         "filename": "247268-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2033,7 +2047,7 @@
         "filename": "242119-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2044,7 +2058,7 @@
         "filename": "213943-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2055,7 +2069,7 @@
         "filename": "151298-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2066,7 +2080,7 @@
         "filename": "140628-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2077,7 +2091,7 @@
         "filename": "126359-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2088,7 +2102,7 @@
         "filename": "101057-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2099,7 +2113,7 @@
         "filename": "80301-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2110,7 +2124,7 @@
         "filename": "40163-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2121,7 +2135,7 @@
         "filename": "17654-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2132,7 +2146,7 @@
         "filename": "16190-android.widget.ImageButton.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2143,7 +2157,7 @@
         "filename": "15995-android.widget.TextView.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2154,7 +2168,7 @@
         "filename": "15767-android.widget.TextView.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2165,7 +2179,7 @@
         "filename": "15248-android.widget.ImageButton.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2473,7 +2487,7 @@
         "filename": "17723-android.widget.TextView.png",
         "path": "resources/GUI_components/cancel",
         "description": "features.experiment.GUI_components.description.cancel",
-        "gui_component_category": 1
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2484,7 +2498,7 @@
         "filename": "17200-android.widget.ImageButton.png",
         "path": "resources/GUI_components/cancel",
         "description": "features.experiment.GUI_components.description.cancel",
-        "gui_component_category": 1
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2660,7 +2674,7 @@
         "filename": "17317-android.widget.TextView.png",
         "path": "resources/GUI_components/send",
         "description": "features.experiment.GUI_components.description.send",
-        "gui_component_category": 1
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3056,7 +3070,7 @@
         "filename": "alert (1).png",
         "path": "resources/GUI_components/alert",
         "description": "features.experiment.GUI_components.description.alert",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3067,7 +3081,7 @@
         "filename": "alert (2).png",
         "path": "resources/GUI_components/alert",
         "description": "features.experiment.GUI_components.description.alert",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3078,7 +3092,7 @@
         "filename": "alert (3).png",
         "path": "resources/GUI_components/alert",
         "description": "features.experiment.GUI_components.description.alert",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3089,7 +3103,7 @@
         "filename": "alert (4).png",
         "path": "resources/GUI_components/alert",
         "description": "features.experiment.GUI_components.description.alert",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3100,7 +3114,7 @@
         "filename": "alert (5).png",
         "path": "resources/GUI_components/alert",
         "description": "features.experiment.GUI_components.description.alert",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3111,7 +3125,7 @@
         "filename": "alert (6).png",
         "path": "resources/GUI_components/alert",
         "description": "features.experiment.GUI_components.description.alert",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3133,7 +3147,7 @@
         "filename": "alert (8).png",
         "path": "resources/GUI_components/alert",
         "description": "features.experiment.GUI_components.description.alert",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3144,7 +3158,7 @@
         "filename": "alert (9).png",
         "path": "resources/GUI_components/alert",
         "description": "features.experiment.GUI_components.description.alert",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3155,7 +3169,7 @@
         "filename": "alert (10).png",
         "path": "resources/GUI_components/alert",
         "description": "features.experiment.GUI_components.description.alert",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3166,7 +3180,7 @@
         "filename": "crm(1).png",
         "path": "resources/GUI_components/image",
         "description": "features.experiment.GUI_components.description.cmr",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3177,7 +3191,7 @@
         "filename": "crm(4).png",
         "path": "resources/GUI_components/image",
         "description": "features.experiment.GUI_components.description.cmr",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3188,7 +3202,7 @@
         "filename": "crm(2).png",
         "path": "resources/GUI_components/image",
         "description": "features.experiment.GUI_components.description.cmr",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3199,7 +3213,7 @@
         "filename": "crm(5).png",
         "path": "resources/GUI_components/image",
         "description": "features.experiment.GUI_components.description.cmr",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3210,7 +3224,7 @@
         "filename": "crm(6).png",
         "path": "resources/GUI_components/image",
         "description": "features.experiment.GUI_components.description.cmr",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3221,7 +3235,7 @@
         "filename": "crm(7).png",
         "path": "resources/GUI_components/image",
         "description": "features.experiment.GUI_components.description.cmr",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3232,7 +3246,7 @@
         "filename": "crm(8).png",
         "path": "resources/GUI_components/image",
         "description": "features.experiment.GUI_components.description.cmr",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3243,7 +3257,7 @@
         "filename": "crm.png",
         "path": "resources/GUI_components/image",
         "description": "features.experiment.GUI_components.description.cmr",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
