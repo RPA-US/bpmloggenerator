@@ -69,7 +69,7 @@ class ExperimentView(generics.ListCreateAPIView):
                 if execute_mode:
                     if request.data.get('number_scenarios') and int(request.data.get('number_scenarios')) > 0 and not ('scenarios_conf' in request.data):
                         return Response({"message": "Number scenarios greater than 1 and no scenario configuration included!"}, status=status.HTTP_400_BAD_REQUEST)
-                    for data in ['size_balance', 'name', 'description', 'number_scenarios', 
+                    for data in ['size_balance', 'name', 'number_scenarios', 
                         'variability_conf', 'screenshots',
                         'special_colnames', 'screenshot_name_generation_function']:
                         if not data in request.data:
