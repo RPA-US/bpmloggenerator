@@ -55,3 +55,10 @@ xmltodict==0.12.0
 wheel==0.37.0
 whitenoise==5.3.0
 zipp==3.7.0
+graphviz  
+ipython   
+keras-ocr 
+openpyxl  
+seaborn   
+sklearn   
+tensorflow

@@ -64,6 +64,9 @@ INSTALLED_APPS = [
     'users', # Local App
     'experiments', # Local App
     'wizard', # Local App
+    'analyzer', # Local App
+    'featureextraction', # Local App
+    'decisiondiscovery', # Local App
 ]
 
 MIDDLEWARE = [
