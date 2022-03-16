@@ -67,10 +67,12 @@ class ExperimentView(generics.ListCreateAPIView):
                 )    
             else:
                 if execute_mode:
+                    if request.data.get('number_scenarios') and int(request.data.get('number_scenarios')) > 0 and not ('scenarios_conf' in request.data):
+                        return Response({"message": "Number scenarios greater than 1 and no scenario configuration included!"}, status=status.HTTP_400_BAD_REQUEST)
                     for data in ['size_balance', 'name', 'description', 'number_scenarios', 
                         'variability_conf', 'screenshots',
                         'special_colnames', 'screenshot_name_generation_function']:
-                        if not data in request.data or (int(request.data.get('number_scenarios')) > 0 and not ('scenarios_conf' in request.data)):
+                        if not data in request.data:
                             return Response({"message": "Incomplete data"}, status=status.HTTP_400_BAD_REQUEST)
                 else:
                     for data in ['name', 'special_colnames', 'screenshot_name_generation_function']:
@@ -84,7 +86,7 @@ class ExperimentView(generics.ListCreateAPIView):
                     description=request.data.get('description'),
                     number_scenarios=int(request.data.get('number_scenarios')) if request.data.get('number_scenarios') else None,
                     variability_conf=json_attributes_load(request.data.get('variability_conf')),
-                    scenarios_conf=json_attributes_load(request.data.get('scenarios_conf')),
+                    scenarios_conf=json_attributes_load(request.data.get('scenarios_conf')) if request.data.get('scenarios_conf') else None,
                     special_colnames=json_attributes_load(request.data.get('special_colnames')),
                     screenshots=request.data.get('screenshots'),
                     user=user,
@@ -111,11 +113,14 @@ class ExperimentView(generics.ListCreateAPIView):
                 experiment.status=ExperimentStatusChoice.SA.value
             experiment.save()
             
+            response_content = {"message": msg, "id": experiment.id, "status": experiment.status}
+            
         except Exception as e:
             msg = 'Some of atributes are invalid: ' + str(e)
             st = status.HTTP_422_UNPROCESSABLE_ENTITY
+            response_content = {"message": msg}
 
-        return Response({"message": msg, "id": experiment.id, "status": experiment.status}, status=st)
+        return Response(response_content, status=st)
 
    
 class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
