@@ -15,17 +15,23 @@ Including another URLconf
 """
 from .system_configuration import API_VERSION
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
+from django.shortcuts import render
 from rest_framework import routers
 import private_storage.urls
 # from rest_framework.schemas import get_schema_view
 # from experiments import views
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
+def render_react(request):
+    return render(request, "index.html")
+
 router = routers.DefaultRouter()
 
 urlpatterns = [
     path(API_VERSION+'admin/', admin.site.urls),
+    re_path(r"^$", render_react),
+    re_path(r"^(?:.*)/?$", render_react),
     path(API_VERSION+'users/', include('users.urls')),
     path(API_VERSION+'experiments/', include('experiments.urls')),
     path(API_VERSION+'wizard/', include('wizard.urls')),

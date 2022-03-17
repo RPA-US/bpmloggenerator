@@ -10,6 +10,7 @@
     "random_appname" : "generate_app_demo",
     "lorem_word_as_appname" : "generate_lorem_app_demo",
     "generate_timestamp" : "generate_timestamp",
+    "mouse_position_range" : "generate_mouse_position_x",
     "mouse_position_range_x" : "generate_mouse_position_x",
     "mouse_position_range_y" : "generate_mouse_position_y",
     "mouse_or_keyboard" : "generate_mousekeyboard",
