@@ -7,7 +7,7 @@ import json
 from colorama import Back,Style, Fore
 from plugins.screenshot.create_screenshot import generate_capture, generate_scenario_capture
 from plugins.screenshot.replace_gui_component import generate_copied_capture_without_root, generate_copied_capture
-from agosuirpa.generic_utils import detect_function
+from agosuirpa.generic_utils import detect_function,args_by_function_in_order
 from agosuirpa.system_configuration import sep, experiment_results_path, ui_logs_foldername, additional_scenarios_resources_foldername
 
 def validation_params(json,number_logs,percent_per_trace):   
@@ -53,8 +53,7 @@ def generate_row(experiment, generate_path, dict, acu, case, variant, original_e
                     initValue = element["initValue"]
                     variate = element["variate"]
                     name = element["name"]
-                    args = element["args"]
-                                        
+                    args = util.args_by_function_in_order(element["args"],name)
                     if variate == 1:
                         if i==screenshot_column_name:
                             val = generate_capture(experiment, columns_ui, columns, element, acu, case, generate_path, attr, key, variant)
