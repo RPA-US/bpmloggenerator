@@ -46,8 +46,8 @@ def select_random_list(objects):
 
 def args_by_function_in_order(list_dict,name):
     argsList = []
-    if (name == "insert_text_image"):
-        f=1
+    if (name == "replace_gui_element_various_places"):
+        argsList=list_dict["features.experiment.function_params.element_input.label"]
     if not(name =="" or len(list_dict)==0):
         function_name = VariabilityFunction.objects.get(id_code=name)
         paramList = []

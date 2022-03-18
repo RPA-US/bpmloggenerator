@@ -26,7 +26,7 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
     '''
     # actual_path = os.getcwd()
     capture_path = element["initValue"]
-    args_tmp = element["args"]
+    args_tmp = util.args_by_function_in_order(element["args"],experiment.screenshot_name_generation_function)
     args = [generate_path, acu]
     #new_image = generate_screenshot_demo(args)
     new_image = detect_function(
@@ -45,7 +45,7 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
                         if element is not None:
                             coordinates = j["coordinates"]
                             name = j["name"]
-                            args =j["args"]# util.args_by_function_in_order(j["args"],name)
+                            args = util.args_by_function_in_order(j["args"], name)
                             if not sep in new_image:
                                 image_path_to_save = generate_path + new_image
                             else:
@@ -93,7 +93,9 @@ def generate_scenario_capture(experiment, element, case, generate_path, activity
             if element is not None:
                 coordinates = variation_conf["coordinates"]
                 name = variation_conf["name"]
-                args = variation_conf["args"]
+                if(variant==2 and activity=="E" and variation_conf["id"]==5):
+                    f=1
+                args = util.args_by_function_in_order(variation_conf["args"], name)
                 if not sep in new_image:
                     image_path_to_save = generate_path + new_image
                 else:

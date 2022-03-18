@@ -48,15 +48,13 @@ def generate_row(experiment, generate_path, dict, acu, case, variant, original_e
         attr = []
         acu += 1
         for i in columns:
-            if (variant == 2 and key == 'D' and i=="Screenshot"):
-                f = 1
             if i in json_list[key]:
                 element = json_list[key][i]
                 if element is not None:
                     initValue = element["initValue"]
                     variate = element["variate"]
                     name = element["name"]
-                    args = element["args"]#args_by_function_in_order(element["args"], name)
+                    args = args_by_function_in_order(element["args"], name)
                     if variate == 1:
                         if i == screenshot_column_name:
                             val = generate_capture(
