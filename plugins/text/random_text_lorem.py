@@ -42,15 +42,15 @@ def generate_path(args):
     '''
     Generate path. The argument is the level of path and the extension
     args:
-        value: number of levels of the path
         ext: the extension if is the path of a file 
+        value: number of levels of the path
     '''
     if args  == []:
         value=1
         ext=None
     else:
-        value=args[0]
-        ext=args[1] 
+        value=args[1]
+        ext=args[0] 
     res = "C:"+sep+generate_words()
     for i in range(1,value):        
         res += sep+generate_words()
