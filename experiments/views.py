@@ -57,8 +57,12 @@ class ExperimentView(generics.ListCreateAPIView):
                         return Response({"message": "Incomplete data"}, status=status.HTTP_400_BAD_REQUEST)
                 
                 experiment = Experiment(
+                    size_balance=json_attributes_load(request.data.get('size_balance')),
                     name=request.data.get('name'),
                     description=request.data.get('description'),
+                    number_scenarios=int(request.data.get('number_scenarios')) if request.data.get('number_scenarios') else None,
+                    variability_conf=json_attributes_load(request.data.get('variability_conf')),
+                    scenarios_conf=json_attributes_load(request.data.get('scenarios_conf')) if request.data.get('scenarios_conf') else None,
                     special_colnames=json_attributes_load(request.data.get('special_colnames')),
                     screenshots=request.data.get('screenshots'),
                     user=user,
