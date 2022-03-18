@@ -19,10 +19,12 @@ from django.urls import include, path, re_path
 from django.shortcuts import render
 from rest_framework import routers
 import private_storage.urls
+from django.views.decorators.csrf import csrf_exempt
 # from rest_framework.schemas import get_schema_view
 # from experiments import views
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
+@csrf_exempt
 def render_react(request):
     return render(request, "index.html")
 
