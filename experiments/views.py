@@ -151,7 +151,7 @@ class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
                     for data in ['size_balance', 'name', 'description', 'number_scenarios', 
                         'variability_conf', 'screenshots',
                         'special_colnames', 'screenshot_name_generation_function']:
-                        if not data in request.data or (int(request.data.get('number_scenarios')) > 0 and not ('scenarios_conf' in request.data)):
+                        if ((not data in request.data) and (not getattr(experiment, data))) or (int(request.data.get('number_scenarios')) > 0 and not ('scenarios_conf' in request.data)):
                             return Response({"message": "Incomplete data"}, status=status.HTTP_400_BAD_REQUEST)
                 else:
                     for data in ['name', 'special_colnames', 'screenshot_name_generation_function']:
