@@ -169,6 +169,9 @@ class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
                 if 'screenshots' in request.data and experiment.screenshots != request.data.get('screenshots'):
                     experiment.screenshots=request.data.get('screenshots')
                 
+                if (experiment.number_scenarios > 0 and not experiment.scenarios_conf):
+                    raise AssertionError("Scenarios variability configuration must be present if number of scenarios greater than 0")
+
                 experiment.save()
                 
                 if 'screenshots' in request.data and experiment.screenshots != request.data.get('screenshots'):
