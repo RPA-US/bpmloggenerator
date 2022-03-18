@@ -31,7 +31,7 @@ class Experiment(models.Model):
     screenshots_path = models.CharField(null=True, blank=True, max_length=255)
     foldername = models.CharField(null=True, blank=True, max_length=255)
     # Internal configuration attributes
-    status = models.CharField(max_length=255, choices=ExperimentStatusChoice.choices())
+    status = models.CharField(max_length=255, choices=ExperimentStatusChoice.choices(), null=True)
     screenshot_name_generation_function = models.CharField(max_length=255)
     is_being_processed=models.IntegerField(default=0)
     is_active=models.BooleanField(default=True)
