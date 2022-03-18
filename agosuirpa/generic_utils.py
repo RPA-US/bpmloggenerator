@@ -46,14 +46,21 @@ def select_random_list(objects):
 
 def args_by_function_in_order(list_dict,name):
     argsList = []
-    function_name = VariabilityFunction.objects.get(id_code=name)
-    paramList = []
-    #TODO: change to the correct param order
-    function_params = function_name.params.all().order_by("id")
-    for i in function_params:
-        parTMP = FunctionParam.objects.get(pk=i.id)
-        paramList.append(parTMP)
-    if(len(list_dict) == len(paramList)):
-        for i in paramList:
-            argsList.append(list_dict[i.label])
+    if (name == "insert_text_image"):
+        f=1
+    if not(name =="" or len(list_dict)==0):
+        function_name = VariabilityFunction.objects.get(id_code=name)
+        paramList = []
+        #TODO: change to the correct param order
+        function_params = function_name.params.all().order_by("id")
+        for i in function_params:
+            parTMP = FunctionParam.objects.get(pk=i.id)
+            paramList.append(parTMP)
+        if(len(list_dict) == len(paramList)):
+            for i in paramList:
+                if isinstance(list_dict[i.label],list):
+                    for j in list_dict[i.label]:
+                        argsList.append(j)
+                else:
+                    argsList.append(list_dict[i.label])
     return argsList
