@@ -166,6 +166,8 @@ class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
                 experiment.scenarios_conf=json_attributes_load(request.data.get('scenarios_conf')) if request.data.get('scenarios_conf') else None
                 experiment.special_colnames=json_attributes_load(request.data.get('special_colnames'))
                 experiment.screenshot_name_generation_function=request.data.get('screenshot_name_generation_function')
+                if 'screenshots' in request.data and experiment.screenshots != request.data.get('screenshots'):
+                    experiment.screenshots=request.data.get('screenshots')
                 
                 experiment.save()
                 
