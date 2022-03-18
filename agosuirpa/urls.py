@@ -19,20 +19,20 @@ from django.urls import include, path, re_path
 from django.shortcuts import render
 from rest_framework import routers
 import private_storage.urls
-# from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt
 # from rest_framework.schemas import get_schema_view
 # from experiments import views
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
-# @csrf_exempt
-# def render_react(request):
-#     return render(request, "index.html")
+@csrf_exempt
+def render_react(request):
+    return render(request, "index.html")
 
 router = routers.DefaultRouter()
 
 urlpatterns = [
-    # re_path(r"^$", render_react),
-    # re_path(r"^(?:.*)/?$", render_react),
+    re_path(r"agosuirpa/$", render_react),
+    re_path(r"agosuirpa(?:.*)/?$", render_react),
     path(API_VERSION+'admin/', admin.site.urls),
     path(API_VERSION+'users/', include('users.urls')),
     path(API_VERSION+'experiments/', include('experiments.urls')),
