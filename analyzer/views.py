@@ -10,7 +10,7 @@ import re
 from tqdm import tqdm
 from time import sleep
 from datetime import datetime
-from analyzer.configuration_settings import times_calculation_mode, metadata_location, sep
+from analyzer.configuration_settings import times_calculation_mode, metadata_location, sep, decision_foldername
 from featureextraction.views import check_npy_components_of_capture
 from decisiondiscovery.views import decision_tree_training, extract_training_dataset
 from featureextraction.views import gui_components_detection, classify_image_components
@@ -50,6 +50,10 @@ def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activ
             for n in family_names:
                 times[n] = {}
                 
+                decision_tree_library = to_exec['decision_tree_training']['library'] if (to_exec['decision_tree_training'] and to_exec['decision_tree_training']['library']) else 'sklearn'
+                decision_tree_algorithms = to_exec['decision_tree_training']['algorithms'] if (to_exec['decision_tree_training'] and to_exec['decision_tree_training']['algorithms']) else ['ID3', 'CART', 'CHAID', 'C4.5']
+                decision_tree_mode = to_exec['decision_tree_training']['mode'] if (to_exec['decision_tree_training'] and to_exec['decision_tree_training']['mode']) else 'autogeneration'
+                
                 to_exec_args = {
                     'gui_components_detection': (param_path+n+sep+'log.csv', param_path+n+sep),
                     'classify_image_components': ('resources'+sep+'models'+sep+'model.json',
@@ -59,10 +63,10 @@ def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activ
                                                   param_path+n+sep+'enriched_log.csv',
                                                   False),
                     'extract_training_dataset': (decision_activity, param_path + n+sep + 'enriched_log.csv', param_path+n+sep),
-                    'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep, 'sklearn') # 'autogeneration' -> to plot tree automatically
+                    'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep, decision_tree_library, decision_tree_mode, decision_tree_algorithms) # 'autogeneration' -> to plot tree automatically
                     }
                 
-                for index, function_to_exec in enumerate(to_exec):
+                for index, function_to_exec in enumerate(to_exec.keys()):
                     times[n][index] = {"start": time.time()}
                     output = eval(function_to_exec)(*to_exec_args[function_to_exec])
                     times[n][index]["finish"] = time.time()
@@ -93,10 +97,8 @@ def times_duration(times_dict):
     return res
 
 
-def calculate_accuracy_per_tree(decision_tree_path, expression, quantity_difference):
-    f = open(decision_tree_path, "r").read()
+def calculate_accuracy_per_tree(decision_tree_path, expression, quantity_difference, library):
     res = {}
-    
     # This code is useful if we want to get the expresion like: [["TextView", "B"],["ImageView", "B"]]
     # if not isinstance(levels, list):
     #     levels = [levels]
@@ -107,36 +109,66 @@ def calculate_accuracy_per_tree(decision_tree_path, expression, quantity_differe
       while op in levels:
         levels.remove(op)
 
-    for gui_component_name_to_find in levels:
-    # This code is useful if we want to get the expresion like: [["TextView", "B"],["ImageView", "B"]]
-    # for gui_component_class in levels:
-        # if len(gui_component_class) == 1:
-        #     gui_component_name_to_find = gui_component_class[0]
-        # else:
-        #     gui_component_name_to_find = gui_component_class[0] + \
-        #         "_"+gui_component_class[1]
-        position = f.find(gui_component_name_to_find)
-        res[gui_component_name_to_find] = "False"
-        if position != -1:
-            positions = [m.start() for m in re.finditer(gui_component_name_to_find, f)]
-            number_of_nodes = int(len(positions)/2)
-            if len(positions) != 2:
-                print("Warning: GUI component appears more than twice")
-            for n_nod in range(0, number_of_nodes):
-                res_partial = {}
-                for index, position_2i0 in enumerate(positions):
-                    position_i += 2*n_nod
-                    position_aux = position_i + len(gui_component_name_to_find)
-                    s = f[position_aux:]
-                    end_position = s.find("\n")
-                    quantity = f[position_aux:position_aux+end_position]
+    if library == 'sklearn':
+        f = open(decision_tree_path + "decision_tree.log", "r").read()
+        for gui_component_name_to_find in levels:
+        # This code is useful if we want to get the expresion like: [["TextView", "B"],["ImageView", "B"]]
+        # for gui_component_class in levels:
+            # if len(gui_component_class) == 1:
+            #     gui_component_name_to_find = gui_component_class[0]
+            # else:
+            #     gui_component_name_to_find = gui_component_class[0] + \
+            #         "_"+gui_component_class[1]
+            position = f.find(gui_component_name_to_find)
+            res[gui_component_name_to_find] = "False"
+            if position != -1:
+                positions = [m.start() for m in re.finditer(gui_component_name_to_find, f)]
+                number_of_nodes = int(len(positions)/2)
+                if len(positions) != 2:
+                    print("Warning: GUI component appears more than twice")
+                for n_nod in range(0, number_of_nodes):
+                    res_partial = {}
+                    for index, position_i in enumerate(positions):
+                        position_i += 2*n_nod
+                        position_aux = position_i + len(gui_component_name_to_find)
+                        s = f[position_aux:]
+                        end_position = s.find("\n")
+                        quantity = f[position_aux:position_aux+end_position]
+                        for c in '<>= ':
+                            quantity = quantity.replace(c, '')
+                            res_partial[index] = quantity
+                    if float(res_partial[0])-float(res_partial[1]) > quantity_difference:
+                        print("GUI component quantity difference greater than the expected")
+                        res[gui_component_name_to_find] = "False"
+                    else:
+                        res[gui_component_name_to_find] = "True"
+    else:
+        alg = "ID3"
+        json_f = open(decision_tree_path + decision_foldername + sep + alg + "-rules.json")
+        decision_tree_decision_points = json.load(json_f)
+        for gui_component_name_to_find in levels:
+            res_partial = []
+            gui_component_to_find_index = 0
+            for node in decision_tree_decision_points:
+                if node['return_statement'] == 0 and (gui_component_name_to_find in node['feature_name']): 
+                    # return_statement: filtering return statements (only conditions evaluations)
+                    # feature_name: filtering feature names as the ones contained on the expression
+                    feature_complete_id = 'obj['+str(node['feature_idx'])+']'
+                    pos1 = node['rule'].find(feature_complete_id) + len(feature_complete_id)
+                    pos2 = node['rule'].find(':')
+                    quantity = node['rule'][pos1:pos2]
+                    res_partial.append(quantity)
                     for c in '<>= ':
                         quantity = quantity.replace(c, '')
-                        res_partial[index] = quantity
-                if float(res_partial[0])-float(res_partial[1]) > quantity_difference:
-                    print("GUI component quantity difference greater than the expected")
-                else:
-                    res[gui_component_name_to_find] = "True"
+                        res_partial[gui_component_to_find_index] = quantity
+                    gui_component_to_find_index +=1
+            if res_partial and (float(res_partial[0])-float(res_partial[1]) > quantity_difference):
+                print("GUI component quantity difference greater than the expected")
+                res[gui_component_name_to_find] = "False"
+            elif res_partial and len(res_partial) == 2:
+                res[gui_component_name_to_find] = "True"
+            else:
+                res[gui_component_name_to_find] = "False"
 
     s = expression
     print(res)
@@ -144,15 +176,13 @@ def calculate_accuracy_per_tree(decision_tree_path, expression, quantity_differe
         s = s.replace(gui_component_name_to_find, res[gui_component_name_to_find])
     
     res = eval(s)
-    
+        
     if not res:
       print("Condition " + str(expression) + " is not fulfilled")
     return int(res)
 
 
 def experiments_results_collectors(exp_foldername, exp_folder_complete_path, scenarios, gui_component_class, quantity_difference, decision_tree_filename, phases_to_execute, drop):
-    # Configuration data
-    decision_tree_filename = "decision_tree.log"
     csv_filename = exp_folder_complete_path + sep + exp_foldername + "_results.csv"
 
     times_info_path = metadata_location + sep + exp_foldername + "_metadata" + sep
@@ -184,7 +214,7 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
         for n in family_size_balance_variations:
             metainfo = n.split("_")
             # path example of decision tree specification: agosuirpa\CSV_exit\resources\version1637144717955\scenario_1\Basic_10_Imbalanced\decision_tree.log
-            decision_tree_path = scenario_path + sep + n + sep + decision_tree_filename
+            decision_tree_path = scenario_path + sep + n + sep
 
             family.append(metainfo[0])
             log_size.append(metainfo[1])
@@ -192,16 +222,16 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
             # 1 == Balanced, 0 == Imbalanced
             balanced.append(1 if metainfo[2] == "Balanced" else 0)
             count = 0
-            if "gui_components_detection" in phases_to_execute:
+            if "gui_components_detection" in phases_to_execute.keys():
                 detection_time.append(times_duration(times[n]["0"]))
                 count += 1
-            if "classify_image_components" in phases_to_execute:
+            if "classify_image_components" in phases_to_execute.keys():
                 classification_time.append(times_duration(times[n][str(count)]))
                 count += 1
-            elif "extract_training_dataset" in phases_to_execute:
+            elif "extract_training_dataset" in phases_to_execute.keys():
                 flat_time.append(times_duration(times[n][str(count)]))
                 count += 1
-            elif "decision_tree_training" in phases_to_execute:
+            elif "decision_tree_training" in phases_to_execute.keys():
                 tree_training_time.append(times_duration(times[n][str(count)]))
                 count += 1
             # TODO: accurracy_score
@@ -214,9 +244,11 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
 
             # Calculate level of accuracy
             accuracy.append(calculate_accuracy_per_tree(
-                decision_tree_path, gui_component_class, quantity_difference))
+                decision_tree_path, gui_component_class, quantity_difference, phases_to_execute['decision_tree_training']['library']))
+    
+    dict_results = {}
 
-    dict_results = {
+    dict_results_aux = {
         'family': family,
         'balanced': balanced,
         'log_size': log_size,
@@ -230,6 +262,10 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
         'log_column': log_column,
         'accuracy': accuracy
     }
+    
+    for entry in dict_results_aux.items():
+        if len(entry[1]) > 0:
+            dict_results[entry[0]] = entry[1]
 
     df = pd.DataFrame(dict_results)
     df.to_csv(csv_filename)
@@ -353,12 +389,18 @@ class CaseStudyView(generics.ListCreateAPIView):
         else:
             execute_case_study = True
             try:
-                for phase in case_study_serialized.data['phases_to_execute']:
+                if not isinstance(case_study_serialized.data['phases_to_execute'], dict):
+                    response_content = {"message": "phases_to_execute must be of type dict!!!!! and must be composed by phases contained in ['gui_components_detection','classify_image_components','extract_training_dataset','decision_tree_training']"}
+                    st = status.HTTP_422_UNPROCESSABLE_ENTITY 
+                    execute_case_study = False
+                    return Response(response_content, status=st)
+                        
+                for phase in dict(case_study_serialized.data['phases_to_execute']).keys():
                     if not(phase in ['gui_components_detection','classify_image_components','extract_training_dataset','decision_tree_training']):
                         response_content = {"message": "phases_to_execute must be composed by phases contained in ['gui_components_detection','classify_image_components','extract_training_dataset','decision_tree_training']"}
                         st = status.HTTP_422_UNPROCESSABLE_ENTITY 
                         execute_case_study = False
-                        break
+                        return Response(response_content, status=st)
                 if execute_case_study:
                     generator_msg, generator_success = case_study_generator(
                                         case_study_serialized.data['mode'],

@@ -10,7 +10,7 @@ from sklearn.tree import DecisionTreeClassifier, export_graphviz, export_text
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
 from chefboost import Chefboost as chef
-import subprocess
+from analyzer.configuration_settings import sep, decision_foldername
 # import json
 # import sys
 # from django.shortcuts import render
@@ -184,7 +184,7 @@ def plot_decision_tree(path: str,
 def chefboost_decision_tree(param_preprocessed_log_path, param_path, algorithms):
     flattened_dataset = pd.read_csv(param_preprocessed_log_path, index_col=0, sep=',')
     target_label = 'Variant'
-    param_path += 'decision-tree/'
+    param_path += decision_foldername + sep
     if not os.path.exists(param_path):
         os.mkdir(param_path)
     one_hot_cols = []

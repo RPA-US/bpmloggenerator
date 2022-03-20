@@ -1,9 +1,9 @@
 from django.db import models
-from django.contrib.postgres.fields import ArrayField
+from django.forms import JSONField
 from users.models import CustomUser
 
 def default_phases_to_execute():
-    return ['gui_components_detection', 'classify_image_components', 'extract_training_dataset', 'decision_tree_training']
+    return {'gui_components_detection': {}, 'classify_image_components': {}, 'extract_training_dataset': {}, 'decision_tree_training': {}}
 
 # Create your models here.
 class CaseStudy(models.Model):
@@ -14,7 +14,7 @@ class CaseStudy(models.Model):
     mode = models.CharField(max_length=255)
     scenarios_to_study = models.CharField(max_length=255, null=True)
     drop = models.CharField(max_length=255, null=True)
-    phases_to_execute = ArrayField(models.CharField(max_length=50), default=default_phases_to_execute)
+    phases_to_execute = JSONField()
     decision_point_activity = models.CharField(max_length=255)
     gui_class_success_regex = models.CharField(max_length=255)
     gui_quantity_difference = models.IntegerField(default=1)
