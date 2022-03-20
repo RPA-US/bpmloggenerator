@@ -147,3 +147,6 @@ loggenerator.db
 
 # Django Migrations
 migrations/
+
+# Decision Tree Chefboost Library Output
+outputs/

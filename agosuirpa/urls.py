@@ -30,8 +30,8 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     path(API_VERSION+'admin/', admin.site.urls),
-    re_path(r"^$", render_react),
-    re_path(r"^(?:.*)/?$", render_react),
+    # re_path(r"^$", render_react),
+    # re_path(r"^(?:.*)/?$", render_react),
     path(API_VERSION+'users/', include('users.urls')),
     path(API_VERSION+'analyzer/', include('analyzer.urls')),
     path(API_VERSION+'experiments/', include('experiments.urls')),

@@ -52,10 +52,14 @@ def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activ
                 
                 to_exec_args = {
                     'gui_components_detection': (param_path+n+sep+'log.csv', param_path+n+sep),
-                    'classify_image_components': ('media'+sep+'models'+sep+'model.json', 'media'+sep+'models'+sep+'model.h5', param_path+n +
-                                               sep+'components_npy'+sep, param_path+n+sep + 'log.csv', param_path+n+sep+'enriched_log.csv'),
+                    'classify_image_components': ('resources'+sep+'models'+sep+'model.json',
+                                                  'resources'+sep+'models'+sep+'model.h5',
+                                                  param_path + n + sep + 'components_npy' + sep,
+                                                  param_path+n+sep + 'log.csv',
+                                                  param_path+n+sep+'enriched_log.csv',
+                                                  False),
                     'extract_training_dataset': (decision_activity, param_path + n+sep + 'enriched_log.csv', param_path+n+sep),
-                    'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep, 'autogeneration')
+                    'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep) # 'autogeneration' -> to plot tree automatically
                     }
                 
                 for index, function_to_exec in enumerate(to_exec):
@@ -113,14 +117,13 @@ def calculate_accuracy_per_tree(decision_tree_path, expression, quantity_differe
         position = f.find(gui_component_name_to_find)
         res[gui_component_name_to_find] = "False"
         if position != -1:
-            positions = [m.start()
-                         for m in re.finditer(gui_component_name_to_find, f)]
+            positions = [m.start() for m in re.finditer(gui_component_name_to_find, f)]
             number_of_nodes = int(len(positions)/2)
             if len(positions) != 2:
-                print("GUI component appears more than twice")
+                print("Warning: GUI component appears more than twice")
             for n_nod in range(0, number_of_nodes):
                 res_partial = {}
-                for index, position_i in enumerate(positions):
+                for index, position_2i0 in enumerate(positions):
                     position_i += 2*n_nod
                     position_aux = position_i + len(gui_component_name_to_find)
                     s = f[position_aux:]

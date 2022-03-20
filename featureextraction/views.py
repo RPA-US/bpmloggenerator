@@ -254,7 +254,7 @@ def pad(img, h, w):
     return np.copy(np.pad(img, ((top_pad, bottom_pad), (left_pad, right_pad), (0, 0)), mode='constant', constant_values=0))
 
 
-def classify_image_components(param_json_file_name="media/models/model.json", param_model_weights="media/models/model.h5", param_images_root="media/screenshots/components_npy/", param_log_path="media/log.csv", enriched_log_output_path="media/enriched_log_feature_extracted.csv"):
+def classify_image_components(param_json_file_name="resources/models/model.json", param_model_weights="resources/models/model.h5", param_images_root="resources/screenshots/components_npy/", param_log_path="resources/log.csv", enriched_log_output_path="resources/enriched_log_feature_extracted.csv", rewrite_log=False):
     """
     Con esta función clasificamos los componentes recortados de cada una de las capturas para posteriormente añadir al log
     14 columnas. Estas corresponden a cada una de las clases en las que se puede clasificar un componente GUI. Los valores 
@@ -270,137 +270,141 @@ def classify_image_components(param_json_file_name="media/models/model.json", pa
     :param_log_path: ruta donde se encuentra el log que queremos enriquecer con cuántos componentes GUI de cada tipo hay en sus capturas
     :type param_log_path: str
     """
+    if not os.path.exists(enriched_log_output_path) or rewrite_log:
+        column_names = ['x0_Button', 'x0_CheckBox', 'x0_CheckedTextView', 'x0_EditText',
+                        'x0_ImageButton', 'x0_ImageView', 'x0_NumberPicker', 'x0_RadioButton',
+                        'x0_RatingBar', 'x0_SeekBar', 'x0_Spinner', 'x0_Switch', 'x0_TextView',
+                        'x0_ToggleButton']
 
-    column_names = ['x0_Button', 'x0_CheckBox', 'x0_CheckedTextView', 'x0_EditText',
-                    'x0_ImageButton', 'x0_ImageView', 'x0_NumberPicker', 'x0_RadioButton',
-                    'x0_RatingBar', 'x0_SeekBar', 'x0_Spinner', 'x0_Switch', 'x0_TextView',
-                    'x0_ToggleButton']
+        # print("\n\n====== Column names =======================")
+        # print(column_names)
+        # print("===========================================\n\n")
 
-    # print("\n\n====== Column names =======================")
-    # print(column_names)
-    # print("===========================================\n\n")
+        # load json and create model
+        json_file = open(param_json_file_name, 'r')
+        loaded_model_json = json_file.read()
+        json_file.close()
+        loaded_model = model_from_json(loaded_model_json)
+        # load weights into new model
+        loaded_model.load_weights(param_model_weights)
+        # model = tf.keras.models.load_model('media/models/model_remaui.pb')
+        print("\n\nLoaded ML model from disk\n")
 
-    # load json and create model
-    json_file = open(param_json_file_name, 'r')
-    loaded_model_json = json_file.read()
-    json_file.close()
-    loaded_model = model_from_json(loaded_model_json)
-    # load weights into new model
-    loaded_model.load_weights(param_model_weights)
-    # model = tf.keras.models.load_model('media/models/model_remaui.pb')
-    print("\n\nLoaded ML model from disk\n")
-
-    """
-    Tras comprobar el accuracy obtenido tras la evaluación, vamos a aplicar el modelo a un experimento basado en un log,
-    con imágenes mockeadas a modo de screenchots del proceso, para extraerle las características a estas.
-
-    Cogemos los vectores de numpy correspondientes a cada imagen, obtenidos a través de la aplicación del notebook
-    de Detección y recorte de componentes GUI, que tendrán que ser almacenadas en la ruta "mockups_vector/".
-    """
-    log = pd.read_csv(param_log_path, sep=",")
-
-    images_root = param_images_root  # "mockups_vector/"
-    crop_imgs = {}
-    # images_names = [ x + ".npy" for x in log.loc[:,"Screenshot"].values.tolist()] # os.listdir(images_root)
-    images_names = log.loc[:, "Screenshot"].values.tolist()
-    # print(images_names)
-    for img_filename in images_names:
-        crop_img_aux = np.load(images_root+img_filename +
-                               ".npy", allow_pickle=True)
-        text_or_not_text = np.load(
-            images_root+img_filename+"_texts.npy", allow_pickle=True)
-        crop_imgs[img_filename] = {
-            'content': crop_img_aux, 'text': text_or_not_text}
-
-    """
-    Una vez cargadas, reducimos su tamaño para adecuarlo a la entrada de la red neuronal convolucional producto de este
-    notebook.
-    """
-    print("\nLog dictionary length: " + str(len(crop_imgs)))
-
-    crop_images = list(crop_imgs)
-    # print("Padded: (150, 150, 3)")
-    # print("Cropped: (50, 50, 3)\n\n")
-    for i in range(0, len(crop_imgs)):
-        aux = []
-        for img in crop_imgs[crop_images[i]]["content"]:
-            # for index, img in enumerate(crop_imgs[crop_images[i]]["content"]):
-            # print("Original "+str(index)+": "+str(img.shape))
-            if img.shape[1] > 150:
-                img = img[0:img.shape[0], 0:150]
-            if img.shape[0] > 150:
-                img = img[0:150, 0:img.shape[1]]
-            img_padded = pad(img, 150, 150)
-            # print("Padded: "+str(img_padded.shape))
-            img_resized = tf.image.resize(img_padded, [
-                                          50, 50], method=tf.image.ResizeMethod.NEAREST_NEIGHBOR, preserve_aspect_ratio=True, antialias=True)
-            aux.append(img_resized)
-            # print("Cropped: "+str(img_resized.shape))
-        crop_imgs[crop_images[i]]["content_preprocessed"] = aux
         """
-        Esta red devuelve como salida un número, indicando una de las clases. Este número tendrá que ser mapeado a su texto
-        (nombre de la clase) correspondiente.
+        Tras comprobar el accuracy obtenido tras la evaluación, vamos a aplicar el modelo a un experimento basado en un log,
+        con imágenes mockeadas a modo de screenchots del proceso, para extraerle las características a estas.
+
+        Cogemos los vectores de numpy correspondientes a cada imagen, obtenidos a través de la aplicación del notebook
+        de Detección y recorte de componentes GUI, que tendrán que ser almacenadas en la ruta "mockups_vector/".
         """
-        content_preprocessed_aux = crop_imgs[images_names[i]
-                                             ]["content_preprocessed"]
+        log = pd.read_csv(param_log_path, sep=",")
 
-        # print("Content preprocessed length: " + str(len(crop_imgs[images_names[i]]["content_preprocessed"])))
-        # result = loaded_model.predict_classes(np.array(content_preprocessed_aux)) # removed from tensorflow 2.6
-        # for gui_component in content_preprocessed_aux:
-        # print("Content preprocessed object type: " + str(type(gui_component)))
-        # print("Content preprocessed component shape: " + str(gui_component.shape))
-        predict_x = loaded_model.predict(np.array(content_preprocessed_aux))
-        result = np.argmax(predict_x, axis=1)
-        # print("\nPREDICTIONS:")
-        # print(result)
+        images_root = param_images_root  # "mockups_vector/"
+        crop_imgs = {}
+        # images_names = [ x + ".npy" for x in log.loc[:,"Screenshot"].values.tolist()] # os.listdir(images_root)
+        images_names = log.loc[:, "Screenshot"].values.tolist()
+        # print(images_names)
+        for img_filename in images_names:
+            crop_img_aux = np.load(images_root+img_filename +
+                                ".npy", allow_pickle=True)
+            text_or_not_text = np.load(
+                images_root+img_filename+"_texts.npy", allow_pickle=True)
+            crop_imgs[img_filename] = {
+                'content': crop_img_aux, 'text': text_or_not_text}
 
-        result_mapped = ["x0_TextView" if crop_imgs[crop_images[i]]["text"][index] else column_names[x] for index, x in enumerate(result)]
+        """
+        Una vez cargadas, reducimos su tamaño para adecuarlo a la entrada de la red neuronal convolucional producto de este
+        notebook.
+        """
+        print("\nLog dictionary length: " + str(len(crop_imgs)))
 
-        crop_imgs[images_names[i]]["result"] = result_mapped
-        crop_imgs[images_names[i]]["result_freq"] = pd.Series(
-            result_mapped).value_counts()
-        crop_imgs[images_names[i]]["result_freq_df"] = crop_imgs[images_names[i]
-                                                                 ]["result_freq"].to_frame().T
+        crop_images = list(crop_imgs)
+        # print("Padded: (150, 150, 3)")
+        # print("Cropped: (50, 50, 3)\n\n")
+        for i in range(0, len(crop_imgs)):
+            aux = []
+            for img in crop_imgs[crop_images[i]]["content"]:
+                # for index, img in enumerate(crop_imgs[crop_images[i]]["content"]):
+                # print("Original "+str(index)+": "+str(img.shape))
+                if img.shape[1] > 150:
+                    img = img[0:img.shape[0], 0:150]
+                if img.shape[0] > 150:
+                    img = img[0:150, 0:img.shape[1]]
+                img_padded = pad(img, 150, 150)
+                # print("Padded: "+str(img_padded.shape))
+                img_resized = tf.image.resize(img_padded, [
+                                            50, 50], method=tf.image.ResizeMethod.NEAREST_NEIGHBOR, preserve_aspect_ratio=True, antialias=True)
+                aux.append(img_resized)
+                # print("Cropped: "+str(img_resized.shape))
+            crop_imgs[crop_images[i]]["content_preprocessed"] = aux
+            """
+            Esta red devuelve como salida un número, indicando una de las clases. Este número tendrá que ser mapeado a su texto
+            (nombre de la clase) correspondiente.
+            """
+            content_preprocessed_aux = crop_imgs[images_names[i]
+                                                ]["content_preprocessed"]
 
-    """
-    Como todas las imágenes no tendrán todas las clases, generarán como salida un dataset que no tendrán siempre las mismas
-    columnas. Dependerá si en la imagen aparecen componentes GUI de todo tipo o solamente un subconjunto de ellos. Por ello, 
-    inicializamos un dataframe con todas las columnas posibles, y vamos incluyendo una fila por cada resultado obtenido de
-    cada imagen pasada por la red.
-    """
+            # print("Content preprocessed length: " + str(len(crop_imgs[images_names[i]]["content_preprocessed"])))
+            # result = loaded_model.predict_classes(np.array(content_preprocessed_aux)) # removed from tensorflow 2.6
+            # for gui_component in content_preprocessed_aux:
+            # print("Content preprocessed object type: " + str(type(gui_component)))
+            # print("Content preprocessed component shape: " + str(gui_component.shape))
+            predict_x = loaded_model.predict(np.array(content_preprocessed_aux))
+            result = np.argmax(predict_x, axis=1)
+            # print("\nPREDICTIONS:")
+            # print(result)
 
-    nombre_clases = ['x0_RatingBar', 'x0_ToggleButton', 'x0_Spinner', 'x0_Switch', 'x0_CheckBox', 'x0_TextView', 'x0_EditText',
-                     'x0_ImageButton', 'x0_NumberPicker', 'x0_CheckedTextView', 'x0_SeekBar', 'x0_ImageView', 'x0_RadioButton', 'x0_Button']
-    df = pd.DataFrame([], columns=nombre_clases)
+            result_mapped = ["x0_TextView" if crop_imgs[crop_images[i]]["text"][index] else column_names[x] for index, x in enumerate(result)]
 
-    for i in range(0, len(images_names)):
-        row1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        # accedemos a las frecuencias almacenadas anteriormente
-        df1 = crop_imgs[images_names[i]]["result_freq_df"]
-        if len(df1.columns.tolist()) > 0:
-            for x in df1.columns.tolist():
-                uiui = nombre_clases.index(x)
-                row1[uiui] = df1[x][0]
-                df.loc[i] = row1
+            crop_imgs[images_names[i]]["result"] = result_mapped
+            crop_imgs[images_names[i]]["result_freq"] = pd.Series(
+                result_mapped).value_counts()
+            crop_imgs[images_names[i]]["result_freq_df"] = crop_imgs[images_names[i]
+                                                                    ]["result_freq"].to_frame().T
 
-    """
-    Una vez obtenido el dataset correspondiente a la cantidad de elementos de cada clase contenidos en cada una de las
-    imágenes. Unimos este con el log completo, añadiendo las características extraídas de las imágenes.
-    """
+        """
+        Como todas las imágenes no tendrán todas las clases, generarán como salida un dataset que no tendrán siempre las mismas
+        columnas. Dependerá si en la imagen aparecen componentes GUI de todo tipo o solamente un subconjunto de ellos. Por ello, 
+        inicializamos un dataframe con todas las columnas posibles, y vamos incluyendo una fila por cada resultado obtenido de
+        cada imagen pasada por la red.
+        """
 
-    log_enriched = log.join(df).fillna(method='ffill')
+        nombre_clases = ['x0_RatingBar', 'x0_ToggleButton', 'x0_Spinner', 'x0_Switch', 'x0_CheckBox', 'x0_TextView', 'x0_EditText',
+                        'x0_ImageButton', 'x0_NumberPicker', 'x0_CheckedTextView', 'x0_SeekBar', 'x0_ImageView', 'x0_RadioButton', 'x0_Button']
+        df = pd.DataFrame([], columns=nombre_clases)
 
-    """
-    Finalmente obtenemos un log enriquecido, que se torna como prueba de concepto de nuestra hipótesis basada en que, si
-    no solamente capturamos eventos de teclado o de ratón en la monitorización a través de un keylogger, sino que obtenemos
-    también capturas de pantalla. Podemos extraer mucha más información útil, pudiendo mejorar la minería de procesos sobre
-    dicho log. Nos ha quedado pendiente validar esta hipótesis mediante la comparación de resultados entre aplicar técnicas
-    de pricess mining aplicadas sobre el log inicial vs. el log enriquecido. Esperamos poder continuar con este proyecto
-    en fases posteriores del máster.
-    """
-    log_enriched.to_csv(enriched_log_output_path)
-    print("\n\n=========== ENRICHED LOG GENERATED: path=" +
-          enriched_log_output_path)
+        for i in range(0, len(images_names)):
+            row1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            # accedemos a las frecuencias almacenadas anteriormente
+            df1 = crop_imgs[images_names[i]]["result_freq_df"]
+            if len(df1.columns.tolist()) > 0:
+                for x in df1.columns.tolist():
+                    uiui = nombre_clases.index(x)
+                    row1[uiui] = df1[x][0]
+                    df.loc[i] = row1
+
+        """
+        Una vez obtenido el dataset correspondiente a la cantidad de elementos de cada clase contenidos en cada una de las
+        imágenes. Unimos este con el log completo, añadiendo las características extraídas de las imágenes.
+        """
+
+        log_enriched = log.join(df).fillna(method='ffill')
+
+        """
+        Finalmente obtenemos un log enriquecido, que se torna como prueba de concepto de nuestra hipótesis basada en que, si
+        no solamente capturamos eventos de teclado o de ratón en la monitorización a través de un keylogger, sino que obtenemos
+        también capturas de pantalla. Podemos extraer mucha más información útil, pudiendo mejorar la minería de procesos sobre
+        dicho log. Nos ha quedado pendiente validar esta hipótesis mediante la comparación de resultados entre aplicar técnicas
+        de pricess mining aplicadas sobre el log inicial vs. el log enriquecido. Esperamos poder continuar con este proyecto
+        en fases posteriores del máster.
+        """
+        log_enriched.to_csv(enriched_log_output_path)
+        print("\n\n=========== ENRICHED LOG GENERATED: path=" +
+            enriched_log_output_path)
+    else:
+        log_enriched = pd.read_csv(enriched_log_output_path, sep=",", index_col=0)
+        print("\n\n=========== ENRICHED LOG ALREADY EXISTS: path=" +
+            enriched_log_output_path)
     return log_enriched
 
 

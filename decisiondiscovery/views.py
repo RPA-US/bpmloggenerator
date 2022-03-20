@@ -1,12 +1,14 @@
 from typing import List
 import pandas as pd
 import os
+import shutil
 import graphviz
 import matplotlib.image as plt_img
 import numpy as np
 from sklearn.tree import DecisionTreeClassifier, export_graphviz, export_text
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
+from chefboost import Chefboost as chef
 # import json
 # import sys
 # from django.shortcuts import render
@@ -177,8 +179,37 @@ def plot_decision_tree(path: str,
 
     return image
 
+def chefboost_decision_tree(param_preprocessed_log_path="media/preprocessed_dataset.csv", param_path="media/", algorithms=['ID3', 'CART', 'CHAID', 'C4.5']):
+    flattened_dataset = pd.read_csv(param_preprocessed_log_path, index_col=0, sep=',')
+    param_path += 'decision-tree/'
+    if not os.path.exists(param_path):
+        os.mkdir(param_path)
+    one_hot_cols = []
+    text_cols = []
+    for c in flattened_dataset.columns:
+        if "NameApp" in c:
+            one_hot_cols.append(c)
+        elif "TextInput" in c:
+            text_cols.append(c)
+            
+    flattened_dataset = pd.get_dummies(flattened_dataset, columns=one_hot_cols)
+    flattened_dataset = flattened_dataset.drop(text_cols, axis=1)
+    flattened_dataset = flattened_dataset.fillna(0.)
+    
+    for alg in list(algorithms):
+        df = flattened_dataset
+        config = {'algorithm': alg, 'enableParallelism': True, 'num_cores': 2} # CHAID, ID3
+        chef.fit(df, config = config, target_label = 'Variant')
+        # model = chef.fit(df, config = config, target_label = 'Variant')
+        # chef.save_model(model, alg+'model.pkl')
+        df = chef.feature_importance('outputs/rules/rules.py')
+        df.to_csv(param_path+alg+"-tree-feature-importance.csv")
+        shutil.copyfile('outputs/rules/rules.py', param_path+alg+'-rules.py')
+        shutil.copyfile('outputs/rules/rules.json', param_path+alg+'-rules.json')
+    accuracy_score = 100
+    return accuracy_score
 
-def decision_tree_training(param_preprocessed_log_path="media/preprocessed_dataset.csv", param_path="media/", autogeneration="autogeneration"):
+def CART_sklearn_decision_tree(param_preprocessed_log_path="media/preprocessed_dataset.csv", param_path="media/", autogeneration="autogeneration"):
     df = pd.read_csv(param_preprocessed_log_path, index_col=0, sep=',')
 
     one_hot_cols = []
@@ -260,3 +291,8 @@ def decision_tree_training(param_preprocessed_log_path="media/preprocessed_datas
         plt.show()
 
     return accuracy_score(y, y_predict)
+
+
+def decision_tree_training(param_preprocessed_log_path="media/preprocessed_dataset.csv", param_path="media/", algorithms=['ID3', 'CART', 'CHAID', 'C4.5']):
+    # return CART_sklearn_decision_tree(param_preprocessed_log_path, param_path, autogeneration)
+    return chefboost_decision_tree(param_preprocessed_log_path, param_path, algorithms)
