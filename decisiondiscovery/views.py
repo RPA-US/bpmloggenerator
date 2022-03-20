@@ -203,21 +203,24 @@ def chefboost_decision_tree(param_preprocessed_log_path, param_path, algorithms)
     
     for alg in list(algorithms):
         df = flattened_dataset
-        config = {'algorithm': alg, 'enableParallelism': True, 'num_cores': 2} # CHAID, ID3
-        chef.fit(df, config = config, target_label = target_label)
+        df.rename(columns = {target_label:'Decision'}, inplace = True)
+        df['Decision'] = df['Decision'].astype(object) # which will by default set the length to the max len it encounters
+        config = {'algorithm': alg} # CHAID, ID3
+        chef.fit(df, config = config)
         # TODO: accurracy_score -> store evaluate terminar output
-        # model = chef.fit(df, config = config, target_label = target_label)
-        # output = subprocess.Popen( [chef.evaluate(model,df,target_label=target_label)], stdout=subprocess.PIPE ).communicate()[0]
+        # model = chef.fit(df, config = config)
+        # output = subprocess.Popen( [chef.evaluate(model,df)], stdout=subprocess.PIPE ).communicate()[0]
         # file = open(param_path+alg+'-results.txt','w')
         # file.write(output)
         # file.close()
         # Saving model
         # model = chef.fit(df, config = config, target_label = 'Variant')
         # chef.save_model(model, alg+'model.pkl')
-        fi = chef.feature_importance('outputs/rules/rules.py').set_index("feature")
-        # Graphical representation of feature importance
+        # TODO: feature importance
+        # fi = chef.feature_importance('outputs/rules/rules.py').set_index("feature")
+        # fi.to_csv(param_path+alg+"-tree-feature-importance.csv")
+        # TODO: Graphical representation of feature importance
         # fi.plot(kind="barh", title="Feature Importance")
-        fi.to_csv(param_path+alg+"-tree-feature-importance.csv")
         shutil.copyfile('outputs/rules/rules.py', param_path+alg+'-rules.py')
         shutil.copyfile('outputs/rules/rules.json', param_path+alg+'-rules.json')
     accuracy_score = 100

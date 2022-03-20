@@ -50,9 +50,9 @@ def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activ
             for n in family_names:
                 times[n] = {}
                 
-                decision_tree_library = to_exec['decision_tree_training']['library'] if (to_exec['decision_tree_training'] and to_exec['decision_tree_training']['library']) else 'sklearn'
-                decision_tree_algorithms = to_exec['decision_tree_training']['algorithms'] if (to_exec['decision_tree_training'] and to_exec['decision_tree_training']['algorithms']) else ['ID3', 'CART', 'CHAID', 'C4.5']
-                decision_tree_mode = to_exec['decision_tree_training']['mode'] if (to_exec['decision_tree_training'] and to_exec['decision_tree_training']['mode']) else 'autogeneration'
+                decision_tree_library       = to_exec['decision_tree_training']['library'] if (('decision_tree_training' in to_exec) and ('library' in to_exec['decision_tree_training'])) else 'sklearn'
+                decision_tree_algorithms    = to_exec['decision_tree_training']['algorithms'] if (('decision_tree_training' in to_exec) and ('algorithms' in to_exec['decision_tree_training'])) else None # ['ID3', 'CART', 'CHAID', 'C4.5']
+                decision_tree_mode          = to_exec['decision_tree_training']['mode'] if (('decision_tree_training' in to_exec) and ('mode' in to_exec['decision_tree_training'])) else 'autogeneration'
                 
                 to_exec_args = {
                     'gui_components_detection': (param_path+n+sep+'log.csv', param_path+n+sep),
@@ -97,7 +97,7 @@ def times_duration(times_dict):
     return res
 
 
-def calculate_accuracy_per_tree(decision_tree_path, expression, quantity_difference, library):
+def calculate_accuracy_per_tree(decision_tree_path, expression, quantity_difference, algorithm):
     res = {}
     # This code is useful if we want to get the expresion like: [["TextView", "B"],["ImageView", "B"]]
     # if not isinstance(levels, list):
@@ -109,7 +109,7 @@ def calculate_accuracy_per_tree(decision_tree_path, expression, quantity_differe
       while op in levels:
         levels.remove(op)
 
-    if library == 'sklearn':
+    if not algorithm:
         f = open(decision_tree_path + "decision_tree.log", "r").read()
         for gui_component_name_to_find in levels:
         # This code is useful if we want to get the expresion like: [["TextView", "B"],["ImageView", "B"]]
@@ -143,8 +143,7 @@ def calculate_accuracy_per_tree(decision_tree_path, expression, quantity_differe
                     else:
                         res[gui_component_name_to_find] = "True"
     else:
-        alg = "ID3"
-        json_f = open(decision_tree_path + decision_foldername + sep + alg + "-rules.json")
+        json_f = open(decision_tree_path + decision_foldername + sep + algorithm + "-rules.json")
         decision_tree_decision_points = json.load(json_f)
         for gui_component_name_to_find in levels:
             res_partial = []
@@ -199,8 +198,12 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
     tree_training_time = []
     tree_training_accuracy = []
     log_column = []
-    accuracy = []
-        
+    
+    decision_tree_algorithms    = phases_to_execute['decision_tree_training']['algorithms'] if (('decision_tree_training' in phases_to_execute) and ('algorithms' in phases_to_execute['decision_tree_training'])) else None
+    if decision_tree_algorithms:
+        accuracy = {}
+    else:
+        accuracy = []
     for scenario in tqdm(scenarios,
                          desc="Experiment results that have been processed"):
         sleep(.1)
@@ -242,9 +245,12 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
                 csv_headings = next(csv_reader)
             log_column.append(len(csv_headings))
 
-            # Calculate level of accuracy
-            accuracy.append(calculate_accuracy_per_tree(
-                decision_tree_path, gui_component_class, quantity_difference, phases_to_execute['decision_tree_training']['library']))
+            if decision_tree_algorithms:
+                for alg in decision_tree_algorithms:
+                    accuracy[alg+'_accuracy'] = calculate_accuracy_per_tree(decision_tree_path, gui_component_class, quantity_difference, alg)
+            else:
+                # Calculate level of accuracy
+                accuracy.append(calculate_accuracy_per_tree(decision_tree_path, gui_component_class, quantity_difference, None))
     
     dict_results = {}
 
@@ -264,7 +270,10 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
     }
     
     for entry in dict_results_aux.items():
-        if len(entry[1]) > 0:
+        if isinstance(entry[1], dict):
+            for sub_entry in entry[1].items():
+                dict_results[sub_entry[0]] = sub_entry[1]
+        elif len(entry[1]) > 0:
             dict_results[entry[0]] = entry[1]
 
     df = pd.DataFrame(dict_results)
