@@ -16,13 +16,6 @@ def manage_dependency(experiment, name, arguments, j, case, scenario, activity, 
                                   case_variation_id=j["id"], activity=activity, variant=variant, function_name=name, gui_element=image_element)
 
 
-def args_dictionary_to_list(list_dict):
-    argsList = []
-    for i in list_dict:
-        argsList.append(list_dict[i])
-    return argsList
-
-
 def generate_capture(experiment, columns_ui, columns, element, acu, case, generate_path, attr, activity, variant):
     '''
     Generate row reading the json
@@ -52,7 +45,7 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
                         if element is not None:
                             coordinates = j["coordinates"]
                             name = j["name"]
-                            args = args_dictionary_to_list(j["args"])
+                            args =j["args"]# util.args_by_function_in_order(j["args"],name)
                             if not sep in new_image:
                                 image_path_to_save = generate_path + new_image
                             else:
