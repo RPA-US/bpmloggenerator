@@ -59,15 +59,16 @@ def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activ
                                                   param_path+n+sep+'enriched_log.csv',
                                                   False),
                     'extract_training_dataset': (decision_activity, param_path + n+sep + 'enriched_log.csv', param_path+n+sep),
-                    'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep) # 'autogeneration' -> to plot tree automatically
+                    'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep, 'sklearn') # 'autogeneration' -> to plot tree automatically
                     }
                 
                 for index, function_to_exec in enumerate(to_exec):
                     times[n][index] = {"start": time.time()}
                     output = eval(function_to_exec)(*to_exec_args[function_to_exec])
                     times[n][index]["finish"] = time.time()
-                    if index == len(to_exec)-1:
-                        times[n][index]["decision_model_accuracy"] = output
+                    # TODO: accurracy_score
+                    # if index == len(to_exec)-1:
+                    #     times[n][index]["decision_model_accuracy"] = output
 
             # if not os.path.exists(scenario+sep):
             #     os.makedirs(scenario+sep)
@@ -149,7 +150,7 @@ def calculate_accuracy_per_tree(decision_tree_path, expression, quantity_differe
     return int(res)
 
 
-def experiments_results_collectors(exp_foldername, exp_folder_complete_path, scenarios, gui_component_class, quantity_difference, decision_tree_filename, drop):
+def experiments_results_collectors(exp_foldername, exp_folder_complete_path, scenarios, gui_component_class, quantity_difference, decision_tree_filename, phases_to_execute, drop):
     # Configuration data
     decision_tree_filename = "decision_tree.log"
     csv_filename = exp_folder_complete_path + sep + exp_foldername + "_results.csv"
@@ -169,11 +170,11 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
     tree_training_accuracy = []
     log_column = []
     accuracy = []
-
+        
     for scenario in tqdm(scenarios,
                          desc="Experiment results that have been processed"):
         sleep(.1)
-        scenario_path = exp_folder_complete_path + scenario
+        scenario_path = exp_folder_complete_path + sep + scenario
         family_size_balance_variations = get_foldernames_as_list(
             scenario_path, sep)
         if drop and drop in family_size_balance_variations:
@@ -190,11 +191,21 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
             scenario_number.append(scenario.split("_")[1])
             # 1 == Balanced, 0 == Imbalanced
             balanced.append(1 if metainfo[2] == "Balanced" else 0)
-            detection_time.append(times_duration(times[n]["0"]))
-            classification_time.append(times_duration(times[n]["1"]))
-            flat_time.append(times_duration(times[n]["2"]))
-            tree_training_time.append(times_duration(times[n]["3"]))
-            tree_training_accuracy.append(times[n]["3"]["decision_model_accuracy"])
+            count = 0
+            if "gui_components_detection" in phases_to_execute:
+                detection_time.append(times_duration(times[n]["0"]))
+                count += 1
+            if "classify_image_components" in phases_to_execute:
+                classification_time.append(times_duration(times[n][str(count)]))
+                count += 1
+            elif "extract_training_dataset" in phases_to_execute:
+                flat_time.append(times_duration(times[n][str(count)]))
+                count += 1
+            elif "decision_tree_training" in phases_to_execute:
+                tree_training_time.append(times_duration(times[n][str(count)]))
+                count += 1
+            # TODO: accurracy_score
+            # tree_training_accuracy.append(times[n]["3"]["decision_model_accuracy"])
 
             with open(scenario_path + sep + n + sep + preprocessed_log_filename, newline='') as f:
                 csv_reader = csv.reader(f)
@@ -214,7 +225,8 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
         'classification_time': classification_time,
         'flat_time': flat_time,
         'tree_training_time': tree_training_time,
-        'tree_training_accuracy': tree_training_accuracy,
+        # TODO: accurracy_score
+        # 'tree_training_accuracy': tree_training_accuracy,
         'log_column': log_column,
         'accuracy': accuracy
     }
@@ -289,6 +301,7 @@ def case_study_generator(mode, exp_foldername, phases_to_execute, decision_point
                                        gui_class_success_regex,
                                        gui_quantity_difference, 
                                        "decision_tree.log",
+                                       phases_to_execute,
                                        drop)
         msg = exp_foldername + ' case study results collected!'
         executed = True

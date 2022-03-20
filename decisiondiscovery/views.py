@@ -1,3 +1,4 @@
+from asyncore import write
 from typing import List
 import pandas as pd
 import os
@@ -9,12 +10,13 @@ from sklearn.tree import DecisionTreeClassifier, export_graphviz, export_text
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
 from chefboost import Chefboost as chef
+import subprocess
 # import json
 # import sys
 # from django.shortcuts import render
 # import seaborn as sns
 # from sklearn.ensemble import RandomForestClassifier
-# from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split
 
 # def clean_dataset(df):
 #     assert isinstance(df, pd.DataFrame), "df needs to be a pd.DataFrame"
@@ -179,8 +181,9 @@ def plot_decision_tree(path: str,
 
     return image
 
-def chefboost_decision_tree(param_preprocessed_log_path="media/preprocessed_dataset.csv", param_path="media/", algorithms=['ID3', 'CART', 'CHAID', 'C4.5']):
+def chefboost_decision_tree(param_preprocessed_log_path, param_path, algorithms):
     flattened_dataset = pd.read_csv(param_preprocessed_log_path, index_col=0, sep=',')
+    target_label = 'Variant'
     param_path += 'decision-tree/'
     if not os.path.exists(param_path):
         os.mkdir(param_path)
@@ -195,21 +198,32 @@ def chefboost_decision_tree(param_preprocessed_log_path="media/preprocessed_data
     flattened_dataset = pd.get_dummies(flattened_dataset, columns=one_hot_cols)
     flattened_dataset = flattened_dataset.drop(text_cols, axis=1)
     flattened_dataset = flattened_dataset.fillna(0.)
+    # Splitting dataset
+    # X_train, X_test = train_test_split(flattened_dataset, test_size=0.2, random_state=42, stratify=flattened_dataset[target_label])
     
     for alg in list(algorithms):
         df = flattened_dataset
         config = {'algorithm': alg, 'enableParallelism': True, 'num_cores': 2} # CHAID, ID3
-        chef.fit(df, config = config, target_label = 'Variant')
+        chef.fit(df, config = config, target_label = target_label)
+        # TODO: accurracy_score -> store evaluate terminar output
+        # model = chef.fit(df, config = config, target_label = target_label)
+        # output = subprocess.Popen( [chef.evaluate(model,df,target_label=target_label)], stdout=subprocess.PIPE ).communicate()[0]
+        # file = open(param_path+alg+'-results.txt','w')
+        # file.write(output)
+        # file.close()
+        # Saving model
         # model = chef.fit(df, config = config, target_label = 'Variant')
         # chef.save_model(model, alg+'model.pkl')
-        df = chef.feature_importance('outputs/rules/rules.py')
-        df.to_csv(param_path+alg+"-tree-feature-importance.csv")
+        fi = chef.feature_importance('outputs/rules/rules.py').set_index("feature")
+        # Graphical representation of feature importance
+        # fi.plot(kind="barh", title="Feature Importance")
+        fi.to_csv(param_path+alg+"-tree-feature-importance.csv")
         shutil.copyfile('outputs/rules/rules.py', param_path+alg+'-rules.py')
         shutil.copyfile('outputs/rules/rules.json', param_path+alg+'-rules.json')
     accuracy_score = 100
     return accuracy_score
 
-def CART_sklearn_decision_tree(param_preprocessed_log_path="media/preprocessed_dataset.csv", param_path="media/", autogeneration="autogeneration"):
+def CART_sklearn_decision_tree(param_preprocessed_log_path, param_path, autogeneration):
     df = pd.read_csv(param_preprocessed_log_path, index_col=0, sep=',')
 
     one_hot_cols = []
@@ -293,6 +307,17 @@ def CART_sklearn_decision_tree(param_preprocessed_log_path="media/preprocessed_d
     return accuracy_score(y, y_predict)
 
 
-def decision_tree_training(param_preprocessed_log_path="media/preprocessed_dataset.csv", param_path="media/", algorithms=['ID3', 'CART', 'CHAID', 'C4.5']):
-    # return CART_sklearn_decision_tree(param_preprocessed_log_path, param_path, autogeneration)
-    return chefboost_decision_tree(param_preprocessed_log_path, param_path, algorithms)
+def decision_tree_training(param_preprocessed_log_path="media/preprocessed_dataset.csv", param_path="media/", implementation="sklearn", autogeneration="autogeneration", algorithms=['ID3', 'CART', 'CHAID', 'C4.5']):
+    if implementation == 'sklearn':
+        return CART_sklearn_decision_tree(param_preprocessed_log_path, param_path, autogeneration)
+    else:
+        return chefboost_decision_tree(param_preprocessed_log_path, param_path, algorithms)
+
+def decision_tree_predict(module_path, instance):
+    """
+    moduleName = "outputs/rules/rules" #this will load outputs/rules/rules.py
+    instance = for example ['Sunny', 'Hot', 'High', 'Weak']
+    """
+    tree = chef.restoreTree(module_path)
+    prediction = tree.findDecision(instance)
+    return prediction
