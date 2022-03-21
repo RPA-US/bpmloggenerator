@@ -233,8 +233,10 @@ class DownloadExperiment(generics.RetrieveAPIView):
         if(user.is_anonymous is False):
             experiment = get_object_or_404(Experiment, user=user.id, is_being_processed=100, id=kwargs["pk"])
             try:        
-                zip_experiment = compress_experiment(experiment.foldername, experiment.name.replace(" ", "_") + "_" + str(experiment.id))
-                filename = experiment.name.replace(" ", "_") + "_" + str(experiment.id) + ".zip"
+                splitted = experiment.foldername.split(sep)
+                val = splitted[len(splitted)-1]
+                zip_experiment = compress_experiment(experiment.foldername, val)
+                filename = val + ".zip"
                 response = FileResponse(open(zip_experiment, 'rb'))
                 response['Content-Disposition'] = 'attachment; filename="%s"' % filename  
             except Exception as e:
@@ -262,21 +264,22 @@ def associate_experiment(user):
             scenarios_conf=data['scenarios_conf']
 
             experiment = Experiment(
-                scenarios_conf=scenarios_conf,
-                size_balance=size_balance,
-                name=name,
-                description=description,
-                number_scenarios=number_scenarios,
-                variability_conf=variability_conf,
-                special_colnames=special_colnames,
-                screenshots=screenshots,
-                foldername=foldername,
-                is_being_processed=100,
-                is_active=True,
-                user=user,
-                screenshot_name_generation_function=screenshot_name_generation_function,
-                screenshots_path=basic_path_template_experiments+(screenshots)
-            )
+                    scenarios_conf=scenarios_conf,
+                    size_balance=size_balance,
+                    name=name,
+                    description=description,
+                    number_scenarios=number_scenarios,
+                    variability_conf=variability_conf,
+                    special_colnames=special_colnames,
+                    screenshots=screenshots,
+                    foldername=foldername,
+                    is_being_processed=100,
+                    is_active=True,
+                    user=user,
+                    screenshot_name_generation_function=screenshot_name_generation_function,
+                    screenshots_path=basic_path_template_experiments+(screenshots),
+                    status=ExperimentStatusChoice.LA.value
+                )    
             experiment.user=user
             experiment.save()
 

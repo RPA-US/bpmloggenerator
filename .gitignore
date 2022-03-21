@@ -147,3 +147,5 @@ loggenerator.db
 
 # Django Migrations
 migrations/
+
+staticfiles/
