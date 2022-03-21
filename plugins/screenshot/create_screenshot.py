@@ -5,18 +5,18 @@ from agosuirpa.generic_utils import detect_function
 from agosuirpa.system_configuration import sep
 
 
-def manage_dependency(experiment, name, arguments, j, case, scenario, activity, variant):
+def manage_dependency(experiment, name, arguments, j, case, scenario, activity, variant, balanced, log_size):
     if "args_dependency" in j:
-        dependant_row = Variations.objects.get(experiment=experiment, case_id=case, scenario=scenario,
+        dependant_row = Variations.objects.filter(experiment=experiment, case_id=case, scenario=scenario, balanced=balanced, log_size=log_size,
                                                activity=j["args_dependency"]["Activity"], case_variation_id=j["args_dependency"]["id"], variant=j["args_dependency"]["V"])
-        arguments.append(dependant_row.gui_element)
+        arguments.append(dependant_row[0].gui_element)
     image_element = util.detect_function(name)(arguments)
     if type(image_element) == str:
-        Variations.objects.create(experiment=experiment, case_id=case, scenario=scenario,
+        Variations.objects.create(experiment=experiment, case_id=case, scenario=scenario, balanced=balanced, log_size=log_size,
                                   case_variation_id=j["id"], activity=activity, variant=variant, function_name=name, gui_element=image_element)
 
 
-def generate_capture(experiment, columns_ui, columns, element, acu, case, generate_path, attr, activity, variant):
+def generate_capture(experiment, columns_ui, columns, element, acu, case, generate_path, attr, activity, variant, attachments_path, balanced, log_size, original_experiment):
     '''
     Generate row reading the json
     args:
@@ -25,7 +25,10 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
         variante: if use the initial value or the generate
     '''
     # actual_path = os.getcwd()
-    capture_path = element["initValue"]
+    if original_experiment:
+        capture_path = attachments_path + sep + element["initValue"]
+    else:
+        capture_path = element["initValue"]
     args_tmp = element["args"]
     args = [generate_path, acu]
     #new_image = generate_screenshot_demo(args)
@@ -35,16 +38,14 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
         for i in columns_ui:
             try:
                 arguments = []
-                if i in columns:
-                    ind_text = columns.index(i)
-                    content = attr[ind_text]
-                    arguments.append(content)
                 if i in args_tmp:
                     func = args_tmp[i]
                     for j in func:
                         if element is not None:
                             coordinates = j["coordinates"]
                             name = j["name"]
+                            if i in columns:
+                                arguments.append(attr[columns.index(i)])
                             args =util.args_by_function_in_order(j["args"],name)
                             if not sep in new_image:
                                 image_path_to_save = generate_path + new_image
@@ -61,7 +62,7 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
                             arguments.append(coordinates)
 
                             manage_dependency(
-                                experiment, name, arguments, j, case, 0, activity, variant)
+                                experiment, name, arguments, j, case, 0, activity, variant, balanced, log_size)
                         else:
                             new_image = ""
                         arguments = []
@@ -109,7 +110,7 @@ def generate_scenario_capture(experiment, element, case, generate_path, activity
                 arguments.append(coordinates)
 
                 manage_dependency(experiment, name, arguments,
-                                  variation_conf, case, scenario, activity, variant)
+                                  variation_conf, case, scenario, activity, variant, None, None)
             else:
                 new_image = ""
             arguments = []

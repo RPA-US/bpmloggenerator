@@ -53,6 +53,8 @@ class Experiment(models.Model):
 class Variations(models.Model):
     case_variation_id = models.CharField(max_length=255)
     case_id = models.CharField(max_length=255)
+    log_size = models.IntegerField(null=True)
+    balanced = models.CharField(max_length=255, blank=True, null=True)
     scenario = models.CharField(max_length=255)
     activity = models.CharField(max_length=255)
     variant = models.CharField(max_length=255)

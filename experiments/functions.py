@@ -28,7 +28,7 @@ def validation_params(json, number_logs, percent_per_trace):
     return res
 
 
-def generate_row(experiment, generate_path, dict, acu, case, variant, original_experiment):
+def generate_row(experiment, generate_path, dict, acu, case, variant, original_experiment, balanced, log_size):
     '''
     Generate row reading the json
     args:
@@ -37,6 +37,7 @@ def generate_row(experiment, generate_path, dict, acu, case, variant, original_e
         variante: if use the initial value or the generate
     '''
     screenshot_column_name = experiment.special_colnames["Screenshot"]
+    attachments_path = experiment.screenshots_path
 
     rows = []
     columns = dict["columnsNames"]
@@ -48,8 +49,6 @@ def generate_row(experiment, generate_path, dict, acu, case, variant, original_e
         attr = []
         acu += 1
         for i in columns:
-            if (variant == 2 and key == 'D' and i=="Screenshot"):
-                f = 1
             if i in json_list[key]:
                 element = json_list[key][i]
                 if element is not None:
@@ -60,14 +59,14 @@ def generate_row(experiment, generate_path, dict, acu, case, variant, original_e
                     if variate == 1:
                         if i == screenshot_column_name:
                             val = generate_capture(
-                                experiment, columns_ui, columns, element, acu, case, generate_path, attr, key, variant)
+                                experiment, columns_ui, columns, element, acu, case, generate_path, attr, key, variant, attachments_path, balanced, log_size, original_experiment)
                         else:
                             val = detect_function(name)(args)
                     elif variate == 0:
                         if initValue != "":
                             if i == screenshot_column_name:
                                 if original_experiment:
-                                    initValue = experiment.screenshots_path + sep + initValue
+                                    initValue = attachments_path + sep + initValue
                                 val = generate_copied_capture_without_root(
                                     [initValue, generate_path, acu])
                             else:
@@ -121,7 +120,7 @@ def number_rows_by_number_of_activities(dict, number_logs, percent_per_trace):
     return list_percents
 
 
-def case_generation(experiment, json_log, generate_path, number_logs, percent_per_trace, path, original_experiment):
+def case_generation(experiment, json_log, generate_path, number_logs, percent_per_trace, path, original_experiment, balanced):
     '''
     The main function to generate logs for a case
         args:
@@ -167,7 +166,7 @@ def case_generation(experiment, json_log, generate_path, number_logs, percent_pe
         random.shuffle(total_variants)
         for variant in total_variants:
             rows, acu = generate_row(experiment,
-                                     generate_path, json_log, acu, case, variant, original_experiment)
+                                     generate_path, json_log, acu, case, variant, original_experiment, balanced, number_logs[1])
             case += 1
             for row in rows:
                 writer.writerow(row)
@@ -201,7 +200,7 @@ def automatic_experiments(experiment, generate_path, variability_conf, scenario)
             size = ['log_size', i]
             output_path = version_path + "_size" + str(i) + "_" + bal_imb + sep
             case_generation(experiment, json_act_path, generate_path,
-                            size, balance[bal_imb], output_path, original_experiment)
+                            size, balance[bal_imb], output_path, original_experiment,bal_imb)
     return version_path
 
 
@@ -220,7 +219,7 @@ def execute_experiment(experiment):
     attachments_path = experiment.screenshots_path
     generate_path = experiment_results_path
     screenshot_column_name = experiment.special_colnames["Screenshot"]
-    folder_name = experiment.name.replace(" ", "_")
+    folder_name = experiment.name.replace(" ", "_")+"_"+str(experiment.id)
     prefix_scenario = "sc_"
 
     print(Back.GREEN + experiment.name)
