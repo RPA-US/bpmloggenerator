@@ -205,7 +205,7 @@ def chefboost_decision_tree(param_preprocessed_log_path, param_path, algorithms)
         df = flattened_dataset
         df.rename(columns = {target_label:'Decision'}, inplace = True)
         df['Decision'] = df['Decision'].astype(object) # which will by default set the length to the max len it encounters
-        config = {'algorithm': alg} # CHAID, ID3
+        config = {'algorithm': alg, 'enableParallelism': True, 'num_cores': 2} # CHAID, ID3
         chef.fit(df, config = config)
         # TODO: accurracy_score -> store evaluate terminar output
         # model = chef.fit(df, config = config)
