@@ -41,10 +41,9 @@ def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activ
     if not os.path.exists(metadata_path):
         os.makedirs(metadata_path)
 
-    for scenario in tqdm(scenarios,
-                         desc="Scenarios that have been processed"):
+    for scenario in tqdm(scenarios, desc="Scenarios that have been processed: "):
         sleep(.1)
-
+        print("\nActual Scenario: " + str(scenario))
         param_path = exp_folder_complete_path + sep + scenario + sep
         if to_exec and len(to_exec) > 0:
             for n in family_names:
@@ -66,10 +65,15 @@ def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activ
                     'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep, decision_tree_library, decision_tree_mode, decision_tree_algorithms) # 'autogeneration' -> to plot tree automatically
                     }
                 
-                for index, function_to_exec in enumerate(to_exec.keys()):
-                    times[n][index] = {"start": time.time()}
-                    output = eval(function_to_exec)(*to_exec_args[function_to_exec])
-                    times[n][index]["finish"] = time.time()
+                for function_to_exec in to_exec.keys():
+                    if function_to_exec == "decision_tree_training" and decision_tree_library!='sklearn':
+                        res, tree_times = eval(function_to_exec)(*to_exec_args[function_to_exec])
+                        times[n][function_to_exec] = tree_times
+                    else:
+                        times[n][function_to_exec] = {"start": time.time()}
+                        output = eval(function_to_exec)(*to_exec_args[function_to_exec])
+                        times[n][function_to_exec]["finish"] = time.time()
+                        
                     # TODO: accurracy_score
                     # if index == len(to_exec)-1:
                     #     times[n][index]["decision_model_accuracy"] = output
@@ -191,18 +195,21 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
     balanced = []
     log_size = []
     scenario_number = []
-    detection_time = []
-    classification_time = []
-    flat_time = []
-    tree_training_time = []
-    tree_training_accuracy = []
     log_column = []
+    phases_info = {}
+    # detection_time = []
+    # classification_time = []
+    # flat_time = []
+    # tree_training_time = []
+    # tree_training_accuracy = []
     
-    decision_tree_algorithms    = phases_to_execute['decision_tree_training']['algorithms'] if (('decision_tree_training' in phases_to_execute) and ('algorithms' in phases_to_execute['decision_tree_training'])) else None
+    decision_tree_algorithms = phases_to_execute['decision_tree_training']['algorithms'] if (('decision_tree_training' in phases_to_execute) and ('algorithms' in phases_to_execute['decision_tree_training'])) else None
+
     if decision_tree_algorithms:
         accuracy = {}
     else:
         accuracy = []
+        
     for scenario in tqdm(scenarios,
                          desc="Experiment results that have been processed"):
         sleep(.1)
@@ -217,66 +224,57 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
             metainfo = n.split("_")
             # path example of decision tree specification: agosuirpa\CSV_exit\resources\version1637144717955\scenario_1\Basic_10_Imbalanced\decision_tree.log
             decision_tree_path = scenario_path + sep + n + sep
+            
+            with open(scenario_path + sep + n + sep + preprocessed_log_filename, newline='') as f:
+                csv_reader = csv.reader(f)
+                csv_headings = next(csv_reader)
+            log_column.append(len(csv_headings))
 
             family.append(metainfo[0])
             log_size.append(metainfo[1])
             scenario_number.append(scenario.split("_")[1])
             # 1 == Balanced, 0 == Imbalanced
             balanced.append(1 if metainfo[2] == "Balanced" else 0)
-            count = 0
-            if "gui_components_detection" in phases_to_execute.keys():
-                detection_time.append(times_duration(times[n]["0"]))
-                count += 1
-            if "classify_image_components" in phases_to_execute.keys():
-                classification_time.append(times_duration(times[n][str(count)]))
-                count += 1
-            elif "extract_training_dataset" in phases_to_execute.keys():
-                flat_time.append(times_duration(times[n][str(count)]))
-                count += 1
-            elif "decision_tree_training" in phases_to_execute.keys():
-                tree_training_time.append(times_duration(times[n][str(count)]))
-                count += 1
+            
+            for phase in phases_to_execute.keys():
+                if not (phase == 'decision_tree_training' and decision_tree_algorithms):
+                    if phase in phases_info:
+                        phases_info[phase].append(times_duration(times[n][phase]))
+                    else:
+                        phases_info[phase] = [times_duration(times[n][phase])]
+                
             # TODO: accurracy_score
             # tree_training_accuracy.append(times[n]["3"]["decision_model_accuracy"])
-
-            with open(scenario_path + sep + n + sep + preprocessed_log_filename, newline='') as f:
-                csv_reader = csv.reader(f)
-                csv_headings = next(csv_reader)
-            log_column.append(len(csv_headings))
 
             if decision_tree_algorithms:
                 for alg in decision_tree_algorithms:
                     if (alg+'_accuracy') in accuracy:
+                        accuracy[alg+'_tree_training_time'].append(times_duration(times[n]['decision_tree_training'][alg]))
                         accuracy[alg+'_accuracy'].append(calculate_accuracy_per_tree(decision_tree_path, gui_component_class, quantity_difference, alg))
                     else:
+                        accuracy[alg+'_tree_training_time'] = [times_duration(times[n]['decision_tree_training'][alg])]
                         accuracy[alg+'_accuracy'] = [calculate_accuracy_per_tree(decision_tree_path, gui_component_class, quantity_difference, alg)]
             else:
                 # Calculate level of accuracy
                 accuracy.append(calculate_accuracy_per_tree(decision_tree_path, gui_component_class, quantity_difference, None))
     
-    dict_results = {}
-
-    dict_results_aux = {
+    dict_results = {
         'family': family,
         'balanced': balanced,
         'log_size': log_size,
         'scenario_number': scenario_number,
-        'detection_time': detection_time,
-        'classification_time': classification_time,
-        'flat_time': flat_time,
-        'tree_training_time': tree_training_time,
+        'log_column': log_column,
         # TODO: accurracy_score
         # 'tree_training_accuracy': tree_training_accuracy,
-        'log_column': log_column,
-        'accuracy': accuracy
     }
     
-    for entry in dict_results_aux.items():
-        if isinstance(entry[1], dict):
-            for sub_entry in entry[1].items():
-                dict_results[sub_entry[0]] = sub_entry[1]
-        elif len(entry[1]) > 0:
-            dict_results[entry[0]] = entry[1]
+    
+    if isinstance(accuracy, dict):
+        for sub_entry in accuracy.items():
+            dict_results[sub_entry[0]] = sub_entry[1]
+    
+    for phase in phases_info.keys():
+        dict_results[phase] = phases_info[phase]
 
     df = pd.DataFrame(dict_results)
     df.to_csv(csv_filename)

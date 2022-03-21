@@ -2,6 +2,7 @@ from asyncore import write
 from typing import List
 import pandas as pd
 import os
+import time
 import shutil
 import graphviz
 import matplotlib.image as plt_img
@@ -184,6 +185,7 @@ def plot_decision_tree(path: str,
 def chefboost_decision_tree(param_preprocessed_log_path, param_path, algorithms):
     flattened_dataset = pd.read_csv(param_preprocessed_log_path, index_col=0, sep=',')
     target_label = 'Variant'
+    times = {}
     param_path += decision_foldername + sep
     if not os.path.exists(param_path):
         os.mkdir(param_path)
@@ -205,8 +207,11 @@ def chefboost_decision_tree(param_preprocessed_log_path, param_path, algorithms)
         df = flattened_dataset
         df.rename(columns = {target_label:'Decision'}, inplace = True)
         df['Decision'] = df['Decision'].astype(object) # which will by default set the length to the max len it encounters
+
         config = {'algorithm': alg, 'enableParallelism': True, 'num_cores': 2} # CHAID, ID3
+        times[alg] = {"start": time.time()}
         chef.fit(df, config = config)
+        times[alg]["finish"] = time.time()
         # TODO: accurracy_score -> store evaluate terminar output
         # model = chef.fit(df, config = config)
         # output = subprocess.Popen( [chef.evaluate(model,df)], stdout=subprocess.PIPE ).communicate()[0]
@@ -224,7 +229,7 @@ def chefboost_decision_tree(param_preprocessed_log_path, param_path, algorithms)
         shutil.move('outputs/rules/rules.py', param_path+alg+'-rules.py')
         shutil.move('outputs/rules/rules.json', param_path+alg+'-rules.json')
     accuracy_score = 100
-    return accuracy_score
+    return accuracy_score, times
 
 def CART_sklearn_decision_tree(param_preprocessed_log_path, param_path, autogeneration):
     df = pd.read_csv(param_preprocessed_log_path, index_col=0, sep=',')
