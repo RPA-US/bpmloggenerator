@@ -161,13 +161,12 @@ def calculate_accuracy_per_tree(decision_tree_path, expression, quantity_differe
                         quantity = quantity.replace(c, '')
                         res_partial[gui_component_to_find_index] = quantity
                     gui_component_to_find_index +=1
-            if res_partial and (float(res_partial[0])-float(res_partial[1]) > quantity_difference):
-                print("GUI component quantity difference greater than the expected")
-                res[gui_component_name_to_find] = "False"
-            elif res_partial and len(res_partial) == 2:
-                res[gui_component_name_to_find] = "True"
+            if res_partial and len(res_partial) == 2:
+                res_aux = (float(res_partial[0])-float(res_partial[1]) <= quantity_difference)
             else:
-                res[gui_component_name_to_find] = "False"
+                res_aux = False
+            if not res_aux: print("GUI component quantity difference greater than the expected: len->" + str(len(res_partial)))
+            res[gui_component_name_to_find] = str(res_aux)
 
     s = expression
     print(res)
@@ -247,7 +246,10 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
 
             if decision_tree_algorithms:
                 for alg in decision_tree_algorithms:
-                    accuracy[alg+'_accuracy'] = calculate_accuracy_per_tree(decision_tree_path, gui_component_class, quantity_difference, alg)
+                    if (alg+'_accuracy') in accuracy:
+                        accuracy[alg+'_accuracy'].append(calculate_accuracy_per_tree(decision_tree_path, gui_component_class, quantity_difference, alg))
+                    else:
+                        accuracy[alg+'_accuracy'] = [calculate_accuracy_per_tree(decision_tree_path, gui_component_class, quantity_difference, alg)]
             else:
                 # Calculate level of accuracy
                 accuracy.append(calculate_accuracy_per_tree(decision_tree_path, gui_component_class, quantity_difference, None))

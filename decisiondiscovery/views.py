@@ -221,8 +221,8 @@ def chefboost_decision_tree(param_preprocessed_log_path, param_path, algorithms)
         # fi.to_csv(param_path+alg+"-tree-feature-importance.csv")
         # TODO: Graphical representation of feature importance
         # fi.plot(kind="barh", title="Feature Importance")
-        shutil.copyfile('outputs/rules/rules.py', param_path+alg+'-rules.py')
-        shutil.copyfile('outputs/rules/rules.json', param_path+alg+'-rules.json')
+        shutil.move('outputs/rules/rules.py', param_path+alg+'-rules.py')
+        shutil.move('outputs/rules/rules.json', param_path+alg+'-rules.json')
     accuracy_score = 100
     return accuracy_score
 
