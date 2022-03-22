@@ -149,3 +149,4 @@ loggenerator.db
 migrations/
 
 staticfiles/
+landing/

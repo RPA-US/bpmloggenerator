@@ -1,5 +1,5 @@
 # AGOSUIRPA
-Automatic generation of sintetic UI log in RPA context introducing variability
+Automatic generation of synthetic UI log in RPA context introducing variability
 
 # Index
 
