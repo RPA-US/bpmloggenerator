@@ -49,10 +49,12 @@ def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activ
             for n in family_names:
                 times[n] = {}
                 
-                decision_tree_library       = to_exec['decision_tree_training']['library'] if (('decision_tree_training' in to_exec) and ('library' in to_exec['decision_tree_training'])) else 'sklearn'
-                decision_tree_algorithms    = to_exec['decision_tree_training']['algorithms'] if (('decision_tree_training' in to_exec) and ('algorithms' in to_exec['decision_tree_training'])) else None # ['ID3', 'CART', 'CHAID', 'C4.5']
-                decision_tree_mode          = to_exec['decision_tree_training']['mode'] if (('decision_tree_training' in to_exec) and ('mode' in to_exec['decision_tree_training'])) else 'autogeneration'
-                
+                decision_tree_library           = to_exec['decision_tree_training']['library'] if (('decision_tree_training' in to_exec) and ('library' in to_exec['decision_tree_training'])) else 'sklearn'
+                decision_tree_algorithms        = to_exec['decision_tree_training']['algorithms'] if (('decision_tree_training' in to_exec) and ('algorithms' in to_exec['decision_tree_training'])) else None # ['ID3', 'CART', 'CHAID', 'C4.5']
+                decision_tree_mode              = to_exec['decision_tree_training']['mode'] if (('decision_tree_training' in to_exec) and ('mode' in to_exec['decision_tree_training'])) else 'autogeneration'
+                decision_columns_to_ignore      = to_exec['decision_tree_training']['columns_to_ignore'] if (('decision_tree_training' in to_exec) and ('columns_to_ignore' in to_exec['decision_tree_training'])) else None
+                training_columns_to_ignore      = to_exec['extract_training_dataset']['columns_to_ignore'] if (('extract_training_dataset' in to_exec) and ('columns_to_ignore' in to_exec['extract_training_dataset'])) else None
+
                 to_exec_args = {
                     'gui_components_detection': (param_path+n+sep+'log.csv', param_path+n+sep),
                     'classify_image_components': ('resources'+sep+'models'+sep+'model.json',
@@ -61,8 +63,8 @@ def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activ
                                                   param_path+n+sep + 'log.csv',
                                                   param_path+n+sep+'enriched_log.csv',
                                                   False),
-                    'extract_training_dataset': (decision_activity, param_path + n+sep + 'enriched_log.csv', param_path+n+sep),
-                    'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep, decision_tree_library, decision_tree_mode, decision_tree_algorithms) # 'autogeneration' -> to plot tree automatically
+                    'extract_training_dataset': (decision_activity, param_path + n + sep + 'enriched_log.csv', param_path + n + sep, training_columns_to_ignore),
+                    'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep, decision_tree_library, decision_tree_mode, decision_tree_algorithms, decision_columns_to_ignore) # 'autogeneration' -> to plot tree automatically
                     }
                 
                 for function_to_exec in to_exec.keys():
@@ -153,7 +155,7 @@ def calculate_accuracy_per_tree(decision_tree_path, expression, quantity_differe
             res_partial = []
             gui_component_to_find_index = 0
             for node in decision_tree_decision_points:
-                if node['return_statement'] == 0 and (gui_component_name_to_find in node['feature_name']): 
+                if node['return_statement'] == 0 and ('x0_'+gui_component_name_to_find in node['feature_name']): 
                     # return_statement: filtering return statements (only conditions evaluations)
                     # feature_name: filtering feature names as the ones contained on the expression
                     feature_complete_id = 'obj['+str(node['feature_idx'])+']'
@@ -167,9 +169,10 @@ def calculate_accuracy_per_tree(decision_tree_path, expression, quantity_differe
                     gui_component_to_find_index +=1
             if res_partial and len(res_partial) == 2:
                 res_aux = (float(res_partial[0])-float(res_partial[1]) <= quantity_difference)
+                if not res_aux:
+                    print("GUI component quantity difference greater than the expected: len->" + str(len(res_partial)))
             else:
                 res_aux = False
-            if not res_aux: print("GUI component quantity difference greater than the expected: len->" + str(len(res_partial)))
             res[gui_component_name_to_find] = str(res_aux)
 
     s = expression

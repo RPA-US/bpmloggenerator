@@ -49,6 +49,7 @@ def flat_dataset_row(data, columns, param_timestamp_column_name, param_variant_c
     """
     add_case = False  # Set True to add case column
     df_content = []
+    new_list = [col_name for col_name in columns if col_name not in actions_columns]
     for case in data["cases"]:
         # print(case)
         timestamp_start = data["cases"][case]["A"].get(
@@ -74,8 +75,6 @@ def flat_dataset_row(data, columns, param_timestamp_column_name, param_variant_c
                 for c in columns:
                     headers.append(c+"_"+act)
             else:
-                new_list = [
-                    col_name for col_name in columns if col_name not in actions_columns]
                 row.extend(data["cases"][case][act].drop(
                     columns_to_drop).drop(actions_columns).values.tolist())
                 for c in new_list:
@@ -90,7 +89,7 @@ def flat_dataset_row(data, columns, param_timestamp_column_name, param_variant_c
 
 
 def extract_training_dataset(
-        param_decision_point_activity, param_log_path="media/enriched_log_feature_extracted.csv", param_path_dataset_saved="media/", param_variant_column_name="Variant", param_case_column_name="Case", param_screenshot_column_name="Screenshot", param_timestamp_column_name="Timestamp", param_activity_column_name="Activity", actions_columns=["Coor_X", "Coor_Y", "MorKeyb", "TextInput", "Click"]):
+        param_decision_point_activity, param_log_path="media/enriched_log_feature_extracted.csv", param_path_dataset_saved="media/", actions_columns=["Coor_X", "Coor_Y", "MorKeyb", "TextInput", "Click"], param_variant_column_name="Variant", param_case_column_name="Case", param_screenshot_column_name="Screenshot", param_timestamp_column_name="Timestamp", param_activity_column_name="Activity"):
     """
     Recorro cada fila del log:
         Por cada caso:
@@ -182,7 +181,7 @@ def plot_decision_tree(path: str,
 
     return image
 
-def chefboost_decision_tree(param_preprocessed_log_path, param_path, algorithms):
+def chefboost_decision_tree(param_preprocessed_log_path, param_path, algorithms, columns_to_ignore):
     flattened_dataset = pd.read_csv(param_preprocessed_log_path, index_col=0, sep=',')
     target_label = 'Variant'
     times = {}
@@ -190,15 +189,15 @@ def chefboost_decision_tree(param_preprocessed_log_path, param_path, algorithms)
     if not os.path.exists(param_path):
         os.mkdir(param_path)
     one_hot_cols = []
-    text_cols = []
+
     for c in flattened_dataset.columns:
         if "NameApp" in c:
             one_hot_cols.append(c)
         elif "TextInput" in c:
-            text_cols.append(c)
+            columns_to_ignore.append(c)  # TODO: get type of field using NLP: convert to categorical variable (conversation, name, email, number, date, etc)
             
     flattened_dataset = pd.get_dummies(flattened_dataset, columns=one_hot_cols)
-    flattened_dataset = flattened_dataset.drop(text_cols, axis=1)
+    flattened_dataset = flattened_dataset.drop(columns_to_ignore, axis=1)
     flattened_dataset = flattened_dataset.fillna(0.)
     # Splitting dataset
     # X_train, X_test = train_test_split(flattened_dataset, test_size=0.2, random_state=42, stratify=flattened_dataset[target_label])
@@ -207,8 +206,7 @@ def chefboost_decision_tree(param_preprocessed_log_path, param_path, algorithms)
         df = flattened_dataset
         df.rename(columns = {target_label:'Decision'}, inplace = True)
         df['Decision'] = df['Decision'].astype(object) # which will by default set the length to the max len it encounters
-
-        config = {'algorithm': alg, 'enableParallelism': True, 'num_cores': 2} # CHAID, ID3
+        config = {'algorithm': alg, 'enableParallelism': True, 'num_cores': 2, 'max_depth': 5}
         times[alg] = {"start": time.time()}
         chef.fit(df, config = config)
         times[alg]["finish"] = time.time()
@@ -315,11 +313,11 @@ def CART_sklearn_decision_tree(param_preprocessed_log_path, param_path, autogene
     return accuracy_score(y, y_predict)
 
 
-def decision_tree_training(param_preprocessed_log_path="media/preprocessed_dataset.csv", param_path="media/", implementation="sklearn", autogeneration="autogeneration", algorithms=['ID3', 'CART', 'CHAID', 'C4.5']):
+def decision_tree_training(param_preprocessed_log_path="media/preprocessed_dataset.csv", param_path="mdia/", implementation="sklearn", autogeneration="autogeneration", algorithms=['ID3', 'CART', 'CHAID', 'C4.5'], columns_to_ignore=["Timestamp_start", "Timestamp_end"]):
     if implementation == 'sklearn':
-        return CART_sklearn_decision_tree(param_preprocessed_log_path, param_path, autogeneration)
+        return CART_sklearn_decision_tree(param_preprocessed_log_path, param_path, autogeneration, columns_to_ignore)
     else:
-        return chefboost_decision_tree(param_preprocessed_log_path, param_path, algorithms)
+        return chefboost_decision_tree(param_preprocessed_log_path, param_path, algorithms, columns_to_ignore)
 
 def decision_tree_predict(module_path, instance):
     """
