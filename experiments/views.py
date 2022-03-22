@@ -286,7 +286,7 @@ def associate_experiment(user):
     experiments = Experiment.objects.filter(user=user.id, is_active=True)
     if experiments == None or not experiments:
         data_complete = json.load(
-            open(basic_path_template_experiments+'template_basic.json'))
+            open(basic_path_template_experiments+'template_experiments.json'))
         for data in data_complete['results']:
             size_balance = data['size_balance']
             name = data['name']

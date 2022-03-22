@@ -59,7 +59,7 @@ class Variations(models.Model):
     activity = models.CharField(max_length=255)
     variant = models.CharField(max_length=255)
     function_name = models.CharField(max_length=255)
-    gui_element = models.CharField(max_length=255)
+    gui_element = models.TextField()
     experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
 
     def __str__(self):
