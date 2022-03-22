@@ -10,9 +10,6 @@ def manage_dependency(experiment, name, arguments, j, case, scenario, activity, 
         dependant_row = Variations.objects.filter(experiment=experiment, case_id=case, scenario=scenario, balanced=balanced, log_size=log_size,
                                                activity=j["args_dependency"]["Activity"], case_variation_id=j["args_dependency"]["id"], variant=j["args_dependency"]["V"]).order_by("id")
         arguments.append(dependant_row[len(dependant_row)-1].gui_element)
-        #name=dependant_row[len(dependant_row)-1].function_name
-    if(name=="random_words_in_image"):
-        f=1
     image_element = util.detect_function(name)(arguments)
     if type(image_element) == str:
         Variations.objects.create(experiment=experiment, case_id=case, scenario=scenario, balanced=balanced, log_size=log_size,
