@@ -4,8 +4,6 @@ from users.models import CustomUser
 from private_storage.fields import PrivateFileField, PrivateImageField
 from django.core.exceptions import ValidationError
 from enum import Enum
-from django.contrib.postgres.fields import ArrayField
-
 
 class ExperimentStatusChoice(Enum):   # A subclass of Enum
     PR = "PRE_SAVED"
@@ -60,7 +58,7 @@ class Variations(models.Model):
     activity = models.CharField(max_length=255)
     variant = models.CharField(max_length=255)
     function_name = models.CharField(max_length=255)
-    arguments = ArrayField(models.TextField())
+    arguments = models.TextField()
     experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
 
     def __str__(self):
