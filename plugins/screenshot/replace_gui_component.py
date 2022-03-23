@@ -38,7 +38,8 @@ def replace_gui_element_by_other(args):
         selected_element = util.select_random_list(args[0])
         image_element = util.detect_element(selected_element)
     else:
-        image_element = args[0]
+        selected_element = args[0]
+        image_element = util.detect_element(selected_element)
     image_path_to_save = args[1]
     capture = args[2]
     coordenates = args[3]
