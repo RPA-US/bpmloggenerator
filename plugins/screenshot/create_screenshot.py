@@ -3,17 +3,13 @@ import agosuirpa.generic_utils as util
 from experiments.models import Variations
 from agosuirpa.generic_utils import detect_function
 from agosuirpa.system_configuration import sep
-import ast
-
 
 def manage_dependency(experiment, name, arguments,argumentsSave, j, case, scenario, activity, variant, balanced, log_size):
     if "args_dependency" in j:
         dependant_row = Variations.objects.filter(experiment=experiment, case_id=case, scenario=scenario, balanced=balanced, log_size=log_size,
                                                activity=j["args_dependency"]["Activity"], case_variation_id=j["args_dependency"]["id"], variant=j["args_dependency"]["V"]).order_by("id")
-        #arguments.append(dependant_row[len(dependant_row)-1].gui_element)
         row=dependant_row[len(dependant_row)-1]
-        arguments = row.arguments+arguments#ast.literal_eval(row.arguments)
-        #arguments.insert(0, )
+        arguments = row.arguments+arguments
         name=row.function_name
     image_element = util.detect_function(name)(arguments)
     if len(argumentsSave) > 0:
