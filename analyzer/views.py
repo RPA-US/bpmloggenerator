@@ -152,27 +152,28 @@ def calculate_accuracy_per_tree(decision_tree_path, expression, quantity_differe
         json_f = open(decision_tree_path + decision_foldername + sep + algorithm + "-rules.json")
         decision_tree_decision_points = json.load(json_f)
         for gui_component_name_to_find in levels:
-            res_partial = []
-            gui_component_to_find_index = 0
+            # res_partial = []
+            # gui_component_to_find_index = 0
+            res_aux = False
             for node in decision_tree_decision_points:
-                if node['return_statement'] == 0 and ('x0_'+gui_component_name_to_find in node['feature_name']): 
+                res_aux = res_aux or (node['return_statement'] == 0 and ('x0_'+gui_component_name_to_find in node['feature_name']))
                     # return_statement: filtering return statements (only conditions evaluations)
                     # feature_name: filtering feature names as the ones contained on the expression
-                    feature_complete_id = 'obj['+str(node['feature_idx'])+']'
-                    pos1 = node['rule'].find(feature_complete_id) + len(feature_complete_id)
-                    pos2 = node['rule'].find(':')
-                    quantity = node['rule'][pos1:pos2]
-                    res_partial.append(quantity)
-                    for c in '<>= ':
-                        quantity = quantity.replace(c, '')
-                        res_partial[gui_component_to_find_index] = quantity
-                    gui_component_to_find_index +=1
-            if res_partial and len(res_partial) == 2:
-                res_aux = (float(res_partial[0])-float(res_partial[1]) <= quantity_difference)
-                if not res_aux:
-                    print("GUI component quantity difference greater than the expected: len->" + str(len(res_partial)))
-            else:
-                res_aux = False
+            #         feature_complete_id = 'obj['+str(node['feature_idx'])+']'
+            #         pos1 = node['rule'].find(feature_complete_id) + len(feature_complete_id)
+            #         pos2 = node['rule'].find(':')
+            #         quantity = node['rule'][pos1:pos2]
+            #         res_partial.append(quantity)
+            #         for c in '<>= ':
+            #             quantity = quantity.replace(c, '')
+            #             res_partial[gui_component_to_find_index] = quantity
+            #         gui_component_to_find_index +=1
+            # if res_partial and len(res_partial) == 2:
+            #     res_aux = (float(res_partial[0])-float(res_partial[1]) <= quantity_difference)
+            #     if not res_aux:
+            #         print("GUI component quantity difference greater than the expected: len->" + str(len(res_partial)))
+            # else:
+            #     res_aux = False
             res[gui_component_name_to_find] = str(res_aux)
 
     s = expression
