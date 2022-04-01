@@ -3,17 +3,24 @@ import agosuirpa.generic_utils as util
 from experiments.models import Variations
 from agosuirpa.generic_utils import detect_function
 from agosuirpa.system_configuration import sep
+import ast
 
-
-def manage_dependency(experiment, name, arguments, j, case, scenario, activity, variant, balanced, log_size):
+def manage_dependency(experiment, name, arguments,argumentsSave, j, case, scenario, activity, variant, balanced, log_size):
     if "args_dependency" in j:
         dependant_row = Variations.objects.filter(experiment=experiment, case_id=case, scenario=scenario, balanced=balanced, log_size=log_size,
-                                               activity=j["args_dependency"]["Activity"], case_variation_id=j["args_dependency"]["id"], variant=j["args_dependency"]["V"])
-        arguments.append(dependant_row[0].gui_element)
+                                               activity=j["args_dependency"]["Activity"], case_variation_id=j["args_dependency"]["id"], variant=j["args_dependency"]["V"]).order_by("id")
+        row=dependant_row[len(dependant_row)-1]
+        tmp = ast.literal_eval(row.arguments)
+        arguments = tmp+arguments
+        name=row.function_name
     image_element = util.detect_function(name)(arguments)
+    if len(argumentsSave) > 0:
+        argumentsSave[0]=image_element
+    else:
+        argumentsSave.append(image_element)
     if type(image_element) == str:
         Variations.objects.create(experiment=experiment, case_id=case, scenario=scenario, balanced=balanced, log_size=log_size,
-                                  case_variation_id=j["id"], activity=activity, variant=variant, function_name=name, gui_element=image_element)
+                                  case_variation_id=j["id"], activity=activity, variant=variant, function_name=name, arguments=argumentsSave)
 
 
 def generate_capture(experiment, columns_ui, columns, element, acu, case, generate_path, attr, activity, variant, attachments_path, balanced, log_size, original_experiment):
@@ -44,9 +51,12 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
                         if element is not None:
                             coordinates = j["coordinates"]
                             name = j["name"]
-                            if i in columns:
-                                arguments.append(attr[columns.index(i)])
-                            args =util.args_by_function_in_order(j["args"],name)
+                            #TODO: generate autocolumns in front and edit this line
+                            if not "args_dependency" in j: 
+                                if i in columns or "TextInput" in columns:
+                                    arguments.append(attr[columns.index(i)])
+                                args = util.args_by_function_in_order(j["args"],name)
+                                arguments.append(args)
                             if not sep in new_image:
                                 image_path_to_save = generate_path + new_image
                             else:
@@ -56,13 +66,13 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
                             if os.path.exists(image_path_to_save):
                                 capture_path = image_path_to_save
 
-                            arguments.append(args)
+                            argumentsSave = arguments.copy()
                             arguments.append(image_path_to_save)
                             arguments.append(capture_path)
                             arguments.append(coordinates)
 
                             manage_dependency(
-                                experiment, name, arguments, j, case, 0, activity, variant, balanced, log_size)
+                                experiment, name, arguments, argumentsSave, j, case, 0, activity, variant, balanced, log_size)
                         else:
                             new_image = ""
                         arguments = []
@@ -94,7 +104,9 @@ def generate_scenario_capture(experiment, element, case, generate_path, activity
             if element is not None:
                 coordinates = variation_conf["coordinates"]
                 name = variation_conf["name"]
-                args = util.args_by_function_in_order(variation_conf["args"],name)
+                if not "args_dependency" in variation_conf: 
+                    args = util.args_by_function_in_order(variation_conf["args"],name)
+                    arguments.append(args)
                 if not sep in new_image:
                     image_path_to_save = generate_path + new_image
                 else:
@@ -104,12 +116,12 @@ def generate_scenario_capture(experiment, element, case, generate_path, activity
                 if os.path.exists(image_path_to_save):
                     capture_path = image_path_to_save
 
-                arguments.append(args)
+                argumentsSave = arguments.copy()
                 arguments.append(image_path_to_save)
                 arguments.append(capture_path)
                 arguments.append(coordinates)
 
-                manage_dependency(experiment, name, arguments,
+                manage_dependency(experiment, name, arguments, argumentsSave,
                                   variation_conf, case, scenario, activity, variant, None, None)
             else:
                 new_image = ""

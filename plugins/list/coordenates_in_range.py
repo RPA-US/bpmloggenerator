@@ -11,12 +11,12 @@ def generate_mouse_position(args):
             - Screenshot resolution, for position limits
             - Height and width values for calculating the 4 corners of the area
     '''
-    position_h = args[0]
-    position_w = args[1]
-    resolution_h = liargsst[2]
-    resolution_w = args[3]
-    height = args[4]
-    width = args[5]
+    position_h = int(args[0])
+    position_w = int(args[1])
+    resolution_h = int(liargsst[2])
+    resolution_w = int(args[3])
+    height = int(args[4])
+    width = int(args[5])
     if position_h+height > resolution_h:
         height = resolution_h-position_h
         logging.warn("Limit of heigh change for resolution limits to: "+str(height))
@@ -38,9 +38,9 @@ def generate_mouse_position_x(args):
             - Screenshot resolution, for x position limits
             - Width values for calculating the corner of the area
     '''
-    position_w = args[0]
-    resolution_w = args[1]
-    width = args[2]
+    position_w = int(args[0])
+    resolution_w = int(args[1])
+    width = int(args[2])
     if position_w+width > resolution_w:
         width = resolution_w-position_w
         logging.warn("Limit of width change for resolution limits to: "+str(width))
@@ -60,9 +60,9 @@ def generate_mouse_position_y(args):
             - Screenshot resolution, for y position limit
             - Height value for calculating the corner of the area
     '''
-    position_h = args[0]
-    resolution_h = args[1]
-    height = args[2]
+    position_h = int(args[0])
+    resolution_h = int(args[1])
+    height = int(args[2])
     if position_h+height > resolution_h:
         height = resolution_h-position_h
         logging.warn("Limit of heigh change for resolution limits to: "+str(height))
