@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
 from users.permissions import IsActive
-from .models import VariabilityFunction, VariabilityFunctionCategory, GUIComponent, GUIComponentCategory, FunctionParam
-from .serializers import VariabilityFunctionSerializer, VariabilityFunctionCategorySerializer, GUIComponentSerializer, GUIComponentCategorySerializer, FunctionParamSerializer
+from .models import VariabilityFunction, VariabilityFunctionCategory, GUIComponent, GUIComponentCategory, FunctionParam, ParamAssign
+from .serializers import VariabilityFunctionSerializer, VariabilityFunctionCategorySerializer, GUIComponentSerializer, GUIComponentCategorySerializer, FunctionParamSerializer, ParamAssignSerializer
 
 class GUIComponentCategoryViewSet(viewsets.ModelViewSet):
     queryset = GUIComponentCategory.objects.all()
@@ -46,4 +46,14 @@ class FunctionParamViewSet(viewsets.ModelViewSet):
     
     def list(self, request):
         serializer = FunctionParamSerializer(self.queryset, many=True)
+        return Response({"results": serializer.data})
+
+
+class ParamAssignViewSet(viewsets.ModelViewSet):
+    queryset = ParamAssign.objects.all()
+    serializer_class = ParamAssignSerializer
+    permission_classes = [IsActive]
+    
+    def list(self, request):
+        serializer = ParamAssignSerializer(self.queryset, many=True)
         return Response({"results": serializer.data})

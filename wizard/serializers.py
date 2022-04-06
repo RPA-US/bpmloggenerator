@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import GUIComponent, GUIComponentCategory, VariabilityFunction, VariabilityFunctionCategory, FunctionParam
+from .models import GUIComponent, GUIComponentCategory, VariabilityFunction, VariabilityFunctionCategory, FunctionParam, ParamAssign
 
 class GUIComponentCategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,6 +18,10 @@ class GUIComponentSerializer(serializers.ModelSerializer):
         model = GUIComponent
         fields = ['id', 'name', 'id_code', 'filename', 'path', 'description', 'gui_component_category']
 
+class ParamAssignSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ParamAssign
+        fields = ['id', 'order', 'variabilityFunction', 'functionParam']
 
 class VariabilityFunctionSerializer(serializers.ModelSerializer):
     class Meta:

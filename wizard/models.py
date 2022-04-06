@@ -63,10 +63,18 @@ class VariabilityFunction(models.Model):
     filename = models.CharField(max_length=255)
     path = models.CharField(max_length=255)
     description = models.TextField()
-    params = models.ManyToManyField(FunctionParam, blank=True)
+    params = models.ManyToManyField(FunctionParam, through='ParamAssign',blank=True)
     variability_function_category = models.ForeignKey(
         VariabilityFunctionCategory, on_delete=models.CASCADE, blank=True, null=True, limit_choices_to={'active': True},
     )
         
     def __str__(self):
         return self.filename
+
+class ParamAssign(models.Model):
+    #id = models.AutoField(primary_key=True, blank=False, null=False, unique=True)
+    order = models.IntegerField(blank=False)
+    variabilityFunction = models.ForeignKey(VariabilityFunction, on_delete=models.CASCADE)
+    functionParam = models.ForeignKey(FunctionParam, on_delete=models.CASCADE)
+    class Meta:
+        unique_together = (("id","functionParam", "order"),)
