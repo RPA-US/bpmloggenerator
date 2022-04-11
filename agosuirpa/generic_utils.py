@@ -55,9 +55,8 @@ def args_by_function_in_order(list_dict,name,spec=False):
                 function_name = VariabilityFunction.objects.get(id_code=name)
                 paramList = []
                 #TODO: change to the correct param order
-                function_params = function_name.params.all().order_by("id")
                 for i in function_params:
-                    parTMP = FunctionParam.objects.get(pk=i.id)
+                    parTMP = FunctionParam.objects.get(pk=i.functionParam)
                     paramList.append(parTMP)                
                 if(len(list_dict) == len(paramList)):
                     for i in paramList:

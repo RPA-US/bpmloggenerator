@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import GUIComponent, GUIComponentCategory, VariabilityFunction, VariabilityFunctionCategory, FunctionParam, ParamAssign
+from .models import GUIComponent, GUIComponentCategory, VariabilityFunction, VariabilityFunctionCategory, FunctionParam, FunctionParamCategory
 
 class GUIComponentCategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,17 +18,17 @@ class GUIComponentSerializer(serializers.ModelSerializer):
         model = GUIComponent
         fields = ['id', 'name', 'id_code', 'filename', 'path', 'description', 'gui_component_category']
 
-class ParamAssignSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ParamAssign
-        fields = ['id', 'order', 'variabilityFunction', 'functionParam']
-
 class VariabilityFunctionSerializer(serializers.ModelSerializer):
     class Meta:
         model = VariabilityFunction
-        fields = ['id', 'id_code', 'function_name', 'filename', 'path', 'description', 'params', 'variability_function_category']
+        fields = ['id', 'id_code', 'function_name', 'filename', 'path', 'description', 'variability_function_category']
         
+class FunctionParamCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FunctionParamCategory
+        fields = ['id', 'label', 'placeholder', 'data_type', 'description', 'validation_needs']
+
 class FunctionParamSerializer(serializers.ModelSerializer):
     class Meta:
         model = FunctionParam
-        fields = ['id', 'label', 'placeholder', 'data_type', 'description', 'validation_needs']
+        fields = ['id', 'id_code', 'order', 'description', 'description', 'validation_needs', 'functionParam', 'function']
