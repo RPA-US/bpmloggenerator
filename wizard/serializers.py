@@ -17,6 +17,11 @@ class GUIComponentSerializer(serializers.ModelSerializer):
     class Meta:
         model = GUIComponent
         fields = ['id', 'name', 'id_code', 'filename', 'path', 'description', 'gui_component_category']
+        
+class FunctionParamIDSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FunctionParam
+        fields = ['id']
 
 class VariabilityFunctionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,4 +36,5 @@ class FunctionParamCategorySerializer(serializers.ModelSerializer):
 class FunctionParamSerializer(serializers.ModelSerializer):
     class Meta:
         model = FunctionParam
-        fields = ['id', 'id_code', 'order', 'description', 'description', 'validation_needs', 'functionParam', 'function']
+        depth = 1
+        fields = ['id', 'id_code', 'order', 'description', 'validation_needs', 'function_param_category', 'variability_function']

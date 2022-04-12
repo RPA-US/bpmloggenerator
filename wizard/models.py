@@ -55,18 +55,7 @@ class FunctionParamCategory(models.Model):
     validation_needs = models.JSONField() # TODO
     
     def __str__(self):
-        return self.label    
-    
-class FunctionParam(models.Model):
-    id_code = models.CharField(max_length=255, unique=True)
-    order = models.IntegerField(blank=False)
-    description = models.CharField(max_length=255)
-    functionParam = models.ForeignKey(FunctionParamCategory, blank=False, null=False, on_delete=models.CASCADE)
-    validation_needs = models.JSONField() # TODO
-    function = models.ForeignKey("VariabilityFunction",blank=True, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.label    
+        return self.label     
 
 class VariabilityFunction(models.Model):
     id_code = models.CharField(max_length=255, unique=True)
@@ -74,9 +63,18 @@ class VariabilityFunction(models.Model):
     filename = models.CharField(max_length=255)
     path = models.CharField(max_length=255)
     description = models.TextField()
-    variability_function_category = models.ForeignKey(
-        VariabilityFunctionCategory, on_delete=models.CASCADE, blank=True, null=True, limit_choices_to={'active': True},
-    )
+    variability_function_category = models.ForeignKey(VariabilityFunctionCategory, on_delete=models.CASCADE, blank=True, null=True, limit_choices_to={'active': True},)
         
     def __str__(self):
         return self.filename
+
+class FunctionParam(models.Model):
+    id_code = models.CharField(max_length=255, unique=True)
+    order = models.IntegerField(blank=False)
+    description = models.CharField(max_length=255)
+    function_param_category = models.ForeignKey(FunctionParamCategory, blank=False, null=False, on_delete=models.CASCADE)
+    validation_needs = models.JSONField() # TODO
+    variability_function = models.ForeignKey(VariabilityFunction,blank=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.id_code 

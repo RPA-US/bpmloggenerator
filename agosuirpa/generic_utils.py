@@ -53,18 +53,15 @@ def args_by_function_in_order(list_dict,name,spec=False):
         else:
             if not(name =="" or len(list_dict)==0):
                 function_name = VariabilityFunction.objects.get(id_code=name)
-                paramList = []
-                #TODO: change to the correct param order
-                for i in function_params:
-                    parTMP = FunctionParam.objects.get(pk=i.functionParam)
-                    paramList.append(parTMP)                
-                if(len(list_dict) == len(paramList)):
-                    for i in paramList:
-                        if type(list_dict[i.label]) is list:
-                            for j in list_dict[i.label]:
+                function_params = FunctionParam.objects.filter(variability_function=function_name).order_by("order")  
+                #TODO: use the validation attribute            
+                if(len(list_dict) == len(function_params)):
+                    for i in function_params:
+                        if type(list_dict[i.id_code]) is list:
+                            for j in list_dict[i.id_code]:
                                 argsList.append(j)
                         else:
-                            argsList.append(list_dict[i.label])
+                            argsList.append(list_dict[i.id_code])
     except:
         argsList=[]
     return argsList
