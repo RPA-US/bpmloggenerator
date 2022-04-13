@@ -58,8 +58,12 @@ def args_by_function_in_order(list_dict,name,spec=False):
                 if(len(list_dict) == len(function_params)):
                     for i in function_params:
                         if type(list_dict[i.id_code]) is list:
-                            for j in list_dict[i.id_code]:
-                                argsList.append(j)
+                            #TODO: use the validation attribute and not the font like this            
+                            if i.function_param_category.data_type == "font":
+                                argsList.append(list_dict[i.id_code])
+                            else:
+                                for j in list_dict[i.id_code]:
+                                    argsList.append(j)
                         else:
                             argsList.append(list_dict[i.id_code])
     except:

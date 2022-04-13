@@ -218,32 +218,46 @@ def random_word_image(args):
     """
     Mandatory to have as args Font, Font size, Font color, Background color, Character delimitation, Random max number of word: "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84, 3]
     """
-    if args[0] and len(list(args[0]))>5:
-        size = random.randint(1,int(args[0][5]))
+    if args[0] and len(list(args[0]))>2:
+        if args[0][2] == "":
+            size = 1
+        else:
+            size = random.randint(1,int(args[0][2]))
     else:
         size = 1
     s = lorem.words(size)
-    s_line_breaks = delimit_characters(s,int(args[0][4]))
+    s_line_breaks = delimit_characters(s,int(args[0][1]))
     return random_text_image(args,s_line_breaks)
     
 def random_paragraph_image(args):
     """
     Mandatory to have as args Font, Font size, Font color, Background color, Character delimitation, Random max number of paragraph: "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84, 3]
+    [["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF"], 84, 3, newimage, capture, coordinates]
     """
     if args[0] and len(list(args[0]))>5:
-        size = random.randint(1,int(args[0][5]))
+        if args[0][2] == "":
+            size = 1
+        else:
+            size = random.randint(1,int(args[0][2]))
     else:
         size = random.randint(1,2)
     s = lorem.paragraphs(size)
-    s_line_breaks = delimit_characters(s,int(args[0][4]))
+    s_line_breaks = delimit_characters(s,int(args[0][1]))
+    """
+        [["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF"], newimage, capture, coordinates]
+    """
     return random_text_image(args,s_line_breaks)
     
 def random_sentence_image(args):
     """
     Mandatory to have as args Font, Font size, Font color, Background color and Character delimitation for paragraph: "args[0]":["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+    [["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF"], 84, newimage, capture, coordinates]   
     """
     s = lorem.sentence()
-    s_line_breaks = delimit_characters(s,int(args[0][4]))
+    s_line_breaks = delimit_characters(s,int(args[0][2]))
+    """
+        [["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF"], newimage, capture, coordinates]
+    """
     return random_text_image(args,s_line_breaks)
 
 def random_text_image(args,random_text):
@@ -275,16 +289,16 @@ def insert_text_image(args):
         coordenates: list with the top left corner. The coordenate (0,0) is the top_left in the image
     '''
     text = str(args[0])
-    font = str(args[1][0])
-    font_size = int(args[1][1])
-    font_color = str(args[1][2])
+    font = str(args[1][0][0])
+    font_size = int(args[1][0][1])
+    font_color = str(args[1][0][2])
     new_image = str(args[2])
     capture = str(args[3])
     if isinstance(args[4], list):
         coordenates = args[4]
     background_color = False
     if len(args[1]) > 3:
-        background_color = str(args[1][3])
+        background_color = str(args[1][0][3])
     
     # Coordenates x and y
     left_top_x = int(coordenates[0])
