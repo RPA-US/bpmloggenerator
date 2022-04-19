@@ -47,25 +47,21 @@ def select_random_list(objects):
 def args_by_function_in_order(list_dict,name,spec=False):
     argsList = []
     try:        
-        if(name=="replace_gui_element_various_places"):
-            for i in list_dict:
-                argsList = (list_dict[i])
-        else:
-            if not(name =="" or len(list_dict)==0):
-                function_name = VariabilityFunction.objects.get(id_code=name)
-                function_params = FunctionParam.objects.filter(variability_function=function_name).order_by("order")  
-                #TODO: use the validation attribute            
-                if(len(list_dict) == len(function_params)):
-                    for i in function_params:
-                        if type(list_dict[i.id_code]) is list:
-                            #TODO: use the validation attribute and not the font like this            
-                            if i.function_param_category.data_type == "font":
-                                argsList.append(list_dict[i.id_code])
-                            else:
-                                for j in list_dict[i.id_code]:
-                                    argsList.append(j)
-                        else:
+        if not(name =="" or len(list_dict)==0):
+            function_name = VariabilityFunction.objects.get(id_code=name)
+            function_params = FunctionParam.objects.filter(variability_function=function_name).order_by("order")  
+            #TODO: use the validation attribute            
+            if(len(list_dict) == len(function_params)):
+                for i in function_params:
+                    if type(list_dict[i.id_code]) is list:
+                        #TODO: use the validation attribute and not the font like this            
+                        if i.function_param_category.data_type == "font":
                             argsList.append(list_dict[i.id_code])
+                        else:
+                            for j in list_dict[i.id_code]:
+                                argsList.append(j)
+                    else:
+                        argsList.append(list_dict[i.id_code])
     except:
         argsList=[]
     return argsList
