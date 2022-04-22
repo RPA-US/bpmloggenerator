@@ -285,8 +285,7 @@ def execute_experiment(experiment):
                                     [image_to_duplicate, resources_folder + sep, scenario_iteration_path + "_" + init_value_original_screenshot])
                             else:
                                 val = ""
-                        original_json["trace"][str(
-                            variant)][key][screenshot_column_name]["initValue"] = str(val)
+                        original_json["trace"][str(variant)][key][screenshot_column_name]["initValue"] = str(val)
 
             # Serializing json
             json_to_write = json.dumps(original_json, indent=4)
