@@ -159,7 +159,7 @@ class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
                     if not data in request.data:
                         return Response({"message": "POST experiment executing - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
             elif request.data.get('status') == ExperimentStatusChoice.PR.value:
-                for data in ['name', 'screenshots',
+                for data in ['name','screenshots',
                     'special_colnames', 'screenshot_name_generation_function']:
                     if not data in request.data:
                         return Response({"message": "POST experiment pre-saving - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
@@ -187,6 +187,7 @@ class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
 
             experiment.save()   
             
+
             if 'screenshots' in request.data and experiment.screenshots != request.data.get('screenshots'):
                 path_without_fileextension = upload_mockups(
                     'privatefiles'+sep+experiment.screenshots.name)
