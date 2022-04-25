@@ -154,15 +154,19 @@ class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
                 if request.data.get('number_scenarios') and int(request.data.get('number_scenarios')) > 0 and not ('scenarios_conf' in request.data):
                     return Response({"message": "POST experiment executing - Incomplete data: Number scenarios greater than 1 and no scenario configuration included!"}, status=status.HTTP_400_BAD_REQUEST)
                 for data in ['size_balance', 'name', 'number_scenarios',
-                    'variability_conf', 'screenshots',
+                    'variability_conf',
                     'special_colnames', 'screenshot_name_generation_function']:
                     if not data in request.data:
                         return Response({"message": "POST experiment executing - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
+                if not 'screenshots_path' in request.data or not 'screenshots_path' in request.data:
+                        return Response({"message": "POST experiment executing - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
             elif request.data.get('status') == ExperimentStatusChoice.PR.value:
-                for data in ['name','screenshots',
+                for data in ['name',
                     'special_colnames', 'screenshot_name_generation_function']:
                     if not data in request.data:
                         return Response({"message": "POST experiment pre-saving - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
+                if not 'screenshots_path' in request.data or not 'screenshots_path' in request.data:
+                        return Response({"message": "POST experiment executing - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)            
             else:
                 for data in ['name', 'special_colnames', 'screenshot_name_generation_function']:
                     if not data in request.data:
