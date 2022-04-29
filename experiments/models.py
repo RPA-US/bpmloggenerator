@@ -34,6 +34,7 @@ class Experiment(models.Model):
     screenshot_name_generation_function = models.CharField(max_length=255)
     is_being_processed=models.IntegerField(default=0)
     is_active=models.BooleanField(default=True)
+    public=models.BooleanField(default=False)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='ExperimentOwner')
     
     class Meta:

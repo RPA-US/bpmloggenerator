@@ -10,6 +10,8 @@ from .serializers import ExperimentSerializer, VariationsSerializer
 from users.models import CustomUser
 from .functions import execute_experiment
 from django.http import FileResponse
+from rest_framework.decorators import api_view
+from django.db import transaction
 import json
 from agosuirpa.system_configuration import sep
 from django.shortcuts import get_object_or_404
@@ -30,6 +32,17 @@ class VariationsViewSet(viewsets.ModelViewSet):
     queryset = Variations.objects.all()
     serializer_class = VariationsSerializer
 
+@api_view(('GET',))
+def check_experiment_percentage(request, id):
+    user = request.user
+    res = Response({'message': 'The id experiment not corresponds to one of yours'}, status=status.HTTP_401_UNAUTHORIZED)
+    percentage = None
+    if(user.is_anonymous is False):
+        user = CustomUser.objects.get(id=request.user.id)
+        percentage = Experiment.objects.filter(pk=id, user=user.id, is_active=True).values('is_being_processed')
+    if percentage:
+        res = Response({'experiment_is_being_processed': percentage[0]['is_being_processed'],'message': 'Info. retrieved'}, status=status.HTTP_200_OK)
+    return res
 
 class ExperimentView(generics.ListCreateAPIView):
     # permission_classes = [IsAuthenticatedUser]
@@ -42,8 +55,11 @@ class ExperimentView(generics.ListCreateAPIView):
             user = CustomUser.objects.get(id=self.request.user.id)
             experiments = Experiment.objects.filter(
                 user=user.id, is_active=True).order_by("-created_at")
+        else:
+            experiments = Experiment.objects.filter(public=True, is_active=True)
         return experiments
 
+    @transaction.atomic
     def post(self, request, *args, **kwargs):
         try:
             user = CustomUser.objects.get(id=self.request.user.id)
@@ -73,6 +89,7 @@ class ExperimentView(generics.ListCreateAPIView):
                     if not data in request.data:
                         return Response({"message": "POST experiment saving - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
 
+            #with transaction.atomic():
             experiment = Experiment(
                 size_balance=json_attributes_load(
                     request.data.get('size_balance')),
@@ -109,7 +126,7 @@ class ExperimentView(generics.ListCreateAPIView):
                 experiment.foldername = execute_experiment(experiment)
                 experiment.execution_finish = datetime.datetime.now(
                     tz=timezone.utc)
-                experiment.is_being_processed = 100
+                experiment.is_being_processed = 1
                 experiment.is_active = True
                 experiment.status = ExperimentStatusChoice.LA.value
             elif request.data.get('status') != ExperimentStatusChoice.PR.value:
@@ -204,7 +221,7 @@ class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
                 experiment.foldername = execute_experiment(experiment)
                 experiment.execution_finish = datetime.datetime.now(
                     tz=timezone.utc)
-                experiment.is_being_processed = 100
+                experiment.is_being_processed = 1
                 experiment.is_active = True
                 experiment.status = ExperimentStatusChoice.LA.value
             elif request.data.get('status') != ExperimentStatusChoice.PR.value:

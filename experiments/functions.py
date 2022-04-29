@@ -8,8 +8,7 @@ from colorama import Back, Style, Fore
 from plugins.screenshot.create_screenshot import generate_capture, generate_scenario_capture
 from plugins.screenshot.replace_gui_component import generate_copied_capture_without_root, generate_copied_capture
 from agosuirpa.generic_utils import detect_function, args_by_function_in_order
-from agosuirpa.system_configuration import sep, experiment_results_path, ui_logs_foldername, additional_scenarios_resources_foldername
-
+from agosuirpa.system_configuration import sep, experiment_results_path, ui_logs_foldername, additional_scenarios_resources_foldername, prefix_scenario
 
 def validation_params(json, number_logs, percent_per_trace):
     '''
@@ -120,7 +119,7 @@ def number_rows_by_number_of_activities(dict, number_logs, percent_per_trace):
     return list_percents
 
 
-def case_generation(experiment, json_log, generate_path, number_logs, percent_per_trace, path, original_experiment, balanced):
+def case_generation(experiment, json_log, generate_path, number_logs, percent_per_trace, path, original_experiment, balanced, number_executions, current_execution):
     '''
     The main function to generate logs for a case
         args:
@@ -164,10 +163,18 @@ def case_generation(experiment, json_log, generate_path, number_logs, percent_pe
             total_variants += num_cases_per_variant_i * [i+1]
 
         random.shuffle(total_variants)
-        for variant in total_variants:
+        total = len(total_variants)
+        # TODO: control exception in case: number_executions<=1
+        print(number_executions)
+        print(current_execution)
+        current_percentage = current_execution / number_executions
+        advance_range = ((current_execution + 1) / number_executions) - current_percentage
+        for i, variant in enumerate(total_variants):
             rows, acu = generate_row(experiment,
                                      generate_path, json_log, acu, case, variant, original_experiment, balanced, number_logs[1])
             case += 1
+            print("\n =>  "+str(((i/total * advance_range) + current_percentage)*100)+" per cent generated")
+            experiment.is_being_processed = (i/total * advance_range) + current_percentage
             for row in rows:
                 writer.writerow(row)
         f.close()
@@ -182,10 +189,14 @@ def case_generation(experiment, json_log, generate_path, number_logs, percent_pe
 def automatic_experiments(experiment, generate_path, variability_conf, scenario):
     balance = experiment.size_balance["balance"]
     size_secuence = experiment.size_balance["size_secuence"]
-
-    if scenario:
+    total_case_generations = len(size_secuence) * len(balance['Balanced']) 
+    current_execution = 0
+    
+    if scenario > 0:
+        current_execution += total_case_generations*scenario
+        
         original_experiment = False
-        version_path = generate_path + sep + scenario
+        version_path = generate_path + sep + prefix_scenario + str(scenario+1)
         json_log = open(variability_conf)
         json_act_path = json.load(json_log)
     else:
@@ -194,13 +205,17 @@ def automatic_experiments(experiment, generate_path, variability_conf, scenario)
         version_path = generate_path + sep + "sc_0"
         # os.makedirs(version_path)
 
+    if scenario > -1:
+        total_case_generations *= experiment.number_scenarios+1
+    
     # os.system("cd " + param_path_log_generator)
     for i in size_secuence:
         for bal_imb in balance:
             size = ['log_size', i]
             output_path = version_path + "_size" + str(i) + "_" + bal_imb + sep
             case_generation(experiment, json_act_path, generate_path,
-                            size, balance[bal_imb], output_path, original_experiment,bal_imb)
+                            size, balance[bal_imb], output_path, original_experiment,bal_imb,total_case_generations,current_execution)
+            current_execution+=1
     return version_path
 
 
@@ -220,7 +235,6 @@ def execute_experiment(experiment):
     generate_path = experiment_results_path
     screenshot_column_name = experiment.special_colnames["Screenshot"]
     folder_name = experiment.name.replace(" ", "_")+"_"+str(experiment.id)
-    prefix_scenario = "sc_"
 
     print(Back.GREEN + experiment.name)
     print(Style.RESET_ALL)
@@ -242,7 +256,11 @@ def execute_experiment(experiment):
     # Original Experiment Generation
     print(Fore.GREEN + "=> Original Experiment")
     print(Style.RESET_ALL)
-    automatic_experiments(experiment, path, experiment.variability_conf, None)
+    
+    if scenario_size > 0:
+        automatic_experiments(experiment, path, experiment.variability_conf, 0)
+    else:
+        automatic_experiments(experiment, path, experiment.variability_conf, -1)
 
     # Addtional Scenarios Generation
     if scenario_size > 0:
@@ -310,7 +328,6 @@ def execute_experiment(experiment):
         for index, scenario_conf in enumerate(n_scenario_seed_logs):
             print(Fore.GREEN + "\n=> Additional Scenario " + str(index+1))
             print(Style.RESET_ALL)
-            automatic_experiments(
-                experiment, path, scenario_conf, prefix_scenario + str(index+1))
+            automatic_experiments(experiment, path, scenario_conf, index+1)
 
     return experiment_path

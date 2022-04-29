@@ -3,6 +3,7 @@ import sys
 # AGOSUIRPA API version
 API_VERSION = 'api/v1/'
 
+prefix_scenario = "sc_"
 experiment_results_path = "CSV_exit"
 ui_logs_foldername = "UI_logs"
 additional_scenarios_resources_foldername = "additional_scenarios_resources"
