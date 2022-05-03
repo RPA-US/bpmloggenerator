@@ -21,19 +21,19 @@ DJANGO_SECRET_KEY="Secret text for cryptographic purposes"
 
 In the project directory, open a terminal and run:
 
-** `python manage.py makemigrations`**
+**`python manage.py makemigrations`**
 
 To create a DB model.
 
-** `python manage.py migrate`**
+**`python manage.py migrate`**
 
 To create the tables in the DB based on project models.
 
-** `python manage.py loaddata configuration/db_populate.json`**
+**`python manage.py loaddata configuration/db_populate.json`**
 
 To insert initial data in DB.
 
-** `python manage.py runserver`**
+**`python manage.py runserver`**
 
 Runs the app in the debug mode. If you want to init in deploy mode, change in the *agosuirpa/settings.py* file, the *DEBUG* mode attribute to False.
 
