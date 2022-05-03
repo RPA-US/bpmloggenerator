@@ -1,30 +1,42 @@
 # AGOSUIRPA
 Automatic generation of synthetic UI log in RPA context introducing variability
 
-# Index
+## Before run
+You need to have ([Python](https://www.python.org/downloads/)) installed.
 
+If desired, you can create an isolated installation of the project requirements by creating a ([virtual environment](https://docs.python.org/3/library/venv.html#:~:text=A%20virtual%20environment%20is%20a,part%20of%20your%20operating%20system.)).
 
-# Generate log
-The software will generate a log with the characteristics defined in the screen of the second form for log generation.
+## Configuration DB
+Firstly, you need configure the Database for the proyect. To do this, create an *.env* file in the folder *configuration* with the following contents:
+`
+DB_NAME="Database name"
+DB_HOST="Database URL"
+DB_PORT="Database access port"
+DB_USER="Database user to access. Use a new user with limited credentials"
+DB_PASSWORD="Password for the previous user"
+DJANGO_SETTINGS_MODULE=agosuirpa.settings
+DJANGO_SECRET_KEY="Secret text for cryptographic purposes"
+`
+## Project initialization
 
-(image)
+In the project directory, open a terminal and run:
 
-The requested data are:
-- **Json path:** path of the json generated with the trace.
-- **Path destination log:** log generation destination path.
-- **Number of logs:** number of log case to generate.
-- **Percent per trace:** percentage of cases for the two possible json traces.
-- **Activity decision:** activity decision node of the trace.
-- **Condition:** the condition in the activity decision.
-- **Variety selection:** select the random generation content of a log or use the predefined value for every node of the trace.
+### `python manage.py makemigrations`
 
-# Add a new function
+To create a DB model.
 
-To add a new function to the list of functions available to operate on the log, you must:
-- Add the function name without parameters to the json "function_trace".
-- Import the function into eltools.generic_utils.py 
+### `python manage.py migrate`
 
-# Add a new gui element to use
+To create the tables in the DB based on project models.
 
-To add a new gui element to the list of elements available to operate on the log, you must:
-- Add the element path to the json "element_trace".
+### `python manage.py loaddata configuration/db_populate.json`
+
+To insert initial data in DB.
+
+### `python manage.py runserver`
+
+Runs the app in the debug mode. If you want to init in deploy mode, change in the *agosuirpa/settings.py* file, the *DEBUG* mode attribute to False.
+
+## Learn More
+
+You can learn more about the deploy of the aplication backend in the [Django documentation](https://docs.djangoproject.com/en/4.0/).
