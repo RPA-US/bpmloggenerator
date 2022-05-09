@@ -1,5 +1,5 @@
 # AGOSUIRPA
-Automatic generation of synthetic UI log in RPA context introducing variability
+Automatic generation of synthetic UI log in RPA context introducing variability.
 
 ## Before run
 You need to have ([Python](https://www.python.org/downloads/)) installed.
@@ -9,13 +9,13 @@ If desired, you can create an isolated installation of the project requirements 
 ## Configuration DB
 Firstly, you need configure the Database for the proyect. To do this, create an *.env* file in the folder *configuration* with the following contents:
 `
-DB_NAME="Database name"
-DB_HOST="Database URL"
-DB_PORT="Database access port"
-DB_USER="Database user to access. Use a new user with limited credentials"
-DB_PASSWORD="Password for the previous user"
-DJANGO_SETTINGS_MODULE=agosuirpa.settings
-DJANGO_SECRET_KEY="Secret text for cryptographic purposes"
+-  DB_NAME="Database name"
+-  DB_HOST="Database URL"
+-  DB_PORT="Database access port"
+-  DB_USER="Database user to access. Use a new user with limited credentials"
+-  DB_PASSWORD="Password for the previous user"
+-  DJANGO_SETTINGS_MODULE=agosuirpa.settings
+-  DJANGO_SECRET_KEY="Secret text for cryptographic purposes"
 `
 ## Project initialization
 
@@ -40,3 +40,5 @@ Runs the app in the debug mode. If you want to init in deploy mode, change in th
 ## Learn More
 
 You can learn more about the deploy of the aplication backend in the [Django documentation](https://docs.djangoproject.com/en/4.0/).
+
+A video demo is available at: https://www.youtube.com
