@@ -220,7 +220,6 @@ class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
                 experiment.foldername = execute_experiment(experiment)
                 experiment.execution_finish = datetime.datetime.now(
                     tz=timezone.utc)
-                experiment.is_being_processed = 1
                 experiment.is_active = True
                 experiment.status = ExperimentStatusChoice.LA.value
             elif request.data.get('status') != ExperimentStatusChoice.PR.value:
