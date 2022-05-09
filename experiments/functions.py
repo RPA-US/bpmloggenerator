@@ -172,7 +172,8 @@ def case_generation(experiment, json_log, generate_path, number_logs, percent_pe
                                      generate_path, json_log, acu, case, variant, original_experiment, balanced, number_logs[1])
             case += 1
             print("\n =>  "+str(((i/total * advance_range) + current_percentage)*100)+" per cent generated")
-            experiment.is_being_processed = (i/total * advance_range) + current_percentage
+            experiment.is_being_processed = int(((i/total * advance_range) + current_percentage)*100)
+            experiment.save()
             for row in rows:
                 writer.writerow(row)
         f.close()
