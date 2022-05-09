@@ -39,7 +39,7 @@ def check_experiment_percentage(request, id):
     percentage = None
     if(user.is_anonymous is False):
         user = CustomUser.objects.get(id=request.user.id)
-        percentage = Experiment.objects.filter(pk=id, user=user.id, is_active=True).values('is_being_processed')
+        percentage = Experiment.objects.filter(pk=id, user=user.id).values('is_being_processed')
     if percentage:
         res = Response({'experiment_is_being_processed': percentage[0]['is_being_processed'],'message': 'Info. retrieved'}, status=status.HTTP_200_OK)
     return res
@@ -126,7 +126,6 @@ class ExperimentView(generics.ListCreateAPIView):
                 experiment.foldername = execute_experiment(experiment)
                 experiment.execution_finish = datetime.datetime.now(
                     tz=timezone.utc)
-                experiment.is_being_processed = 1
                 experiment.is_active = True
                 experiment.status = ExperimentStatusChoice.LA.value
             elif request.data.get('status') != ExperimentStatusChoice.PR.value:

@@ -165,8 +165,6 @@ def case_generation(experiment, json_log, generate_path, number_logs, percent_pe
         random.shuffle(total_variants)
         total = len(total_variants)
         # TODO: control exception in case: number_executions<=1
-        print(number_executions)
-        print(current_execution)
         current_percentage = current_execution / number_executions
         advance_range = ((current_execution + 1) / number_executions) - current_percentage
         for i, variant in enumerate(total_variants):
