@@ -340,8 +340,8 @@ def associate_experiment(user):
                     screenshots_path=screenshots_path,
                     status=ExperimentStatusChoice.LA.value,
                     execution_start = execution_start,
-                    execution_finish = execution_finish
-
+                    execution_finish = execution_finish,
+                    public=False
                 )    
             experiment.user=user
             experiment.save()
