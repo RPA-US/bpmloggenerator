@@ -41,4 +41,4 @@ Runs the app in the debug mode. If you want to init in deploy mode, change in th
 
 You can learn more about the deploy of the aplication backend in the [Django documentation](https://docs.djangoproject.com/en/4.0/).
 
-A video demo is available at: https://www.youtube.com
+A video demo is available at: https://youtu.be/6dzTWxWyOTU
