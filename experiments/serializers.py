@@ -22,4 +22,4 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class VariationsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Variations
-        fields = ('case_variation_id', 'case_id', 'scenario', 'activity', 'variant', 'function_name', 'gui_element', 'experiment')
+        fields = ('case_variation_id', 'case_id', 'scenario', 'activity', 'variant', 'function_name', 'arguments', 'experiment')

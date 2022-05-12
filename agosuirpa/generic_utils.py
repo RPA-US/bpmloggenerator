@@ -44,23 +44,24 @@ def select_random_list(objects):
     index = random.randint(0,len(objects)-1)      
     return objects[index]
 
-def args_by_function_in_order(list_dict,name):
+def args_by_function_in_order(list_dict,name,spec=False):
     argsList = []
-    if (name == "insert_text_image"):
-        f=1
-    if not(name =="" or len(list_dict)==0):
-        function_name = VariabilityFunction.objects.get(id_code=name)
-        paramList = []
-        #TODO: change to the correct param order
-        function_params = function_name.params.all().order_by("id")
-        for i in function_params:
-            parTMP = FunctionParam.objects.get(pk=i.id)
-            paramList.append(parTMP)
-        if(len(list_dict) == len(paramList)):
-            for i in paramList:
-                if isinstance(list_dict[i.label],list):
-                    for j in list_dict[i.label]:
-                        argsList.append(j)
-                else:
-                    argsList.append(list_dict[i.label])
+    try:        
+        if not(name =="" or len(list_dict)==0):
+            function_name = VariabilityFunction.objects.get(id_code=name)
+            function_params = FunctionParam.objects.filter(variability_function=function_name).order_by("order")  
+            #TODO: use the validation attribute            
+            if(len(list_dict) == len(function_params)):
+                for i in function_params:
+                    if type(list_dict[i.id_code]) is list:
+                        #TODO: use the validation attribute and not the font like this            
+                        if i.function_param_category.data_type == "font":
+                            argsList.append(list_dict[i.id_code])
+                        else:
+                            for j in list_dict[i.id_code]:
+                                argsList.append(j)
+                    else:
+                        argsList.append(list_dict[i.id_code])
+    except:
+        argsList=[]
     return argsList

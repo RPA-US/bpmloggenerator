@@ -767,6 +767,102 @@
         "codename": "view_guicomponent"
     }
 }, {
+    "model": "auth.permission",
+    "pk": 97,
+    "fields": {
+        "name": "Can add param assign",
+        "content_type": 25,
+        "codename": "add_paramassign"
+    }
+}, {
+    "model": "auth.permission",
+    "pk": 98,
+    "fields": {
+        "name": "Can change param assign",
+        "content_type": 25,
+        "codename": "change_paramassign"
+    }
+}, {
+    "model": "auth.permission",
+    "pk": 99,
+    "fields": {
+        "name": "Can delete param assign",
+        "content_type": 25,
+        "codename": "delete_paramassign"
+    }
+}, {
+    "model": "auth.permission",
+    "pk": 100,
+    "fields": {
+        "name": "Can view param assign",
+        "content_type": 25,
+        "codename": "view_paramassign"
+    }
+}, {
+    "model": "auth.permission",
+    "pk": 101,
+    "fields": {
+        "name": "Can add function param category",
+        "content_type": 20,
+        "codename": "add_functionparamcategory"
+    }
+}, {
+    "model": "auth.permission",
+    "pk": 102,
+    "fields": {
+        "name": "Can change function param category",
+        "content_type": 20,
+        "codename": "change_functionparamcategory"
+    }
+}, {
+    "model": "auth.permission",
+    "pk": 103,
+    "fields": {
+        "name": "Can delete function param category",
+        "content_type": 20,
+        "codename": "delete_functionparamcategory"
+    }
+}, {
+    "model": "auth.permission",
+    "pk": 104,
+    "fields": {
+        "name": "Can view function param category",
+        "content_type": 20,
+        "codename": "view_functionparamcategory"
+    }
+}, {
+    "model": "auth.permission",
+    "pk": 105,
+    "fields": {
+        "name": "Can add function param",
+        "content_type": 25,
+        "codename": "add_functionparam"
+    }
+}, {
+    "model": "auth.permission",
+    "pk": 106,
+    "fields": {
+        "name": "Can change function param",
+        "content_type": 25,
+        "codename": "change_functionparam"
+    }
+}, {
+    "model": "auth.permission",
+    "pk": 107,
+    "fields": {
+        "name": "Can delete function param",
+        "content_type": 25,
+        "codename": "delete_functionparam"
+    }
+}, {
+    "model": "auth.permission",
+    "pk": 108,
+    "fields": {
+        "name": "Can view function param",
+        "content_type": 25,
+        "codename": "view_functionparam"
+    }
+}, {
     "model": "contenttypes.contenttype",
     "pk": 1,
     "fields": {
@@ -904,7 +1000,7 @@
     "pk": 20,
     "fields": {
         "app_label": "wizard",
-        "model": "functionparam"
+        "model": "functionparamcategory"
     }
 }, {
     "model": "contenttypes.contenttype",
@@ -935,32 +1031,18 @@
         "model": "guicomponent"
     }
 }, {
-    "model": "sessions.session",
-    "pk": "jk3w5jx48dhydxgvtolyar4xmsdpldap",
+    "model": "contenttypes.contenttype",
+    "pk": 25,
     "fields": {
-        "session_data": ".eJxVjMEOwiAQRP-FsyHCLli86Y80yy4NjQ1NhJ6M_y41Pehx5s2blxppa3ncanqOs6irMur020XiRyo7oGXZa03M61aa_m4OXPWtp1TazNTmtdwP6-8qU839x5NB5MmiCcRnFseDGSLYCIIRfHApItjAbrh4iymgE-8lgESAqXvq_QGwJjwb:1nTiSs:tXDlqQhm6Acz_L2MTQ1sGDwWZDDxfQrEgsZWkc3d9s0",
-        "expire_date": "2022-03-28T11:02:14.047Z"
-    }
-}, {
-    "model": "sessions.session",
-    "pk": "rcdyeji1hkxk0p1tgh2xctpllff4y2hl",
-    "fields": {
-        "session_data": ".eJxVjMEOwiAQRP-FsyHCLli86Y80yy4NjQ1NhJ6M_y41Pehx5s2blxppa3ncanqOs6irMur020XiRyo7oGXZa03M61aa_m4OXPWtp1TazNTmtdwP6-8qU839x5NB5MmiCcRnFseDGSLYCIIRfHApItjAbrh4iymgE-8lgESAqXvq_QGwJjwb:1nSeHk:qHjuFolke4uiU6yRNvyfBNLA_O_n51IBYzYod-LST44",
-        "expire_date": "2022-03-25T12:22:20.392Z"
-    }
-}, {
-    "model": "sessions.session",
-    "pk": "t2r7b087ihfk5k5zv5warhkj31vdqo7a",
-    "fields": {
-        "session_data": ".eJxVjMEOwiAQRP-FsyHCLli86Y80yy4NjQ1NhJ6M_y41Pehx5s2blxppa3ncanqOs6irMur020XiRyo7oGXZa03M61aa_m4OXPWtp1TazNTmtdwP6-8qU839x5NB5MmiCcRnFseDGSLYCIIRfHApItjAbrh4iymgE-8lgESAqXvq_QGwJjwb:1nSFzK:40HiWETX5o-k04nZZSZFiY9TgO8xD8yPkXWDUcP6dWc",
-        "expire_date": "2022-03-24T10:25:42.710Z"
+        "app_label": "wizard",
+        "model": "functionparam"
     }
 }, {
     "model": "authtoken.token",
-    "pk": "95f0ffe51ed98cd1635597d3de1491278db1e349",
+    "pk": "403440f234973564cafc378f2a8dd74ff2c089a6",
     "fields": {
         "user": 1,
-        "created": "2022-03-10T10:25:42.398Z"
+        "created": "2022-03-23T07:34:29.849Z"
     }
 }, {
     "model": "sites.site",
@@ -974,7 +1056,7 @@
     "pk": 1,
     "fields": {
         "password": "pbkdf2_sha256$260000$SMejNXzmmPuX1yi7WPxOgA$FERx86AN773es9Q+iNKvapKnMxBFmylNUoLRBkNN5g4=",
-        "last_login": "2022-03-14T11:02:14.012Z",
+        "last_login": "2022-04-18T06:20:33.307Z",
         "is_superuser": true,
         "username": "admin",
         "first_name": "",
@@ -1406,7 +1488,7 @@
         "filename": "250686-android.widget.ImageButton.png",
         "path": "resources/GUI_components/menu",
         "description": "features.experiment.GUI_components.description.menu",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1417,7 +1499,7 @@
         "filename": "249444-android.widget.ImageButton.png",
         "path": "resources/GUI_components/menu",
         "description": "features.experiment.GUI_components.description.menu",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1428,7 +1510,7 @@
         "filename": "247427-android.widget.ImageButton.png",
         "path": "resources/GUI_components/menu",
         "description": "features.experiment.GUI_components.description.menu",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1439,7 +1521,7 @@
         "filename": "135975-android.widget.Button.png",
         "path": "resources/GUI_components/menu",
         "description": "features.experiment.GUI_components.description.menu",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1450,7 +1532,7 @@
         "filename": "32916-android.widget.Button.png",
         "path": "resources/GUI_components/menu",
         "description": "features.experiment.GUI_components.description.menu",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1461,7 +1543,7 @@
         "filename": "17600-android.widget.ImageView.png",
         "path": "resources/GUI_components/menu",
         "description": "features.experiment.GUI_components.description.menu",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1472,7 +1554,7 @@
         "filename": "15564-android.widget.ImageButton.png",
         "path": "resources/GUI_components/menu",
         "description": "features.experiment.GUI_components.description.menu",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1483,7 +1565,7 @@
         "filename": "6-android.widget.ImageButton.png",
         "path": "resources/GUI_components/menu",
         "description": "features.experiment.GUI_components.description.menu",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1494,7 +1576,7 @@
         "filename": "reply-message.png",
         "path": "resources/GUI_components/reply",
         "description": "features.experiment.GUI_components.description.reply",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1505,7 +1587,7 @@
         "filename": "reply.png",
         "path": "resources/GUI_components/reply",
         "description": "features.experiment.GUI_components.description.reply",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1516,7 +1598,7 @@
         "filename": "reply(3).png",
         "path": "resources/GUI_components/reply",
         "description": "features.experiment.GUI_components.description.reply",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1527,7 +1609,7 @@
         "filename": "reply(2).png",
         "path": "resources/GUI_components/reply",
         "description": "features.experiment.GUI_components.description.reply",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1538,7 +1620,7 @@
         "filename": "reply(1).png",
         "path": "resources/GUI_components/reply",
         "description": "features.experiment.GUI_components.description.reply",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1549,7 +1631,7 @@
         "filename": "239935-android.widget.Button.png",
         "path": "resources/GUI_components/reload",
         "description": "features.experiment.GUI_components.description.reload",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1560,7 +1642,7 @@
         "filename": "188872-android.widget.Button.png",
         "path": "resources/GUI_components/reload",
         "description": "features.experiment.GUI_components.description.reload",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1571,7 +1653,7 @@
         "filename": "138968-android.widget.Button.png",
         "path": "resources/GUI_components/reload",
         "description": "features.experiment.GUI_components.description.reload",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1582,7 +1664,7 @@
         "filename": "62324-android.widget.Button.png",
         "path": "resources/GUI_components/reload",
         "description": "features.experiment.GUI_components.description.reload",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1593,7 +1675,7 @@
         "filename": "16411-android.widget.TextView.png",
         "path": "resources/GUI_components/reload",
         "description": "features.experiment.GUI_components.description.reload",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1604,7 +1686,7 @@
         "filename": "trash_b.png",
         "path": "resources/GUI_components/trash",
         "description": "features.experiment.GUI_components.description.trash",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1615,7 +1697,7 @@
         "filename": "trash.png",
         "path": "resources/GUI_components/trash",
         "description": "features.experiment.GUI_components.description.trash",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1626,7 +1708,7 @@
         "filename": "trash(2).png",
         "path": "resources/GUI_components/trash",
         "description": "features.experiment.GUI_components.description.trash",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1637,7 +1719,7 @@
         "filename": "trash(1).png",
         "path": "resources/GUI_components/trash",
         "description": "features.experiment.GUI_components.description.trash",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1648,7 +1730,7 @@
         "filename": "garbage.png",
         "path": "resources/GUI_components/trash",
         "description": "features.experiment.GUI_components.description.trash",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1659,7 +1741,7 @@
         "filename": "190610-android.widget.Button.png",
         "path": "resources/GUI_components/trash",
         "description": "features.experiment.GUI_components.description.trash",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1670,7 +1752,7 @@
         "filename": "149263-android.widget.Button.png",
         "path": "resources/GUI_components/mail",
         "description": "features.experiment.GUI_components.description.mail",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1681,7 +1763,7 @@
         "filename": "17792-android.widget.ImageView.png",
         "path": "resources/GUI_components/mail",
         "description": "features.experiment.GUI_components.description.mail",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1692,7 +1774,7 @@
         "filename": "17760-android.widget.ImageView.png",
         "path": "resources/GUI_components/mail",
         "description": "features.experiment.GUI_components.description.mail",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1703,7 +1785,7 @@
         "filename": "16907-android.widget.TextView.png",
         "path": "resources/GUI_components/mail",
         "description": "features.experiment.GUI_components.description.mail",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1714,7 +1796,7 @@
         "filename": "15988-android.widget.TextView.png",
         "path": "resources/GUI_components/mail",
         "description": "features.experiment.GUI_components.description.mail",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1725,7 +1807,7 @@
         "filename": "15712-android.widget.TextView.png",
         "path": "resources/GUI_components/mail",
         "description": "features.experiment.GUI_components.description.mail",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1736,7 +1818,7 @@
         "filename": "15540-android.widget.TextView.png",
         "path": "resources/GUI_components/mail",
         "description": "features.experiment.GUI_components.description.mail",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1747,7 +1829,7 @@
         "filename": "15486-android.widget.TextView.png",
         "path": "resources/GUI_components/mail",
         "description": "features.experiment.GUI_components.description.mail",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1758,7 +1840,7 @@
         "filename": "15317-android.widget.TextView.png",
         "path": "resources/GUI_components/mail",
         "description": "features.experiment.GUI_components.description.mail",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1769,7 +1851,7 @@
         "filename": "247887-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1780,7 +1862,7 @@
         "filename": "247925-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1791,7 +1873,7 @@
         "filename": "249391-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1802,7 +1884,7 @@
         "filename": "250749-android.widget.Button.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1813,7 +1895,7 @@
         "filename": "17642-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1824,7 +1906,7 @@
         "filename": "17649-android.widget.Button.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1835,7 +1917,7 @@
         "filename": "17675-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1846,7 +1928,7 @@
         "filename": "57478-android.widget.Button.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1857,7 +1939,7 @@
         "filename": "166430-android.widget.Button.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1868,7 +1950,7 @@
         "filename": "176216-android.widget.Button.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1879,7 +1961,7 @@
         "filename": "180721-android.widget.Button.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1890,7 +1972,7 @@
         "filename": "228740-android.widget.Button.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1901,7 +1983,7 @@
         "filename": "234976-android.widget.Button.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1912,7 +1994,7 @@
         "filename": "250749-android.widget.Button.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1923,7 +2005,7 @@
         "filename": "16912-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1934,7 +2016,7 @@
         "filename": "16189-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1945,7 +2027,7 @@
         "filename": "15994-android.widget.TextView.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1956,7 +2038,7 @@
         "filename": "15700-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1967,7 +2049,7 @@
         "filename": "15232-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1978,7 +2060,7 @@
         "filename": "17043-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -1989,7 +2071,7 @@
         "filename": "17239-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2000,7 +2082,7 @@
         "filename": "17314-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2011,7 +2093,7 @@
         "filename": "17367-android.widget.ImageButton.png",
         "path": "resources/GUI_components/back",
         "description": "features.experiment.GUI_components.description.back",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2022,7 +2104,7 @@
         "filename": "247268-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2033,7 +2115,7 @@
         "filename": "242119-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2044,7 +2126,7 @@
         "filename": "213943-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2055,7 +2137,7 @@
         "filename": "151298-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2066,7 +2148,7 @@
         "filename": "140628-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2077,7 +2159,7 @@
         "filename": "126359-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2088,7 +2170,7 @@
         "filename": "101057-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2099,7 +2181,7 @@
         "filename": "80301-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2110,7 +2192,7 @@
         "filename": "40163-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2121,7 +2203,7 @@
         "filename": "17654-android.widget.Button.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 1
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2132,7 +2214,7 @@
         "filename": "16190-android.widget.ImageButton.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2143,7 +2225,7 @@
         "filename": "15995-android.widget.TextView.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2154,7 +2236,7 @@
         "filename": "15767-android.widget.TextView.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2165,7 +2247,7 @@
         "filename": "15248-android.widget.ImageButton.png",
         "path": "resources/GUI_components/next",
         "description": "features.experiment.GUI_components.description.next",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2473,7 +2555,7 @@
         "filename": "17723-android.widget.TextView.png",
         "path": "resources/GUI_components/cancel",
         "description": "features.experiment.GUI_components.description.cancel",
-        "gui_component_category": 1
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2484,7 +2566,7 @@
         "filename": "17200-android.widget.ImageButton.png",
         "path": "resources/GUI_components/cancel",
         "description": "features.experiment.GUI_components.description.cancel",
-        "gui_component_category": 1
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -2660,7 +2742,7 @@
         "filename": "17317-android.widget.TextView.png",
         "path": "resources/GUI_components/send",
         "description": "features.experiment.GUI_components.description.send",
-        "gui_component_category": 1
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3056,7 +3138,7 @@
         "filename": "alert (1).png",
         "path": "resources/GUI_components/alert",
         "description": "features.experiment.GUI_components.description.alert",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3067,7 +3149,7 @@
         "filename": "alert (2).png",
         "path": "resources/GUI_components/alert",
         "description": "features.experiment.GUI_components.description.alert",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3078,7 +3160,7 @@
         "filename": "alert (3).png",
         "path": "resources/GUI_components/alert",
         "description": "features.experiment.GUI_components.description.alert",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3089,7 +3171,7 @@
         "filename": "alert (4).png",
         "path": "resources/GUI_components/alert",
         "description": "features.experiment.GUI_components.description.alert",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3100,7 +3182,7 @@
         "filename": "alert (5).png",
         "path": "resources/GUI_components/alert",
         "description": "features.experiment.GUI_components.description.alert",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3111,7 +3193,7 @@
         "filename": "alert (6).png",
         "path": "resources/GUI_components/alert",
         "description": "features.experiment.GUI_components.description.alert",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3133,7 +3215,7 @@
         "filename": "alert (8).png",
         "path": "resources/GUI_components/alert",
         "description": "features.experiment.GUI_components.description.alert",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3144,7 +3226,7 @@
         "filename": "alert (9).png",
         "path": "resources/GUI_components/alert",
         "description": "features.experiment.GUI_components.description.alert",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3155,7 +3237,7 @@
         "filename": "alert (10).png",
         "path": "resources/GUI_components/alert",
         "description": "features.experiment.GUI_components.description.alert",
-        "gui_component_category": 2
+        "gui_component_category": 5
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3166,7 +3248,7 @@
         "filename": "crm(1).png",
         "path": "resources/GUI_components/image",
         "description": "features.experiment.GUI_components.description.cmr",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3177,7 +3259,7 @@
         "filename": "crm(4).png",
         "path": "resources/GUI_components/image",
         "description": "features.experiment.GUI_components.description.cmr",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3188,7 +3270,7 @@
         "filename": "crm(2).png",
         "path": "resources/GUI_components/image",
         "description": "features.experiment.GUI_components.description.cmr",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3199,7 +3281,7 @@
         "filename": "crm(5).png",
         "path": "resources/GUI_components/image",
         "description": "features.experiment.GUI_components.description.cmr",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3210,7 +3292,7 @@
         "filename": "crm(6).png",
         "path": "resources/GUI_components/image",
         "description": "features.experiment.GUI_components.description.cmr",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3221,7 +3303,7 @@
         "filename": "crm(7).png",
         "path": "resources/GUI_components/image",
         "description": "features.experiment.GUI_components.description.cmr",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3232,7 +3314,7 @@
         "filename": "crm(8).png",
         "path": "resources/GUI_components/image",
         "description": "features.experiment.GUI_components.description.cmr",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3243,7 +3325,7 @@
         "filename": "crm.png",
         "path": "resources/GUI_components/image",
         "description": "features.experiment.GUI_components.description.cmr",
-        "gui_component_category": 2
+        "gui_component_category": 6
     }
 }, {
     "model": "wizard.guicomponent",
@@ -3657,7 +3739,7 @@
         "level": 0
     }
 }, {
-    "model": "wizard.functionparam",
+    "model": "wizard.functionparamcategory",
     "pk": 1,
     "fields": {
         "label": "features.experiment.function_params.text_input.label",
@@ -3667,7 +3749,7 @@
         "validation_needs": {}
     }
 }, {
-    "model": "wizard.functionparam",
+    "model": "wizard.functionparamcategory",
     "pk": 2,
     "fields": {
         "label": "features.experiment.function_params.number_input.label",
@@ -3677,7 +3759,7 @@
         "validation_needs": {}
     }
 }, {
-    "model": "wizard.functionparam",
+    "model": "wizard.functionparamcategory",
     "pk": 3,
     "fields": {
         "label": "features.experiment.function_params.element_input.label",
@@ -3687,7 +3769,7 @@
         "validation_needs": {}
     }
 }, {
-    "model": "wizard.functionparam",
+    "model": "wizard.functionparamcategory",
     "pk": 4,
     "fields": {
         "label": "features.experiment.function_params.font_input.label",
@@ -3697,7 +3779,7 @@
         "validation_needs": {}
     }
 }, {
-    "model": "wizard.functionparam",
+    "model": "wizard.functionparamcategory",
     "pk": 5,
     "fields": {
         "label": "features.experiment.function_params.list_input.label",
@@ -3715,8 +3797,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.random_mouse_position",
-        "variability_function_category": 1,
-        "params": [5]
+        "variability_function_category": 1
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3727,8 +3808,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.random_id_card",
-        "variability_function_category": 3,
-        "params": []
+        "variability_function_category": 3
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3739,8 +3819,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.random_word_with_first_letter_capital",
-        "variability_function_category": 3,
-        "params": [1]
+        "variability_function_category": 3
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3751,8 +3830,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.random_path",
-        "variability_function_category": 3,
-        "params": [1, 2]
+        "variability_function_category": 3
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3763,8 +3841,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.random_paragraph",
-        "variability_function_category": 3,
-        "params": [2]
+        "variability_function_category": 3
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3775,8 +3852,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.random_sentence",
-        "variability_function_category": 3,
-        "params": []
+        "variability_function_category": 3
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3787,8 +3863,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.random_words",
-        "variability_function_category": 3,
-        "params": [2]
+        "variability_function_category": 3
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3799,8 +3874,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.image_name_as_num_img_png",
-        "variability_function_category": 5,
-        "params": []
+        "variability_function_category": 5
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3811,8 +3885,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.random_appname",
-        "variability_function_category": 1,
-        "params": []
+        "variability_function_category": 1
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3823,8 +3896,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.lorem_word_as_appname",
-        "variability_function_category": 1,
-        "params": []
+        "variability_function_category": 1
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3835,8 +3907,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.generate_timestamp",
-        "variability_function_category": 3,
-        "params": []
+        "variability_function_category": 3
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3847,8 +3918,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.mouse_position_range_x",
-        "variability_function_category": 1,
-        "params": [5]
+        "variability_function_category": 1
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3859,8 +3929,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.mouse_or_keyboard",
-        "variability_function_category": 2,
-        "params": []
+        "variability_function_category": 2
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3871,8 +3940,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.replace_gui_component_by_other",
-        "variability_function_category": 4,
-        "params": [3]
+        "variability_function_category": 4
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3883,8 +3951,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.given_text_in_image",
-        "variability_function_category": 4,
-        "params": [1, 4]
+        "variability_function_category": 4
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3895,8 +3962,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.hidden_gui_element",
-        "variability_function_category": 4,
-        "params": [1]
+        "variability_function_category": 4
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3907,8 +3973,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.screenshot_name_without_root_path",
-        "variability_function_category": 5,
-        "params": []
+        "variability_function_category": 5
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3919,8 +3984,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.random_text_in_image",
-        "variability_function_category": 4,
-        "params": [1]
+        "variability_function_category": 4
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3931,8 +3995,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.image_copy_renamed",
-        "variability_function_category": 4,
-        "params": []
+        "variability_function_category": 4
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3943,8 +4006,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.image_copy_renamed_and_return_path",
-        "variability_function_category": 4,
-        "params": []
+        "variability_function_category": 4
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3955,8 +4017,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.random_words_in_image",
-        "variability_function_category": 4,
-        "params": [5]
+        "variability_function_category": 4
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3967,8 +4028,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.random_sentence_in_image",
-        "variability_function_category": 4,
-        "params": [5]
+        "variability_function_category": 4
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3979,8 +4039,7 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.random_paragraph_in_image",
-        "variability_function_category": 4,
-        "params": [5]
+        "variability_function_category": 4
     }
 }, {
     "model": "wizard.variabilityfunction",
@@ -3991,7 +4050,325 @@
         "filename": "function_trace.json",
         "path": "configuration",
         "description": "features.experiment.function_trace.description.mouse_position_range_y",
-        "variability_function_category": 1,
-        "params": [5]
+        "variability_function_category": 1
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 1,
+    "fields": {
+        "id_code": "mouse_list_coordenates_down",
+        "order": 1,
+        "description": "features.experiment.param.description.mouse_list_coordenates_down",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 1
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 2,
+    "fields": {
+        "id_code": "number_words",
+        "order": 1,
+        "description": "features.experiment.param.description.number_words",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 3
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 3,
+    "fields": {
+        "id_code": "extension_file",
+        "order": 1,
+        "description": "features.experiment.param.description.extension_file",
+        "function_param_category": 1,
+        "validation_needs": {},
+        "variability_function": 4
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 4,
+    "fields": {
+        "id_code": "dir_level",
+        "order": 2,
+        "description": "features.experiment.param.description.dir_level",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 4
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 5,
+    "fields": {
+        "id_code": "number_paragraphs",
+        "order": 1,
+        "description": "features.experiment.param.description.number_paragraphs",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 5
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 6,
+    "fields": {
+        "id_code": "number_random_words",
+        "order": 1,
+        "description": "features.experiment.param.description.number_random_words",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 7
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 7,
+    "fields": {
+        "id_code": "mouse_list_coordenates_x_left",
+        "order": 1,
+        "description": "features.experiment.param.description.mouse_list_coordenates_x_left",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 12
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 8,
+    "fields": {
+        "id_code": "gui_elements_to_replace",
+        "order": 1,
+        "description": "features.experiment.param.description.gui_elements_to_replace",
+        "function_param_category": 3,
+        "validation_needs": {},
+        "variability_function": 14
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 9,
+    "fields": {
+        "id_code": "font_configuration",
+        "order": 1,
+        "description": "features.experiment.param.description.font_configuration",
+        "function_param_category": 4,
+        "validation_needs": {},
+        "variability_function": 15
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 10,
+    "fields": {
+        "id_code": "color_hidden_square",
+        "order": 1,
+        "description": "features.experiment.param.description.color_hidden_square",
+        "function_param_category": 1,
+        "validation_needs": {},
+        "variability_function": 16
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 11,
+    "fields": {
+        "id_code": "text_to_insert",
+        "order": 1,
+        "description": "features.experiment.param.description.text_to_insert",
+        "function_param_category": 1,
+        "validation_needs": {},
+        "variability_function": 19
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 12,
+    "fields": {
+        "id_code": "word_configuration_font",
+        "order": 1,
+        "description": "features.experiment.param.description.word_configuration_font",
+        "function_param_category": 4,
+        "validation_needs": {},
+        "variability_function": 22
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 13,
+    "fields": {
+        "id_code": "sentence_configuration_font",
+        "order": 1,
+        "description": "features.experiment.param.description.sentence_configuration_font",
+        "function_param_category": 4,
+        "validation_needs": {},
+        "variability_function": 23
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 14,
+    "fields": {
+        "id_code": "paragraph_configuration_font",
+        "order": 1,
+        "description": "features.experiment.param.description.paragraph_configuration_font",
+        "function_param_category": 4,
+        "validation_needs": {},
+        "variability_function": 24
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 15,
+    "fields": {
+        "id_code": "mouse_list_coordenates_y_left",
+        "order": 1,
+        "description": "features.experiment.param.description.mouse_list_coordenates_y_left",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 25
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 16,
+    "fields": {
+        "id_code": "mouse_list_coordenates_x_resolution",
+        "order": 2,
+        "description": "features.experiment.param.description.mouse_list_coordenates_x_resolution",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 12
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 17,
+    "fields": {
+        "id_code": "mouse_list_coordenates_x_right",
+        "order": 3,
+        "description": "features.experiment.param.description.mouse_list_coordenates_x_right",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 12
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 18,
+    "fields": {
+        "id_code": "mouse_list_coordenates_y_resolution",
+        "order": 2,
+        "description": "features.experiment.param.description.mouse_list_coordenates_y_resolution",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 25
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 19,
+    "fields": {
+        "id_code": "mouse_list_coordenates_y_right",
+        "order": 3,
+        "description": "features.experiment.param.description.mouse_list_coordenates_y_right",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 25
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 20,
+    "fields": {
+        "id_code": "mouse_list_coordenates_left",
+        "order": 2,
+        "description": "features.experiment.param.description.mouse_list_coordenates_left",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 1
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 21,
+    "fields": {
+        "id_code": "mouse_list_coordenates_resolution_x",
+        "order": 3,
+        "description": "features.experiment.param.description.mouse_list_coordenates_resolution_x",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 1
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 22,
+    "fields": {
+        "id_code": "mouse_list_coordenates_resolution_y",
+        "order": 4,
+        "description": "features.experiment.param.description.mouse_list_coordenates_resolution_y",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 1
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 23,
+    "fields": {
+        "id_code": "mouse_list_coordenates_top",
+        "order": 5,
+        "description": "features.experiment.param.description.mouse_list_coordenates_top",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 1
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 24,
+    "fields": {
+        "id_code": "mouse_list_coordenates_right",
+        "order": 6,
+        "description": "features.experiment.param.description.mouse_list_coordenates_right",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 1
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 25,
+    "fields": {
+        "id_code": "word_configuration_chat_limit",
+        "order": 2,
+        "description": "features.experiment.param.description.word_configuration_chat_limit",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 22
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 26,
+    "fields": {
+        "id_code": "word_configuration_max_words",
+        "order": 3,
+        "description": "features.experiment.param.description.word_configuration_max_words",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 22
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 27,
+    "fields": {
+        "id_code": "sentence_configuration_char_limit",
+        "order": 2,
+        "description": "features.experiment.param.description.sentence_configuration_char_limit",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 23
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 28,
+    "fields": {
+        "id_code": "paragraph_configuration_char_limit",
+        "order": 2,
+        "description": "features.experiment.param.description.paragraph_configuration_char_limit",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 24
+    }
+}, {
+    "model": "wizard.functionparam",
+    "pk": 29,
+    "fields": {
+        "id_code": "paragraph_configuration_max_paragraph",
+        "order": 3,
+        "description": "features.experiment.param.description.paragraph_configuration_max_paragraph",
+        "function_param_category": 2,
+        "validation_needs": {},
+        "variability_function": 24
     }
 }]

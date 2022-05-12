@@ -5,7 +5,6 @@ from private_storage.fields import PrivateFileField, PrivateImageField
 from django.core.exceptions import ValidationError
 from enum import Enum
 
-
 class ExperimentStatusChoice(Enum):   # A subclass of Enum
     PR = "PRE_SAVED"
     SA = "SAVED"
@@ -35,6 +34,7 @@ class Experiment(models.Model):
     screenshot_name_generation_function = models.CharField(max_length=255)
     is_being_processed=models.IntegerField(default=0)
     is_active=models.BooleanField(default=True)
+    public=models.BooleanField(default=False)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='ExperimentOwner')
     
     class Meta:
@@ -53,11 +53,13 @@ class Experiment(models.Model):
 class Variations(models.Model):
     case_variation_id = models.CharField(max_length=255)
     case_id = models.CharField(max_length=255)
+    log_size = models.IntegerField(null=True)
+    balanced = models.CharField(max_length=255, blank=True, null=True)
     scenario = models.CharField(max_length=255)
     activity = models.CharField(max_length=255)
     variant = models.CharField(max_length=255)
     function_name = models.CharField(max_length=255)
-    gui_element = models.CharField(max_length=255)
+    arguments = models.TextField()
     experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
 
     def __str__(self):

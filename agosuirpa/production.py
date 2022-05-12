@@ -23,7 +23,7 @@ environ.Env.read_env()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['150.214.188.176']
+ALLOWED_HOSTS = ['150.214.188.176', 'canela.lsi.us.es']
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -219,7 +219,9 @@ AUTH_USER_MODEL = 'users.CustomUser'
 # from. All all of this.
 
 CORS_ALLOWED_ORIGINS = [    
-'http://localhost:3000'
+'http://localhost:3000',
+'http://canela.lsi.us.es',
+'https://canela.lsi.us.es'
 ]
 
 # - django auth

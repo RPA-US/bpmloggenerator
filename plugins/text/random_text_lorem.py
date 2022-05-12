@@ -11,7 +11,7 @@ def generate_words(args):
     if args  == []:
         words=1
     else:
-        words = args[0]
+        words = int(args[0])
     text = lorem.words(words)
     return text
 
@@ -34,7 +34,7 @@ def generate_paragraph(args):
     if args  == []:
         para=1
     else:
-        para = args[0]
+        para = int(args[0])
     text =  lorem.paragraphs(para)
     return text
 
@@ -49,8 +49,8 @@ def generate_path(args):
         value=1
         ext=None
     else:
-        value=args[1]
-        ext=args[0] 
+        value=int(args[1])
+        ext=str(args[0])
     res = "C:"+sep+generate_words()
     for i in range(1,value):        
         res += sep+generate_words()
@@ -80,7 +80,7 @@ def generate_random_entity(args):
     if args == []:
         words=1
     else:
-        words = args[0]
+        words = int(args[0])
     text = lorem.words(words).capitalize() 
     return text
 

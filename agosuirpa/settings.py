@@ -90,7 +90,7 @@ ROOT_URLCONF = 'agosuirpa.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'build'],
+        'DIRS': [BASE_DIR / 'build', BASE_DIR / 'landing'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

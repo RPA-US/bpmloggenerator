@@ -24,15 +24,20 @@ from django.views.decorators.csrf import csrf_exempt
 # from experiments import views
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
-# @csrf_exempt
-# def render_react(request):
-#     return render(request, "index.html")
+@csrf_exempt
+def render_react(request):
+    return render(request, "index.html")
+
+@csrf_exempt
+def render_landing(request):
+    return render(request, "rpa-landing.html")
 
 router = routers.DefaultRouter()
 
 urlpatterns = [
-    # re_path(r"agosuirpa/$", render_react),
-    # re_path(r"agosuirpa(?:.*)/?$", render_react),
+    re_path(r"^$", render_landing),
+    re_path(r"agosuirpa/$", render_react),
+    re_path(r"agosuirpa(?:.*)/?$", render_react),
     path(API_VERSION+'admin/', admin.site.urls),
     path(API_VERSION+'users/', include('users.urls')),
     path(API_VERSION+'analyzer/', include('analyzer.urls')),
