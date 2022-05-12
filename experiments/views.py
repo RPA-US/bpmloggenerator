@@ -114,7 +114,8 @@ class ExperimentView(generics.ListCreateAPIView):
                 status=ExperimentStatusChoice.PR.value,
                 screenshot_name_generation_function=request.data.get(
                     'screenshot_name_generation_function'),
-                last_edition=datetime.datetime.now(tz=timezone.utc)
+                last_edition=datetime.datetime.now(tz=timezone.utc),
+                is_being_processed = 1
             )
 
             experiment.save()
