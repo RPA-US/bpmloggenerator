@@ -32,17 +32,22 @@ class VariationsViewSet(viewsets.ModelViewSet):
     queryset = Variations.objects.all()
     serializer_class = VariationsSerializer
 
+
 @api_view(('GET',))
 def check_experiment_percentage(request, id):
     user = request.user
-    res = Response({'message': 'The id experiment not corresponds to one of yours'}, status=status.HTTP_401_UNAUTHORIZED)
+    res = Response({'message': 'The id experiment not corresponds to one of yours'},
+                   status=status.HTTP_401_UNAUTHORIZED)
     percentage = None
     if(user.is_anonymous is False):
         user = CustomUser.objects.get(id=request.user.id)
-        percentage = Experiment.objects.filter(pk=id, user=user.id).values('is_being_processed')
+        percentage = Experiment.objects.filter(
+            pk=id, user=user.id).values('is_being_processed')
     if percentage:
-        res = Response({'experiment_is_being_processed': percentage[0]['is_being_processed'],'message': 'Info. retrieved'}, status=status.HTTP_200_OK)
+        res = Response(
+            {'experiment_is_being_processed': percentage[0]['is_being_processed'], 'message': 'Info. retrieved'}, status=status.HTTP_200_OK)
     return res
+
 
 class ExperimentView(generics.ListCreateAPIView):
     # permission_classes = [IsAuthenticatedUser]
@@ -56,7 +61,8 @@ class ExperimentView(generics.ListCreateAPIView):
             experiments = Experiment.objects.filter(
                 user=user.id, is_active=True).order_by("-created_at")
         else:
-            experiments = Experiment.objects.filter(public=True, is_active=True)
+            experiments = Experiment.objects.filter(
+                public=True, is_active=True)
         return experiments
 
     @transaction.atomic
@@ -75,13 +81,13 @@ class ExperimentView(generics.ListCreateAPIView):
                 if request.data.get('number_scenarios') and int(request.data.get('number_scenarios')) > 0 and not ('scenarios_conf' in request.data):
                     return Response({"message": "POST experiment executing - Incomplete data: Number scenarios greater than 1 and no scenario configuration included!"}, status=status.HTTP_400_BAD_REQUEST)
                 for data in ['size_balance', 'name', 'number_scenarios',
-                    'variability_conf', 'screenshots',
-                    'special_colnames', 'screenshot_name_generation_function']:
+                             'variability_conf', 'screenshots',
+                             'special_colnames', 'screenshot_name_generation_function']:
                     if not data in request.data:
                         return Response({"message": "POST experiment executing - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
             elif request.data.get('status') == ExperimentStatusChoice.PR.value:
                 for data in ['name', 'screenshots',
-                    'special_colnames', 'screenshot_name_generation_function']:
+                             'special_colnames', 'screenshot_name_generation_function']:
                     if not data in request.data:
                         return Response({"message": "POST experiment pre-saving - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
             else:
@@ -89,7 +95,7 @@ class ExperimentView(generics.ListCreateAPIView):
                     if not data in request.data:
                         return Response({"message": "POST experiment saving - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
 
-            #with transaction.atomic():
+            # with transaction.atomic():
             experiment = Experiment(
                 size_balance=json_attributes_load(
                     request.data.get('size_balance')),
@@ -126,6 +132,7 @@ class ExperimentView(generics.ListCreateAPIView):
                 experiment.foldername = execute_experiment(experiment)
                 experiment.execution_finish = datetime.datetime.now(
                     tz=timezone.utc)
+                experiment.is_being_processed = 100
                 experiment.is_active = True
                 experiment.status = ExperimentStatusChoice.LA.value
             elif request.data.get('status') != ExperimentStatusChoice.PR.value:
@@ -133,7 +140,7 @@ class ExperimentView(generics.ListCreateAPIView):
             experiment.save()
 
             response_content = {"message": msg,
-                "id": experiment.id, "status": experiment.status}
+                                "id": experiment.id, "status": experiment.status}
 
         except Exception as e:
             msg = 'Some of atributes are invalid: ' + str(e)
@@ -166,73 +173,86 @@ class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
         execute_mode = request.data.get('execute_mode')
 
         try:
-            if execute_mode:
-                if request.data.get('number_scenarios') and int(request.data.get('number_scenarios')) > 0 and not ('scenarios_conf' in request.data):
-                    return Response({"message": "POST experiment executing - Incomplete data: Number scenarios greater than 1 and no scenario configuration included!"}, status=status.HTTP_400_BAD_REQUEST)
-                for data in ['size_balance', 'name', 'number_scenarios',
-                    'variability_conf',
-                    'special_colnames', 'screenshot_name_generation_function']:
-                    if not data in request.data:
-                        return Response({"message": "POST experiment executing - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
-                if not 'screenshots_path' in request.data or not 'screenshots_path' in request.data:
-                        return Response({"message": "POST experiment executing - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
-            elif request.data.get('status') == ExperimentStatusChoice.PR.value:
-                for data in ['name',
-                    'special_colnames', 'screenshot_name_generation_function']:
-                    if not data in request.data:
-                        return Response({"message": "POST experiment pre-saving - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
-                if not 'screenshots_path' in request.data or not 'screenshots_path' in request.data:
-                        return Response({"message": "POST experiment executing - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)            
-            else:
-                for data in ['name', 'special_colnames', 'screenshot_name_generation_function']:
-                    if not data in request.data:
-                        return Response({"message": "POST experiment saving - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
-
-            experiment.size_balance = json_attributes_load(
-                request.data.get('size_balance'))
-            experiment.name = request.data.get('name')
-            experiment.description = request.data.get('description')
-            experiment.number_scenarios = int(request.data.get(
-                'number_scenarios')) if request.data.get('number_scenarios') else None
-            experiment.variability_conf = json_attributes_load(request.data.get(
-                'variability_conf')) if request.data.get('variability_conf') else None
-            experiment.scenarios_conf = json_attributes_load(request.data.get(
-                'scenarios_conf')) if request.data.get('scenarios_conf') else None
-            experiment.special_colnames = json_attributes_load(
-                request.data.get('special_colnames'))
-            experiment.screenshots = request.data.get('screenshots')
-            experiment.screenshot_name_generation_function = request.data.get(
-                'screenshot_name_generation_function')
-            experiment.last_edition = datetime.datetime.now(tz=timezone.utc)
-
-            experiment.save()   
-            
-
-            if 'screenshots' in request.data and experiment.screenshots != request.data.get('screenshots'):
-                path_without_fileextension = upload_mockups(
-                    'privatefiles'+sep+experiment.screenshots.name)
-                experiment.screenshots_path = path_without_fileextension
-                associate_screenshots_files(experiment)
-
-            if execute_mode:
-                experiment.execution_start = datetime.datetime.now(
-                    tz=timezone.utc)
-                experiment.foldername = execute_experiment(experiment)
-                experiment.execution_finish = datetime.datetime.now(
-                    tz=timezone.utc)
-                experiment.is_being_processed = 100
-                experiment.is_active = True
-                experiment.status = ExperimentStatusChoice.LA.value
-            elif request.data.get('status') != ExperimentStatusChoice.PR.value:
-                experiment.status = ExperimentStatusChoice.SA.value
-            experiment.save()
-
-            response_content = {"message": msg,
+            if experiment.status == ExperimentStatusChoice.LA.value:
+                if request.data.get('public'):
+                    if request.data.get('public') == "false":
+                        experiment.public = False
+                    if request.data.get('public') == "true":
+                        experiment.public = True
+                    experiment.save()
+                response_content = {"message": msg,
                 "id": experiment.id, "status": experiment.status}
+            else:
+                if execute_mode:
+                    if request.data.get('number_scenarios') and int(request.data.get('number_scenarios')) > 0 and not ('scenarios_conf' in request.data):
+                        return Response({"message": "POST experiment executing - Incomplete data: Number scenarios greater than 1 and no scenario configuration included!"}, status=status.HTTP_400_BAD_REQUEST)
+                    for data in ['size_balance', 'name', 'number_scenarios',
+                                'variability_conf',
+                                'special_colnames', 'screenshot_name_generation_function']:
+                        if not data in request.data:
+                            return Response({"message": "POST experiment executing - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
+                    if not 'screenshots_path' in request.data and not 'screenshots' in request.data:
+                        return Response({"message": "POST experiment executing - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
+                elif request.data.get('status') == ExperimentStatusChoice.PR.value:
+                    for data in ['name',
+                                'special_colnames', 'screenshot_name_generation_function']:
+                        if not data in request.data:
+                            return Response({"message": "POST experiment pre-saving - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
+                    if not 'screenshots_path' in request.data and not 'screenshots' in request.data:
+                        return Response({"message": "POST experiment executing - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
+                else:
+                    for data in ['name', 'special_colnames', 'screenshot_name_generation_function']:
+                        if not data in request.data:
+                            return Response({"message": "POST experiment saving - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
+
+                experiment.size_balance = json_attributes_load(
+                    request.data.get('size_balance'))
+                experiment.name = request.data.get('name')
+                experiment.description = request.data.get('description')
+                experiment.number_scenarios = int(request.data.get(
+                    'number_scenarios')) if request.data.get('number_scenarios') else None
+                experiment.variability_conf = json_attributes_load(request.data.get(
+                    'variability_conf')) if request.data.get('variability_conf') else None
+                experiment.scenarios_conf = json_attributes_load(request.data.get(
+                    'scenarios_conf')) if request.data.get('scenarios_conf') else None
+                experiment.special_colnames = json_attributes_load(
+                    request.data.get('special_colnames'))
+                experiment.screenshots = request.data.get('screenshots')
+                experiment.screenshot_name_generation_function = request.data.get(
+                    'screenshot_name_generation_function')
+                experiment.last_edition = datetime.datetime.now(tz=timezone.utc)
+                if request.data.get('screenshots') == "true":
+                    experiment.public = True
+                else:
+                    experiment.public = False
+
+                experiment.save()
+
+                if 'screenshots' in request.data and experiment.screenshots != request.data.get('screenshots'):
+                    path_without_fileextension = upload_mockups(
+                        'privatefiles'+sep+experiment.screenshots.name)
+                    experiment.screenshots_path = path_without_fileextension
+                    associate_screenshots_files(experiment)
+
+                if execute_mode:
+                    experiment.execution_start = datetime.datetime.now(
+                        tz=timezone.utc)
+                    experiment.foldername = execute_experiment(experiment)
+                    experiment.execution_finish = datetime.datetime.now(
+                        tz=timezone.utc)
+                    experiment.is_being_processed = 100
+                    experiment.is_active = True
+                    experiment.status = ExperimentStatusChoice.LA.value
+                elif request.data.get('status') != ExperimentStatusChoice.PR.value:
+                    experiment.status = ExperimentStatusChoice.SA.value
+                experiment.save()
+
+                response_content = {"message": msg,
+                                    "id": experiment.id, "status": experiment.status}
 
         except Exception as e:
             msg = 'Some of atributes are invalid: ' + str(e)
-            st = status.HTTP_422_UNPROCESSABLE_ENTITY                             
+            st = status.HTTP_422_UNPROCESSABLE_ENTITY
             response_content = {"message": msg}
         return Response(response_content, status=st)
 
@@ -324,26 +344,26 @@ def associate_experiment(user):
             execution_finish = datetime.datetime.now(tz=timezone.utc)
 
             experiment = Experiment(
-                    scenarios_conf=scenarios_conf,
-                    size_balance=size_balance,
-                    name=name,
-                    description=description,
-                    number_scenarios=number_scenarios,
-                    variability_conf=variability_conf,
-                    special_colnames=special_colnames,
-                    screenshots=screenshots,
-                    foldername=foldername,
-                    is_being_processed=100,
-                    is_active=True,
-                    user=user,
-                    screenshot_name_generation_function=screenshot_name_generation_function,
-                    screenshots_path=screenshots_path,
-                    status=ExperimentStatusChoice.LA.value,
-                    execution_start = execution_start,
-                    execution_finish = execution_finish,
-                    public=False
-                )    
-            experiment.user=user
+                scenarios_conf=scenarios_conf,
+                size_balance=size_balance,
+                name=name,
+                description=description,
+                number_scenarios=number_scenarios,
+                variability_conf=variability_conf,
+                special_colnames=special_colnames,
+                screenshots=screenshots,
+                foldername=foldername,
+                is_being_processed=100,
+                is_active=True,
+                user=user,
+                screenshot_name_generation_function=screenshot_name_generation_function,
+                screenshots_path=screenshots_path,
+                status=ExperimentStatusChoice.LA.value,
+                execution_start=execution_start,
+                execution_finish=execution_finish,
+                public=False
+            )
+            experiment.user = user
             experiment.save()
 
 # https://github.com/edoburu/django-private-storage
@@ -360,6 +380,7 @@ def associate_experiment(user):
 #         # This overrides PRIVATE_STORAGE_AUTH_FUNCTION
 #         return True
 
+
 def associate_screenshots_files(experiment):
     for root, directories, file in os.walk(experiment.screenshots_path):
         for file in file:
@@ -368,5 +389,6 @@ def associate_screenshots_files(experiment):
                 aux = experiment.screenshots_path.split(sep)
                 width, height = image.size
                 relative_path = aux[len(aux)-1]+sep+file
-                screenshot = Screenshot(relative_path=relative_path, width=width, height=height, image=file, experiment=experiment)
+                screenshot = Screenshot(
+                    relative_path=relative_path, width=width, height=height, image=file, experiment=experiment)
                 screenshot.save()
