@@ -3,6 +3,8 @@ from enum import unique
 from django.db import models
 from categories.models import CategoryBase
 from django.core.exceptions import ValidationError
+from django.forms import BooleanField
+from users.models import CustomUser
 # from django_postgres_extensions.models.fields import ArrayField
 
 class GUIComponentCategory(CategoryBase):
@@ -29,9 +31,19 @@ class GUIComponent(models.Model):
     gui_component_category = models.ForeignKey(
         GUIComponentCategory, on_delete=models.CASCADE, blank=True, null=True, limit_choices_to={'active': True},
     )
-    
+    preloaded = models.BooleanField(default=False)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='GUIComponentOwner')
+
+    class Meta:
+        verbose_name = "GUI Component"
+        verbose_name_plural = "GUI Components"
+
     def __str__(self):
         return self.filename
+    
+    def clean(self):
+        if self.user.is_superuser:
+            self.preloaded = True
 
 class VariabilityFunctionCategory(CategoryBase):
     """
