@@ -55,14 +55,21 @@ class ExperimentView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         user = self.request.user
+        params = self.request.query_params
         experiments = []
         if(user.is_anonymous is False):
             user = CustomUser.objects.get(id=self.request.user.id)
-            experiments = Experiment.objects.filter(
-                user=user.id, is_active=True).order_by("-created_at")
+            if "public" in params:
+                if params["public"] == "True":
+                    experiments = Experiment.objects.filter(is_active=True, public=True).order_by("-created_at")
+                elif params["public"] == "False":
+                    experiments = Experiment.objects.filter(user=user.id, is_active=True, public=False).order_by("-created_at")
+                else:
+                    experiments = Experiment.objects.filter(user=user.id, is_active=True, public=False).order_by("-created_at")
+            else:
+                experiments = Experiment.objects.filter(user=user.id, is_active=True, public=False).order_by("-created_at")
         else:
-            experiments = Experiment.objects.filter(
-                public=True, is_active=True)
+            experiments = Experiment.objects.filter(public=True, is_active=True).order_by("-created_at")
         return experiments
 
     @transaction.atomic
