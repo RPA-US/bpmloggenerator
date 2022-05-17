@@ -59,13 +59,12 @@ class ExperimentView(generics.ListCreateAPIView):
         experiments = []
         if(user.is_anonymous is False):
             user = CustomUser.objects.get(id=self.request.user.id)
-            if "public" in params:
-                if params["public"] == "True":
-                    experiments = Experiment.objects.filter(is_active=True, public=True).order_by("-created_at")
-                elif params["public"] == "False":
-                    experiments = Experiment.objects.filter(user=user.id, is_active=True, public=False).order_by("-created_at")
-                else:
-                    experiments = Experiment.objects.filter(user=user.id, is_active=True, public=False).order_by("-created_at")
+            if "public" in params and params["public"] == "True":
+                experiments = Experiment.objects.filter(is_active=True, public=True).order_by("-created_at")
+                #elif params["public"] == "False":
+                 #   experiments = Experiment.objects.filter(user=user.id, is_active=True, public=False).order_by("-created_at")
+                #else:
+                #    experiments = Experiment.objects.filter(user=user.id, is_active=True, public=False).order_by("-created_at")
             else:
                 experiments = Experiment.objects.filter(user=user.id, is_active=True, public=False).order_by("-created_at")
         else:

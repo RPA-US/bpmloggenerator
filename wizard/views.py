@@ -62,6 +62,31 @@ class GUIComponentViewSet(viewsets.ModelViewSet):
             response_content = {"message": msg}
         return Response(response_content, status=st)
 
+    def update(self, request):
+        try:
+            user = CustomUser.objects.get(id=self.request.user.id)
+        except:
+            return Response({"message": "No user found"}, status=status.HTTP_404_NOT_FOUND)
+        try:
+            guiComponent = experiment = get_object_or_404(GUIComponent, user=user.id, id=id)
+
+            guiComponent.id_code = request.data.get('id_code')
+            guiComponent.name = request.data.get('name')
+            guiComponent.filename = request.data.get('filename')
+            guiComponent.path = request.data.get('path')
+            guiComponent.description = request.data.get('description')
+            guiComponent.gui_component_category = GUIComponentCategory.objects.get(id=request.data.get('gui_component_category'))
+            guiComponent.save()
+            msg = 'ok, created'
+            st = status.HTTP_201_CREATED
+            response_content = {"message": msg}
+
+        except Exception as e:
+            msg = 'Some of atributes are invalid: ' + str(e)
+            st = status.HTTP_422_UNPROCESSABLE_ENTITY
+            response_content = {"message": msg}
+        return Response(response_content, status=st)
+
 class VariabilityFunctionViewSet(viewsets.ModelViewSet):
     queryset = VariabilityFunction.objects.all()
     serializer_class = VariabilityFunctionSerializer

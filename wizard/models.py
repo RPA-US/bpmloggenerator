@@ -41,9 +41,6 @@ class GUIComponent(models.Model):
     def __str__(self):
         return self.filename
     
-    def clean(self):
-        if self.user.is_superuser:
-            self.preloaded = True
 
 class VariabilityFunctionCategory(CategoryBase):
     """
@@ -65,7 +62,9 @@ class FunctionParamCategory(models.Model):
     data_type = models.CharField(max_length=75)
     description = models.CharField(max_length=255)
     validation_needs = models.JSONField() # TODO
-    
+    class Meta:
+        verbose_name = "Function Param Category"
+        verbose_name_plural = "Function Param Categories"
     def __str__(self):
         return self.label     
 
@@ -90,3 +89,4 @@ class FunctionParam(models.Model):
 
     def __str__(self):
         return self.id_code 
+    
