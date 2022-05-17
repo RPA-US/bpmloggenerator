@@ -5,7 +5,9 @@ from categories.models import CategoryBase
 from django.core.exceptions import ValidationError
 from django.forms import BooleanField
 from users.models import CustomUser
+from private_storage.fields import PrivateImageField
 # from django_postgres_extensions.models.fields import ArrayField
+from agosuirpa.system_configuration import sep
 
 class GUIComponentCategory(CategoryBase):
     """
@@ -25,9 +27,12 @@ class GUIComponentCategory(CategoryBase):
 class GUIComponent(models.Model):
     id_code = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
+    description = models.CharField(max_length=255)
     filename = models.CharField(max_length=255)
     path = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
+    width = models.PositiveSmallIntegerField(default=0)
+    height = models.PositiveSmallIntegerField(default=0)
+    image = PrivateImageField("Image", width_field='width', height_field='height',upload_to="resources")
     gui_component_category = models.ForeignKey(
         GUIComponentCategory, on_delete=models.CASCADE, blank=True, null=True, limit_choices_to={'active': True},
     )
