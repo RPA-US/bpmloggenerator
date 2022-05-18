@@ -32,7 +32,7 @@ class GUIComponent(models.Model):
     path = models.CharField(max_length=255)
     width = models.PositiveSmallIntegerField(default=0)
     height = models.PositiveSmallIntegerField(default=0)
-    image = PrivateImageField("Image", width_field='width', height_field='height',upload_to="resources")
+    image = PrivateImageField("Image", width_field='width', height_field='height',upload_to="GUI_components")
     gui_component_category = models.ForeignKey(
         GUIComponentCategory, on_delete=models.CASCADE, blank=True, null=True, limit_choices_to={'active': True},
     )
