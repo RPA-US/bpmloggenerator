@@ -115,7 +115,7 @@ class ExperimentView(generics.ListCreateAPIView):
                 screenshot_name_generation_function=request.data.get(
                     'screenshot_name_generation_function'),
                 last_edition=datetime.datetime.now(tz=timezone.utc),
-                is_being_processed = 1
+                is_being_processed = 0
             )
 
             experiment.save()
@@ -130,6 +130,7 @@ class ExperimentView(generics.ListCreateAPIView):
             if execute_mode:
                 experiment.execution_start = datetime.datetime.now(
                     tz=timezone.utc)
+                experiment.is_being_processed = 1
                 experiment.foldername = execute_experiment(experiment)
                 experiment.execution_finish = datetime.datetime.now(
                     tz=timezone.utc)
@@ -238,6 +239,7 @@ class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
                 if execute_mode:
                     experiment.execution_start = datetime.datetime.now(
                         tz=timezone.utc)
+                    experiment.is_being_processed = 1
                     experiment.foldername = execute_experiment(experiment)
                     experiment.execution_finish = datetime.datetime.now(
                         tz=timezone.utc)
