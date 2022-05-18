@@ -14,5 +14,8 @@ def allow_staff(private_file):
     guicomponent=Wizard_model.GUIComponent.objects.filter(path=private_file.relative_name)
     if guicomponent:
         guicomponent=guicomponent[0]
-        res=user == guicomponent.user
+        if guicomponent.preload:
+            res=user
+        else:
+            res=user == guicomponent.user
     return res
