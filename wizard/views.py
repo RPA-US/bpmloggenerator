@@ -53,7 +53,7 @@ class GUIComponentViewSet(viewsets.ModelViewSet):
             if user.is_superuser:
                 guiComponent.preloaded = True
             guiComponent.filename = guiComponent.image.name
-            guiComponent.path = 'resources'+sep+guiComponent.image.name
+            guiComponent.path = 'GUI_components'+sep+guiComponent.image.name
 
             guiComponent.save()
             msg = 'ok, created'
