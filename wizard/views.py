@@ -6,6 +6,7 @@ from .models import VariabilityFunction, VariabilityFunctionCategory, GUICompone
 from .serializers import VariabilityFunctionSerializer, VariabilityFunctionCategorySerializer, GUIComponentSerializer, GUIComponentCategorySerializer, FunctionParamSerializer, FunctionParamCategorySerializer
 from agosuirpa.system_configuration import sep
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 class GUIComponentCategoryViewSet(viewsets.ModelViewSet):
     queryset = GUIComponentCategory.objects.all()
@@ -31,8 +32,15 @@ class GUIComponentViewSet(viewsets.ModelViewSet):
     permission_classes = [IsActive]
 
     def list(self, request):
-        serializer = GUIComponentSerializer(self.queryset, many=True)
-        return Response({"results": serializer.data})
+        params = request.query_params
+        guiCompoments = []
+        user = CustomUser.objects.get(id=request.user.id)
+        if "profile" in params and params["profile"] == "true":
+            guiCompoments = GUIComponent.objects.filter(user=user.id)
+        else:
+            guiCompoments = GUIComponent.objects.filter(Q(user=user.id) | Q(preloaded=True))
+        serializer = GUIComponentSerializer(guiCompoments, many=True)
+        return Response({ "results": serializer.data }) 
 
     def create(self, request):
 
@@ -41,11 +49,16 @@ class GUIComponentViewSet(viewsets.ModelViewSet):
         except:
             return Response({"message": "No user found"}, status=status.HTTP_404_NOT_FOUND)
         try:
+            gui_component_category_id = request.data.get('gui_component_category')
+
+            if isinstance(gui_component_category_id, str):
+                gui_component_category_id = int(gui_component_category_id)
+
             guiComponent = GUIComponent(
             id_code = request.data.get('id_code'),
             name = request.data.get('name'),
             description = request.data.get('description'),
-            gui_component_category = GUIComponentCategory.objects.get(id=request.data.get('gui_component_category')),
+            gui_component_category = GUIComponentCategory.objects.get(id=gui_component_category_id),
             user = user,
             image = request.data.get('image')
             )
@@ -60,7 +73,7 @@ class GUIComponentViewSet(viewsets.ModelViewSet):
             guiComponent.save()
             msg = 'ok, created'
             st = status.HTTP_201_CREATED
-            response_content = {"message": msg}
+            response_content = {"message": msg, "id": guiComponent.id}
 
         except Exception as e:
             msg = 'Some of atributes are invalid: ' + str(e)
@@ -74,8 +87,7 @@ class GUIComponentViewSet(viewsets.ModelViewSet):
         except:
             return Response({"message": "No user found"}, status=status.HTTP_404_NOT_FOUND)
         try:
-            guiComponent = experiment = get_object_or_404(GUIComponent, user=user.id, id=pk)
-            image = request.data.get('image')
+            guiComponent = get_object_or_404(GUIComponent, user=user.id, id=pk)
             guiComponent.save()
             guiComponent.id_code = request.data.get('id_code')
             guiComponent.name = request.data.get('name')
