@@ -59,7 +59,7 @@ class ExperimentView(generics.ListCreateAPIView):
         experiments = []
         if(user.is_anonymous is False):
             user = CustomUser.objects.get(id=self.request.user.id)
-            if "public" in params and params["public"] == "True":
+            if "public" in params and params["public"] == "true":
                 experiments = Experiment.objects.filter(is_active=True, public=True).order_by("-created_at")
                 #elif params["public"] == "False":
                  #   experiments = Experiment.objects.filter(user=user.id, is_active=True, public=False).order_by("-created_at")
@@ -320,6 +320,7 @@ class DownloadExperiment(generics.RetrieveAPIView):
                 filename = val + ".zip"
                 response = FileResponse(open(zip_experiment, 'rb'))
                 response['Content-Disposition'] = 'attachment; filename="%s"' % filename
+                response['Access-Control-Expose-Headers'] = 'Content-Disposition'
             except Exception as e:
                 response = Response(
                     {"message": "Experiment error: " + str(e)}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
