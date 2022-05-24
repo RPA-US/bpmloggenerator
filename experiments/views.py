@@ -20,7 +20,6 @@ from django.utils import timezone
 from .utils import compress_experiment, upload_mockups
 from PIL import Image
 
-
 def json_attributes_load(att):
     if att:
         att = json.loads(att)
@@ -61,10 +60,6 @@ class ExperimentView(generics.ListCreateAPIView):
             user = CustomUser.objects.get(id=self.request.user.id)
             if "public" in params and params["public"] == "true":
                 experiments = Experiment.objects.filter(is_active=True, public=True).order_by("-created_at")
-                #elif params["public"] == "False":
-                 #   experiments = Experiment.objects.filter(user=user.id, is_active=True, public=False).order_by("-created_at")
-                #else:
-                #    experiments = Experiment.objects.filter(user=user.id, is_active=True, public=False).order_by("-created_at")
             else:
                 experiments = Experiment.objects.filter(user=user.id, is_active=True, public=False).order_by("-created_at")
         else:
