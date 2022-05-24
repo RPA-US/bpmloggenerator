@@ -43,16 +43,16 @@ class GUIComponent(models.Model):
         verbose_name = "GUI Component"
         verbose_name_plural = "GUI Components"
 
-    def clean(self):
-        id_code = self.cleaned_data['id_code']
+    def save(self, *args, **kwargs):
+        data = self.id_code
+        id_code = self.id_code
         if ' ' in id_code:
-            raise ValidationError('id_code should not contain any space')
-        return id_code
+            raise ValidationError(('id_code should not contain any space'))
+        else:
+            super(GUIComponent, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.filename
-        
-    
+        return self.filename    
 
 class VariabilityFunctionCategory(CategoryBase):
     """
