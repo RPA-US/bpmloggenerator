@@ -1,15 +1,21 @@
 from rest_framework import serializers
 from django.contrib.auth.models import Group
 from .models import Experiment, Variations
-from users.models import CustomUser
 from users.serializers import UserExperimentSerializer
 
-class ExperimentSerializer(serializers.HyperlinkedModelSerializer):
+
+class ExperimentSerializer(serializers.ModelSerializer):
+    user = UserExperimentSerializer()
     class Meta:
         model = Experiment
+        depth = 1
         fields = ['id', 'created_at', 'last_edition', 'execution_start', 'execution_finish', 'size_balance', 'name', 'description', 'number_scenarios', 
                   'variability_conf', 'scenarios_conf', 'special_colnames', 'is_being_processed', 'is_active', 'status', 'screenshots_path', 'foldername', 
-                  'screenshot_name_generation_function', 'user_id']
+                  'screenshot_name_generation_function', 'user']
+
+    def get_user(self, obj):
+        # here obj is a build model object
+        return obj.author.CustomUser
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
