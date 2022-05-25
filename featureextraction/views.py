@@ -10,9 +10,11 @@ import cv2
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.linear_model import enet_path
 import tensorflow as tf
 from keras.models import model_from_json
-from analyzer.configuration_settings import threshold
+from analyzer.configuration_settings import cropping_threshold
+from analyzer.configuration_settings import gaze_analysis_threshold
 import pickle
 # import sys
 # from numpy.lib.function_base import append
@@ -78,7 +80,150 @@ def get_ocr_image(pipeline, param_img_root, images_input):
     return prediction_groups
 
 
-def detect_images_components(param_img_root, image_names, texto_detectado_ocr, path_to_save_bordered_images, path_to_save_gui_components_npy, add_words_columns, log):
+def get_gui_components_crops(gaze_analysis, param_img_root, image_names, texto_detectado_ocr, path_to_save_bordered_images, add_words_columns, img_index):
+    words = {}
+    words_columns_names = {}
+    
+    if not gaze_analysis:
+        gaze_point_x = gaze_analysis['gaze_point_x'][img_index]
+        gaze_point_y = gaze_analysis['gaze_point_y'][img_index]
+        duration = gaze_analysis['duration'][img_index]
+    else:
+        gaze_point_x = False
+    
+    image_path = param_img_root + image_names[img_index]
+    # Leemos la imagen
+    img = cv2.imread(image_path)
+    img_copy = img.copy()
+    # cv2_imshow(img_copy)
+
+    # Almacenamos en global_y todas las coordenadas "y" de los cuadros de texto
+    # Cada fila es un cuadro de texto distinto, mucho más amigable que el formato que devuelve keras_ocr
+    global_y = []
+    global_x = []
+    words[img_index] = {}
+    res = None
+
+    for j in range(0, len(texto_detectado_ocr[img_index])):
+        coordenada_y = []
+        coordenada_x = []
+
+        for i in range(0, len(texto_detectado_ocr[img_index][j][1])):
+            coordenada_y.append(texto_detectado_ocr[img_index][j][1][i][1])
+            coordenada_x.append(texto_detectado_ocr[img_index][j][1][i][0])
+
+        if add_words_columns:
+            word = texto_detectado_ocr[img_index][j][0]
+            centroid = (np.mean(coordenada_x), np.mean(coordenada_y))
+            if word in words[img_index]:
+                words[img_index][word] += [centroid]
+            else:
+                words[img_index][word] = [centroid]
+
+            if word in words_columns_names:
+                words_columns_names[word] += 1
+            else:
+                words_columns_names[word] = 1
+
+        global_y.append(coordenada_y)
+        global_x.append(coordenada_x)
+        #print('Coord y, cuadro texto ' +str(j+1)+ str(global_y[j]))
+        #print('Coord x, cuadro texto ' +str(j+1)+ str(global_x[j]))
+
+    # print("Number of text boxes detected (iteration " + str(img_index) + "): " + str(len(texto_detectado_ocr[img_index])))
+
+    # Cálculo los intervalos de los cuadros de texto
+    intervalo_y = []
+    intervalo_x = []
+    for j in range(0, len(global_y)):
+        intervalo_y.append([int(max(global_y[j])), int(min(global_y[j]))])
+        intervalo_x.append([int(max(global_x[j])), int(min(global_x[j]))])
+    # print("Intervalo y", intervalo_y)
+    # print("Intervalo x", intervalo_x)
+
+    # Convertimos a escala de grises
+    gris = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    # cv2_imshow(gris)
+
+    # Aplicar suavizado Gaussiano
+    gauss = cv2.GaussianBlur(gris, (5, 5), 0)
+    # cv2_imshow(gauss)
+
+    # Detectamos los bordes con Canny
+    canny = cv2.Canny(gauss, 50, 150)
+    # cv2_imshow(canny)
+
+    # Buscamos los contornos
+    (contornos, _) = cv2.findContours(canny.copy(),
+                                    cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    # print("Number of GUI components detected: ", len(contornos), "\n")
+
+    # y los dibujamos
+    cv2.drawContours(img_copy, contornos, -1, (0, 0, 255), 2)
+    # cv2_imshow(img_copy)
+    cv2.imwrite(path_to_save_bordered_images +
+                image_names[img_index] + '_contornos.png', img_copy)
+
+    # Llevamos a cabo los recortes para cada contorno detectado
+    recortes = []
+    lista_para_no_recortar_dos_veces_mismo_gui = []
+
+    text_or_not_text = []
+
+    for j in range(0, len(contornos)):
+        cont_horizontal = []
+        cont_vertical = []
+        # Obtenemos componentes máximas y mínimas (eje x,y) del contorno
+        for i in range(0, len(contornos[j])-1):
+            cont_horizontal.append(contornos[j][i][0][0])
+            cont_vertical.append(contornos[j][i][0][1])
+            x = min(cont_horizontal)
+            w = max(cont_horizontal)
+            y = min(cont_vertical)
+            h = max(cont_vertical)
+        #print('Coord x, componente' + str(j+1) + '  ' + str(x) + ' : ' + str(w))
+        #print('Coord y, componente' + str(j+1) + '  ' + str(y) + ' : ' + str(h))
+
+        # Comprobamos que los contornos no solapen con cuadros de texto y optamos por recortar los cuadros de texto si solapan.
+        condicion_recorte = True
+        no_solapa = 1
+        for k in range(0, len(intervalo_y)):
+            solapa_y = 0
+            solapa_x = 0
+            y_min = min(intervalo_y[k])-cropping_threshold
+            y_max = max(intervalo_y[k])+cropping_threshold
+            x_min = min(intervalo_x[k])-cropping_threshold
+            x_max = max(intervalo_x[k])+cropping_threshold
+            solapa_y = (y_min <= y <= y_max) or (y_min <= h <= y_max) #and max([y-y_min, y_max-y, h-y_min, y_max-h])<=surrounding_max_diff
+            solapa_x = (x_min <= x <= x_max) or (x_min <= w <= x_max) #and max([x-x_min, x_max-x, w-x_min, x_max-w])<=surrounding_max_diff
+            if (solapa_y and solapa_x):
+                if (lista_para_no_recortar_dos_veces_mismo_gui.count(k) == 0):
+                    lista_para_no_recortar_dos_veces_mismo_gui.append(k)
+                else:
+                    # print("Text inside GUI component " + str(k) + " twice")
+                    condicion_recorte = False
+                x = min(intervalo_x[k])
+                w = max(intervalo_x[k])
+                y = min(intervalo_y[k])
+                h = max(intervalo_y[k])
+                no_solapa *= 0
+                #crop_img = img[min(intervalo_y[k]) : max(intervalo_y[k]), min(intervalo_x[k]) : max(intervalo_x[k])]
+                #print("Componente " + str(j+1) + " solapa con cuadro de texto")
+        # if (solapa_y == 1 and solapa_x == 1):
+        #crop_img = img[min(intervalo_y[k]) : max(intervalo_y[k]), min(intervalo_x[k]) : max(intervalo_x[k])]
+        #print("Componente " + str(j+1) + " solapa con cuadro de texto")
+        # recortes.append(crop_img)
+        # else:
+        # Si el componente GUI solapa con el cuadro de texto, cortamos el cuadro de texto a partir de las coordenadas de sus esquinas
+        coincidence_with_attention_point = gaze_point_x and  gaze_point_x >= x and gaze_point_x <= w and gaze_point_y >= y and gaze_point_y <= h and duration >= gaze_analysis_threshold
+        if (condicion_recorte and coincidence_with_attention_point):
+            crop_img = img[y:h, x:w]
+            recortes.append(crop_img)
+            text_or_not_text.append(abs(no_solapa-1))
+            
+    return (recortes, text_or_not_text, words)
+
+def detect_images_components(param_img_root, image_names, texto_detectado_ocr, path_to_save_bordered_images, path_to_save_gui_components_npy, add_words_columns, log, gaze_analysis):
     """
     Con esta función preprocesamos las imágenes de las capturas a partir de la información resultante de 
     aplicar OCR y de la propia imagen. Recortamos los componentes GUI y se almacena un numpy array con
@@ -96,8 +241,7 @@ def detect_images_components(param_img_root, image_names, texto_detectado_ocr, p
     :type path_to_save_bordered_images: str
     """
     
-    words = {}
-    words_columns_names = {}
+    
     no_modification = True
     # Recorremos la lista de imágenes
     for img_index in range(0, len(image_names)):
@@ -106,136 +250,8 @@ def detect_images_components(param_img_root, image_names, texto_detectado_ocr, p
         files_exists = os.path.exists(screenshot_npy) and os.path.exists(screenshot_texts_npy)
         no_modification = no_modification and files_exists
         if not files_exists:
-            image_path = param_img_root + image_names[img_index]
-            # Leemos la imagen
-            img = cv2.imread(image_path)
-            img_copy = img.copy()
-            # cv2_imshow(img_copy)
-
-            # Almacenamos en global_y todas las coordenadas "y" de los cuadros de texto
-            # Cada fila es un cuadro de texto distinto, mucho más amigable que el formato que devuelve keras_ocr
-            global_y = []
-            global_x = []
-            words[img_index] = {}
-            res = None
-
-            for j in range(0, len(texto_detectado_ocr[img_index])):
-                coordenada_y = []
-                coordenada_x = []
-
-                for i in range(0, len(texto_detectado_ocr[img_index][j][1])):
-                    coordenada_y.append(texto_detectado_ocr[img_index][j][1][i][1])
-                    coordenada_x.append(texto_detectado_ocr[img_index][j][1][i][0])
-
-                if add_words_columns:
-                    word = texto_detectado_ocr[img_index][j][0]
-                    centroid = (np.mean(coordenada_x), np.mean(coordenada_y))
-                    if word in words[img_index]:
-                        words[img_index][word] += [centroid]
-                    else:
-                        words[img_index][word] = [centroid]
-
-                    if word in words_columns_names:
-                        words_columns_names[word] += 1
-                    else:
-                        words_columns_names[word] = 1
-
-                global_y.append(coordenada_y)
-                global_x.append(coordenada_x)
-                #print('Coord y, cuadro texto ' +str(j+1)+ str(global_y[j]))
-                #print('Coord x, cuadro texto ' +str(j+1)+ str(global_x[j]))
-
-            # print("Number of text boxes detected (iteration " + str(img_index) + "): " + str(len(texto_detectado_ocr[img_index])))
-
-            # Cálculo los intervalos de los cuadros de texto
-            intervalo_y = []
-            intervalo_x = []
-            for j in range(0, len(global_y)):
-                intervalo_y.append([int(max(global_y[j])), int(min(global_y[j]))])
-                intervalo_x.append([int(max(global_x[j])), int(min(global_x[j]))])
-            # print("Intervalo y", intervalo_y)
-            # print("Intervalo x", intervalo_x)
-
-            # Convertimos a escala de grises
-            gris = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            # cv2_imshow(gris)
-
-            # Aplicar suavizado Gaussiano
-            gauss = cv2.GaussianBlur(gris, (5, 5), 0)
-            # cv2_imshow(gauss)
-
-            # Detectamos los bordes con Canny
-            canny = cv2.Canny(gauss, 50, 150)
-            # cv2_imshow(canny)
-
-            # Buscamos los contornos
-            (contornos, _) = cv2.findContours(canny.copy(),
-                                            cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-            # print("Number of GUI components detected: ", len(contornos), "\n")
-
-            # y los dibujamos
-            cv2.drawContours(img_copy, contornos, -1, (0, 0, 255), 2)
-            # cv2_imshow(img_copy)
-            cv2.imwrite(path_to_save_bordered_images +
-                        image_names[img_index] + '_contornos.png', img_copy)
-
-            # Llevamos a cabo los recortes para cada contorno detectado
-            recortes = []
-            lista_para_no_recortar_dos_veces_mismo_gui = []
-
-            text_or_not_text = []
-
-            for j in range(0, len(contornos)):
-                cont_horizontal = []
-                cont_vertical = []
-                # Obtenemos componentes máximas y mínimas (eje x,y) del contorno
-                for i in range(0, len(contornos[j])-1):
-                    cont_horizontal.append(contornos[j][i][0][0])
-                    cont_vertical.append(contornos[j][i][0][1])
-                    x = min(cont_horizontal)
-                    w = max(cont_horizontal)
-                    y = min(cont_vertical)
-                    h = max(cont_vertical)
-                #print('Coord x, componente' + str(j+1) + '  ' + str(x) + ' : ' + str(w))
-                #print('Coord y, componente' + str(j+1) + '  ' + str(y) + ' : ' + str(h))
-
-                # Comprobamos que los contornos no solapen con cuadros de texto y optamos por recortar los cuadros de texto si solapan.
-                condicion_recorte = True
-                no_solapa = 1
-                for k in range(0, len(intervalo_y)):
-                    solapa_y = 0
-                    solapa_x = 0
-                    y_min = min(intervalo_y[k])-threshold
-                    y_max = max(intervalo_y[k])+threshold
-                    x_min = min(intervalo_x[k])-threshold
-                    x_max = max(intervalo_x[k])+threshold
-                    solapa_y = (y_min <= y <= y_max) or (y_min <= h <= y_max) #and max([y-y_min, y_max-y, h-y_min, y_max-h])<=surrounding_max_diff
-                    solapa_x = (x_min <= x <= x_max) or (x_min <= w <= x_max) #and max([x-x_min, x_max-x, w-x_min, x_max-w])<=surrounding_max_diff
-                    if (solapa_y and solapa_x):
-                        if (lista_para_no_recortar_dos_veces_mismo_gui.count(k) == 0):
-                            lista_para_no_recortar_dos_veces_mismo_gui.append(k)
-                        else:
-                            # print("Text inside GUI component " + str(k) + " twice")
-                            condicion_recorte = False
-                        x = min(intervalo_x[k])
-                        w = max(intervalo_x[k])
-                        y = min(intervalo_y[k])
-                        h = max(intervalo_y[k])
-                        no_solapa *= 0
-                        #crop_img = img[min(intervalo_y[k]) : max(intervalo_y[k]), min(intervalo_x[k]) : max(intervalo_x[k])]
-                        #print("Componente " + str(j+1) + " solapa con cuadro de texto")
-                # if (solapa_y == 1 and solapa_x == 1):
-                #crop_img = img[min(intervalo_y[k]) : max(intervalo_y[k]), min(intervalo_x[k]) : max(intervalo_x[k])]
-                #print("Componente " + str(j+1) + " solapa con cuadro de texto")
-                # recortes.append(crop_img)
-                # else:
-                # Si el componente GUI solapa con el cuadro de texto, cortamos el cuadro de texto a partir de las coordenadas de sus esquinas
-                if (condicion_recorte):
-                    crop_img = img[y:h, x:w]
-                    recortes.append(crop_img)
-                    text_or_not_text.append(abs(no_solapa-1))
+            recortes, text_or_not_text, words = get_gui_components_crops(gaze_analysis, param_img_root, image_names, texto_detectado_ocr, path_to_save_bordered_images, add_words_columns, img_index)
             aux = np.array(recortes)
-
             np.save(screenshot_texts_npy, text_or_not_text)
             np.save(screenshot_npy, aux)
 
@@ -468,11 +484,15 @@ Hacemos uso de la libería OpenCV para llevar a cabo las siguientes tareas:
 """
 
 
-def gui_components_detection(param_log_path="media/log.csv", param_img_root="media/screenshots/", add_words_columns=False):
+def gui_components_detection(param_log_path="media/log.csv", param_img_root="media/screenshots/", add_words_columns=False, gaze_analysis=None):
     # Leemos el log
     log = pd.read_csv(param_log_path, sep=",")
     # Extraemos los nombres de las capturas asociadas a cada fila del log
     image_names = log.loc[:, "Screenshot"].values.tolist()
+    if gaze_analysis:
+        gaze_analysis['gaze_point_x'] = log.loc[:, gaze_analysis['gaze_point_x']].values.tolist()
+        gaze_analysis['gaze_point_y'] = log.loc[:, gaze_analysis['gaze_point_y']].values.tolist()
+        gaze_analysis['duration']     = log.loc[:, gaze_analysis['duration']].values.tolist()
     pipeline = keras_ocr.pipeline.Pipeline()
     file_exists = os.path.exists(param_img_root + "images_ocr_info.txt")
 
@@ -496,7 +516,7 @@ def gui_components_detection(param_log_path="media/log.csv", param_img_root="med
         if not os.path.exists(p):
             os.mkdir(p)
 
-    detect_images_components(param_img_root, image_names, esquinas_texto, path1, path2, add_words_columns, log)
+    detect_images_components(param_img_root, image_names, esquinas_texto, path1, path2, add_words_columns, log, gaze_analysis)
 
 
 ################################

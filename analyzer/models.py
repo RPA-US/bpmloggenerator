@@ -14,7 +14,7 @@ class CaseStudy(models.Model):
     mode = models.CharField(max_length=255)
     scenarios_to_study = models.CharField(max_length=255, null=True)
     drop = models.CharField(max_length=255, null=True)
-    phases_to_execute = JSONField()
+    phases_to_execute = JSONField(default=default_phases_to_execute)
     decision_point_activity = models.CharField(max_length=255)
     gui_class_success_regex = models.CharField(max_length=255)
     gui_quantity_difference = models.IntegerField(default=1)

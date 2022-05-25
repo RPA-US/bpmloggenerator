@@ -56,7 +56,7 @@ def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activ
                 training_columns_to_ignore      = to_exec['extract_training_dataset']['columns_to_ignore'] if (('extract_training_dataset' in to_exec) and ('columns_to_ignore' in to_exec['extract_training_dataset'])) else None
 
                 to_exec_args = {
-                    'gui_components_detection': (param_path+n+sep+'log.csv', param_path+n+sep),
+                    'gui_components_detection': (param_path+n+sep+'log.csv', param_path+n+sep, to_exec['gaze_analysis']),
                     'classify_image_components': ('resources'+sep+'models'+sep+'model.json',
                                                   'resources'+sep+'models'+sep+'model.h5',
                                                   param_path + n + sep + 'components_npy' + sep,
@@ -292,16 +292,22 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
 # EXAMPLE JSON REQUEST BODY
 # {
 #     "title": "Test Case Study",
-#     "mode": "generation",
+#     "mode": "results",
 #     "exp_foldername": "Advanced_10_30",
-#     "phases_to_execute": ["gui_components_detection",
-#                     "classify_image_components",
-#                     "extract_training_dataset",
-#                     "decision_tree_training"
-#                     ],
-#     "decision_point_activity": "D",
-#     "exp_folder_complete_path": null,
-#     "gui_class_success_regex": "CheckBox_D or ImageView_D or TextView_D",
+#     "phases_to_execute": {
+#         "extract_training_dataset": {
+#             "columns_to_ignore": ["Coor_X", "Coor_Y"]
+#         },
+#         "decision_tree_training": {
+#             "library": "chefboost",
+#             "algorithms": ["ID3", "CART", "CHAID", "C4.5"],
+#             "mode": "autogeneration",
+#             "columns_to_ignore": ["Timestamp_start", "Timestamp_end"]
+#         }
+#     },
+#     "decision_point_activity": "B",
+#     "exp_folder_complete_path": "C:\\Users\\Antonio\\Desktop\\caise data\\Advanced_10_30",
+#     "gui_class_success_regex": "CheckBox_B or ImageView_B or TextView_B",
 #     "gui_quantity_difference": 1,
 #     "scenarios_to_study": null,
 #     "drop": null
@@ -318,11 +324,11 @@ def case_study_generator(mode, exp_foldername, phases_to_execute, decision_point
     # gui_quantity_difference = 1
     # drop = None  # Example: ["Advanced_10_Balanced", "Advanced_10_Imbalanced"]
     # interactive = False
-    # phases_to_execute = ['gui_components_detection'
-    #                'classify_image_components',
-    #                'extract_training_dataset',
-    #                'decision_tree_training'
-    #                ]
+    # phases_to_execute = {'gui_components_detection': {},
+    #                'classify_image_components': {},
+    #                'extract_training_dataset': {},
+    #                'decision_tree_training': {}
+    #                }
     # scenarios = None # ["scenario_10","scenario_11","scenario_12","scenario_13"]
     
     # =================================
@@ -378,7 +384,7 @@ def interactive_terminal(phases_to_execute, gui_class_success_regex, gui_quantit
 
             case_study_generator(phases_to_execute, mode, scenarios_to_study, exp_foldername, path_to_save_experiment,
                                      decision_point_activity, gui_class_success_regex,
-                                     gui_quantity_difference, drop)
+                                     gui_quantity_difference, None, drop)
         else:
             print('Please enter valid input')
     else:
