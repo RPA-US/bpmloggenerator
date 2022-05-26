@@ -11,7 +11,7 @@ class ExperimentSerializer(serializers.ModelSerializer):
         depth = 1
         fields = ['id', 'created_at', 'last_edition', 'execution_start', 'execution_finish', 'size_balance', 'name', 'description', 'number_scenarios', 
                   'variability_conf', 'scenarios_conf', 'special_colnames', 'is_being_processed', 'is_active', 'status', 'screenshots_path', 'foldername', 
-                  'screenshot_name_generation_function', 'user']
+                  'screenshot_name_generation_function', 'public', 'user']
 
     def get_user(self, obj):
         # here obj is a build model object

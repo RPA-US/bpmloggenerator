@@ -1,4 +1,5 @@
 from rest_framework import viewsets, status
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from users.permissions import IsActive
 from users.models import CustomUser
@@ -30,6 +31,18 @@ class GUIComponentViewSet(viewsets.ModelViewSet):
     queryset = GUIComponent.objects.all()
     serializer_class = GUIComponentSerializer
     permission_classes = [IsActive]
+
+
+    @action(detail=False, methods=['GET'], name='id_code checker')
+    def checkId(self, request):
+        params = request.query_params
+        if "id_code" in params:
+            guiComponent = GUIComponent.objects.filter(id_code=params["id_code"])
+            return Response({
+                "exists": guiComponent.exists()
+            })
+        else:
+            return Response({"message": "request was missing 'id_code' param"}, status=status.HTTP_400_BAD_REQUEST)
 
     def list(self, request):
         params = request.query_params
