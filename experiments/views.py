@@ -20,7 +20,6 @@ from django.utils import timezone
 from .utils import compress_experiment, upload_mockups
 from PIL import Image
 
-
 def json_attributes_load(att):
     if att:
         att = json.loads(att)
@@ -55,14 +54,16 @@ class ExperimentView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         user = self.request.user
+        params = self.request.query_params
         experiments = []
         if(user.is_anonymous is False):
             user = CustomUser.objects.get(id=self.request.user.id)
-            experiments = Experiment.objects.filter(
-                user=user.id, is_active=True).order_by("-created_at")
+            if "public" in params and params["public"] == "true":
+                experiments = Experiment.objects.filter(is_active=True, public=True).order_by("-created_at")
+            else:
+                experiments = Experiment.objects.filter(user=user.id, is_active=True, public=False).order_by("-created_at")
         else:
-            experiments = Experiment.objects.filter(
-                public=True, is_active=True)
+            experiments = Experiment.objects.filter(public=True, is_active=True).order_by("-created_at")
         return experiments
 
     @transaction.atomic
@@ -314,6 +315,7 @@ class DownloadExperiment(generics.RetrieveAPIView):
                 filename = val + ".zip"
                 response = FileResponse(open(zip_experiment, 'rb'))
                 response['Content-Disposition'] = 'attachment; filename="%s"' % filename
+                response['Access-Control-Expose-Headers'] = 'Content-Disposition'
             except Exception as e:
                 response = Response(
                     {"message": "Experiment error: " + str(e)}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
