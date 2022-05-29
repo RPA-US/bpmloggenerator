@@ -215,7 +215,7 @@ def get_gui_components_crops(gaze_analysis, param_img_root, image_names, texto_d
         # recortes.append(crop_img)
         # else:
         # Si el componente GUI solapa con el cuadro de texto, cortamos el cuadro de texto a partir de las coordenadas de sus esquinas
-        coincidence_with_attention_point = gaze_point_x and  gaze_point_x >= x and gaze_point_x <= w and gaze_point_y >= y and gaze_point_y <= h and duration >= gaze_analysis_threshold
+        coincidence_with_attention_point = gaze_point_x and gaze_point_x >= x and gaze_point_x <= w and gaze_point_y >= y and gaze_point_y <= h and duration >= gaze_analysis_threshold
         if (condicion_recorte and coincidence_with_attention_point):
             crop_img = img[y:h, x:w]
             recortes.append(crop_img)
@@ -223,7 +223,7 @@ def get_gui_components_crops(gaze_analysis, param_img_root, image_names, texto_d
             
     return (recortes, text_or_not_text, words)
 
-def detect_images_components(param_img_root, image_names, texto_detectado_ocr, path_to_save_bordered_images, path_to_save_gui_components_npy, add_words_columns, log, gaze_analysis):
+def detect_images_components(param_img_root, image_names, texto_detectado_ocr, path_to_save_bordered_images, path_to_save_gui_components_npy, add_words_columns, log, gaze_analysis, overwrite_npy):
     """
     Con esta función preprocesamos las imágenes de las capturas a partir de la información resultante de 
     aplicar OCR y de la propia imagen. Recortamos los componentes GUI y se almacena un numpy array con
@@ -241,7 +241,6 @@ def detect_images_components(param_img_root, image_names, texto_detectado_ocr, p
     :type path_to_save_bordered_images: str
     """
     
-    
     no_modification = True
     # Recorremos la lista de imágenes
     for img_index in range(0, len(image_names)):
@@ -249,14 +248,14 @@ def detect_images_components(param_img_root, image_names, texto_detectado_ocr, p
         screenshot_npy = path_to_save_gui_components_npy + image_names[img_index] + ".npy"
         files_exists = os.path.exists(screenshot_npy) and os.path.exists(screenshot_texts_npy)
         no_modification = no_modification and files_exists
-        if not files_exists:
+        if not files_exists or overwrite_npy:
             recortes, text_or_not_text, words = get_gui_components_crops(gaze_analysis, param_img_root, image_names, texto_detectado_ocr, path_to_save_bordered_images, add_words_columns, img_index)
             aux = np.array(recortes)
             np.save(screenshot_texts_npy, text_or_not_text)
             np.save(screenshot_npy, aux)
 
-    if (add_words_columns and (not no_modification)) or (add_words_columns and (not os.exists(param_img_root+"text_colums.csv"))):
-        storage_text_info_as_dataset(words, image_names, log, param_img_root)
+            if (add_words_columns and (not no_modification)) or (add_words_columns and (not os.path.exists(param_img_root+"text_colums.csv"))):
+                storage_text_info_as_dataset(words, image_names, log, param_img_root)
 
 # Para el caso de este ejemplo elegimos la función de Zero-padding para redimensionar las imágenes
 
@@ -484,7 +483,7 @@ Hacemos uso de la libería OpenCV para llevar a cabo las siguientes tareas:
 """
 
 
-def gui_components_detection(param_log_path="media/log.csv", param_img_root="media/screenshots/", add_words_columns=False, gaze_analysis=None):
+def gui_components_detection(param_log_path="media/log.csv", param_img_root="media/screenshots/", add_words_columns=False, gaze_analysis=None, overwrite_npy=False):
     # Leemos el log
     log = pd.read_csv(param_log_path, sep=",")
     # Extraemos los nombres de las capturas asociadas a cada fila del log
@@ -516,7 +515,7 @@ def gui_components_detection(param_log_path="media/log.csv", param_img_root="med
         if not os.path.exists(p):
             os.mkdir(p)
 
-    detect_images_components(param_img_root, image_names, esquinas_texto, path1, path2, add_words_columns, log, gaze_analysis)
+    detect_images_components(param_img_root, image_names, esquinas_texto, path1, path2, add_words_columns, log, gaze_analysis, overwrite_npy)
 
 
 ################################

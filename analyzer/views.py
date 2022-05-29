@@ -56,7 +56,11 @@ def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activ
                 training_columns_to_ignore      = to_exec['extract_training_dataset']['columns_to_ignore'] if (('extract_training_dataset' in to_exec) and ('columns_to_ignore' in to_exec['extract_training_dataset'])) else None
 
                 to_exec_args = {
-                    'gui_components_detection': (param_path+n+sep+'log.csv', param_path+n+sep, to_exec['gaze_analysis']),
+                    'gui_components_detection': (param_path+n+sep+'log.csv', 
+                                                 param_path+n+sep, 
+                                                 to_exec['gui_components_detection']['add_words_columns'],
+                                                 to_exec['gui_components_detection']['gaze_analysis'],
+                                                 to_exec['gui_components_detection']['overwrite_npy']),
                     'classify_image_components': ('resources'+sep+'models'+sep+'model.json',
                                                   'resources'+sep+'models'+sep+'model.h5',
                                                   param_path + n + sep + 'components_npy' + sep,
