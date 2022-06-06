@@ -32,10 +32,10 @@ def get_foldernames_as_list(path, sep):
             family_names.append(f)
     return family_names
 
-def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activity, scenarios, to_exec):
+def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activity, scenarios, special_colnames, to_exec):
     times = {}
     family_names = get_foldernames_as_list(exp_folder_complete_path + sep + scenarios[0], sep)
-    exp_folder_complete_path + sep + "metadata" + sep
+    #exp_folder_complete_path + sep + "metadata" + sep
     metadata_path = metadata_location + sep + exp_foldername + "_metadata" + sep
     
     if not os.path.exists(metadata_path):
@@ -54,20 +54,23 @@ def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activ
                 decision_tree_mode              = to_exec['decision_tree_training']['mode'] if (('decision_tree_training' in to_exec) and ('mode' in to_exec['decision_tree_training'])) else 'autogeneration'
                 decision_columns_to_ignore      = to_exec['decision_tree_training']['columns_to_ignore'] if (('decision_tree_training' in to_exec) and ('columns_to_ignore' in to_exec['decision_tree_training'])) else None
                 training_columns_to_ignore      = to_exec['extract_training_dataset']['columns_to_ignore'] if (('extract_training_dataset' in to_exec) and ('columns_to_ignore' in to_exec['extract_training_dataset'])) else None
+                
 
                 to_exec_args = {
                     'gui_components_detection': (param_path+n+sep+'log.csv', 
-                                                 param_path+n+sep, 
+                                                 param_path+n+sep,
+                                                 special_colnames,
+                                                 to_exec['gui_components_detection']['eyetracking_log_filename'],
                                                  to_exec['gui_components_detection']['add_words_columns'],
-                                                 to_exec['gui_components_detection']['gaze_analysis'],
                                                  to_exec['gui_components_detection']['overwrite_npy']),
                     'classify_image_components': ('resources'+sep+'models'+sep+'model.json',
                                                   'resources'+sep+'models'+sep+'model.h5',
                                                   param_path + n + sep + 'components_npy' + sep,
                                                   param_path+n+sep + 'log.csv',
                                                   param_path+n+sep+'enriched_log.csv',
+                                                  special_colnames["Screenshot"],
                                                   False),
-                    'extract_training_dataset': (decision_activity, param_path + n + sep + 'enriched_log.csv', param_path + n + sep, training_columns_to_ignore),
+                    'extract_training_dataset': (decision_activity, param_path + n + sep + 'enriched_log.csv', param_path + n + sep, training_columns_to_ignore, special_colnames["Variant"], special_colnames["Case"], special_colnames["Screenshot"], special_colnames["Timestamp"], special_colnames["Activity"]),
                     'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep, decision_tree_library, decision_tree_mode, decision_tree_algorithms, decision_columns_to_ignore) # 'autogeneration' -> to plot tree automatically
                     }
                 
@@ -317,8 +320,20 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
 #     "drop": null
 # }
 
-def case_study_generator(mode, exp_foldername, phases_to_execute, decision_point_activity, exp_folder_complete_path, gui_class_success_regex, gui_quantity_difference, scenarios_to_study, drop):
+def case_study_generator(data):
+    mode = data['mode']
+    exp_foldername = data['exp_foldername']
+    phases_to_execute = data['phases_to_execute']
+    decision_point_activity = data['decision_point_activity']
+    exp_folder_complete_path = data['exp_folder_complete_path']
+    gui_class_success_regex = data['gui_class_success_regex']
+    gui_quantity_difference = data['gui_quantity_difference']
+    scenarios_to_study = data['scenarios_to_study']
+    drop = data['drop']
+    special_colnames = data['special_colnames'] if ('special_colnames' in data) else None
+    
     # =================================
+    # Mandatory Attributes: mode, exp_foldername, phases_to_execute, decision_point_activity, exp_folder_complete_path, gui_class_success_regex, gui_quantity_difference, scenarios_to_study, drop, special_colnames
     # Example values
     # version_name = "Advanced_10_30"
     # mode = "generation"
@@ -347,7 +362,7 @@ def case_study_generator(mode, exp_foldername, phases_to_execute, decision_point
         scenarios_to_study = get_foldernames_as_list(exp_folder_complete_path, sep)
         
     if mode == "generation" or mode == "both":
-        generate_case_study(exp_foldername, exp_folder_complete_path, decision_point_activity, scenarios_to_study, phases_to_execute)
+        generate_case_study(exp_foldername, exp_folder_complete_path, decision_point_activity, scenarios_to_study, special_colnames, phases_to_execute)
         msg = exp_foldername + ' case study generated!'
         executed = True
     if mode == "results" or mode == "both":
@@ -386,9 +401,27 @@ def interactive_terminal(phases_to_execute, gui_class_success_regex, gui_quantit
                     'Enter path where you want to store experiment results (if nothing typed, it will be stored in "media/"): ')
                 path_to_save_experiment = input_exp_path if input_exp_path != "" else None
 
-            case_study_generator(phases_to_execute, mode, scenarios_to_study, exp_foldername, path_to_save_experiment,
-                                     decision_point_activity, gui_class_success_regex,
-                                     gui_quantity_difference, None, drop)
+            data = {'mode': mode,
+                    'exp_foldername': exp_foldername,
+                    'phases_to_execute': phases_to_execute,
+                    'decision_point_activity': decision_point_activity,
+                    'exp_folder_complete_path': path_to_save_experiment,
+                    'gui_class_success_regex': gui_class_success_regex,
+                    'gui_quantity_difference': gui_quantity_difference,
+                    'scenarios_to_study': scenarios_to_study,
+                    'drop': drop,
+                    'special_colnames': {
+                        "Case": "Case",
+                        "Activity": "Activity",
+                        "Screenshot": "Screenshot",
+                        "Variant": "Variant",
+                        "Timestamp": "Timestamp",
+                        "eyetracking_recording_timestamp": "Recording timestamp",
+                        "eyetracking_gaze_point_x": "Gaze point X",
+                        "eyetracking_gaze_point_y": "Gaze point Y"
+                    }
+                }
+            case_study_generator(data)
         else:
             print('Please enter valid input')
     else:
@@ -425,17 +458,7 @@ class CaseStudyView(generics.ListCreateAPIView):
                         execute_case_study = False
                         return Response(response_content, status=st)
                 if execute_case_study:
-                    generator_msg, generator_success = case_study_generator(
-                                        case_study_serialized.data['mode'],
-                                        case_study_serialized.data['exp_foldername'],
-                                        case_study_serialized.data['phases_to_execute'],
-                                        case_study_serialized.data['decision_point_activity'],
-                                        case_study_serialized.data['exp_folder_complete_path'],
-                                        case_study_serialized.data['gui_class_success_regex'],
-                                        case_study_serialized.data['gui_quantity_difference'],
-                                        case_study_serialized.data['scenarios_to_study'],
-                                        case_study_serialized.data['drop']
-                                        )
+                    generator_msg, generator_success = case_study_generator(case_study_serialized.data)
                     response_content = {"message": generator_msg}
                     if not generator_success:
                         st = status.HTTP_422_UNPROCESSABLE_ENTITY 

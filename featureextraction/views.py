@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import enet_path
 import tensorflow as tf
 from keras.models import model_from_json
+from django.core.exceptions import ValidationError
 from analyzer.configuration_settings import cropping_threshold
 from analyzer.configuration_settings import gaze_analysis_threshold
 import pickle
@@ -80,16 +81,17 @@ def get_ocr_image(pipeline, param_img_root, images_input):
     return prediction_groups
 
 
-def get_gui_components_crops(gaze_analysis, param_img_root, image_names, texto_detectado_ocr, path_to_save_bordered_images, add_words_columns, img_index):
+def get_gui_components_crops(param_img_root, image_names, texto_detectado_ocr, path_to_save_bordered_images, add_words_columns, img_index):
     words = {}
     words_columns_names = {}
     
-    if not gaze_analysis:
-        gaze_point_x = gaze_analysis['gaze_point_x'][img_index]
-        gaze_point_y = gaze_analysis['gaze_point_y'][img_index]
-        duration = gaze_analysis['duration'][img_index]
-    else:
-        gaze_point_x = False
+    
+    # if gaze_analysis:
+    #     gaze_point_x = gaze_analysis['gaze_point_x'][img_index]
+    #     gaze_point_y = gaze_analysis['gaze_point_y'][img_index]
+    #     duration = gaze_analysis['duration'][img_index]
+    # else:
+    #     gaze_point_x = False
     
     image_path = param_img_root + image_names[img_index]
     # Leemos la imagen
@@ -215,7 +217,7 @@ def get_gui_components_crops(gaze_analysis, param_img_root, image_names, texto_d
         # recortes.append(crop_img)
         # else:
         # Si el componente GUI solapa con el cuadro de texto, cortamos el cuadro de texto a partir de las coordenadas de sus esquinas
-        coincidence_with_attention_point = gaze_point_x and gaze_point_x >= x and gaze_point_x <= w and gaze_point_y >= y and gaze_point_y <= h and duration >= gaze_analysis_threshold
+        coincidence_with_attention_point = True #gaze_point_x and gaze_point_x >= x and gaze_point_x <= w and gaze_point_y >= y and gaze_point_y <= h and duration >= gaze_analysis_threshold
         if (condicion_recorte and coincidence_with_attention_point):
             crop_img = img[y:h, x:w]
             recortes.append(crop_img)
@@ -223,7 +225,29 @@ def get_gui_components_crops(gaze_analysis, param_img_root, image_names, texto_d
             
     return (recortes, text_or_not_text, words)
 
-def detect_images_components(param_img_root, image_names, texto_detectado_ocr, path_to_save_bordered_images, path_to_save_gui_components_npy, add_words_columns, log, gaze_analysis, overwrite_npy):
+
+def gaze_events_associated_to_event_time_range(eyetracking_log, colnames, timestamp_start, timestamp_end, last_upper_limit):
+    eyetracking_log_timestamp = eyetracking_log[colnames['eyetracking_recording_timestamp']] # timestamp starts from 0
+    if eyetracking_log_timestamp[0] != 0:
+        raise ValidationError("Recording timestamp in eyetracking log must starts from 0")
+    
+    lower_limit = 0
+    upper_limit = 0
+        
+    if timestamp_end != "LAST":
+        for index, time in enumerate(eyetracking_log_timestamp):
+            if time > timestamp_start:
+                lower_limit = eyetracking_log_timestamp[index-1]
+                if time >= timestamp_end:
+                    upper_limit = eyetracking_log_timestamp[index]
+                    break
+    else:
+        upper_limit = len(eyetracking_log_timestamp)
+        lower_limit = last_upper_limit
+        
+    return eyetracking_log.loc[lower_limit:upper_limit,[colnames['eyetracking_gaze_point_x'],colnames['eyetracking_gaze_point_y']]], upper_limit
+
+def detect_images_components(param_img_root, log, special_colnames, overwrite_npy, eyetracking_log_filename, image_names, text_detected_by_OCR, path_to_save_bordered_images, path_to_save_gui_components_npy, add_words_columns):
     """
     Con esta función preprocesamos las imágenes de las capturas a partir de la información resultante de 
     aplicar OCR y de la propia imagen. Recortamos los componentes GUI y se almacena un numpy array con
@@ -240,16 +264,45 @@ def detect_images_components(param_img_root, image_names, texto_detectado_ocr, p
     :path_to_save_bordered_images: ruta donde se almacenan las imágenes de cada componente con el borde resaltado
     :type path_to_save_bordered_images: str
     """
-    
     no_modification = True
+    
+    eyetracking_log = pd.read_csv(param_img_root + eyetracking_log_filename, sep=";")
+    init_value_ui_log_timestamp = log[special_colnames['Timestamp']][0]
+    
+    gaze_events = {} # key: row number, 
+    #value: { tuple: [coorX, coorY], gui_component_coordinate: [[corners_of_crop]]}
+    
+    last_upper_limit = 0
+    
     # Recorremos la lista de imágenes
     for img_index in range(0, len(image_names)):
         screenshot_texts_npy = path_to_save_gui_components_npy + image_names[img_index] + "_texts.npy"
         screenshot_npy = path_to_save_gui_components_npy + image_names[img_index] + ".npy"
         files_exists = os.path.exists(screenshot_npy) and os.path.exists(screenshot_texts_npy)
         no_modification = no_modification and files_exists
+        
+        timestamp_start = log[special_colnames['Timestamp']][img_index]-init_value_ui_log_timestamp
+        if img_index < len(image_names)-1:
+            timestamp_end = log[special_colnames['Timestamp']][img_index+1]-init_value_ui_log_timestamp
+            interval, last_upper_limit = gaze_events_associated_to_event_time_range(
+                eyetracking_log, 
+                special_colnames,
+                timestamp_start,
+                timestamp_end,
+                None)
+        else:
+            print("detect_images_components: LAST SCREENSHOT")
+            interval, last_upper_limit = gaze_events_associated_to_event_time_range(
+                eyetracking_log, 
+                special_colnames,
+                timestamp_start,
+                "LAST",
+                last_upper_limit)
+        
+        gaze_events[img_index] = interval # { row_number: [[gaze_coorX, gaze_coorY],[gaze_coorX, gaze_coorY],[gaze_coorX, gaze_coorY]]}
+        
         if not files_exists or overwrite_npy:
-            recortes, text_or_not_text, words = get_gui_components_crops(gaze_analysis, param_img_root, image_names, texto_detectado_ocr, path_to_save_bordered_images, add_words_columns, img_index)
+            recortes, text_or_not_text, words = get_gui_components_crops(param_img_root, log, image_names, text_detected_by_OCR, path_to_save_bordered_images, add_words_columns, img_index)
             aux = np.array(recortes)
             np.save(screenshot_texts_npy, text_or_not_text)
             np.save(screenshot_npy, aux)
@@ -269,7 +322,7 @@ def pad(img, h, w):
     return np.copy(np.pad(img, ((top_pad, bottom_pad), (left_pad, right_pad), (0, 0)), mode='constant', constant_values=0))
 
 
-def classify_image_components(param_json_file_name="resources/models/model.json", param_model_weights="resources/models/model.h5", param_images_root="resources/screenshots/components_npy/", param_log_path="resources/log.csv", enriched_log_output_path="resources/enriched_log_feature_extracted.csv", rewrite_log=False):
+def classify_image_components(param_json_file_name="resources/models/model.json", param_model_weights="resources/models/model.h5", param_images_root="resources/screenshots/components_npy/", param_log_path="resources/log.csv", enriched_log_output_path="resources/enriched_log_feature_extracted.csv", screenshot_colname="Screenshot", rewrite_log=False):
     """
     Con esta función clasificamos los componentes recortados de cada una de las capturas para posteriormente añadir al log
     14 columnas. Estas corresponden a cada una de las clases en las que se puede clasificar un componente GUI. Los valores 
@@ -317,7 +370,7 @@ def classify_image_components(param_json_file_name="resources/models/model.json"
         images_root = param_images_root  # "mockups_vector/"
         crop_imgs = {}
         # images_names = [ x + ".npy" for x in log.loc[:,"Screenshot"].values.tolist()] # os.listdir(images_root)
-        images_names = log.loc[:, "Screenshot"].values.tolist()
+        images_names = log.loc[:, screenshot_colname].values.tolist()
         # print(images_names)
         for img_filename in images_names:
             crop_img_aux = np.load(images_root+img_filename +
@@ -483,39 +536,35 @@ Hacemos uso de la libería OpenCV para llevar a cabo las siguientes tareas:
 """
 
 
-def gui_components_detection(param_log_path="media/log.csv", param_img_root="media/screenshots/", add_words_columns=False, gaze_analysis=None, overwrite_npy=False):
+def gui_components_detection(param_log_path, param_img_root, special_colnames, eyetracking_log_filename, add_words_columns=False, overwrite_npy=False):
     # Leemos el log
     log = pd.read_csv(param_log_path, sep=",")
     # Extraemos los nombres de las capturas asociadas a cada fila del log
-    image_names = log.loc[:, "Screenshot"].values.tolist()
-    if gaze_analysis:
-        gaze_analysis['gaze_point_x'] = log.loc[:, gaze_analysis['gaze_point_x']].values.tolist()
-        gaze_analysis['gaze_point_y'] = log.loc[:, gaze_analysis['gaze_point_y']].values.tolist()
-        gaze_analysis['duration']     = log.loc[:, gaze_analysis['duration']].values.tolist()
+    image_names = log.loc[:, special_colnames["Screenshot"]].values.tolist()
     pipeline = keras_ocr.pipeline.Pipeline()
     file_exists = os.path.exists(param_img_root + "images_ocr_info.txt")
 
     if file_exists:
         print("\n\nReading images OCR info from file...")
         with open(param_img_root + "images_ocr_info.txt", "rb") as fp:   # Unpickling
-            esquinas_texto = pickle.load(fp)
+            text_corners = pickle.load(fp)
     else:
-        esquinas_texto = []
+        text_corners = []
         for img in image_names:
             ocr_result = get_ocr_image(pipeline, param_img_root, img)
-            esquinas_texto.append(ocr_result[0])
+            text_corners.append(ocr_result[0])
         with open(param_img_root + "images_ocr_info.txt", "wb") as fp:  # Pickling
-            pickle.dump(esquinas_texto, fp)
+            pickle.dump(text_corners, fp)
 
-    # print(len(esquinas_texto))
+    # print(len(text_corners))
 
-    path1 = param_img_root+"contornos/"
-    path2 = param_img_root+"components_npy/"
-    for p in [path1, path2]:
+    bordered = param_img_root+"contornos/"
+    components_npy = param_img_root+"components_npy/"
+    for p in [bordered, components_npy]:
         if not os.path.exists(p):
             os.mkdir(p)
 
-    detect_images_components(param_img_root, image_names, esquinas_texto, path1, path2, add_words_columns, log, gaze_analysis, overwrite_npy)
+    detect_images_components(param_img_root, log, special_colnames, overwrite_npy, eyetracking_log_filename, image_names, text_corners, bordered, components_npy, add_words_columns)
 
 
 ################################
