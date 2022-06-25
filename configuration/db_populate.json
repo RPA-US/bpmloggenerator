@@ -1,1 +1,2604 @@
-[{"model": "admin.logentry", "pk": 1, "fields": {"action_time": "2022-05-17T09:07:48.641Z", "user": 1, "content_type": 24, "object_id": "235", "object_repr": "asdf", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 2, "fields": {"action_time": "2022-05-17T09:19:55.309Z", "user": 1, "content_type": 24, "object_id": "236", "object_repr": "asdf", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "auth.permission", "pk": 1, "fields": {"name": "Can add log entry", "content_type": 1, "codename": "add_logentry"}}, {"model": "auth.permission", "pk": 2, "fields": {"name": "Can change log entry", "content_type": 1, "codename": "change_logentry"}}, {"model": "auth.permission", "pk": 3, "fields": {"name": "Can delete log entry", "content_type": 1, "codename": "delete_logentry"}}, {"model": "auth.permission", "pk": 4, "fields": {"name": "Can view log entry", "content_type": 1, "codename": "view_logentry"}}, {"model": "auth.permission", "pk": 5, "fields": {"name": "Can add permission", "content_type": 2, "codename": "add_permission"}}, {"model": "auth.permission", "pk": 6, "fields": {"name": "Can change permission", "content_type": 2, "codename": "change_permission"}}, {"model": "auth.permission", "pk": 7, "fields": {"name": "Can delete permission", "content_type": 2, "codename": "delete_permission"}}, {"model": "auth.permission", "pk": 8, "fields": {"name": "Can view permission", "content_type": 2, "codename": "view_permission"}}, {"model": "auth.permission", "pk": 9, "fields": {"name": "Can add group", "content_type": 3, "codename": "add_group"}}, {"model": "auth.permission", "pk": 10, "fields": {"name": "Can change group", "content_type": 3, "codename": "change_group"}}, {"model": "auth.permission", "pk": 11, "fields": {"name": "Can delete group", "content_type": 3, "codename": "delete_group"}}, {"model": "auth.permission", "pk": 12, "fields": {"name": "Can view group", "content_type": 3, "codename": "view_group"}}, {"model": "auth.permission", "pk": 13, "fields": {"name": "Can add content type", "content_type": 4, "codename": "add_contenttype"}}, {"model": "auth.permission", "pk": 14, "fields": {"name": "Can change content type", "content_type": 4, "codename": "change_contenttype"}}, {"model": "auth.permission", "pk": 15, "fields": {"name": "Can delete content type", "content_type": 4, "codename": "delete_contenttype"}}, {"model": "auth.permission", "pk": 16, "fields": {"name": "Can view content type", "content_type": 4, "codename": "view_contenttype"}}, {"model": "auth.permission", "pk": 17, "fields": {"name": "Can add session", "content_type": 5, "codename": "add_session"}}, {"model": "auth.permission", "pk": 18, "fields": {"name": "Can change session", "content_type": 5, "codename": "change_session"}}, {"model": "auth.permission", "pk": 19, "fields": {"name": "Can delete session", "content_type": 5, "codename": "delete_session"}}, {"model": "auth.permission", "pk": 20, "fields": {"name": "Can view session", "content_type": 5, "codename": "view_session"}}, {"model": "auth.permission", "pk": 21, "fields": {"name": "Can add Token", "content_type": 6, "codename": "add_token"}}, {"model": "auth.permission", "pk": 22, "fields": {"name": "Can change Token", "content_type": 6, "codename": "change_token"}}, {"model": "auth.permission", "pk": 23, "fields": {"name": "Can delete Token", "content_type": 6, "codename": "delete_token"}}, {"model": "auth.permission", "pk": 24, "fields": {"name": "Can view Token", "content_type": 6, "codename": "view_token"}}, {"model": "auth.permission", "pk": 25, "fields": {"name": "Can add token", "content_type": 7, "codename": "add_tokenproxy"}}, {"model": "auth.permission", "pk": 26, "fields": {"name": "Can change token", "content_type": 7, "codename": "change_tokenproxy"}}, {"model": "auth.permission", "pk": 27, "fields": {"name": "Can delete token", "content_type": 7, "codename": "delete_tokenproxy"}}, {"model": "auth.permission", "pk": 28, "fields": {"name": "Can view token", "content_type": 7, "codename": "view_tokenproxy"}}, {"model": "auth.permission", "pk": 29, "fields": {"name": "Can add site", "content_type": 8, "codename": "add_site"}}, {"model": "auth.permission", "pk": 30, "fields": {"name": "Can change site", "content_type": 8, "codename": "change_site"}}, {"model": "auth.permission", "pk": 31, "fields": {"name": "Can delete site", "content_type": 8, "codename": "delete_site"}}, {"model": "auth.permission", "pk": 32, "fields": {"name": "Can view site", "content_type": 8, "codename": "view_site"}}, {"model": "auth.permission", "pk": 33, "fields": {"name": "Can add email address", "content_type": 9, "codename": "add_emailaddress"}}, {"model": "auth.permission", "pk": 34, "fields": {"name": "Can change email address", "content_type": 9, "codename": "change_emailaddress"}}, {"model": "auth.permission", "pk": 35, "fields": {"name": "Can delete email address", "content_type": 9, "codename": "delete_emailaddress"}}, {"model": "auth.permission", "pk": 36, "fields": {"name": "Can view email address", "content_type": 9, "codename": "view_emailaddress"}}, {"model": "auth.permission", "pk": 37, "fields": {"name": "Can add email confirmation", "content_type": 10, "codename": "add_emailconfirmation"}}, {"model": "auth.permission", "pk": 38, "fields": {"name": "Can change email confirmation", "content_type": 10, "codename": "change_emailconfirmation"}}, {"model": "auth.permission", "pk": 39, "fields": {"name": "Can delete email confirmation", "content_type": 10, "codename": "delete_emailconfirmation"}}, {"model": "auth.permission", "pk": 40, "fields": {"name": "Can view email confirmation", "content_type": 10, "codename": "view_emailconfirmation"}}, {"model": "auth.permission", "pk": 41, "fields": {"name": "Can add social account", "content_type": 11, "codename": "add_socialaccount"}}, {"model": "auth.permission", "pk": 42, "fields": {"name": "Can change social account", "content_type": 11, "codename": "change_socialaccount"}}, {"model": "auth.permission", "pk": 43, "fields": {"name": "Can delete social account", "content_type": 11, "codename": "delete_socialaccount"}}, {"model": "auth.permission", "pk": 44, "fields": {"name": "Can view social account", "content_type": 11, "codename": "view_socialaccount"}}, {"model": "auth.permission", "pk": 45, "fields": {"name": "Can add social application", "content_type": 12, "codename": "add_socialapp"}}, {"model": "auth.permission", "pk": 46, "fields": {"name": "Can change social application", "content_type": 12, "codename": "change_socialapp"}}, {"model": "auth.permission", "pk": 47, "fields": {"name": "Can delete social application", "content_type": 12, "codename": "delete_socialapp"}}, {"model": "auth.permission", "pk": 48, "fields": {"name": "Can view social application", "content_type": 12, "codename": "view_socialapp"}}, {"model": "auth.permission", "pk": 49, "fields": {"name": "Can add social application token", "content_type": 13, "codename": "add_socialtoken"}}, {"model": "auth.permission", "pk": 50, "fields": {"name": "Can change social application token", "content_type": 13, "codename": "change_socialtoken"}}, {"model": "auth.permission", "pk": 51, "fields": {"name": "Can delete social application token", "content_type": 13, "codename": "delete_socialtoken"}}, {"model": "auth.permission", "pk": 52, "fields": {"name": "Can view social application token", "content_type": 13, "codename": "view_socialtoken"}}, {"model": "auth.permission", "pk": 53, "fields": {"name": "Can add category", "content_type": 14, "codename": "add_category"}}, {"model": "auth.permission", "pk": 54, "fields": {"name": "Can change category", "content_type": 14, "codename": "change_category"}}, {"model": "auth.permission", "pk": 55, "fields": {"name": "Can delete category", "content_type": 14, "codename": "delete_category"}}, {"model": "auth.permission", "pk": 56, "fields": {"name": "Can view category", "content_type": 14, "codename": "view_category"}}, {"model": "auth.permission", "pk": 57, "fields": {"name": "Can add category relation", "content_type": 15, "codename": "add_categoryrelation"}}, {"model": "auth.permission", "pk": 58, "fields": {"name": "Can change category relation", "content_type": 15, "codename": "change_categoryrelation"}}, {"model": "auth.permission", "pk": 59, "fields": {"name": "Can delete category relation", "content_type": 15, "codename": "delete_categoryrelation"}}, {"model": "auth.permission", "pk": 60, "fields": {"name": "Can view category relation", "content_type": 15, "codename": "view_categoryrelation"}}, {"model": "auth.permission", "pk": 61, "fields": {"name": "Can add user", "content_type": 16, "codename": "add_customuser"}}, {"model": "auth.permission", "pk": 62, "fields": {"name": "Can change user", "content_type": 16, "codename": "change_customuser"}}, {"model": "auth.permission", "pk": 63, "fields": {"name": "Can delete user", "content_type": 16, "codename": "delete_customuser"}}, {"model": "auth.permission", "pk": 64, "fields": {"name": "Can view user", "content_type": 16, "codename": "view_customuser"}}, {"model": "auth.permission", "pk": 65, "fields": {"name": "Can add experiment", "content_type": 17, "codename": "add_experiment"}}, {"model": "auth.permission", "pk": 66, "fields": {"name": "Can change experiment", "content_type": 17, "codename": "change_experiment"}}, {"model": "auth.permission", "pk": 67, "fields": {"name": "Can delete experiment", "content_type": 17, "codename": "delete_experiment"}}, {"model": "auth.permission", "pk": 68, "fields": {"name": "Can view experiment", "content_type": 17, "codename": "view_experiment"}}, {"model": "auth.permission", "pk": 69, "fields": {"name": "Can add variations", "content_type": 18, "codename": "add_variations"}}, {"model": "auth.permission", "pk": 70, "fields": {"name": "Can change variations", "content_type": 18, "codename": "change_variations"}}, {"model": "auth.permission", "pk": 71, "fields": {"name": "Can delete variations", "content_type": 18, "codename": "delete_variations"}}, {"model": "auth.permission", "pk": 72, "fields": {"name": "Can view variations", "content_type": 18, "codename": "view_variations"}}, {"model": "auth.permission", "pk": 73, "fields": {"name": "Can add screenshot", "content_type": 19, "codename": "add_screenshot"}}, {"model": "auth.permission", "pk": 74, "fields": {"name": "Can change screenshot", "content_type": 19, "codename": "change_screenshot"}}, {"model": "auth.permission", "pk": 75, "fields": {"name": "Can delete screenshot", "content_type": 19, "codename": "delete_screenshot"}}, {"model": "auth.permission", "pk": 76, "fields": {"name": "Can view screenshot", "content_type": 19, "codename": "view_screenshot"}}, {"model": "auth.permission", "pk": 77, "fields": {"name": "Can add function param", "content_type": 20, "codename": "add_functionparam"}}, {"model": "auth.permission", "pk": 78, "fields": {"name": "Can change function param", "content_type": 20, "codename": "change_functionparam"}}, {"model": "auth.permission", "pk": 79, "fields": {"name": "Can delete function param", "content_type": 20, "codename": "delete_functionparam"}}, {"model": "auth.permission", "pk": 80, "fields": {"name": "Can view function param", "content_type": 20, "codename": "view_functionparam"}}, {"model": "auth.permission", "pk": 81, "fields": {"name": "Can add Variability function category", "content_type": 21, "codename": "add_variabilityfunctioncategory"}}, {"model": "auth.permission", "pk": 82, "fields": {"name": "Can change Variability function category", "content_type": 21, "codename": "change_variabilityfunctioncategory"}}, {"model": "auth.permission", "pk": 83, "fields": {"name": "Can delete Variability function category", "content_type": 21, "codename": "delete_variabilityfunctioncategory"}}, {"model": "auth.permission", "pk": 84, "fields": {"name": "Can view Variability function category", "content_type": 21, "codename": "view_variabilityfunctioncategory"}}, {"model": "auth.permission", "pk": 85, "fields": {"name": "Can add variability function", "content_type": 22, "codename": "add_variabilityfunction"}}, {"model": "auth.permission", "pk": 86, "fields": {"name": "Can change variability function", "content_type": 22, "codename": "change_variabilityfunction"}}, {"model": "auth.permission", "pk": 87, "fields": {"name": "Can delete variability function", "content_type": 22, "codename": "delete_variabilityfunction"}}, {"model": "auth.permission", "pk": 88, "fields": {"name": "Can view variability function", "content_type": 22, "codename": "view_variabilityfunction"}}, {"model": "auth.permission", "pk": 89, "fields": {"name": "Can add GUI component category", "content_type": 23, "codename": "add_guicomponentcategory"}}, {"model": "auth.permission", "pk": 90, "fields": {"name": "Can change GUI component category", "content_type": 23, "codename": "change_guicomponentcategory"}}, {"model": "auth.permission", "pk": 91, "fields": {"name": "Can delete GUI component category", "content_type": 23, "codename": "delete_guicomponentcategory"}}, {"model": "auth.permission", "pk": 92, "fields": {"name": "Can view GUI component category", "content_type": 23, "codename": "view_guicomponentcategory"}}, {"model": "auth.permission", "pk": 93, "fields": {"name": "Can add gui component", "content_type": 24, "codename": "add_guicomponent"}}, {"model": "auth.permission", "pk": 94, "fields": {"name": "Can change gui component", "content_type": 24, "codename": "change_guicomponent"}}, {"model": "auth.permission", "pk": 95, "fields": {"name": "Can delete gui component", "content_type": 24, "codename": "delete_guicomponent"}}, {"model": "auth.permission", "pk": 96, "fields": {"name": "Can view gui component", "content_type": 24, "codename": "view_guicomponent"}}, {"model": "auth.permission", "pk": 97, "fields": {"name": "Can add param assign", "content_type": 25, "codename": "add_paramassign"}}, {"model": "auth.permission", "pk": 98, "fields": {"name": "Can change param assign", "content_type": 25, "codename": "change_paramassign"}}, {"model": "auth.permission", "pk": 99, "fields": {"name": "Can delete param assign", "content_type": 25, "codename": "delete_paramassign"}}, {"model": "auth.permission", "pk": 100, "fields": {"name": "Can view param assign", "content_type": 25, "codename": "view_paramassign"}}, {"model": "auth.permission", "pk": 101, "fields": {"name": "Can add function param category", "content_type": 20, "codename": "add_functionparamcategory"}}, {"model": "auth.permission", "pk": 102, "fields": {"name": "Can change function param category", "content_type": 20, "codename": "change_functionparamcategory"}}, {"model": "auth.permission", "pk": 103, "fields": {"name": "Can delete function param category", "content_type": 20, "codename": "delete_functionparamcategory"}}, {"model": "auth.permission", "pk": 104, "fields": {"name": "Can view function param category", "content_type": 20, "codename": "view_functionparamcategory"}}, {"model": "auth.permission", "pk": 105, "fields": {"name": "Can add function param", "content_type": 25, "codename": "add_functionparam"}}, {"model": "auth.permission", "pk": 106, "fields": {"name": "Can change function param", "content_type": 25, "codename": "change_functionparam"}}, {"model": "auth.permission", "pk": 107, "fields": {"name": "Can delete function param", "content_type": 25, "codename": "delete_functionparam"}}, {"model": "auth.permission", "pk": 108, "fields": {"name": "Can view function param", "content_type": 25, "codename": "view_functionparam"}}, {"model": "contenttypes.contenttype", "pk": 1, "fields": {"app_label": "admin", "model": "logentry"}}, {"model": "contenttypes.contenttype", "pk": 2, "fields": {"app_label": "auth", "model": "permission"}}, {"model": "contenttypes.contenttype", "pk": 3, "fields": {"app_label": "auth", "model": "group"}}, {"model": "contenttypes.contenttype", "pk": 4, "fields": {"app_label": "contenttypes", "model": "contenttype"}}, {"model": "contenttypes.contenttype", "pk": 5, "fields": {"app_label": "sessions", "model": "session"}}, {"model": "contenttypes.contenttype", "pk": 6, "fields": {"app_label": "authtoken", "model": "token"}}, {"model": "contenttypes.contenttype", "pk": 7, "fields": {"app_label": "authtoken", "model": "tokenproxy"}}, {"model": "contenttypes.contenttype", "pk": 8, "fields": {"app_label": "sites", "model": "site"}}, {"model": "contenttypes.contenttype", "pk": 9, "fields": {"app_label": "account", "model": "emailaddress"}}, {"model": "contenttypes.contenttype", "pk": 10, "fields": {"app_label": "account", "model": "emailconfirmation"}}, {"model": "contenttypes.contenttype", "pk": 11, "fields": {"app_label": "socialaccount", "model": "socialaccount"}}, {"model": "contenttypes.contenttype", "pk": 12, "fields": {"app_label": "socialaccount", "model": "socialapp"}}, {"model": "contenttypes.contenttype", "pk": 13, "fields": {"app_label": "socialaccount", "model": "socialtoken"}}, {"model": "contenttypes.contenttype", "pk": 14, "fields": {"app_label": "categories", "model": "category"}}, {"model": "contenttypes.contenttype", "pk": 15, "fields": {"app_label": "categories", "model": "categoryrelation"}}, {"model": "contenttypes.contenttype", "pk": 16, "fields": {"app_label": "users", "model": "customuser"}}, {"model": "contenttypes.contenttype", "pk": 17, "fields": {"app_label": "experiments", "model": "experiment"}}, {"model": "contenttypes.contenttype", "pk": 18, "fields": {"app_label": "experiments", "model": "variations"}}, {"model": "contenttypes.contenttype", "pk": 19, "fields": {"app_label": "experiments", "model": "screenshot"}}, {"model": "contenttypes.contenttype", "pk": 20, "fields": {"app_label": "wizard", "model": "functionparamcategory"}}, {"model": "contenttypes.contenttype", "pk": 21, "fields": {"app_label": "wizard", "model": "variabilityfunctioncategory"}}, {"model": "contenttypes.contenttype", "pk": 22, "fields": {"app_label": "wizard", "model": "variabilityfunction"}}, {"model": "contenttypes.contenttype", "pk": 23, "fields": {"app_label": "wizard", "model": "guicomponentcategory"}}, {"model": "contenttypes.contenttype", "pk": 24, "fields": {"app_label": "wizard", "model": "guicomponent"}}, {"model": "contenttypes.contenttype", "pk": 25, "fields": {"app_label": "wizard", "model": "functionparam"}}, {"model": "sessions.session", "pk": "90i8m1ww5298tokydnqpq1vxem6dqrw9", "fields": {"session_data": ".eJxVjEsOAiEQRO_C2hD-AXd6EdI0TSBOmESYlfHuzphZ6LJeVb0Xi7DNGrdBz9gyuzLJLr8sAT6oHwUsy4E5IK5bn_y7OevBb3uiPhvCbGu_n68_VYVRd48V4IrLtogSJKksAXQij16YnLQx2voSvLVeipyVK0omS0WTCghCgWfvD8JWPG8:1nrFDE:hmIQD5NYyOMJ2wVFA1RZO5JEM2GzJBNtB1zo55rL-i0", "expire_date": "2022-06-01T08:39:20.893Z"}}, {"model": "sessions.session", "pk": "lbiex351vfdfqux8198ketcgrnwixd8b", "fields": {"session_data": ".eJxVjEsOAiEQRO_C2pDhG3CnFyFN0wTihEkEVsa7O2Nmoct6VfVeLMAcJcxOz1ATuzLLLr8sAj6oHQWs64E5IG6zDf7dnHXntz1RGxVh1K3dz9efqkAvuwc15QTCe6Oil9KbbCR6AQokJeVJZ-dEJuu0VgLVklVcSCZBFqUDJ9j7A8PrPE8:1nmwpl:4IQB5NRbrssDJ2PGdY-2Ruhzv5D42TF6mFKwcP06gqo", "expire_date": "2022-05-20T12:13:21.821Z"}}, {"model": "sessions.session", "pk": "thr1xbsvznxf7p83mjhzvlw1iqs2vksy", "fields": {"session_data": ".eJxVjM0KwyAQhN_FcxF_gmhv7YvIuuuiNBho9FT67jUlh5Y5zXwz8xIRRi9x7PkZK4mr0OLymyXAR24HgHU9YgmI22hdfjsn3uVtutx6Reh1a_dz9XdVYC_zx1kTnKccUDsCXjyCSla5kJNarCZFE0_LxpLzU8lSYGB2iikbFu8Pshs8jg:1nrEkr:-FO3LwdgJzUOzKedB6-vMpfBF5SdmACEdbz8_LlFczo", "expire_date": "2022-06-01T08:10:01.020Z"}}, {"model": "authtoken.token", "pk": "403440f234973564cafc378f2a8dd74ff2c089a6", "fields": {"user": 1, "created": "2022-03-23T07:34:29.849Z"}}, {"model": "sites.site", "pk": 1, "fields": {"domain": "example.com", "name": "example.com"}}, {"model": "users.customuser", "pk": 1, "fields": {"password": "pbkdf2_sha256$260000$SMejNXzmmPuX1yi7WPxOgA$FERx86AN773es9Q+iNKvapKnMxBFmylNUoLRBkNN5g4=", "last_login": "2022-05-18T08:39:20.857Z", "is_superuser": true, "username": "admin", "first_name": "", "last_name": "", "email": "admin@example.com", "is_staff": true, "is_active": true, "date_joined": "2022-03-10T10:18:41.361Z", "groups": [], "user_permissions": []}}, {"model": "wizard.guicomponentcategory", "pk": 1, "fields": {"parent": null, "slug": "featuresexperimentgui_categorynamebutton", "active": true, "name": "features.experiment.GUI_category.name.Button", "description": "features.experiment.GUI_category.description.Button", "lft": 1, "rght": 2, "tree_id": 1, "level": 0}}, {"model": "wizard.guicomponentcategory", "pk": 2, "fields": {"parent": null, "slug": "featuresexperimentgui_categorynameimageview", "active": true, "name": "features.experiment.GUI_category.name.ImageView", "description": "features.experiment.GUI_category.description.ImageView", "lft": 1, "rght": 2, "tree_id": 6, "level": 0}}, {"model": "wizard.guicomponentcategory", "pk": 3, "fields": {"parent": null, "slug": "featuresexperimentgui_categorynamecheckbox", "active": true, "name": "features.experiment.GUI_category.name.Checkbox", "description": "features.experiment.GUI_category.description.Checkbox", "lft": 1, "rght": 2, "tree_id": 2, "level": 0}}, {"model": "wizard.guicomponentcategory", "pk": 4, "fields": {"parent": null, "slug": "featuresexperimentgui_categorynametextinput", "active": true, "name": "features.experiment.GUI_category.name.TextInput", "description": "features.experiment.GUI_category.description.TextInput", "lft": 1, "rght": 2, "tree_id": 14, "level": 0}}, {"model": "wizard.guicomponentcategory", "pk": 5, "fields": {"parent": null, "slug": "featuresexperimentgui_categorynametextview", "active": true, "name": "features.experiment.GUI_category.name.TextView", "description": "features.experiment.GUI_category.description.TextView", "lft": 1, "rght": 2, "tree_id": 15, "level": 0}}, {"model": "wizard.guicomponentcategory", "pk": 6, "fields": {"parent": null, "slug": "featuresexperimentgui_categorynameimagebutton", "active": true, "name": "features.experiment.GUI_category.name.ImageButton", "description": "features.experiment.GUI_category.description.ImageButton", "lft": 1, "rght": 2, "tree_id": 5, "level": 0}}, {"model": "wizard.guicomponentcategory", "pk": 7, "fields": {"parent": null, "slug": "featuresexperimentgui_categorynameedittext", "active": true, "name": "features.experiment.GUI_category.name.EditText", "description": "features.experiment.GUI_category.description.EditText", "lft": 1, "rght": 2, "tree_id": 4, "level": 0}}, {"model": "wizard.guicomponentcategory", "pk": 8, "fields": {"parent": null, "slug": "featuresexperimentgui_categorynamecheckedtextview", "active": true, "name": "features.experiment.GUI_category.name.CheckedTextView", "description": "features.experiment.GUI_category.description.CheckedTextView", "lft": 1, "rght": 2, "tree_id": 3, "level": 0}}, {"model": "wizard.guicomponentcategory", "pk": 9, "fields": {"parent": null, "slug": "featuresexperimentgui_categorynameradiobutton", "active": true, "name": "features.experiment.GUI_category.name.RadioButton", "description": "features.experiment.GUI_category.description.RadioButton", "lft": 1, "rght": 2, "tree_id": 9, "level": 0}}, {"model": "wizard.guicomponentcategory", "pk": 10, "fields": {"parent": null, "slug": "featuresexperimentgui_categorynameprogressbar", "active": true, "name": "features.experiment.GUI_category.name.ProgressBar", "description": "features.experiment.GUI_category.description.ProgressBar", "lft": 1, "rght": 2, "tree_id": 8, "level": 0}}, {"model": "wizard.guicomponentcategory", "pk": 11, "fields": {"parent": null, "slug": "featuresexperimentgui_categorynameseekbar", "active": true, "name": "features.experiment.GUI_category.name.SeekBar", "description": "features.experiment.GUI_category.description.SeekBar", "lft": 1, "rght": 2, "tree_id": 11, "level": 0}}, {"model": "wizard.guicomponentcategory", "pk": 12, "fields": {"parent": null, "slug": "featuresexperimentgui_categorynamenumberpicker", "active": true, "name": "features.experiment.GUI_category.name.NumberPicker", "description": "features.experiment.GUI_category.description.NumberPicker", "lft": 1, "rght": 2, "tree_id": 7, "level": 0}}, {"model": "wizard.guicomponentcategory", "pk": 13, "fields": {"parent": null, "slug": "featuresexperimentgui_categorynameswitch", "active": true, "name": "features.experiment.GUI_category.name.Switch", "description": "features.experiment.GUI_category.description.Switch", "lft": 1, "rght": 2, "tree_id": 13, "level": 0}}, {"model": "wizard.guicomponentcategory", "pk": 14, "fields": {"parent": null, "slug": "featuresexperimentgui_categorynametogglebutton", "active": true, "name": "features.experiment.GUI_category.name.ToggleButton", "description": "features.experiment.GUI_category.description.ToggleButton", "lft": 1, "rght": 2, "tree_id": 16, "level": 0}}, {"model": "wizard.guicomponentcategory", "pk": 15, "fields": {"parent": null, "slug": "featuresexperimentgui_categorynameratingbar", "active": true, "name": "features.experiment.GUI_category.name.RatingBar", "description": "features.experiment.GUI_category.description.RatingBar", "lft": 1, "rght": 2, "tree_id": 10, "level": 0}}, {"model": "wizard.guicomponentcategory", "pk": 16, "fields": {"parent": null, "slug": "featuresexperimentgui_categorynamespinner", "active": true, "name": "features.experiment.GUI_category.name.Spinner", "description": "features.experiment.GUI_category.description.Spinner", "lft": 1, "rght": 2, "tree_id": 12, "level": 0}}, {"model": "wizard.guicomponent", "pk": 240, "fields": {"id_code": "id_card_1", "name": "features.experiment.GUI_components.name.id_card_1", "description": "features.experiment.GUI_components.description.id_card", "filename": "dni1.jpg", "path": "resources/dni1.jpg", "width": 261, "height": 166, "image": "GUI_components/dni1.jpg", "gui_component_category": 2, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 241, "fields": {"id_code": "delete_1", "name": "features.experiment.GUI_components.name.delete_1", "description": "features.experiment.GUI_components.description.delete", "filename": "delete_b.png", "path": "resources/delete_b.png", "width": 129, "height": 96, "image": "GUI_components/delete_b.png", "gui_component_category": 1, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 242, "fields": {"id_code": "menu_1", "name": "features.experiment.GUI_components.name.menu_1", "description": "features.experiment.GUI_components.description.menu", "filename": "6-android.widget.ImageButton.png", "path": "resources/6-android.widget.ImageButton.png", "width": 128, "height": 112, "image": "GUI_components/6-android.widget.ImageButton.png", "gui_component_category": 6, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 243, "fields": {"id_code": "reply_1", "name": "features.experiment.GUI_components.name.reply_1", "description": "features.experiment.GUI_components.description.reply", "filename": "reply(1).png", "path": "resources/reply(1).png", "width": 512, "height": 512, "image": "GUI_components/reply1.png", "gui_component_category": 6, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 244, "fields": {"id_code": "reload_1", "name": "features.experiment.GUI_components.name.reload_1", "description": "features.experiment.GUI_components.description.reload", "filename": "16411-android.widget.TextView.png", "path": "resources/16411-android.widget.TextView.png", "width": 128, "height": 112, "image": "GUI_components/16411-android.widget.TextView.png", "gui_component_category": 1, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 245, "fields": {"id_code": "trash_1", "name": "features.experiment.GUI_components.name.trash_1", "description": "features.experiment.GUI_components.description.trash", "filename": "190610-android.widget.Button.png", "path": "resources/190610-android.widget.Button.png", "width": 80, "height": 80, "image": "GUI_components/190610-android.widget.Button.png", "gui_component_category": 1, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 246, "fields": {"id_code": "mail_1", "name": "features.experiment.GUI_components.name.mail_1", "description": "features.experiment.GUI_components.description.mail", "filename": "15317-android.widget.TextView.png", "path": "resources/15317-android.widget.TextView.png", "width": 112, "height": 112, "image": "GUI_components/15317-android.widget.TextView.png", "gui_component_category": 1, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 247, "fields": {"id_code": "back_1", "name": "features.experiment.GUI_components.name.back_1", "description": "features.experiment.GUI_components.description.back", "filename": "15232-android.widget.ImageButton.png", "path": "resources/15232-android.widget.ImageButton.png", "width": 112, "height": 128, "image": "GUI_components/15232-android.widget.ImageButton.png", "gui_component_category": 6, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 248, "fields": {"id_code": "next_1", "name": "features.experiment.GUI_components.name.next_1", "description": "features.experiment.GUI_components.description.next", "filename": "15248-android.widget.ImageButton.png", "path": "resources/15248-android.widget.ImageButton.png", "width": 200, "height": 127, "image": "GUI_components/15248-android.widget.ImageButton.png", "gui_component_category": 1, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 249, "fields": {"id_code": "save_1", "name": "features.experiment.GUI_components.name.save_1", "description": "features.experiment.GUI_components.description.save", "filename": "save_b.png", "path": "resources/save_b.png", "width": 122, "height": 59, "image": "GUI_components/save_b.png", "gui_component_category": 1, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 250, "fields": {"id_code": "cancel_1", "name": "features.experiment.GUI_components.name.cancel_1", "description": "features.experiment.GUI_components.description.cancel", "filename": "15229-android.widget.Button.png", "path": "resources/15229-android.widget.Button.png", "width": 154, "height": 108, "image": "GUI_components/15229-android.widget.Button.png", "gui_component_category": 1, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 251, "fields": {"id_code": "ok_1", "name": "features.experiment.GUI_components.name.ok_1", "description": "features.experiment.GUI_components.description.ok", "filename": "70839-android.widget.Button.png", "path": "resources/70839-android.widget.Button.png", "width": 160, "height": 96, "image": "GUI_components/70839-android.widget.Button.png", "gui_component_category": 1, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 252, "fields": {"id_code": "send_1", "name": "features.experiment.GUI_components.name.send_1", "description": "features.experiment.GUI_components.description.send", "filename": "17317-android.widget.TextView.png", "path": "resources/17317-android.widget.TextView.png", "width": 196, "height": 96, "image": "GUI_components/17317-android.widget.TextView.png", "gui_component_category": 5, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 253, "fields": {"id_code": "text_input_1", "name": "features.experiment.GUI_components.name.text_input_1", "description": "features.experiment.GUI_components.description.text_input", "filename": "9-android.widget.EditText.png", "path": "resources/9-android.widget.EditText.png", "width": 1001, "height": 83, "image": "GUI_components/9-android.widget.EditText.png", "gui_component_category": 4, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 254, "fields": {"id_code": "doc_1", "name": "features.experiment.GUI_components.name.doc_1", "description": "features.experiment.GUI_components.description.doc", "filename": "doc_1 (1).jpg", "path": "resources/doc_1 (1).jpg", "width": 1768, "height": 2500, "image": "GUI_components/doc_1_1.jpg", "gui_component_category": 2, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 255, "fields": {"id_code": "photo_1", "name": "features.experiment.GUI_components.name.photo_1", "description": "features.experiment.GUI_components.description.photo", "filename": "passportphoto (1).png", "path": "resources/passportphoto (1).png", "width": 474, "height": 474, "image": "GUI_components/passportphoto_1.png", "gui_component_category": 2, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 256, "fields": {"id_code": "alert_1", "name": "features.experiment.GUI_components.name.alert_1", "description": "features.experiment.GUI_components.description.alert", "filename": "alert (1).png", "path": "resources/alert (1).png", "width": 512, "height": 512, "image": "GUI_components/alert_1.png", "gui_component_category": 5, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 257, "fields": {"id_code": "crm_1", "name": "features.experiment.GUI_components.name.crm_1", "description": "features.experiment.GUI_components.description.cmr", "filename": "crm(1).png", "path": "resources/crm(1).png", "width": 512, "height": 512, "image": "GUI_components/crm1.png", "gui_component_category": 6, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 258, "fields": {"id_code": "checked_1", "name": "features.experiment.GUI_components.name.checked_1", "description": "features.experiment.GUI_components.description.checked", "filename": "checked (1).png", "path": "resources/checked (1).png", "width": 52, "height": 52, "image": "GUI_components/checked_1.png", "gui_component_category": 3, "preloaded": true, "user": 1}}, {"model": "wizard.guicomponent", "pk": 259, "fields": {"id_code": "non_checked_1", "name": "features.experiment.GUI_components.name.checked_1", "description": "features.experiment.GUI_components.description.checked", "filename": "9-android.widget.CheckBox.png", "path": "resources/9-android.widget.CheckBox.png", "width": 64, "height": 64, "image": "GUI_components/9-android.widget.CheckBox.png", "gui_component_category": 3, "preloaded": true, "user": 1}}, {"model": "wizard.variabilityfunctioncategory", "pk": 1, "fields": {"parent": null, "slug": "featuresexperimentfunction_categorynameapp", "active": true, "name": "features.experiment.function_category.name.app", "description": "features.experiment.function_category.description.app", "lft": 1, "rght": 2, "tree_id": 1, "level": 0}}, {"model": "wizard.variabilityfunctioncategory", "pk": 2, "fields": {"parent": null, "slug": "featuresexperimentfunction_categorynamelist", "active": true, "name": "features.experiment.function_category.name.list", "description": "features.experiment.function_category.description.list", "lft": 1, "rght": 2, "tree_id": 2, "level": 0}}, {"model": "wizard.variabilityfunctioncategory", "pk": 3, "fields": {"parent": null, "slug": "featuresexperimentfunction_categorynametext", "active": true, "name": "features.experiment.function_category.name.text", "description": "features.experiment.function_category.description.text", "lft": 1, "rght": 2, "tree_id": 5, "level": 0}}, {"model": "wizard.variabilityfunctioncategory", "pk": 4, "fields": {"parent": null, "slug": "featuresexperimentfunction_categorynamescreenshot", "active": true, "name": "features.experiment.function_category.name.screenshot", "description": "features.experiment.function_category.description.screenshot", "lft": 1, "rght": 2, "tree_id": 3, "level": 0}}, {"model": "wizard.variabilityfunctioncategory", "pk": 5, "fields": {"parent": null, "slug": "featuresexperimentfunction_categorynamescreenshot_", "active": true, "name": "features.experiment.function_category.name.screenshot_rename", "description": "features.experiment.function_category.description.screenshot_rename", "lft": 1, "rght": 2, "tree_id": 4, "level": 0}}, {"model": "wizard.functionparamcategory", "pk": 1, "fields": {"label": "features.experiment.function_params.text_input.label", "placeholder": "features.experiment.function_params.text_input.placeholder", "data_type": "String", "description": "features.experiment.function_params.text_input.description", "validation_needs": {}}}, {"model": "wizard.functionparamcategory", "pk": 2, "fields": {"label": "features.experiment.function_params.number_input.label", "placeholder": "features.experiment.function_params.number_input.placeholder", "data_type": "number", "description": "features.experiment.function_params.number_input.description", "validation_needs": {}}}, {"model": "wizard.functionparamcategory", "pk": 3, "fields": {"label": "features.experiment.function_params.element_input.label", "placeholder": "features.experiment.function_params.element_input.placeholder", "data_type": "element", "description": "features.experiment.function_params.element_input.description", "validation_needs": {}}}, {"model": "wizard.functionparamcategory", "pk": 4, "fields": {"label": "features.experiment.function_params.font_input.label", "placeholder": "features.experiment.function_params.font_input.placeholder", "data_type": "font", "description": "features.experiment.function_params.font_input.description", "validation_needs": {}}}, {"model": "wizard.functionparamcategory", "pk": 5, "fields": {"label": "features.experiment.function_params.list_input.label", "placeholder": "features.experiment.function_params.list_input.placeholder", "data_type": "list", "description": "features.experiment.function_params.list_input.description", "validation_needs": {}}}, {"model": "wizard.variabilityfunction", "pk": 1, "fields": {"id_code": "random_mouse_position", "function_name": "features.experiment.function_trace.name.random_mouse_position", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.random_mouse_position", "variability_function_category": 1}}, {"model": "wizard.variabilityfunction", "pk": 2, "fields": {"id_code": "random_id_card", "function_name": "features.experiment.function_trace.name.random_id_card", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.random_id_card", "variability_function_category": 3}}, {"model": "wizard.variabilityfunction", "pk": 3, "fields": {"id_code": "random_word_with_first_letter_capital", "function_name": "features.experiment.function_trace.name.random_word_with_first_letter_capital", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.random_word_with_first_letter_capital", "variability_function_category": 3}}, {"model": "wizard.variabilityfunction", "pk": 4, "fields": {"id_code": "random_path", "function_name": "features.experiment.function_trace.name.random_path", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.random_path", "variability_function_category": 3}}, {"model": "wizard.variabilityfunction", "pk": 5, "fields": {"id_code": "random_paragraph", "function_name": "features.experiment.function_trace.name.random_paragraph", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.random_paragraph", "variability_function_category": 3}}, {"model": "wizard.variabilityfunction", "pk": 6, "fields": {"id_code": "random_sentence", "function_name": "features.experiment.function_trace.name.random_sentence", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.random_sentence", "variability_function_category": 3}}, {"model": "wizard.variabilityfunction", "pk": 7, "fields": {"id_code": "random_words", "function_name": "features.experiment.function_trace.name.random_words", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.random_words", "variability_function_category": 3}}, {"model": "wizard.variabilityfunction", "pk": 8, "fields": {"id_code": "image_name_as_num_img_png", "function_name": "features.experiment.function_trace.name.image_name_as_num_img_png", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.image_name_as_num_img_png", "variability_function_category": 5}}, {"model": "wizard.variabilityfunction", "pk": 9, "fields": {"id_code": "random_appname", "function_name": "features.experiment.function_trace.name.random_appname", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.random_appname", "variability_function_category": 1}}, {"model": "wizard.variabilityfunction", "pk": 10, "fields": {"id_code": "lorem_word_as_appname", "function_name": "features.experiment.function_trace.name.lorem_word_as_appname", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.lorem_word_as_appname", "variability_function_category": 1}}, {"model": "wizard.variabilityfunction", "pk": 11, "fields": {"id_code": "generate_timestamp", "function_name": "features.experiment.function_trace.name.generate_timestamp", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.generate_timestamp", "variability_function_category": 3}}, {"model": "wizard.variabilityfunction", "pk": 12, "fields": {"id_code": "mouse_position_range_x", "function_name": "features.experiment.function_trace.name.mouse_position_range_x", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.mouse_position_range_x", "variability_function_category": 1}}, {"model": "wizard.variabilityfunction", "pk": 13, "fields": {"id_code": "mouse_or_keyboard", "function_name": "features.experiment.function_trace.name.mouse_or_keyboard", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.mouse_or_keyboard", "variability_function_category": 2}}, {"model": "wizard.variabilityfunction", "pk": 14, "fields": {"id_code": "replace_gui_component_by_other", "function_name": "features.experiment.function_trace.name.replace_gui_component_by_other", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.replace_gui_component_by_other", "variability_function_category": 4}}, {"model": "wizard.variabilityfunction", "pk": 15, "fields": {"id_code": "given_text_in_image", "function_name": "features.experiment.function_trace.name.given_text_in_image", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.given_text_in_image", "variability_function_category": 4}}, {"model": "wizard.variabilityfunction", "pk": 16, "fields": {"id_code": "hidden_gui_element", "function_name": "features.experiment.function_trace.name.hidden_gui_element", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.hidden_gui_element", "variability_function_category": 4}}, {"model": "wizard.variabilityfunction", "pk": 18, "fields": {"id_code": "screenshot_name_without_root_path", "function_name": "features.experiment.function_trace.name.screenshot_name_without_root_path", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.screenshot_name_without_root_path", "variability_function_category": 5}}, {"model": "wizard.variabilityfunction", "pk": 19, "fields": {"id_code": "random_text_in_image", "function_name": "features.experiment.function_trace.name.random_text_in_image", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.random_text_in_image", "variability_function_category": 4}}, {"model": "wizard.variabilityfunction", "pk": 20, "fields": {"id_code": "image_copy_renamed", "function_name": "features.experiment.function_trace.name.image_copy_renamed", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.image_copy_renamed", "variability_function_category": 4}}, {"model": "wizard.variabilityfunction", "pk": 21, "fields": {"id_code": "image_copy_renamed_and_return_path", "function_name": "features.experiment.function_trace.name.image_copy_renamed_and_return_path", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.image_copy_renamed_and_return_path", "variability_function_category": 4}}, {"model": "wizard.variabilityfunction", "pk": 22, "fields": {"id_code": "random_words_in_image", "function_name": "features.experiment.function_trace.name.random_words_in_image", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.random_words_in_image", "variability_function_category": 4}}, {"model": "wizard.variabilityfunction", "pk": 23, "fields": {"id_code": "random_sentence_in_image", "function_name": "features.experiment.function_trace.name.random_sentence_in_image", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.random_sentence_in_image", "variability_function_category": 4}}, {"model": "wizard.variabilityfunction", "pk": 24, "fields": {"id_code": "random_paragraph_in_image", "function_name": "features.experiment.function_trace.name.random_paragraph_in_image", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.random_paragraph_in_image", "variability_function_category": 4}}, {"model": "wizard.variabilityfunction", "pk": 25, "fields": {"id_code": "mouse_position_range_y", "function_name": "features.experiment.function_trace.name.mouse_position_range_y", "filename": "function_trace.json", "path": "configuration", "description": "features.experiment.function_trace.description.mouse_position_range_y", "variability_function_category": 1}}, {"model": "wizard.functionparam", "pk": 1, "fields": {"id_code": "mouse_list_coordenates_down", "order": 1, "description": "features.experiment.param.description.mouse_list_coordenates_down", "function_param_category": 2, "validation_needs": {}, "variability_function": 1}}, {"model": "wizard.functionparam", "pk": 2, "fields": {"id_code": "number_words", "order": 1, "description": "features.experiment.param.description.number_words", "function_param_category": 2, "validation_needs": {}, "variability_function": 3}}, {"model": "wizard.functionparam", "pk": 3, "fields": {"id_code": "extension_file", "order": 1, "description": "features.experiment.param.description.extension_file", "function_param_category": 1, "validation_needs": {}, "variability_function": 4}}, {"model": "wizard.functionparam", "pk": 4, "fields": {"id_code": "dir_level", "order": 2, "description": "features.experiment.param.description.dir_level", "function_param_category": 2, "validation_needs": {}, "variability_function": 4}}, {"model": "wizard.functionparam", "pk": 5, "fields": {"id_code": "number_paragraphs", "order": 1, "description": "features.experiment.param.description.number_paragraphs", "function_param_category": 2, "validation_needs": {}, "variability_function": 5}}, {"model": "wizard.functionparam", "pk": 6, "fields": {"id_code": "number_random_words", "order": 1, "description": "features.experiment.param.description.number_random_words", "function_param_category": 2, "validation_needs": {}, "variability_function": 7}}, {"model": "wizard.functionparam", "pk": 7, "fields": {"id_code": "mouse_list_coordenates_x_left", "order": 1, "description": "features.experiment.param.description.mouse_list_coordenates_x_left", "function_param_category": 2, "validation_needs": {}, "variability_function": 12}}, {"model": "wizard.functionparam", "pk": 8, "fields": {"id_code": "gui_elements_to_replace", "order": 1, "description": "features.experiment.param.description.gui_elements_to_replace", "function_param_category": 3, "validation_needs": {}, "variability_function": 14}}, {"model": "wizard.functionparam", "pk": 9, "fields": {"id_code": "font_configuration", "order": 1, "description": "features.experiment.param.description.font_configuration", "function_param_category": 4, "validation_needs": {}, "variability_function": 15}}, {"model": "wizard.functionparam", "pk": 10, "fields": {"id_code": "color_hidden_square", "order": 1, "description": "features.experiment.param.description.color_hidden_square", "function_param_category": 1, "validation_needs": {}, "variability_function": 16}}, {"model": "wizard.functionparam", "pk": 11, "fields": {"id_code": "text_to_insert", "order": 1, "description": "features.experiment.param.description.text_to_insert", "function_param_category": 1, "validation_needs": {}, "variability_function": 19}}, {"model": "wizard.functionparam", "pk": 12, "fields": {"id_code": "word_configuration_font", "order": 1, "description": "features.experiment.param.description.word_configuration_font", "function_param_category": 4, "validation_needs": {}, "variability_function": 22}}, {"model": "wizard.functionparam", "pk": 13, "fields": {"id_code": "sentence_configuration_font", "order": 1, "description": "features.experiment.param.description.sentence_configuration_font", "function_param_category": 4, "validation_needs": {}, "variability_function": 23}}, {"model": "wizard.functionparam", "pk": 14, "fields": {"id_code": "paragraph_configuration_font", "order": 1, "description": "features.experiment.param.description.paragraph_configuration_font", "function_param_category": 4, "validation_needs": {}, "variability_function": 24}}, {"model": "wizard.functionparam", "pk": 15, "fields": {"id_code": "mouse_list_coordenates_y_left", "order": 1, "description": "features.experiment.param.description.mouse_list_coordenates_y_left", "function_param_category": 2, "validation_needs": {}, "variability_function": 25}}, {"model": "wizard.functionparam", "pk": 16, "fields": {"id_code": "mouse_list_coordenates_x_resolution", "order": 2, "description": "features.experiment.param.description.mouse_list_coordenates_x_resolution", "function_param_category": 2, "validation_needs": {}, "variability_function": 12}}, {"model": "wizard.functionparam", "pk": 17, "fields": {"id_code": "mouse_list_coordenates_x_right", "order": 3, "description": "features.experiment.param.description.mouse_list_coordenates_x_right", "function_param_category": 2, "validation_needs": {}, "variability_function": 12}}, {"model": "wizard.functionparam", "pk": 18, "fields": {"id_code": "mouse_list_coordenates_y_resolution", "order": 2, "description": "features.experiment.param.description.mouse_list_coordenates_y_resolution", "function_param_category": 2, "validation_needs": {}, "variability_function": 25}}, {"model": "wizard.functionparam", "pk": 19, "fields": {"id_code": "mouse_list_coordenates_y_right", "order": 3, "description": "features.experiment.param.description.mouse_list_coordenates_y_right", "function_param_category": 2, "validation_needs": {}, "variability_function": 25}}, {"model": "wizard.functionparam", "pk": 20, "fields": {"id_code": "mouse_list_coordenates_left", "order": 2, "description": "features.experiment.param.description.mouse_list_coordenates_left", "function_param_category": 2, "validation_needs": {}, "variability_function": 1}}, {"model": "wizard.functionparam", "pk": 21, "fields": {"id_code": "mouse_list_coordenates_resolution_x", "order": 3, "description": "features.experiment.param.description.mouse_list_coordenates_resolution_x", "function_param_category": 2, "validation_needs": {}, "variability_function": 1}}, {"model": "wizard.functionparam", "pk": 22, "fields": {"id_code": "mouse_list_coordenates_resolution_y", "order": 4, "description": "features.experiment.param.description.mouse_list_coordenates_resolution_y", "function_param_category": 2, "validation_needs": {}, "variability_function": 1}}, {"model": "wizard.functionparam", "pk": 23, "fields": {"id_code": "mouse_list_coordenates_top", "order": 5, "description": "features.experiment.param.description.mouse_list_coordenates_top", "function_param_category": 2, "validation_needs": {}, "variability_function": 1}}, {"model": "wizard.functionparam", "pk": 24, "fields": {"id_code": "mouse_list_coordenates_right", "order": 6, "description": "features.experiment.param.description.mouse_list_coordenates_right", "function_param_category": 2, "validation_needs": {}, "variability_function": 1}}, {"model": "wizard.functionparam", "pk": 25, "fields": {"id_code": "word_configuration_chat_limit", "order": 2, "description": "features.experiment.param.description.word_configuration_chat_limit", "function_param_category": 2, "validation_needs": {}, "variability_function": 22}}, {"model": "wizard.functionparam", "pk": 26, "fields": {"id_code": "word_configuration_max_words", "order": 3, "description": "features.experiment.param.description.word_configuration_max_words", "function_param_category": 2, "validation_needs": {}, "variability_function": 22}}, {"model": "wizard.functionparam", "pk": 27, "fields": {"id_code": "sentence_configuration_char_limit", "order": 2, "description": "features.experiment.param.description.sentence_configuration_char_limit", "function_param_category": 2, "validation_needs": {}, "variability_function": 23}}, {"model": "wizard.functionparam", "pk": 28, "fields": {"id_code": "paragraph_configuration_char_limit", "order": 2, "description": "features.experiment.param.description.paragraph_configuration_char_limit", "function_param_category": 2, "validation_needs": {}, "variability_function": 24}}, {"model": "wizard.functionparam", "pk": 29, "fields": {"id_code": "paragraph_configuration_max_paragraph", "order": 3, "description": "features.experiment.param.description.paragraph_configuration_max_paragraph", "function_param_category": 2, "validation_needs": {}, "variability_function": 24}}]
+[
+    {
+        "model": "admin.logentry",
+        "pk": 1,
+        "fields": {
+            "action_time": "2022-05-17T09:07:48.641Z",
+            "user": 1,
+            "content_type": 24,
+            "object_id": "235",
+            "object_repr": "asdf",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 2,
+        "fields": {
+            "action_time": "2022-05-17T09:19:55.309Z",
+            "user": 1,
+            "content_type": 24,
+            "object_id": "236",
+            "object_repr": "asdf",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 1,
+        "fields": {
+            "name": "Can add log entry",
+            "content_type": 1,
+            "codename": "add_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 2,
+        "fields": {
+            "name": "Can change log entry",
+            "content_type": 1,
+            "codename": "change_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 3,
+        "fields": {
+            "name": "Can delete log entry",
+            "content_type": 1,
+            "codename": "delete_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 4,
+        "fields": {
+            "name": "Can view log entry",
+            "content_type": 1,
+            "codename": "view_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 5,
+        "fields": {
+            "name": "Can add permission",
+            "content_type": 2,
+            "codename": "add_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 6,
+        "fields": {
+            "name": "Can change permission",
+            "content_type": 2,
+            "codename": "change_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 7,
+        "fields": {
+            "name": "Can delete permission",
+            "content_type": 2,
+            "codename": "delete_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 8,
+        "fields": {
+            "name": "Can view permission",
+            "content_type": 2,
+            "codename": "view_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 9,
+        "fields": {
+            "name": "Can add group",
+            "content_type": 3,
+            "codename": "add_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 10,
+        "fields": {
+            "name": "Can change group",
+            "content_type": 3,
+            "codename": "change_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 11,
+        "fields": {
+            "name": "Can delete group",
+            "content_type": 3,
+            "codename": "delete_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 12,
+        "fields": {
+            "name": "Can view group",
+            "content_type": 3,
+            "codename": "view_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 13,
+        "fields": {
+            "name": "Can add content type",
+            "content_type": 4,
+            "codename": "add_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 14,
+        "fields": {
+            "name": "Can change content type",
+            "content_type": 4,
+            "codename": "change_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 15,
+        "fields": {
+            "name": "Can delete content type",
+            "content_type": 4,
+            "codename": "delete_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 16,
+        "fields": {
+            "name": "Can view content type",
+            "content_type": 4,
+            "codename": "view_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 17,
+        "fields": {
+            "name": "Can add session",
+            "content_type": 5,
+            "codename": "add_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 18,
+        "fields": {
+            "name": "Can change session",
+            "content_type": 5,
+            "codename": "change_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 19,
+        "fields": {
+            "name": "Can delete session",
+            "content_type": 5,
+            "codename": "delete_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 20,
+        "fields": {
+            "name": "Can view session",
+            "content_type": 5,
+            "codename": "view_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 21,
+        "fields": {
+            "name": "Can add Token",
+            "content_type": 6,
+            "codename": "add_token"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 22,
+        "fields": {
+            "name": "Can change Token",
+            "content_type": 6,
+            "codename": "change_token"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 23,
+        "fields": {
+            "name": "Can delete Token",
+            "content_type": 6,
+            "codename": "delete_token"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 24,
+        "fields": {
+            "name": "Can view Token",
+            "content_type": 6,
+            "codename": "view_token"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 25,
+        "fields": {
+            "name": "Can add token",
+            "content_type": 7,
+            "codename": "add_tokenproxy"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 26,
+        "fields": {
+            "name": "Can change token",
+            "content_type": 7,
+            "codename": "change_tokenproxy"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 27,
+        "fields": {
+            "name": "Can delete token",
+            "content_type": 7,
+            "codename": "delete_tokenproxy"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 28,
+        "fields": {
+            "name": "Can view token",
+            "content_type": 7,
+            "codename": "view_tokenproxy"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 29,
+        "fields": {
+            "name": "Can add site",
+            "content_type": 8,
+            "codename": "add_site"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 30,
+        "fields": {
+            "name": "Can change site",
+            "content_type": 8,
+            "codename": "change_site"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 31,
+        "fields": {
+            "name": "Can delete site",
+            "content_type": 8,
+            "codename": "delete_site"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 32,
+        "fields": {
+            "name": "Can view site",
+            "content_type": 8,
+            "codename": "view_site"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 33,
+        "fields": {
+            "name": "Can add email address",
+            "content_type": 9,
+            "codename": "add_emailaddress"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 34,
+        "fields": {
+            "name": "Can change email address",
+            "content_type": 9,
+            "codename": "change_emailaddress"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 35,
+        "fields": {
+            "name": "Can delete email address",
+            "content_type": 9,
+            "codename": "delete_emailaddress"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 36,
+        "fields": {
+            "name": "Can view email address",
+            "content_type": 9,
+            "codename": "view_emailaddress"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 37,
+        "fields": {
+            "name": "Can add email confirmation",
+            "content_type": 10,
+            "codename": "add_emailconfirmation"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 38,
+        "fields": {
+            "name": "Can change email confirmation",
+            "content_type": 10,
+            "codename": "change_emailconfirmation"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 39,
+        "fields": {
+            "name": "Can delete email confirmation",
+            "content_type": 10,
+            "codename": "delete_emailconfirmation"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 40,
+        "fields": {
+            "name": "Can view email confirmation",
+            "content_type": 10,
+            "codename": "view_emailconfirmation"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 41,
+        "fields": {
+            "name": "Can add social account",
+            "content_type": 11,
+            "codename": "add_socialaccount"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 42,
+        "fields": {
+            "name": "Can change social account",
+            "content_type": 11,
+            "codename": "change_socialaccount"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 43,
+        "fields": {
+            "name": "Can delete social account",
+            "content_type": 11,
+            "codename": "delete_socialaccount"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 44,
+        "fields": {
+            "name": "Can view social account",
+            "content_type": 11,
+            "codename": "view_socialaccount"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 45,
+        "fields": {
+            "name": "Can add social application",
+            "content_type": 12,
+            "codename": "add_socialapp"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 46,
+        "fields": {
+            "name": "Can change social application",
+            "content_type": 12,
+            "codename": "change_socialapp"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 47,
+        "fields": {
+            "name": "Can delete social application",
+            "content_type": 12,
+            "codename": "delete_socialapp"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 48,
+        "fields": {
+            "name": "Can view social application",
+            "content_type": 12,
+            "codename": "view_socialapp"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 49,
+        "fields": {
+            "name": "Can add social application token",
+            "content_type": 13,
+            "codename": "add_socialtoken"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 50,
+        "fields": {
+            "name": "Can change social application token",
+            "content_type": 13,
+            "codename": "change_socialtoken"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 51,
+        "fields": {
+            "name": "Can delete social application token",
+            "content_type": 13,
+            "codename": "delete_socialtoken"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 52,
+        "fields": {
+            "name": "Can view social application token",
+            "content_type": 13,
+            "codename": "view_socialtoken"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 53,
+        "fields": {
+            "name": "Can add category",
+            "content_type": 14,
+            "codename": "add_category"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 54,
+        "fields": {
+            "name": "Can change category",
+            "content_type": 14,
+            "codename": "change_category"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 55,
+        "fields": {
+            "name": "Can delete category",
+            "content_type": 14,
+            "codename": "delete_category"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 56,
+        "fields": {
+            "name": "Can view category",
+            "content_type": 14,
+            "codename": "view_category"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 57,
+        "fields": {
+            "name": "Can add category relation",
+            "content_type": 15,
+            "codename": "add_categoryrelation"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 58,
+        "fields": {
+            "name": "Can change category relation",
+            "content_type": 15,
+            "codename": "change_categoryrelation"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 59,
+        "fields": {
+            "name": "Can delete category relation",
+            "content_type": 15,
+            "codename": "delete_categoryrelation"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 60,
+        "fields": {
+            "name": "Can view category relation",
+            "content_type": 15,
+            "codename": "view_categoryrelation"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 61,
+        "fields": {
+            "name": "Can add user",
+            "content_type": 16,
+            "codename": "add_customuser"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 62,
+        "fields": {
+            "name": "Can change user",
+            "content_type": 16,
+            "codename": "change_customuser"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 63,
+        "fields": {
+            "name": "Can delete user",
+            "content_type": 16,
+            "codename": "delete_customuser"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 64,
+        "fields": {
+            "name": "Can view user",
+            "content_type": 16,
+            "codename": "view_customuser"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 65,
+        "fields": {
+            "name": "Can add experiment",
+            "content_type": 17,
+            "codename": "add_experiment"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 66,
+        "fields": {
+            "name": "Can change experiment",
+            "content_type": 17,
+            "codename": "change_experiment"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 67,
+        "fields": {
+            "name": "Can delete experiment",
+            "content_type": 17,
+            "codename": "delete_experiment"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 68,
+        "fields": {
+            "name": "Can view experiment",
+            "content_type": 17,
+            "codename": "view_experiment"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 69,
+        "fields": {
+            "name": "Can add variations",
+            "content_type": 18,
+            "codename": "add_variations"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 70,
+        "fields": {
+            "name": "Can change variations",
+            "content_type": 18,
+            "codename": "change_variations"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 71,
+        "fields": {
+            "name": "Can delete variations",
+            "content_type": 18,
+            "codename": "delete_variations"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 72,
+        "fields": {
+            "name": "Can view variations",
+            "content_type": 18,
+            "codename": "view_variations"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 73,
+        "fields": {
+            "name": "Can add screenshot",
+            "content_type": 19,
+            "codename": "add_screenshot"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 74,
+        "fields": {
+            "name": "Can change screenshot",
+            "content_type": 19,
+            "codename": "change_screenshot"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 75,
+        "fields": {
+            "name": "Can delete screenshot",
+            "content_type": 19,
+            "codename": "delete_screenshot"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 76,
+        "fields": {
+            "name": "Can view screenshot",
+            "content_type": 19,
+            "codename": "view_screenshot"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 77,
+        "fields": {
+            "name": "Can add function param",
+            "content_type": 20,
+            "codename": "add_functionparam"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 78,
+        "fields": {
+            "name": "Can change function param",
+            "content_type": 20,
+            "codename": "change_functionparam"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 79,
+        "fields": {
+            "name": "Can delete function param",
+            "content_type": 20,
+            "codename": "delete_functionparam"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 80,
+        "fields": {
+            "name": "Can view function param",
+            "content_type": 20,
+            "codename": "view_functionparam"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 81,
+        "fields": {
+            "name": "Can add Variability function category",
+            "content_type": 21,
+            "codename": "add_variabilityfunctioncategory"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 82,
+        "fields": {
+            "name": "Can change Variability function category",
+            "content_type": 21,
+            "codename": "change_variabilityfunctioncategory"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 83,
+        "fields": {
+            "name": "Can delete Variability function category",
+            "content_type": 21,
+            "codename": "delete_variabilityfunctioncategory"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 84,
+        "fields": {
+            "name": "Can view Variability function category",
+            "content_type": 21,
+            "codename": "view_variabilityfunctioncategory"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 85,
+        "fields": {
+            "name": "Can add variability function",
+            "content_type": 22,
+            "codename": "add_variabilityfunction"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 86,
+        "fields": {
+            "name": "Can change variability function",
+            "content_type": 22,
+            "codename": "change_variabilityfunction"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 87,
+        "fields": {
+            "name": "Can delete variability function",
+            "content_type": 22,
+            "codename": "delete_variabilityfunction"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 88,
+        "fields": {
+            "name": "Can view variability function",
+            "content_type": 22,
+            "codename": "view_variabilityfunction"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 89,
+        "fields": {
+            "name": "Can add GUI component category",
+            "content_type": 23,
+            "codename": "add_guicomponentcategory"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 90,
+        "fields": {
+            "name": "Can change GUI component category",
+            "content_type": 23,
+            "codename": "change_guicomponentcategory"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 91,
+        "fields": {
+            "name": "Can delete GUI component category",
+            "content_type": 23,
+            "codename": "delete_guicomponentcategory"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 92,
+        "fields": {
+            "name": "Can view GUI component category",
+            "content_type": 23,
+            "codename": "view_guicomponentcategory"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 93,
+        "fields": {
+            "name": "Can add gui component",
+            "content_type": 24,
+            "codename": "add_guicomponent"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 94,
+        "fields": {
+            "name": "Can change gui component",
+            "content_type": 24,
+            "codename": "change_guicomponent"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 95,
+        "fields": {
+            "name": "Can delete gui component",
+            "content_type": 24,
+            "codename": "delete_guicomponent"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 96,
+        "fields": {
+            "name": "Can view gui component",
+            "content_type": 24,
+            "codename": "view_guicomponent"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 97,
+        "fields": {
+            "name": "Can add param assign",
+            "content_type": 25,
+            "codename": "add_paramassign"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 98,
+        "fields": {
+            "name": "Can change param assign",
+            "content_type": 25,
+            "codename": "change_paramassign"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 99,
+        "fields": {
+            "name": "Can delete param assign",
+            "content_type": 25,
+            "codename": "delete_paramassign"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 100,
+        "fields": {
+            "name": "Can view param assign",
+            "content_type": 25,
+            "codename": "view_paramassign"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 101,
+        "fields": {
+            "name": "Can add function param category",
+            "content_type": 20,
+            "codename": "add_functionparamcategory"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 102,
+        "fields": {
+            "name": "Can change function param category",
+            "content_type": 20,
+            "codename": "change_functionparamcategory"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 103,
+        "fields": {
+            "name": "Can delete function param category",
+            "content_type": 20,
+            "codename": "delete_functionparamcategory"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 104,
+        "fields": {
+            "name": "Can view function param category",
+            "content_type": 20,
+            "codename": "view_functionparamcategory"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 105,
+        "fields": {
+            "name": "Can add function param",
+            "content_type": 25,
+            "codename": "add_functionparam"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 106,
+        "fields": {
+            "name": "Can change function param",
+            "content_type": 25,
+            "codename": "change_functionparam"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 107,
+        "fields": {
+            "name": "Can delete function param",
+            "content_type": 25,
+            "codename": "delete_functionparam"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 108,
+        "fields": {
+            "name": "Can view function param",
+            "content_type": 25,
+            "codename": "view_functionparam"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 1,
+        "fields": {
+            "app_label": "admin",
+            "model": "logentry"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 2,
+        "fields": {
+            "app_label": "auth",
+            "model": "permission"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 3,
+        "fields": {
+            "app_label": "auth",
+            "model": "group"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 4,
+        "fields": {
+            "app_label": "contenttypes",
+            "model": "contenttype"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 5,
+        "fields": {
+            "app_label": "sessions",
+            "model": "session"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 6,
+        "fields": {
+            "app_label": "authtoken",
+            "model": "token"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 7,
+        "fields": {
+            "app_label": "authtoken",
+            "model": "tokenproxy"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 8,
+        "fields": {
+            "app_label": "sites",
+            "model": "site"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 9,
+        "fields": {
+            "app_label": "account",
+            "model": "emailaddress"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 10,
+        "fields": {
+            "app_label": "account",
+            "model": "emailconfirmation"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 11,
+        "fields": {
+            "app_label": "socialaccount",
+            "model": "socialaccount"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 12,
+        "fields": {
+            "app_label": "socialaccount",
+            "model": "socialapp"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 13,
+        "fields": {
+            "app_label": "socialaccount",
+            "model": "socialtoken"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 14,
+        "fields": {
+            "app_label": "categories",
+            "model": "category"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 15,
+        "fields": {
+            "app_label": "categories",
+            "model": "categoryrelation"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 16,
+        "fields": {
+            "app_label": "users",
+            "model": "customuser"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 17,
+        "fields": {
+            "app_label": "experiments",
+            "model": "experiment"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 18,
+        "fields": {
+            "app_label": "experiments",
+            "model": "variations"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 19,
+        "fields": {
+            "app_label": "experiments",
+            "model": "screenshot"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 20,
+        "fields": {
+            "app_label": "wizard",
+            "model": "functionparamcategory"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 21,
+        "fields": {
+            "app_label": "wizard",
+            "model": "variabilityfunctioncategory"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 22,
+        "fields": {
+            "app_label": "wizard",
+            "model": "variabilityfunction"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 23,
+        "fields": {
+            "app_label": "wizard",
+            "model": "guicomponentcategory"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 24,
+        "fields": {
+            "app_label": "wizard",
+            "model": "guicomponent"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 25,
+        "fields": {
+            "app_label": "wizard",
+            "model": "functionparam"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "90i8m1ww5298tokydnqpq1vxem6dqrw9",
+        "fields": {
+            "session_data": ".eJxVjEsOAiEQRO_C2hD-AXd6EdI0TSBOmESYlfHuzphZ6LJeVb0Xi7DNGrdBz9gyuzLJLr8sAT6oHwUsy4E5IK5bn_y7OevBb3uiPhvCbGu_n68_VYVRd48V4IrLtogSJKksAXQij16YnLQx2voSvLVeipyVK0omS0WTCghCgWfvD8JWPG8:1nrFDE:hmIQD5NYyOMJ2wVFA1RZO5JEM2GzJBNtB1zo55rL-i0",
+            "expire_date": "2022-06-01T08:39:20.893Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "lbiex351vfdfqux8198ketcgrnwixd8b",
+        "fields": {
+            "session_data": ".eJxVjEsOAiEQRO_C2pDhG3CnFyFN0wTihEkEVsa7O2Nmoct6VfVeLMAcJcxOz1ATuzLLLr8sAj6oHQWs64E5IG6zDf7dnHXntz1RGxVh1K3dz9efqkAvuwc15QTCe6Oil9KbbCR6AQokJeVJZ-dEJuu0VgLVklVcSCZBFqUDJ9j7A8PrPE8:1nmwpl:4IQB5NRbrssDJ2PGdY-2Ruhzv5D42TF6mFKwcP06gqo",
+            "expire_date": "2022-05-20T12:13:21.821Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "thr1xbsvznxf7p83mjhzvlw1iqs2vksy",
+        "fields": {
+            "session_data": ".eJxVjM0KwyAQhN_FcxF_gmhv7YvIuuuiNBho9FT67jUlh5Y5zXwz8xIRRi9x7PkZK4mr0OLymyXAR24HgHU9YgmI22hdfjsn3uVtutx6Reh1a_dz9XdVYC_zx1kTnKccUDsCXjyCSla5kJNarCZFE0_LxpLzU8lSYGB2iikbFu8Pshs8jg:1nrEkr:-FO3LwdgJzUOzKedB6-vMpfBF5SdmACEdbz8_LlFczo",
+            "expire_date": "2022-06-01T08:10:01.020Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "403440f234973564cafc378f2a8dd74ff2c089a6",
+        "fields": {
+            "user": 1,
+            "created": "2022-03-23T07:34:29.849Z"
+        }
+    },
+    {
+        "model": "sites.site",
+        "pk": 1,
+        "fields": {
+            "domain": "example.com",
+            "name": "example.com"
+        }
+    },
+    {
+        "model": "users.customuser",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$260000$SMejNXzmmPuX1yi7WPxOgA$FERx86AN773es9Q+iNKvapKnMxBFmylNUoLRBkNN5g4=",
+            "last_login": "2022-05-18T08:39:20.857Z",
+            "is_superuser": true,
+            "username": "admin",
+            "first_name": "",
+            "last_name": "",
+            "email": "admin@example.com",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2022-03-10T10:18:41.361Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "wizard.guicomponentcategory",
+        "pk": 1,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentgui_categorynamebutton",
+            "active": true,
+            "name": "features.experiment.GUI_category.name.Button",
+            "description": "features.experiment.GUI_category.description.Button",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 1,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.guicomponentcategory",
+        "pk": 2,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentgui_categorynameimageview",
+            "active": true,
+            "name": "features.experiment.GUI_category.name.ImageView",
+            "description": "features.experiment.GUI_category.description.ImageView",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 6,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.guicomponentcategory",
+        "pk": 3,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentgui_categorynamecheckbox",
+            "active": true,
+            "name": "features.experiment.GUI_category.name.Checkbox",
+            "description": "features.experiment.GUI_category.description.Checkbox",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 2,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.guicomponentcategory",
+        "pk": 4,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentgui_categorynametextinput",
+            "active": true,
+            "name": "features.experiment.GUI_category.name.TextInput",
+            "description": "features.experiment.GUI_category.description.TextInput",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 14,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.guicomponentcategory",
+        "pk": 5,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentgui_categorynametextview",
+            "active": true,
+            "name": "features.experiment.GUI_category.name.TextView",
+            "description": "features.experiment.GUI_category.description.TextView",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 15,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.guicomponentcategory",
+        "pk": 6,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentgui_categorynameimagebutton",
+            "active": true,
+            "name": "features.experiment.GUI_category.name.ImageButton",
+            "description": "features.experiment.GUI_category.description.ImageButton",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 5,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.guicomponentcategory",
+        "pk": 7,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentgui_categorynameedittext",
+            "active": true,
+            "name": "features.experiment.GUI_category.name.EditText",
+            "description": "features.experiment.GUI_category.description.EditText",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 4,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.guicomponentcategory",
+        "pk": 8,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentgui_categorynamecheckedtextview",
+            "active": true,
+            "name": "features.experiment.GUI_category.name.CheckedTextView",
+            "description": "features.experiment.GUI_category.description.CheckedTextView",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 3,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.guicomponentcategory",
+        "pk": 9,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentgui_categorynameradiobutton",
+            "active": true,
+            "name": "features.experiment.GUI_category.name.RadioButton",
+            "description": "features.experiment.GUI_category.description.RadioButton",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 9,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.guicomponentcategory",
+        "pk": 10,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentgui_categorynameprogressbar",
+            "active": true,
+            "name": "features.experiment.GUI_category.name.ProgressBar",
+            "description": "features.experiment.GUI_category.description.ProgressBar",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 8,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.guicomponentcategory",
+        "pk": 11,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentgui_categorynameseekbar",
+            "active": true,
+            "name": "features.experiment.GUI_category.name.SeekBar",
+            "description": "features.experiment.GUI_category.description.SeekBar",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 11,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.guicomponentcategory",
+        "pk": 12,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentgui_categorynamenumberpicker",
+            "active": true,
+            "name": "features.experiment.GUI_category.name.NumberPicker",
+            "description": "features.experiment.GUI_category.description.NumberPicker",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 7,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.guicomponentcategory",
+        "pk": 13,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentgui_categorynameswitch",
+            "active": true,
+            "name": "features.experiment.GUI_category.name.Switch",
+            "description": "features.experiment.GUI_category.description.Switch",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 13,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.guicomponentcategory",
+        "pk": 14,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentgui_categorynametogglebutton",
+            "active": true,
+            "name": "features.experiment.GUI_category.name.ToggleButton",
+            "description": "features.experiment.GUI_category.description.ToggleButton",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 16,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.guicomponentcategory",
+        "pk": 15,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentgui_categorynameratingbar",
+            "active": true,
+            "name": "features.experiment.GUI_category.name.RatingBar",
+            "description": "features.experiment.GUI_category.description.RatingBar",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 10,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.guicomponentcategory",
+        "pk": 16,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentgui_categorynamespinner",
+            "active": true,
+            "name": "features.experiment.GUI_category.name.Spinner",
+            "description": "features.experiment.GUI_category.description.Spinner",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 12,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 240,
+        "fields": {
+            "id_code": "id_card_1",
+            "name": "features.experiment.GUI_components.name.id_card_1",
+            "description": "features.experiment.GUI_components.description.id_card",
+            "filename": "dni1.jpg",
+            "path": "resources/dni1.jpg",
+            "width": 261,
+            "height": 166,
+            "image": "GUI_components/dni1.jpg",
+            "gui_component_category": 2,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 241,
+        "fields": {
+            "id_code": "delete_1",
+            "name": "features.experiment.GUI_components.name.delete_1",
+            "description": "features.experiment.GUI_components.description.delete",
+            "filename": "delete_b.png",
+            "path": "resources/delete_b.png",
+            "width": 129,
+            "height": 96,
+            "image": "GUI_components/delete_b.png",
+            "gui_component_category": 1,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 242,
+        "fields": {
+            "id_code": "menu_1",
+            "name": "features.experiment.GUI_components.name.menu_1",
+            "description": "features.experiment.GUI_components.description.menu",
+            "filename": "6-android.widget.ImageButton.png",
+            "path": "resources/6-android.widget.ImageButton.png",
+            "width": 128,
+            "height": 112,
+            "image": "GUI_components/6-android.widget.ImageButton.png",
+            "gui_component_category": 6,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 243,
+        "fields": {
+            "id_code": "reply_1",
+            "name": "features.experiment.GUI_components.name.reply_1",
+            "description": "features.experiment.GUI_components.description.reply",
+            "filename": "reply(1).png",
+            "path": "resources/reply(1).png",
+            "width": 512,
+            "height": 512,
+            "image": "GUI_components/reply1.png",
+            "gui_component_category": 6,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 244,
+        "fields": {
+            "id_code": "reload_1",
+            "name": "features.experiment.GUI_components.name.reload_1",
+            "description": "features.experiment.GUI_components.description.reload",
+            "filename": "16411-android.widget.TextView.png",
+            "path": "resources/16411-android.widget.TextView.png",
+            "width": 128,
+            "height": 112,
+            "image": "GUI_components/16411-android.widget.TextView.png",
+            "gui_component_category": 1,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 245,
+        "fields": {
+            "id_code": "trash_1",
+            "name": "features.experiment.GUI_components.name.trash_1",
+            "description": "features.experiment.GUI_components.description.trash",
+            "filename": "190610-android.widget.Button.png",
+            "path": "resources/190610-android.widget.Button.png",
+            "width": 80,
+            "height": 80,
+            "image": "GUI_components/190610-android.widget.Button.png",
+            "gui_component_category": 1,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 246,
+        "fields": {
+            "id_code": "mail_1",
+            "name": "features.experiment.GUI_components.name.mail_1",
+            "description": "features.experiment.GUI_components.description.mail",
+            "filename": "15317-android.widget.TextView.png",
+            "path": "resources/15317-android.widget.TextView.png",
+            "width": 112,
+            "height": 112,
+            "image": "GUI_components/15317-android.widget.TextView.png",
+            "gui_component_category": 1,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 247,
+        "fields": {
+            "id_code": "back_1",
+            "name": "features.experiment.GUI_components.name.back_1",
+            "description": "features.experiment.GUI_components.description.back",
+            "filename": "15232-android.widget.ImageButton.png",
+            "path": "resources/15232-android.widget.ImageButton.png",
+            "width": 112,
+            "height": 128,
+            "image": "GUI_components/15232-android.widget.ImageButton.png",
+            "gui_component_category": 6,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 248,
+        "fields": {
+            "id_code": "next_1",
+            "name": "features.experiment.GUI_components.name.next_1",
+            "description": "features.experiment.GUI_components.description.next",
+            "filename": "15248-android.widget.ImageButton.png",
+            "path": "resources/15248-android.widget.ImageButton.png",
+            "width": 200,
+            "height": 127,
+            "image": "GUI_components/15248-android.widget.ImageButton.png",
+            "gui_component_category": 1,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 249,
+        "fields": {
+            "id_code": "save_1",
+            "name": "features.experiment.GUI_components.name.save_1",
+            "description": "features.experiment.GUI_components.description.save",
+            "filename": "save_b.png",
+            "path": "resources/save_b.png",
+            "width": 122,
+            "height": 59,
+            "image": "GUI_components/save_b.png",
+            "gui_component_category": 1,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 250,
+        "fields": {
+            "id_code": "cancel_1",
+            "name": "features.experiment.GUI_components.name.cancel_1",
+            "description": "features.experiment.GUI_components.description.cancel",
+            "filename": "15229-android.widget.Button.png",
+            "path": "resources/15229-android.widget.Button.png",
+            "width": 154,
+            "height": 108,
+            "image": "GUI_components/15229-android.widget.Button.png",
+            "gui_component_category": 1,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 251,
+        "fields": {
+            "id_code": "ok_1",
+            "name": "features.experiment.GUI_components.name.ok_1",
+            "description": "features.experiment.GUI_components.description.ok",
+            "filename": "70839-android.widget.Button.png",
+            "path": "resources/70839-android.widget.Button.png",
+            "width": 160,
+            "height": 96,
+            "image": "GUI_components/70839-android.widget.Button.png",
+            "gui_component_category": 1,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 252,
+        "fields": {
+            "id_code": "send_1",
+            "name": "features.experiment.GUI_components.name.send_1",
+            "description": "features.experiment.GUI_components.description.send",
+            "filename": "17317-android.widget.TextView.png",
+            "path": "resources/17317-android.widget.TextView.png",
+            "width": 196,
+            "height": 96,
+            "image": "GUI_components/17317-android.widget.TextView.png",
+            "gui_component_category": 5,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 253,
+        "fields": {
+            "id_code": "text_input_1",
+            "name": "features.experiment.GUI_components.name.text_input_1",
+            "description": "features.experiment.GUI_components.description.text_input",
+            "filename": "9-android.widget.EditText.png",
+            "path": "resources/9-android.widget.EditText.png",
+            "width": 1001,
+            "height": 83,
+            "image": "GUI_components/9-android.widget.EditText.png",
+            "gui_component_category": 4,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 254,
+        "fields": {
+            "id_code": "doc_1",
+            "name": "features.experiment.GUI_components.name.doc_1",
+            "description": "features.experiment.GUI_components.description.doc",
+            "filename": "doc_1 (1).jpg",
+            "path": "resources/doc_1 (1).jpg",
+            "width": 1768,
+            "height": 2500,
+            "image": "GUI_components/doc_1_1.jpg",
+            "gui_component_category": 2,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 255,
+        "fields": {
+            "id_code": "photo_1",
+            "name": "features.experiment.GUI_components.name.photo_1",
+            "description": "features.experiment.GUI_components.description.photo",
+            "filename": "passportphoto (1).png",
+            "path": "resources/passportphoto (1).png",
+            "width": 474,
+            "height": 474,
+            "image": "GUI_components/passportphoto_1.png",
+            "gui_component_category": 2,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 256,
+        "fields": {
+            "id_code": "alert_1",
+            "name": "features.experiment.GUI_components.name.alert_1",
+            "description": "features.experiment.GUI_components.description.alert",
+            "filename": "alert (1).png",
+            "path": "resources/alert (1).png",
+            "width": 512,
+            "height": 512,
+            "image": "GUI_components/alert_1.png",
+            "gui_component_category": 5,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 257,
+        "fields": {
+            "id_code": "crm_1",
+            "name": "features.experiment.GUI_components.name.crm_1",
+            "description": "features.experiment.GUI_components.description.cmr",
+            "filename": "crm(1).png",
+            "path": "resources/crm(1).png",
+            "width": 512,
+            "height": 512,
+            "image": "GUI_components/crm1.png",
+            "gui_component_category": 6,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 258,
+        "fields": {
+            "id_code": "checked_1",
+            "name": "features.experiment.GUI_components.name.checked_1",
+            "description": "features.experiment.GUI_components.description.checked",
+            "filename": "checked (1).png",
+            "path": "resources/checked (1).png",
+            "width": 52,
+            "height": 52,
+            "image": "GUI_components/checked_1.png",
+            "gui_component_category": 3,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.guicomponent",
+        "pk": 259,
+        "fields": {
+            "id_code": "non_checked_1",
+            "name": "features.experiment.GUI_components.name.checked_1",
+            "description": "features.experiment.GUI_components.description.checked",
+            "filename": "9-android.widget.CheckBox.png",
+            "path": "resources/9-android.widget.CheckBox.png",
+            "width": 64,
+            "height": 64,
+            "image": "GUI_components/9-android.widget.CheckBox.png",
+            "gui_component_category": 3,
+            "preloaded": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "wizard.variabilityfunctioncategory",
+        "pk": 1,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentfunction_categorynameapp",
+            "active": true,
+            "name": "features.experiment.function_category.name.app",
+            "description": "features.experiment.function_category.description.app",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 1,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.variabilityfunctioncategory",
+        "pk": 2,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentfunction_categorynamelist",
+            "active": true,
+            "name": "features.experiment.function_category.name.list",
+            "description": "features.experiment.function_category.description.list",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 2,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.variabilityfunctioncategory",
+        "pk": 3,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentfunction_categorynametext",
+            "active": true,
+            "name": "features.experiment.function_category.name.text",
+            "description": "features.experiment.function_category.description.text",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 5,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.variabilityfunctioncategory",
+        "pk": 4,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentfunction_categorynamescreenshot",
+            "active": true,
+            "name": "features.experiment.function_category.name.screenshot",
+            "description": "features.experiment.function_category.description.screenshot",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 3,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.variabilityfunctioncategory",
+        "pk": 5,
+        "fields": {
+            "parent": null,
+            "slug": "featuresexperimentfunction_categorynamescreenshot_",
+            "active": true,
+            "name": "features.experiment.function_category.name.screenshot_rename",
+            "description": "features.experiment.function_category.description.screenshot_rename",
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 4,
+            "level": 0
+        }
+    },
+    {
+        "model": "wizard.functionparamcategory",
+        "pk": 1,
+        "fields": {
+            "label": "features.experiment.function_params.text_input.label",
+            "placeholder": "features.experiment.function_params.text_input.placeholder",
+            "data_type": "String",
+            "description": "features.experiment.function_params.text_input.description",
+            "validation_needs": {}
+        }
+    },
+    {
+        "model": "wizard.functionparamcategory",
+        "pk": 2,
+        "fields": {
+            "label": "features.experiment.function_params.number_input.label",
+            "placeholder": "features.experiment.function_params.number_input.placeholder",
+            "data_type": "number",
+            "description": "features.experiment.function_params.number_input.description",
+            "validation_needs": {}
+        }
+    },
+    {
+        "model": "wizard.functionparamcategory",
+        "pk": 3,
+        "fields": {
+            "label": "features.experiment.function_params.element_input.label",
+            "placeholder": "features.experiment.function_params.element_input.placeholder",
+            "data_type": "element",
+            "description": "features.experiment.function_params.element_input.description",
+            "validation_needs": {}
+        }
+    },
+    {
+        "model": "wizard.functionparamcategory",
+        "pk": 4,
+        "fields": {
+            "label": "features.experiment.function_params.font_input.label",
+            "placeholder": "features.experiment.function_params.font_input.placeholder",
+            "data_type": "font",
+            "description": "features.experiment.function_params.font_input.description",
+            "validation_needs": {}
+        }
+    },
+    {
+        "model": "wizard.functionparamcategory",
+        "pk": 5,
+        "fields": {
+            "label": "features.experiment.function_params.list_input.label",
+            "placeholder": "features.experiment.function_params.list_input.placeholder",
+            "data_type": "list",
+            "description": "features.experiment.function_params.list_input.description",
+            "validation_needs": {}
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 1,
+        "fields": {
+            "id_code": "random_mouse_position",
+            "function_name": "features.experiment.function_trace.name.random_mouse_position",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.random_mouse_position",
+            "variability_function_category": 1
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 2,
+        "fields": {
+            "id_code": "random_id_card",
+            "function_name": "features.experiment.function_trace.name.random_id_card",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.random_id_card",
+            "variability_function_category": 3
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 3,
+        "fields": {
+            "id_code": "random_word_with_first_letter_capital",
+            "function_name": "features.experiment.function_trace.name.random_word_with_first_letter_capital",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.random_word_with_first_letter_capital",
+            "variability_function_category": 3
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 4,
+        "fields": {
+            "id_code": "random_path",
+            "function_name": "features.experiment.function_trace.name.random_path",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.random_path",
+            "variability_function_category": 3
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 5,
+        "fields": {
+            "id_code": "random_paragraph",
+            "function_name": "features.experiment.function_trace.name.random_paragraph",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.random_paragraph",
+            "variability_function_category": 3
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 6,
+        "fields": {
+            "id_code": "random_sentence",
+            "function_name": "features.experiment.function_trace.name.random_sentence",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.random_sentence",
+            "variability_function_category": 3
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 7,
+        "fields": {
+            "id_code": "random_words",
+            "function_name": "features.experiment.function_trace.name.random_words",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.random_words",
+            "variability_function_category": 3
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 8,
+        "fields": {
+            "id_code": "image_name_as_num_img_png",
+            "function_name": "features.experiment.function_trace.name.image_name_as_num_img_png",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.image_name_as_num_img_png",
+            "variability_function_category": 5
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 9,
+        "fields": {
+            "id_code": "random_appname",
+            "function_name": "features.experiment.function_trace.name.random_appname",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.random_appname",
+            "variability_function_category": 1
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 10,
+        "fields": {
+            "id_code": "lorem_word_as_appname",
+            "function_name": "features.experiment.function_trace.name.lorem_word_as_appname",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.lorem_word_as_appname",
+            "variability_function_category": 1
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 11,
+        "fields": {
+            "id_code": "generate_timestamp",
+            "function_name": "features.experiment.function_trace.name.generate_timestamp",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.generate_timestamp",
+            "variability_function_category": 3
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 12,
+        "fields": {
+            "id_code": "mouse_position_range_x",
+            "function_name": "features.experiment.function_trace.name.mouse_position_range_x",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.mouse_position_range_x",
+            "variability_function_category": 1
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 13,
+        "fields": {
+            "id_code": "mouse_or_keyboard",
+            "function_name": "features.experiment.function_trace.name.mouse_or_keyboard",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.mouse_or_keyboard",
+            "variability_function_category": 2
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 14,
+        "fields": {
+            "id_code": "replace_gui_component_by_other",
+            "function_name": "features.experiment.function_trace.name.replace_gui_component_by_other",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.replace_gui_component_by_other",
+            "variability_function_category": 4
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 15,
+        "fields": {
+            "id_code": "given_text_in_image",
+            "function_name": "features.experiment.function_trace.name.given_text_in_image",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.given_text_in_image",
+            "variability_function_category": 4
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 16,
+        "fields": {
+            "id_code": "hidden_gui_element",
+            "function_name": "features.experiment.function_trace.name.hidden_gui_element",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.hidden_gui_element",
+            "variability_function_category": 4
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 18,
+        "fields": {
+            "id_code": "screenshot_name_without_root_path",
+            "function_name": "features.experiment.function_trace.name.screenshot_name_without_root_path",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.screenshot_name_without_root_path",
+            "variability_function_category": 5
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 19,
+        "fields": {
+            "id_code": "random_text_in_image",
+            "function_name": "features.experiment.function_trace.name.random_text_in_image",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.random_text_in_image",
+            "variability_function_category": 4
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 20,
+        "fields": {
+            "id_code": "image_copy_renamed",
+            "function_name": "features.experiment.function_trace.name.image_copy_renamed",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.image_copy_renamed",
+            "variability_function_category": 4
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 21,
+        "fields": {
+            "id_code": "image_copy_renamed_and_return_path",
+            "function_name": "features.experiment.function_trace.name.image_copy_renamed_and_return_path",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.image_copy_renamed_and_return_path",
+            "variability_function_category": 4
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 22,
+        "fields": {
+            "id_code": "random_words_in_image",
+            "function_name": "features.experiment.function_trace.name.random_words_in_image",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.random_words_in_image",
+            "variability_function_category": 4
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 23,
+        "fields": {
+            "id_code": "random_sentence_in_image",
+            "function_name": "features.experiment.function_trace.name.random_sentence_in_image",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.random_sentence_in_image",
+            "variability_function_category": 4
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 24,
+        "fields": {
+            "id_code": "random_paragraph_in_image",
+            "function_name": "features.experiment.function_trace.name.random_paragraph_in_image",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.random_paragraph_in_image",
+            "variability_function_category": 4
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 25,
+        "fields": {
+            "id_code": "mouse_position_range_y",
+            "function_name": "features.experiment.function_trace.name.mouse_position_range_y",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.mouse_position_range_y",
+            "variability_function_category": 1
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 1,
+        "fields": {
+            "id_code": "mouse_list_coordenates_down",
+            "order": 1,
+            "description": "features.experiment.param.description.mouse_list_coordenates_down",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 1
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 2,
+        "fields": {
+            "id_code": "number_words",
+            "order": 1,
+            "description": "features.experiment.param.description.number_words",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 3
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 3,
+        "fields": {
+            "id_code": "extension_file",
+            "order": 1,
+            "description": "features.experiment.param.description.extension_file",
+            "function_param_category": 1,
+            "validation_needs": {},
+            "variability_function": 4
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 4,
+        "fields": {
+            "id_code": "dir_level",
+            "order": 2,
+            "description": "features.experiment.param.description.dir_level",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 4
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 5,
+        "fields": {
+            "id_code": "number_paragraphs",
+            "order": 1,
+            "description": "features.experiment.param.description.number_paragraphs",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 5
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 6,
+        "fields": {
+            "id_code": "number_random_words",
+            "order": 1,
+            "description": "features.experiment.param.description.number_random_words",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 7
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 7,
+        "fields": {
+            "id_code": "mouse_list_coordenates_x_left",
+            "order": 1,
+            "description": "features.experiment.param.description.mouse_list_coordenates_x_left",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 12
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 8,
+        "fields": {
+            "id_code": "gui_elements_to_replace",
+            "order": 1,
+            "description": "features.experiment.param.description.gui_elements_to_replace",
+            "function_param_category": 3,
+            "validation_needs": {},
+            "variability_function": 14
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 9,
+        "fields": {
+            "id_code": "font_configuration",
+            "order": 1,
+            "description": "features.experiment.param.description.font_configuration",
+            "function_param_category": 4,
+            "validation_needs": {},
+            "variability_function": 15
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 10,
+        "fields": {
+            "id_code": "color_hidden_square",
+            "order": 1,
+            "description": "features.experiment.param.description.color_hidden_square",
+            "function_param_category": 1,
+            "validation_needs": {},
+            "variability_function": 16
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 11,
+        "fields": {
+            "id_code": "text_to_insert",
+            "order": 1,
+            "description": "features.experiment.param.description.text_to_insert",
+            "function_param_category": 1,
+            "validation_needs": {},
+            "variability_function": 19
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 12,
+        "fields": {
+            "id_code": "word_configuration_font",
+            "order": 1,
+            "description": "features.experiment.param.description.word_configuration_font",
+            "function_param_category": 4,
+            "validation_needs": {},
+            "variability_function": 22
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 13,
+        "fields": {
+            "id_code": "sentence_configuration_font",
+            "order": 1,
+            "description": "features.experiment.param.description.sentence_configuration_font",
+            "function_param_category": 4,
+            "validation_needs": {},
+            "variability_function": 23
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 14,
+        "fields": {
+            "id_code": "paragraph_configuration_font",
+            "order": 1,
+            "description": "features.experiment.param.description.paragraph_configuration_font",
+            "function_param_category": 4,
+            "validation_needs": {},
+            "variability_function": 24
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 15,
+        "fields": {
+            "id_code": "mouse_list_coordenates_y_left",
+            "order": 1,
+            "description": "features.experiment.param.description.mouse_list_coordenates_y_left",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 25
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 16,
+        "fields": {
+            "id_code": "mouse_list_coordenates_x_resolution",
+            "order": 2,
+            "description": "features.experiment.param.description.mouse_list_coordenates_x_resolution",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 12
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 17,
+        "fields": {
+            "id_code": "mouse_list_coordenates_x_right",
+            "order": 3,
+            "description": "features.experiment.param.description.mouse_list_coordenates_x_right",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 12
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 18,
+        "fields": {
+            "id_code": "mouse_list_coordenates_y_resolution",
+            "order": 2,
+            "description": "features.experiment.param.description.mouse_list_coordenates_y_resolution",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 25
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 19,
+        "fields": {
+            "id_code": "mouse_list_coordenates_y_right",
+            "order": 3,
+            "description": "features.experiment.param.description.mouse_list_coordenates_y_right",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 25
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 20,
+        "fields": {
+            "id_code": "mouse_list_coordenates_left",
+            "order": 2,
+            "description": "features.experiment.param.description.mouse_list_coordenates_left",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 1
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 21,
+        "fields": {
+            "id_code": "mouse_list_coordenates_resolution_x",
+            "order": 3,
+            "description": "features.experiment.param.description.mouse_list_coordenates_resolution_x",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 1
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 22,
+        "fields": {
+            "id_code": "mouse_list_coordenates_resolution_y",
+            "order": 4,
+            "description": "features.experiment.param.description.mouse_list_coordenates_resolution_y",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 1
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 23,
+        "fields": {
+            "id_code": "mouse_list_coordenates_top",
+            "order": 5,
+            "description": "features.experiment.param.description.mouse_list_coordenates_top",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 1
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 24,
+        "fields": {
+            "id_code": "mouse_list_coordenates_right",
+            "order": 6,
+            "description": "features.experiment.param.description.mouse_list_coordenates_right",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 1
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 25,
+        "fields": {
+            "id_code": "word_configuration_chat_limit",
+            "order": 2,
+            "description": "features.experiment.param.description.word_configuration_chat_limit",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 22
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 26,
+        "fields": {
+            "id_code": "word_configuration_max_words",
+            "order": 3,
+            "description": "features.experiment.param.description.word_configuration_max_words",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 22
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 27,
+        "fields": {
+            "id_code": "sentence_configuration_char_limit",
+            "order": 2,
+            "description": "features.experiment.param.description.sentence_configuration_char_limit",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 23
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 28,
+        "fields": {
+            "id_code": "paragraph_configuration_char_limit",
+            "order": 2,
+            "description": "features.experiment.param.description.paragraph_configuration_char_limit",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 24
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 29,
+        "fields": {
+            "id_code": "paragraph_configuration_max_paragraph",
+            "order": 3,
+            "description": "features.experiment.param.description.paragraph_configuration_max_paragraph",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 24
+        }
+    }
+]

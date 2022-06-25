@@ -61,7 +61,7 @@ class ExperimentView(generics.ListCreateAPIView):
             if "public" in params and params["public"] == "true":
                 experiments = Experiment.objects.filter(is_active=True, public=True).order_by("-created_at")
             else:
-                experiments = Experiment.objects.filter(user=user.id, is_active=True, public=False).order_by("-created_at")
+                experiments = Experiment.objects.filter(user=user.id, is_active=True).order_by("-created_at")
         else:
             experiments = Experiment.objects.filter(public=True, is_active=True).order_by("-created_at")
         return experiments
@@ -159,8 +159,15 @@ class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = 'id'
 
     def get(self, request, id, *args, **kwargs):
-        experiment = get_object_or_404(Experiment, user=request.user.id, id=id)
-        return Response(ExperimentSerializer(experiment).data)
+        exp = Experiment.objects.get(id=id)
+        if exp.public or exp.user.id==request.user.id:
+            res = Response({
+                "owned": exp.user.id==request.user.id,
+                "experiment": ExperimentSerializer(exp).data
+            })
+        else:
+            res = Response({"message": "No user found"}, status=status.HTTP_404_NOT_FOUND)
+        return res
 
     def put(self, request, id, *args, **kwars):
 
@@ -366,6 +373,7 @@ def associate_experiment(user):
                 status=ExperimentStatusChoice.LA.value,
                 execution_start=execution_start,
                 execution_finish=execution_finish,
+                last_edition=datetime.datetime.now(tz=timezone.utc),
                 public=False
             )
             experiment.user = user

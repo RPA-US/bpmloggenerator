@@ -23,7 +23,7 @@ environ.Env.read_env()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'agosuirpa.herokuapp.com']
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -218,14 +218,23 @@ AUTH_USER_MODEL = 'users.CustomUser'
 # server will be running is safe to receive requests
 # from. All all of this.
 
-CORS_ALLOWED_ORIGINS = [    
-'http://localhost:3000'
+ # SECURITY WARNING: don't run with debug turned on in production!
+
+CORS_ALLOWED_ORIGINS = [
+  'http://localhost:3000'
 ]
 
-# - django auth
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# server will be running is safe to receive requests
 
 # Django All Auth config. Add all of this.
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
@@ -242,5 +251,6 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
+OLD_PASSWORD_FIELD_ENABLED = True
 # 1 day
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
