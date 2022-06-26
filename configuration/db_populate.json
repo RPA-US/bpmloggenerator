@@ -1233,8 +1233,8 @@
         "model": "sites.site",
         "pk": 1,
         "fields": {
-            "domain": "example.com",
-            "name": "example.com"
+            "domain": "canela.lsi.us.es",
+            "name": "AGOSUIRPA"
         }
     },
     {
@@ -1247,7 +1247,7 @@
             "username": "admin",
             "first_name": "",
             "last_name": "",
-            "email": "admin@example.com",
+            "email": "agosuirpa@gmail.com",
             "is_staff": true,
             "is_active": true,
             "date_joined": "2022-03-10T10:18:41.361Z",
