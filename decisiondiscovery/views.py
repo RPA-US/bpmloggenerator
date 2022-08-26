@@ -11,7 +11,7 @@ from sklearn.tree import DecisionTreeClassifier, export_graphviz, export_text
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
 from chefboost import Chefboost as chef
-from analyzer.configuration_settings import sep, decision_foldername
+from agosuirpa.system_configuration import sep, decision_foldername
 # import json
 # import sys
 # from django.shortcuts import render

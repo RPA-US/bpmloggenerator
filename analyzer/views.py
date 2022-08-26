@@ -10,7 +10,7 @@ import re
 from tqdm import tqdm
 from time import sleep
 from datetime import datetime
-from analyzer.configuration_settings import times_calculation_mode, metadata_location, sep, decision_foldername
+from agosuirpa.system_configuration import times_calculation_mode, metadata_location, sep, decision_foldername
 from featureextraction.views import check_npy_components_of_capture
 from decisiondiscovery.views import decision_tree_training, extract_training_dataset
 from featureextraction.views import gui_components_detection, classify_image_components

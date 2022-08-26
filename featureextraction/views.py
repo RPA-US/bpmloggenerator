@@ -14,8 +14,8 @@ from sklearn.linear_model import enet_path
 import tensorflow as tf
 from keras.models import model_from_json
 from django.core.exceptions import ValidationError
-from analyzer.configuration_settings import cropping_threshold
-from analyzer.configuration_settings import gaze_analysis_threshold
+from agosuirpa.system_configuration import cropping_threshold
+from agosuirpa.system_configuration import gaze_analysis_threshold
 import pickle
 # import sys
 # from numpy.lib.function_base import append
