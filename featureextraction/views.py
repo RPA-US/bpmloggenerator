@@ -266,7 +266,9 @@ def detect_images_components(param_img_root, log, special_colnames, overwrite_np
     """
     no_modification = True
     
-    eyetracking_log = pd.read_csv(param_img_root + eyetracking_log_filename, sep=";")
+    eyetracking_log = False
+    if eyetracking_log_filename:
+        eyetracking_log = pd.read_csv(param_img_root + eyetracking_log_filename, sep=";")
     init_value_ui_log_timestamp = log[special_colnames['Timestamp']][0]
     
     gaze_events = {} # key: row number, 

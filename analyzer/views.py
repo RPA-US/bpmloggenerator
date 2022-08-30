@@ -26,17 +26,35 @@ from django.utils import timezone
 
 def get_foldernames_as_list(path, sep):
     folders_and_files = os.listdir(path)
-    family_names = []
+    foldername_logs_with_different_size_balance = []
     for f in folders_and_files:
         if os.path.isdir(path+sep+f):
-            family_names.append(f)
-    return family_names
+            foldername_logs_with_different_size_balance.append(f)
+    return foldername_logs_with_different_size_balance
 
 def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activity, scenarios, special_colnames, to_exec):
+    """ Generate case study. This function executes all phases specified in 'to_exec' and it stores enriched log and decision tree extracted from the initial UI log in the same folder it is. 
+    
+    Args:
+        exp_foldername (string): name of the folder where all case study data is stored. Example 'case_study_data'
+
+        exp_folder_complete_path (string): complete path to the folder where all case study data is stored, including the name of the folder in this path. Example 'C:\\John\\Desktop\\case_study_data'
+        
+        decision_activity (string): activity where decision we want to study is taken. Example: 'B' 
+
+        scenarios (list): list with all foldernames corresponding to the differents scenarios that will be studied in this case study
+
+        special_colnames (dict): a dict with the keys "Case", "Activity", "Screenshot", "Variant", "Timestamp", "eyetracking_recording_timestamp", "eyetracking_gaze_point_x", "eyetracking_gaze_point_y", specifiyng as their values each column name associated of your UI log.
+
+        to_exec (list): list of the phases we want to execute. The possible phases to include in this list are ['gui_components_detection','classify_image_components','extract_training_dataset','decision_tree_training']
+
+    Returns:
+        None
+    """
     times = {}
-    family_names = get_foldernames_as_list(exp_folder_complete_path + sep + scenarios[0], sep)
-    #exp_folder_complete_path + sep + "metadata" + sep
-    metadata_path = metadata_location + sep + exp_foldername + "_metadata" + sep
+    foldername_logs_with_different_size_balance = get_foldernames_as_list(exp_folder_complete_path + sep + scenarios[0], sep)
+    # DEPRECATED versions: exp_folder_complete_path + sep + "metadata" + sep
+    metadata_path = metadata_location + sep + exp_foldername + "_metadata" + sep # folder to store metadata that will be used in "results" mode
     
     if not os.path.exists(metadata_path):
         os.makedirs(metadata_path)
@@ -46,7 +64,7 @@ def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activ
         print("\nActual Scenario: " + str(scenario))
         param_path = exp_folder_complete_path + sep + scenario + sep
         if to_exec and len(to_exec) > 0:
-            for n in family_names:
+            for n in foldername_logs_with_different_size_balance:
                 times[n] = {}
                 
                 decision_tree_library           = to_exec['decision_tree_training']['library'] if (('decision_tree_training' in to_exec) and ('library' in to_exec['decision_tree_training'])) else 'sklearn'
@@ -321,6 +339,7 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
 # }
 
 def case_study_generator(data):
+    
     mode = data['mode']
     exp_foldername = data['exp_foldername']
     phases_to_execute = data['phases_to_execute']
@@ -445,6 +464,12 @@ class CaseStudyView(generics.ListCreateAPIView):
         else:
             execute_case_study = True
             try:
+                if not (case_study_serialized.data['mode'] in ['generation', 'results', 'both']):
+                    response_content = {"message": "mode must be one of the following options: generation, results, both."}
+                    st = status.HTTP_422_UNPROCESSABLE_ENTITY 
+                    execute_case_study = False
+                    return Response(response_content, status=st)
+                        
                 if not isinstance(case_study_serialized.data['phases_to_execute'], dict):
                     response_content = {"message": "phases_to_execute must be of type dict!!!!! and must be composed by phases contained in ['gui_components_detection','classify_image_components','extract_training_dataset','decision_tree_training']"}
                     st = status.HTTP_422_UNPROCESSABLE_ENTITY 
