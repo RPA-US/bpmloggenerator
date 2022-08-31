@@ -13,7 +13,7 @@ class CaseStudy(models.Model):
     title = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     exp_foldername = models.CharField(max_length=255)
-    exp_folder_complete_path = models.FilePathField(max_length=255)
+    exp_folder_complete_path = models.CharField(max_length=255)
     mode = models.CharField(max_length=255)
     scenarios_to_study = models.CharField(max_length=255, null=True)
     drop = models.CharField(max_length=255, null=True)
@@ -34,8 +34,8 @@ class GUIComponentDetection(models.Model):
     overwrite_npy = models.BooleanField(default=False)
 
 class ClassifyImageComponents(models.Model):
-    model_json_file_name = models.FilePathField(max_length=255, blank=True, default="resources/models/model.json")
-    model_weights = models.FilePathField(max_length=255, default="resources/models/model.h5")
+    model_json_file_name = models.CharField(max_length=255, blank=True, default="resources/models/model.json")
+    model_weights = models.CharField(max_length=255, default="resources/models/model.h5")
 
 class ExtractTrainingDataset(models.Model):
     columns_to_ignore = ArrayField(models.CharField(max_length=25), default=["Coor_X", "Coor_Y", "Case"])
