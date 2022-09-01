@@ -27,6 +27,14 @@ class CaseStudy(models.Model):
     def __str__(self):
         return self.title
 
+def get_default_extract_training_columns_to_ignore():
+    return 'Coor_X, Coor_Y, Case'.split(', ') # this returns a list
+
+def get_default_decision_tree_columns_to_ignore():
+    return 'Timestamp_start, Timestamp_end'.split(', ') # this returns a list
+
+def get_default_algorithms():
+    return 'ID3, CART, CHAID, C4.5'.split(', ') # this returns a list
 
 class GUIComponentDetection(models.Model):
     eyetracking_log_filename =  models.CharField(max_length=255, default="eyetracking_log.csv")
@@ -38,9 +46,9 @@ class ClassifyImageComponents(models.Model):
     model_weights = models.CharField(max_length=255, default="resources/models/model.h5")
 
 class ExtractTrainingDataset(models.Model):
-    columns_to_ignore = ArrayField(models.CharField(max_length=25), default=["Coor_X", "Coor_Y", "Case"])
+    columns_to_ignore = ArrayField(models.CharField(max_length=25), default=get_default_extract_training_columns_to_ignore)
 class DecisionTreeTraining(models.Model):
     library = models.CharField(max_length=255, default='chefboost') # 'sklearn'
-    algorithms = ArrayField(models.CharField(max_length=25), default=['ID3', 'CART', 'CHAID', 'C4.5'])
+    algorithms = ArrayField(models.CharField(max_length=25), default=get_default_algorithms)
     mode = models.CharField(max_length=25, default='autogeneration')
-    columns_to_ignore = ArrayField(models.CharField(max_length=50), default=['Timestamp_start', 'Timestamp_end'])
+    columns_to_ignore = ArrayField(models.CharField(max_length=50), default=get_default_decision_tree_columns_to_ignore)
