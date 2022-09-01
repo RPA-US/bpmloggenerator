@@ -283,25 +283,26 @@ def detect_images_components(param_img_root, log, special_colnames, overwrite_np
         files_exists = os.path.exists(screenshot_npy) and os.path.exists(screenshot_texts_npy)
         no_modification = no_modification and files_exists
         
-        timestamp_start = log[special_colnames['Timestamp']][img_index]-init_value_ui_log_timestamp
-        if img_index < len(image_names)-1:
-            timestamp_end = log[special_colnames['Timestamp']][img_index+1]-init_value_ui_log_timestamp
-            interval, last_upper_limit = gaze_events_associated_to_event_time_range(
-                eyetracking_log, 
-                special_colnames,
-                timestamp_start,
-                timestamp_end,
-                None)
-        else:
-            print("detect_images_components: LAST SCREENSHOT")
-            interval, last_upper_limit = gaze_events_associated_to_event_time_range(
-                eyetracking_log, 
-                special_colnames,
-                timestamp_start,
-                "LAST",
-                last_upper_limit)
-        
-        gaze_events[img_index] = interval # { row_number: [[gaze_coorX, gaze_coorY],[gaze_coorX, gaze_coorY],[gaze_coorX, gaze_coorY]]}
+        if eyetracking_log:
+            timestamp_start = log[special_colnames['Timestamp']][img_index]-init_value_ui_log_timestamp
+            if img_index < len(image_names)-1:
+                timestamp_end = log[special_colnames['Timestamp']][img_index+1]-init_value_ui_log_timestamp
+                interval, last_upper_limit = gaze_events_associated_to_event_time_range(
+                    eyetracking_log, 
+                    special_colnames,
+                    timestamp_start,
+                    timestamp_end,
+                    None)
+            else:
+                print("detect_images_components: LAST SCREENSHOT")
+                interval, last_upper_limit = gaze_events_associated_to_event_time_range(
+                    eyetracking_log, 
+                    special_colnames,
+                    timestamp_start,
+                    "LAST",
+                    last_upper_limit)
+            
+            gaze_events[img_index] = interval # { row_number: [[gaze_coorX, gaze_coorY],[gaze_coorX, gaze_coorY],[gaze_coorX, gaze_coorY]]}
         
         if not files_exists or overwrite_npy:
             recortes, text_or_not_text, words = get_gui_components_crops(param_img_root, log, image_names, text_detected_by_OCR, path_to_save_bordered_images, add_words_columns, img_index)
