@@ -267,7 +267,7 @@ def detect_images_components(param_img_root, log, special_colnames, overwrite_np
     no_modification = True
     
     eyetracking_log = False
-    if eyetracking_log_filename:
+    if eyetracking_log_filename and os.path.exists(param_img_root + eyetracking_log_filename):
         eyetracking_log = pd.read_csv(param_img_root + eyetracking_log_filename, sep=";")
     init_value_ui_log_timestamp = log[special_colnames['Timestamp']][0]
     
@@ -282,8 +282,7 @@ def detect_images_components(param_img_root, log, special_colnames, overwrite_np
         screenshot_npy = path_to_save_gui_components_npy + image_names[img_index] + ".npy"
         files_exists = os.path.exists(screenshot_npy) and os.path.exists(screenshot_texts_npy)
         no_modification = no_modification and files_exists
-        
-        if eyetracking_log:
+        if eyetracking_log is not False:
             timestamp_start = log[special_colnames['Timestamp']][img_index]-init_value_ui_log_timestamp
             if img_index < len(image_names)-1:
                 timestamp_end = log[special_colnames['Timestamp']][img_index+1]-init_value_ui_log_timestamp
