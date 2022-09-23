@@ -339,6 +339,24 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
 # }
 
 def case_study_generator(data):
+    '''
+    Mandatory Attributes: mode, exp_foldername, phases_to_execute, decision_point_activity, exp_folder_complete_path, gui_class_success_regex, gui_quantity_difference, scenarios_to_study, drop, special_colnames
+    Example values
+    version_name = "Advanced_10_30"
+    mode = "generation"
+    decision_point_activity = "D"
+    path_to_save_experiment = None
+    gui_class_success_regex = "CheckBox_D or ImageView_D or TextView_D" # "(CheckBox_D or ImageView_D or TextView_D) and (ImageView_B or TextView_B)"
+    gui_quantity_difference = 1
+    drop = None  # Example: ["Advanced_10_Balanced", "Advanced_10_Imbalanced"]
+    interactive = False
+    phases_to_execute = {'gui_components_detection': {},
+                   'classify_image_components': {},
+                   'extract_training_dataset': {},
+                   'decision_tree_training': {}
+                   }
+    scenarios = None # ["scenario_10","scenario_11","scenario_12","scenario_13"]
+    '''
     
     mode = data['mode']
     exp_foldername = data['exp_foldername']
@@ -351,28 +369,6 @@ def case_study_generator(data):
     drop = data['drop']
     special_colnames = data['special_colnames'] if ('special_colnames' in data) else None
     
-    # =================================
-    # Mandatory Attributes: mode, exp_foldername, phases_to_execute, decision_point_activity, exp_folder_complete_path, gui_class_success_regex, gui_quantity_difference, scenarios_to_study, drop, special_colnames
-    # Example values
-    # version_name = "Advanced_10_30"
-    # mode = "generation"
-    # decision_point_activity = "D"
-    # path_to_save_experiment = None
-    # gui_class_success_regex = "CheckBox_D or ImageView_D or TextView_D" # "(CheckBox_D or ImageView_D or TextView_D) and (ImageView_B or TextView_B)"
-    # gui_quantity_difference = 1
-    # drop = None  # Example: ["Advanced_10_Balanced", "Advanced_10_Imbalanced"]
-    # interactive = False
-    # phases_to_execute = {'gui_components_detection': {},
-    #                'classify_image_components': {},
-    #                'extract_training_dataset': {},
-    #                'decision_tree_training': {}
-    #                }
-    # scenarios = None # ["scenario_10","scenario_11","scenario_12","scenario_13"]
-    
-    # =================================
-    # TODO: Expected results ## EXAMPLE: [["Case"],["ImageView", "D"]]
-    # It is necessary to specify first the name of the GUI component and next the activity where iit takes place
-    # In case of other column, you must specify only its name: for example ["Case"]
     
     msg = exp_foldername + ' not executed'
     executed = False
