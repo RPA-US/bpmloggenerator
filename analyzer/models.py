@@ -1,7 +1,7 @@
 from email.policy import default
 from xmlrpc.client import Boolean
 from django.db import models
-from django.forms import JSONField
+from jsonfield import JSONField
 from users.models import CustomUser
 from django.contrib.postgres.fields import ArrayField
 
@@ -43,10 +43,11 @@ class GUIComponentDetection(models.Model):
 
 class ClassifyImageComponents(models.Model):
     model_json_file_name = models.CharField(max_length=255, blank=True, default="resources/models/model.json")
-    model_weights = models.CharField(max_length=255, default="resources/models/model.h5")
+    model_weights = models.CharField(max_length=255, default="resources/models/custom-v2.h5")
 
 class ExtractTrainingDataset(models.Model):
     columns_to_ignore = ArrayField(models.CharField(max_length=25), default=get_default_extract_training_columns_to_ignore)
+
 class DecisionTreeTraining(models.Model):
     library = models.CharField(max_length=255, default='chefboost') # 'sklearn'
     algorithms = ArrayField(models.CharField(max_length=25), default=get_default_algorithms)
