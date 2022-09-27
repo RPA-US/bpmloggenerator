@@ -18,10 +18,11 @@ from featureextraction.views import gui_components_detection, classify_image_com
 from rest_framework import generics, status, viewsets #, permissions
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
-from .models import CaseStudy
+from .models import CaseStudy, DecisionTreeTraining, ExtractTrainingDataset
 from .serializers import CaseStudySerializer
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+from django.db import transaction
 
 
 def get_foldernames_as_list(path, sep):
@@ -67,12 +68,32 @@ def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activ
             for n in foldername_logs_with_different_size_balance:
                 times[n] = {}
                 
-                decision_tree_library           = to_exec['decision_tree_training']['library'] if (('decision_tree_training' in to_exec) and ('library' in to_exec['decision_tree_training'])) else 'sklearn'
-                decision_tree_algorithms        = to_exec['decision_tree_training']['algorithms'] if (('decision_tree_training' in to_exec) and ('algorithms' in to_exec['decision_tree_training'])) else None # ['ID3', 'CART', 'CHAID', 'C4.5']
-                decision_tree_mode              = to_exec['decision_tree_training']['mode'] if (('decision_tree_training' in to_exec) and ('mode' in to_exec['decision_tree_training'])) else 'autogeneration'
-                decision_columns_to_ignore      = to_exec['decision_tree_training']['columns_to_ignore'] if (('decision_tree_training' in to_exec) and ('columns_to_ignore' in to_exec['decision_tree_training'])) else None
-                training_columns_to_ignore      = to_exec['extract_training_dataset']['columns_to_ignore'] if (('extract_training_dataset' in to_exec) and ('columns_to_ignore' in to_exec['extract_training_dataset'])) else None
-                
+                # decision_tree_library           = to_exec['decision_tree_training']['library'] if (('decision_tree_training' in to_exec) and ('library' in to_exec['decision_tree_training'])) else 'sklearn'
+                # decision_tree_algorithms        = to_exec['decision_tree_training']['algorithms'] if (('decision_tree_training' in to_exec) and ('algorithms' in to_exec['decision_tree_training'])) else None # ['ID3', 'CART', 'CHAID', 'C4.5']
+                # decision_tree_mode              = to_exec['decision_tree_training']['mode'] if (('decision_tree_training' in to_exec) and ('mode' in to_exec['decision_tree_training'])) else 'autogeneration'
+                # decision_columns_to_ignore      = to_exec['decision_tree_training']['columns_to_ignore'] if (('decision_tree_training' in to_exec) and ('columns_to_ignore' in to_exec['decision_tree_training'])) else None
+                # training_columns_to_ignore      = to_exec['extract_training_dataset']['columns_to_ignore'] if (('extract_training_dataset' in to_exec) and ('columns_to_ignore' in to_exec['extract_training_dataset'])) else None
+
+                # to_exec_args = {
+                #     'gui_components_detection': (param_path+n+sep+'log.csv', 
+                #                                  param_path+n+sep,
+                #                                  special_colnames,
+                #                                  to_exec['gui_components_detection']['eyetracking_log_filename'],
+                #                                  to_exec['gui_components_detection']['add_words_columns'],
+                #                                  to_exec['gui_components_detection']['overwrite_npy']),
+                #     'classify_image_components': ('resources'+sep+'models'+sep+'model.json',
+                #                                   'resources'+sep+'models'+sep+'model.h5',
+                #                                   param_path + n + sep + 'components_npy' + sep,
+                #                                   param_path+n+sep + 'log.csv',
+                #                                   param_path+n+sep+'enriched_log.csv',
+                #                                   special_colnames["Screenshot"],
+                #                                   False),
+                #     'extract_training_dataset': (decision_activity, param_path + n + sep + 'enriched_log.csv', param_path + n + sep, training_columns_to_ignore, special_colnames["Variant"], special_colnames["Case"], special_colnames["Screenshot"], special_colnames["Timestamp"], special_colnames["Activity"]),
+                #     'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep, decision_tree_library, decision_tree_mode, decision_tree_algorithms, decision_columns_to_ignore) # 'autogeneration' -> to plot tree automatically
+                #     }
+                    
+                decision_tree_training = DecisionTreeTraining(to_exec['decision_tree_training'])
+                training_dataset = ExtractTrainingDataset(to_exec['extract_training_dataset'])
 
                 to_exec_args = {
                     'gui_components_detection': (param_path+n+sep+'log.csv', 
@@ -88,12 +109,12 @@ def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activ
                                                   param_path+n+sep+'enriched_log.csv',
                                                   special_colnames["Screenshot"],
                                                   False),
-                    'extract_training_dataset': (decision_activity, param_path + n + sep + 'enriched_log.csv', param_path + n + sep, training_columns_to_ignore, special_colnames["Variant"], special_colnames["Case"], special_colnames["Screenshot"], special_colnames["Timestamp"], special_colnames["Activity"]),
-                    'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep, decision_tree_library, decision_tree_mode, decision_tree_algorithms, decision_columns_to_ignore) # 'autogeneration' -> to plot tree automatically
+                    'extract_training_dataset': (decision_activity, param_path + n + sep + 'enriched_log.csv', param_path + n + sep, training_dataset.columns_to_ignore, special_colnames["Variant"], special_colnames["Case"], special_colnames["Screenshot"], special_colnames["Timestamp"], special_colnames["Activity"]),
+                    'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep, decision_tree_training) # 'autogeneration' -> to plot tree automatically
                     }
                 
                 for function_to_exec in to_exec.keys():
-                    if function_to_exec == "decision_tree_training" and decision_tree_library!='sklearn':
+                    if function_to_exec == "decision_tree_training" and decision_tree_training.library!='sklearn':
                         res, tree_times = eval(function_to_exec)(*to_exec_args[function_to_exec])
                         times[n][function_to_exec] = tree_times
                     else:
@@ -357,28 +378,44 @@ def case_study_generator(data):
                    }
     scenarios = None # ["scenario_10","scenario_11","scenario_12","scenario_13"]
     '''
+    with transaction.atomic():
+        serializer = CaseStudySerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        case_study = serializer.save()
     
-    mode = data['mode']
-    exp_foldername = data['exp_foldername']
-    phases_to_execute = data['phases_to_execute']
-    decision_point_activity = data['decision_point_activity']
-    exp_folder_complete_path = data['exp_folder_complete_path']
-    gui_class_success_regex = data['gui_class_success_regex']
-    gui_quantity_difference = data['gui_quantity_difference']
-    scenarios_to_study = data['scenarios_to_study']
-    drop = data['drop']
-    special_colnames = data['special_colnames'] if ('special_colnames' in data) else None
+    # mode = data['mode']
+    # exp_foldername = data['exp_foldername']
+    # phases_to_execute = data['phases_to_execute']
+    # decision_point_activity = data['decision_point_activity']
+    # exp_folder_complete_path = data['exp_folder_complete_path']
+    # gui_class_success_regex = data['gui_class_success_regex']
+    # gui_quantity_difference = data['gui_quantity_difference']
+    # scenarios_to_study = data['scenarios_to_study']
+    # drop = data['drop']
+    # special_colnames = data['special_colnames'] if ('special_colnames' in data) else None
+
+    mode = case_study.mode
+    exp_foldername = case_study.exp_foldername
+    phases_to_execute = case_study.phases_to_execute
+    decision_point_activity = case_study.decision_point_activity
+    exp_folder_complete_path = case_study.exp_folder_complete_path
+    gui_class_success_regex = case_study.gui_class_success_regex
+    gui_quantity_difference = case_study.gui_quantity_difference
+    scenarios_to_study = case_study.scenarios_to_study
+    drop = case_study.drop
+    special_colnames = case_study.special_colnames if case_study.special_colnames else None
     
     
     msg = exp_foldername + ' not executed'
     executed = False
     
     if not scenarios_to_study:
-        scenarios_to_study = get_foldernames_as_list(exp_folder_complete_path, sep)
+        scenarios_to_study = get_foldernames_as_list(case_study.exp_folder_complete_path, sep)
         
     if mode == "generation" or mode == "both":
         generate_case_study(exp_foldername, exp_folder_complete_path, decision_point_activity, scenarios_to_study, special_colnames, phases_to_execute)
-        msg = exp_foldername + ' case study generated!'
+        # generate_case_study(case_study)
+        sg = exp_foldername + ' case study generated!'
         executed = True
     if mode == "results" or mode == "both":
         # if exp_folder_complete_path and exp_folder_complete_path.find(sep) == -1:

@@ -7,6 +7,9 @@ class CaseStudySerializer(serializers.ModelSerializer):
     class Meta:
         model = CaseStudy
         fields = '__all__' # ['id', 'title', 'created_at', 'mode', 'exp_version_name', 'phases_to_execute', 'decision_point_activity', 'path_to_save_experiment', 'gui_class_success_regex', 'gui_quantity_difference', 'scenarios_to_study', 'drop', 'user']
+    
+    def create(self, validated_data):
+        return CaseStudy.objects.create(**validated_data)
 
 class GUIComponentDetectionSerializer(serializers.ModelSerializer):
     class Meta:
