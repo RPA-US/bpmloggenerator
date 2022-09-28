@@ -33,7 +33,7 @@ def get_foldernames_as_list(path, sep):
             foldername_logs_with_different_size_balance.append(f)
     return foldername_logs_with_different_size_balance
 
-def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activity, scenarios, special_colnames, to_exec):
+def generate_case_study(case_study):
     """ Generate case study. This function executes all phases specified in 'to_exec' and it stores enriched log and decision tree extracted from the initial UI log in the same folder it is. 
     
     Args:
@@ -53,18 +53,18 @@ def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activ
         None
     """
     times = {}
-    foldername_logs_with_different_size_balance = get_foldernames_as_list(exp_folder_complete_path + sep + scenarios[0], sep)
+    foldername_logs_with_different_size_balance = get_foldernames_as_list(case_study.exp_folder_complete_path + sep + case_study.scenarios_to_study[0], sep)
     # DEPRECATED versions: exp_folder_complete_path + sep + "metadata" + sep
-    metadata_path = metadata_location + sep + exp_foldername + "_metadata" + sep # folder to store metadata that will be used in "results" mode
+    metadata_path = metadata_location + sep + case_study.exp_foldername + "_metadata" + sep # folder to store metadata that will be used in "results" mode
     
     if not os.path.exists(metadata_path):
         os.makedirs(metadata_path)
 
-    for scenario in tqdm(scenarios, desc="Scenarios that have been processed: "):
+    for scenario in tqdm(case_study.scenarios_to_study, desc="Scenarios that have been processed: "):
         sleep(.1)
         print("\nActual Scenario: " + str(scenario))
-        param_path = exp_folder_complete_path + sep + scenario + sep
-        if to_exec and len(to_exec) > 0:
+        param_path = case_study.exp_folder_complete_path + sep + scenario + sep
+        if case_study.phases_to_execute and len(case_study.phases_to_execute) > 0:
             for n in foldername_logs_with_different_size_balance:
                 times[n] = {}
                 
@@ -92,28 +92,28 @@ def generate_case_study(exp_foldername, exp_folder_complete_path, decision_activ
                 #     'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep, decision_tree_library, decision_tree_mode, decision_tree_algorithms, decision_columns_to_ignore) # 'autogeneration' -> to plot tree automatically
                 #     }
                     
-                decision_tree_training = DecisionTreeTraining(to_exec['decision_tree_training'])
-                training_dataset = ExtractTrainingDataset(to_exec['extract_training_dataset'])
+                decision_tree_training = DecisionTreeTraining(case_study.phases_to_execute['decision_tree_training'])
+                training_dataset = ExtractTrainingDataset(case_study.phases_to_execute['extract_training_dataset'])
 
                 to_exec_args = {
                     'gui_components_detection': (param_path+n+sep+'log.csv', 
                                                  param_path+n+sep,
-                                                 special_colnames,
-                                                 to_exec['gui_components_detection']['eyetracking_log_filename'],
-                                                 to_exec['gui_components_detection']['add_words_columns'],
-                                                 to_exec['gui_components_detection']['overwrite_npy']),
+                                                 case_study.special_colnames,
+                                                 case_study.phases_to_execute['gui_components_detection']['eyetracking_log_filename'],
+                                                 case_study.phases_to_execute['gui_components_detection']['add_words_columns'],
+                                                 case_study.phases_to_execute['gui_components_detection']['overwrite_npy']),
                     'classify_image_components': ('resources'+sep+'models'+sep+'model.json',
                                                   'resources'+sep+'models'+sep+'model.h5',
                                                   param_path + n + sep + 'components_npy' + sep,
                                                   param_path+n+sep + 'log.csv',
                                                   param_path+n+sep+'enriched_log.csv',
-                                                  special_colnames["Screenshot"],
+                                                  case_study.special_colnames["Screenshot"],
                                                   False),
-                    'extract_training_dataset': (decision_activity, param_path + n + sep + 'enriched_log.csv', param_path + n + sep, training_dataset.columns_to_ignore, special_colnames["Variant"], special_colnames["Case"], special_colnames["Screenshot"], special_colnames["Timestamp"], special_colnames["Activity"]),
+                    'extract_training_dataset': (case_study.decision_point_activity, param_path + n + sep + 'enriched_log.csv', param_path + n + sep, training_dataset.columns_to_ignore, case_study.special_colnames["Variant"], case_study.special_colnames["Case"], case_study.special_colnames["Screenshot"], case_study.special_colnames["Timestamp"], case_study.special_colnames["Activity"]),
                     'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep, decision_tree_training) # 'autogeneration' -> to plot tree automatically
                     }
                 
-                for function_to_exec in to_exec.keys():
+                for function_to_exec in case_study.phases_to_execute.keys():
                     if function_to_exec == "decision_tree_training" and decision_tree_training.library!='sklearn':
                         res, tree_times = eval(function_to_exec)(*to_exec_args[function_to_exec])
                         times[n][function_to_exec] = tree_times
@@ -234,10 +234,10 @@ def calculate_accuracy_per_tree(decision_tree_path, expression, quantity_differe
     return int(res)
 
 
-def experiments_results_collectors(exp_foldername, exp_folder_complete_path, scenarios, gui_component_class, quantity_difference, decision_tree_filename, phases_to_execute, drop):
-    csv_filename = exp_folder_complete_path + sep + exp_foldername + "_results.csv"
+def experiments_results_collectors(case_study, decision_tree_filename):
+    csv_filename = case_study.exp_folder_complete_path + sep + case_study.exp_foldername + "_results.csv"
 
-    times_info_path = metadata_location + sep + exp_foldername + "_metadata" + sep
+    times_info_path = metadata_location + sep + case_study.exp_foldername + "_metadata" + sep
     preprocessed_log_filename = "preprocessed_dataset.csv"
 
     # print("Scenarios: " + str(scenarios))
@@ -253,21 +253,21 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
     # tree_training_time = []
     # tree_training_accuracy = []
     
-    decision_tree_algorithms = phases_to_execute['decision_tree_training']['algorithms'] if (('decision_tree_training' in phases_to_execute) and ('algorithms' in phases_to_execute['decision_tree_training'])) else None
+    decision_tree_algorithms = case_study.phases_to_execute['decision_tree_training']['algorithms'] if (('decision_tree_training' in case_study.phases_to_execute) and ('algorithms' in case_study.phases_to_execute['decision_tree_training'])) else None
 
     if decision_tree_algorithms:
         accuracy = {}
     else:
         accuracy = []
         
-    for scenario in tqdm(scenarios,
+    for scenario in tqdm(case_study.scenarios,
                          desc="Experiment results that have been processed"):
         sleep(.1)
-        scenario_path = exp_folder_complete_path + sep + scenario
+        scenario_path = case_study.exp_folder_complete_path + sep + scenario
         family_size_balance_variations = get_foldernames_as_list(
             scenario_path, sep)
-        if drop and drop in family_size_balance_variations:
-            family_size_balance_variations.remove(drop)
+        if case_study.drop and case_study.drop in family_size_balance_variations:
+            family_size_balance_variations.remove(case_study.drop)
         json_f = open(times_info_path+scenario+"-metainfo.json")
         times = json.load(json_f)
         for n in family_size_balance_variations:
@@ -286,7 +286,7 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
             # 1 == Balanced, 0 == Imbalanced
             balanced.append(1 if metainfo[2] == "Balanced" else 0)
             
-            for phase in phases_to_execute.keys():
+            for phase in case_study.phases_to_execute.keys():
                 if not (phase == 'decision_tree_training' and decision_tree_algorithms):
                     if phase in phases_info:
                         phases_info[phase].append(times_duration(times[n][phase]))
@@ -300,13 +300,13 @@ def experiments_results_collectors(exp_foldername, exp_folder_complete_path, sce
                 for alg in decision_tree_algorithms:
                     if (alg+'_accuracy') in accuracy:
                         accuracy[alg+'_tree_training_time'].append(times_duration(times[n]['decision_tree_training'][alg]))
-                        accuracy[alg+'_accuracy'].append(calculate_accuracy_per_tree(decision_tree_path, gui_component_class, quantity_difference, alg))
+                        accuracy[alg+'_accuracy'].append(calculate_accuracy_per_tree(decision_tree_path, case_study.gui_component_class, case_study.gui_quantity_difference, alg))
                     else:
                         accuracy[alg+'_tree_training_time'] = [times_duration(times[n]['decision_tree_training'][alg])]
-                        accuracy[alg+'_accuracy'] = [calculate_accuracy_per_tree(decision_tree_path, gui_component_class, quantity_difference, alg)]
+                        accuracy[alg+'_accuracy'] = [calculate_accuracy_per_tree(decision_tree_path, case_study.gui_component_class, case_study.gui_quantity_difference, alg)]
             else:
                 # Calculate level of accuracy
-                accuracy.append(calculate_accuracy_per_tree(decision_tree_path, gui_component_class, quantity_difference, None))
+                accuracy.append(calculate_accuracy_per_tree(decision_tree_path, case_study.gui_component_class, case_study.gui_quantity_difference, None))
     
     dict_results = {
         'family': family,
@@ -393,43 +393,23 @@ def case_study_generator(data):
     # scenarios_to_study = data['scenarios_to_study']
     # drop = data['drop']
     # special_colnames = data['special_colnames'] if ('special_colnames' in data) else None
-
-    mode = case_study.mode
-    exp_foldername = case_study.exp_foldername
-    phases_to_execute = case_study.phases_to_execute
-    decision_point_activity = case_study.decision_point_activity
-    exp_folder_complete_path = case_study.exp_folder_complete_path
-    gui_class_success_regex = case_study.gui_class_success_regex
-    gui_quantity_difference = case_study.gui_quantity_difference
-    scenarios_to_study = case_study.scenarios_to_study
-    drop = case_study.drop
-    special_colnames = case_study.special_colnames if case_study.special_colnames else None
     
-    
-    msg = exp_foldername + ' not executed'
+    msg = case_study.exp_foldername + ' not executed'
     executed = False
     
-    if not scenarios_to_study:
-        scenarios_to_study = get_foldernames_as_list(case_study.exp_folder_complete_path, sep)
+    if not case_study.scenarios_to_study:
+        case_study.scenarios_to_study = get_foldernames_as_list(case_study.exp_folder_complete_path, sep)
         
-    if mode == "generation" or mode == "both":
-        generate_case_study(exp_foldername, exp_folder_complete_path, decision_point_activity, scenarios_to_study, special_colnames, phases_to_execute)
-        # generate_case_study(case_study)
-        sg = exp_foldername + ' case study generated!'
+    if case_study.mode == "generation" or case_study.mode == "both":
+        generate_case_study(case_study)
+        sg = case_study.exp_foldername + ' case study generated!'
         executed = True
-    if mode == "results" or mode == "both":
+    if case_study.mode == "results" or case_study.mode == "both":
         # if exp_folder_complete_path and exp_folder_complete_path.find(sep) == -1:
         #     exp_folder_complete_path = exp_folder_complete_path + sep
         
-        experiments_results_collectors(exp_foldername,
-                                       exp_folder_complete_path,
-                                       scenarios_to_study,
-                                       gui_class_success_regex,
-                                       gui_quantity_difference, 
-                                       "decision_tree.log",
-                                       phases_to_execute,
-                                       drop)
-        msg = exp_foldername + ' case study results collected!'
+        experiments_results_collectors(case_study, "descision_tree.log")
+        msg = case_study.exp_foldername + ' case study results collected!'
         executed = True
     
     return msg, executed
