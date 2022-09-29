@@ -362,7 +362,7 @@ def experiments_results_collectors(case_study, decision_tree_filename):
 def case_study_generator(data):
     '''
     Mandatory Attributes: mode, exp_foldername, phases_to_execute, decision_point_activity, exp_folder_complete_path, gui_class_success_regex, gui_quantity_difference, scenarios_to_study, drop, special_colnames
-    Example values
+    Example values:
     version_name = "Advanced_10_30"
     mode = "generation"
     decision_point_activity = "D"
@@ -459,7 +459,6 @@ def interactive_terminal(phases_to_execute, gui_class_success_regex, gui_quantit
     else:
         check_npy_components_of_capture(None, None, True)
         
-        
 class CaseStudyView(generics.ListCreateAPIView):
     # permission_classes = [IsAuthenticatedUser]
     serializer_class = CaseStudySerializer
@@ -509,3 +508,18 @@ class CaseStudyView(generics.ListCreateAPIView):
         # return Response(result.data, status=status.HTTP_201_CREATED)
 
         return Response(response_content, status=st)
+
+class SpecificCaseStudyView(generics.ListCreateAPIView):
+    def get(self, request, case_study_id, *args, **kwargs):
+        st = status.HTTP_200_OK
+        try:
+            response_content = CaseStudy.objects.get(id=case_study_id)
+            serializer = CaseStudySerializer(instance=response_content)
+            response = serializer.data
+            return Response(response, status=st)
+
+        except Exception as e:
+            response = {f"Case Study with id {case_study_id} not found"}
+            st = status.HTTP_404_NOT_FOUND
+        
+        return Response(response, status=st)

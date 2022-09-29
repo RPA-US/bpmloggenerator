@@ -1,9 +1,9 @@
 from email.policy import default
 from xmlrpc.client import Boolean
 from django.db import models
-from jsonfield import JSONField
 from users.models import CustomUser
-from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.fields import ArrayField, JSONField
+from django.db.models import JSONField
 
 def default_phases_to_execute():
     return {'gui_components_detection': {}, 'classify_image_components': {}, 'extract_training_dataset': {}, 'decision_tree_training': {}}
