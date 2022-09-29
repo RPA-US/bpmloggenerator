@@ -19,6 +19,7 @@ from django.urls import include, path, re_path
 from django.shortcuts import render
 from rest_framework import routers
 import private_storage.urls
+import analyzer
 from django.views.decorators.csrf import csrf_exempt
 # from rest_framework.schemas import get_schema_view
 # from experiments import views
@@ -40,7 +41,8 @@ urlpatterns = [
     re_path(r"agosuirpa(?:.*)/?$", render_react),
     path(API_VERSION+'admin/', admin.site.urls),
     path(API_VERSION+'users/', include('users.urls')),
-    path(API_VERSION+'analyzer/', include('analyzer.urls')),
+    path(API_VERSION+'case_study/', include('analyzer.urls')),
+    path(API_VERSION+'case_study', analyzer.views.CaseStudyView.as_view(), name='run-case-study'),
     path(API_VERSION+'experiments/', include('experiments.urls')),
     path(API_VERSION+'wizard/', include('wizard.urls')),
     path(API_VERSION+'api-auth/', include("rest_framework.urls", namespace="rest_framework")),
