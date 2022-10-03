@@ -14,7 +14,6 @@ class CaseStudy(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     exp_foldername = models.CharField(max_length=255)
     exp_folder_complete_path = models.CharField(max_length=255)
-    mode = models.CharField(max_length=255)
     scenarios_to_study = models.CharField(max_length=255, null=True)
     drop = models.CharField(max_length=255, null=True)
     special_colnames = JSONField()

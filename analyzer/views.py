@@ -19,10 +19,11 @@ from rest_framework import generics, status, viewsets #, permissions
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from .models import CaseStudy, DecisionTreeTraining, ExtractTrainingDataset
-from .serializers import CaseStudySerializer
+from .serializers import CaseStudySerializer, DecisionTreeTrainingSerializer, ExtractTrainingDatasetSerializer
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.db import transaction
+from collections import OrderedDict
 
 
 def get_foldernames_as_list(path, sep):
@@ -91,9 +92,15 @@ def generate_case_study(case_study):
                 #     'extract_training_dataset': (decision_activity, param_path + n + sep + 'enriched_log.csv', param_path + n + sep, training_columns_to_ignore, special_colnames["Variant"], special_colnames["Case"], special_colnames["Screenshot"], special_colnames["Timestamp"], special_colnames["Activity"]),
                 #     'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep, decision_tree_library, decision_tree_mode, decision_tree_algorithms, decision_columns_to_ignore) # 'autogeneration' -> to plot tree automatically
                 #     }
-                    
-                decision_tree_training = DecisionTreeTraining(case_study.phases_to_execute['decision_tree_training'])
-                training_dataset = ExtractTrainingDataset(case_study.phases_to_execute['extract_training_dataset'])
+                
+                with transaction.atomic():
+                    serializer = DecisionTreeTrainingSerializer(data=case_study.phases_to_execute['decision_tree_training'])
+                    serializer.is_valid(raise_exception=True)
+                    decision_tree_training_params = serializer.save()
+
+                    serializer = ExtractTrainingDatasetSerializer(data=case_study.phases_to_execute['extract_training_dataset'])
+                    serializer.is_valid(raise_exception=True)
+                    training_dataset = serializer.save()
 
                 to_exec_args = {
                     'gui_components_detection': (param_path+n+sep+'log.csv', 
@@ -109,12 +116,16 @@ def generate_case_study(case_study):
                                                   param_path+n+sep+'enriched_log.csv',
                                                   case_study.special_colnames["Screenshot"],
                                                   False),
-                    'extract_training_dataset': (case_study.decision_point_activity, param_path + n + sep + 'enriched_log.csv', param_path + n + sep, training_dataset.columns_to_ignore, case_study.special_colnames["Variant"], case_study.special_colnames["Case"], case_study.special_colnames["Screenshot"], case_study.special_colnames["Timestamp"], case_study.special_colnames["Activity"]),
-                    'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep, decision_tree_training) # 'autogeneration' -> to plot tree automatically
+                    'extract_training_dataset': (case_study.decision_point_activity, param_path + n + sep + 'enriched_log.csv', 
+                                                param_path + n + sep, training_dataset.columns_to_ignore, 
+                                                case_study.special_colnames["Variant"], case_study.special_colnames["Case"], 
+                                                case_study.special_colnames["Screenshot"], case_study.special_colnames["Timestamp"], 
+                                                case_study.special_colnames["Activity"]),
+                    'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep, decision_tree_training_params) # 'autogeneration' -> to plot tree automatically
                     }
                 
                 for function_to_exec in case_study.phases_to_execute.keys():
-                    if function_to_exec == "decision_tree_training" and decision_tree_training.library!='sklearn':
+                    if function_to_exec == "decision_tree_training" and decision_tree_training_params.library!='sklearn':
                         res, tree_times = eval(function_to_exec)(*to_exec_args[function_to_exec])
                         times[n][function_to_exec] = tree_times
                     else:
@@ -260,7 +271,7 @@ def experiments_results_collectors(case_study, decision_tree_filename):
     else:
         accuracy = []
         
-    for scenario in tqdm(case_study.scenarios,
+    for scenario in tqdm(case_study.scenarios_to_study,
                          desc="Experiment results that have been processed"):
         sleep(.1)
         scenario_path = case_study.exp_folder_complete_path + sep + scenario
@@ -379,6 +390,9 @@ def case_study_generator(data):
     scenarios = None # ["scenario_10","scenario_11","scenario_12","scenario_13"]
     '''
     with transaction.atomic():
+        if not data['scenarios_to_study']:
+            data['scenarios_to_study'] = get_foldernames_as_list(data['exp_folder_complete_path'], sep)
+
         serializer = CaseStudySerializer(data=data)
         serializer.is_valid(raise_exception=True)
         case_study = serializer.save()
@@ -396,21 +410,21 @@ def case_study_generator(data):
     
     msg = case_study.exp_foldername + ' not executed'
     executed = False
-    
-    if not case_study.scenarios_to_study:
-        case_study.scenarios_to_study = get_foldernames_as_list(case_study.exp_folder_complete_path, sep)
         
-    if case_study.mode == "generation" or case_study.mode == "both":
-        generate_case_study(case_study)
-        sg = case_study.exp_foldername + ' case study generated!'
-        executed = True
-    if case_study.mode == "results" or case_study.mode == "both":
-        # if exp_folder_complete_path and exp_folder_complete_path.find(sep) == -1:
-        #     exp_folder_complete_path = exp_folder_complete_path + sep
+    generate_case_study(case_study)
+    msg = case_study.exp_foldername + ' case study generated!'
+    executed = True
+    # if case_study.mode == "generation" or case_study.mode == "both":
+    #     generate_case_study(case_study)
+    #     msg = case_study.exp_foldername + ' case study generated!'
+    #     executed = True
+    # if case_study.mode == "results" or case_study.mode == "both":
+    #     # if exp_folder_complete_path and exp_folder_complete_path.find(sep) == -1:
+    #     #     exp_folder_complete_path = exp_folder_complete_path + sep
         
-        experiments_results_collectors(case_study, "descision_tree.log")
-        msg = case_study.exp_foldername + ' case study results collected!'
-        executed = True
+    #     experiments_results_collectors(case_study, "descision_tree.log")
+    #     msg = case_study.exp_foldername + ' case study results collected!'
+    #     executed = True
     
     return msg, executed
 
@@ -476,11 +490,11 @@ class CaseStudyView(generics.ListCreateAPIView):
         else:
             execute_case_study = True
             try:
-                if not (case_study_serialized.data['mode'] in ['generation', 'results', 'both']):
-                    response_content = {"message": "mode must be one of the following options: generation, results, both."}
-                    st = status.HTTP_422_UNPROCESSABLE_ENTITY 
-                    execute_case_study = False
-                    return Response(response_content, status=st)
+                # if not (case_study_serialized.data['mode'] in ['generation', 'results', 'both']):
+                #     response_content = {"message": "mode must be one of the following options: generation, results, both."}
+                #     st = status.HTTP_422_UNPROCESSABLE_ENTITY 
+                #     execute_case_study = False
+                #     return Response(response_content, status=st)
                         
                 if not isinstance(case_study_serialized.data['phases_to_execute'], dict):
                     response_content = {"message": "phases_to_execute must be of type dict!!!!! and must be composed by phases contained in ['gui_components_detection','classify_image_components','extract_training_dataset','decision_tree_training']"}
@@ -513,10 +527,24 @@ class SpecificCaseStudyView(generics.ListCreateAPIView):
     def get(self, request, case_study_id, *args, **kwargs):
         st = status.HTTP_200_OK
         try:
-            response_content = CaseStudy.objects.get(id=case_study_id)
-            serializer = CaseStudySerializer(instance=response_content)
+            case_study = CaseStudy.objects.get(id=case_study_id)
+            serializer = CaseStudySerializer(instance=case_study)
             response = serializer.data
             return Response(response, status=st)
+
+        except Exception as e:
+            response = {f"Case Study with id {case_study_id} not found"}
+            st = status.HTTP_404_NOT_FOUND
+        
+        return Response(response, status=st)
+
+class ResultCaseStudyView(generics.ListCreateAPIView):
+    def get(self, request, case_study_id, *args, **kwargs):
+        st = status.HTTP_200_OK
+        try:
+            case_study = CaseStudy.objects.get(id=case_study_id)
+            experiments_results_collectors(case_study, "descision_tree.log")
+            response = case_study.exp_foldername + ' case study results collected!'
 
         except Exception as e:
             response = {f"Case Study with id {case_study_id} not found"}
