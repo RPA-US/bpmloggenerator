@@ -101,8 +101,8 @@ def generate_case_study(case_study):
                                                  case_study.gui_components_detection.add_words_columns,
                                                  case_study.gui_components_detection.overwrite_npy) 
                                                  if case_study.gui_components_detection  else None,
-                    'classify_image_components': ('resources'+sep+'models'+sep+'model.json',
-                                                  'resources'+sep+'models'+sep+'model.h5',
+                    'classify_image_components': (case_study.classify_image_components.model_json_file_name,
+                                                  case_study.classify_image_components.model_weights,
                                                   param_path + n + sep + 'components_npy' + sep,
                                                   param_path+n+sep + 'log.csv',
                                                   param_path+n+sep+'enriched_log.csv',
@@ -263,7 +263,7 @@ def experiments_results_collectors(case_study, decision_tree_filename):
     # tree_training_time = []
     # tree_training_accuracy = []
     
-    decision_tree_algorithms = case_study.phases_to_execute['decision_tree_training']['algorithms'] if (('decision_tree_training' in case_study.phases_to_execute) and ('algorithms' in case_study.phases_to_execute['decision_tree_training'])) else None
+    decision_tree_algorithms = case_study.decision_tree_training.algorithms if (case_study.decision_tree_training and case_study.decision_tree_training.algorithms) else None
 
     if decision_tree_algorithms:
         accuracy = {}
@@ -296,7 +296,9 @@ def experiments_results_collectors(case_study, decision_tree_filename):
             # 1 == Balanced, 0 == Imbalanced
             balanced.append(1 if metainfo[2] == "Balanced" else 0)
             
-            for phase in case_study.phases_to_execute.keys():
+            phases = [phase for phase in ["gui_components_detection", "classify_image_components", 
+                      "extract_training_dataset", "decision_tree_training"] if getattr(case_study, phase) is not None]
+            for phase in phases:
                 if not (phase == 'decision_tree_training' and decision_tree_algorithms):
                     if phase in phases_info:
                         phases_info[phase].append(times_duration(times[n][phase]))
@@ -310,13 +312,13 @@ def experiments_results_collectors(case_study, decision_tree_filename):
                 for alg in decision_tree_algorithms:
                     if (alg+'_accuracy') in accuracy:
                         accuracy[alg+'_tree_training_time'].append(times_duration(times[n]['decision_tree_training'][alg]))
-                        accuracy[alg+'_accuracy'].append(calculate_accuracy_per_tree(decision_tree_path, case_study.gui_component_class, case_study.gui_quantity_difference, alg))
+                        accuracy[alg+'_accuracy'].append(calculate_accuracy_per_tree(decision_tree_path, case_study.gui_class_success_regex, case_study.gui_quantity_difference, alg))
                     else:
                         accuracy[alg+'_tree_training_time'] = [times_duration(times[n]['decision_tree_training'][alg])]
-                        accuracy[alg+'_accuracy'] = [calculate_accuracy_per_tree(decision_tree_path, case_study.gui_component_class, case_study.gui_quantity_difference, alg)]
+                        accuracy[alg+'_accuracy'] = [calculate_accuracy_per_tree(decision_tree_path, case_study.gui_class_success_regex, case_study.gui_quantity_difference, alg)]
             else:
                 # Calculate level of accuracy
-                accuracy.append(calculate_accuracy_per_tree(decision_tree_path, case_study.gui_component_class, case_study.gui_quantity_difference, None))
+                accuracy.append(calculate_accuracy_per_tree(decision_tree_path, case_study.gui_class_success_regex, case_study.gui_quantity_difference, None))
     
     dict_results = {
         'family': family,
@@ -419,7 +421,6 @@ def case_study_generator(data):
                     pass
 
         case_study.save()
-
     
     # mode = data['mode']
     # exp_foldername = data['exp_foldername']
