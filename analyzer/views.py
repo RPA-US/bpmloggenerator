@@ -19,7 +19,7 @@ from rest_framework import generics, status, viewsets #, permissions
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from .models import CaseStudy, DecisionTreeTraining, ExtractTrainingDataset
-from .serializers import CaseStudySerializer, DecisionTreeTrainingSerializer, ExtractTrainingDatasetSerializer
+from .serializers import CaseStudySerializer, ClassifyImageComponentsSerializer, DecisionTreeTrainingSerializer, ExtractTrainingDatasetSerializer, GUIComponentDetectionSerializer
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.db import transaction
@@ -65,7 +65,7 @@ def generate_case_study(case_study):
         sleep(.1)
         print("\nActual Scenario: " + str(scenario))
         param_path = case_study.exp_folder_complete_path + sep + scenario + sep
-        if case_study.phases_to_execute and len(case_study.phases_to_execute) > 0:
+        if case_study.gui_components_detection or case_study.classify_image_components or case_study.extract_training_dataset or case_study.decision_tree_training:
             for n in foldername_logs_with_different_size_balance:
                 times[n] = {}
                 
@@ -92,40 +92,39 @@ def generate_case_study(case_study):
                 #     'extract_training_dataset': (decision_activity, param_path + n + sep + 'enriched_log.csv', param_path + n + sep, training_columns_to_ignore, special_colnames["Variant"], special_colnames["Case"], special_colnames["Screenshot"], special_colnames["Timestamp"], special_colnames["Activity"]),
                 #     'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep, decision_tree_library, decision_tree_mode, decision_tree_algorithms, decision_columns_to_ignore) # 'autogeneration' -> to plot tree automatically
                 #     }
-                
-                with transaction.atomic():
-                    serializer = DecisionTreeTrainingSerializer(data=case_study.phases_to_execute['decision_tree_training'])
-                    serializer.is_valid(raise_exception=True)
-                    decision_tree_training_params = serializer.save()
-
-                    serializer = ExtractTrainingDatasetSerializer(data=case_study.phases_to_execute['extract_training_dataset'])
-                    serializer.is_valid(raise_exception=True)
-                    training_dataset = serializer.save()
 
                 to_exec_args = {
                     'gui_components_detection': (param_path+n+sep+'log.csv', 
                                                  param_path+n+sep,
                                                  case_study.special_colnames,
-                                                 case_study.phases_to_execute['gui_components_detection']['eyetracking_log_filename'],
-                                                 case_study.phases_to_execute['gui_components_detection']['add_words_columns'],
-                                                 case_study.phases_to_execute['gui_components_detection']['overwrite_npy']),
+                                                 case_study.gui_components_detection.eyetracking_log_filename,
+                                                 case_study.gui_components_detection.add_words_columns,
+                                                 case_study.gui_components_detection.overwrite_npy) 
+                                                 if case_study.gui_components_detection  else None,
                     'classify_image_components': ('resources'+sep+'models'+sep+'model.json',
                                                   'resources'+sep+'models'+sep+'model.h5',
                                                   param_path + n + sep + 'components_npy' + sep,
                                                   param_path+n+sep + 'log.csv',
                                                   param_path+n+sep+'enriched_log.csv',
                                                   case_study.special_colnames["Screenshot"],
-                                                  False),
+                                                  False) 
+                                                  if case_study.classify_image_components  else None,
                     'extract_training_dataset': (case_study.decision_point_activity, param_path + n + sep + 'enriched_log.csv', 
-                                                param_path + n + sep, training_dataset.columns_to_ignore, 
+                                                param_path + n + sep, case_study.extract_training_dataset.columns_to_ignore, 
                                                 case_study.special_colnames["Variant"], case_study.special_colnames["Case"], 
                                                 case_study.special_colnames["Screenshot"], case_study.special_colnames["Timestamp"], 
-                                                case_study.special_colnames["Activity"]),
-                    'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep, decision_tree_training_params) # 'autogeneration' -> to plot tree automatically
+                                                case_study.special_colnames["Activity"]) 
+                                                if case_study.extract_training_dataset  else None,
+                    'decision_tree_training': (param_path+n+sep + 'preprocessed_dataset.csv', param_path+n+sep,
+                                                case_study.decision_tree_training.library,
+                                                case_study.decision_tree_training.mode,
+                                                case_study.decision_tree_training.algorithms,
+                                                case_study.decision_tree_training.columns_to_ignore) 
+                                                if case_study.decision_tree_training  else None # 'autogeneration' -> to plot tree automatically
                     }
                 
-                for function_to_exec in case_study.phases_to_execute.keys():
-                    if function_to_exec == "decision_tree_training" and decision_tree_training_params.library!='sklearn':
+                for function_to_exec in [key for key in to_exec_args.keys() if to_exec_args[key] is not None]:
+                    if function_to_exec == "decision_tree_training" and case_study.decision_tree_training.library!='sklearn':
                         res, tree_times = eval(function_to_exec)(*to_exec_args[function_to_exec])
                         times[n][function_to_exec] = tree_times
                     else:
@@ -390,12 +389,37 @@ def case_study_generator(data):
     scenarios = None # ["scenario_10","scenario_11","scenario_12","scenario_13"]
     '''
     with transaction.atomic():
+
         if not data['scenarios_to_study']:
             data['scenarios_to_study'] = get_foldernames_as_list(data['exp_folder_complete_path'], sep)
+                
+        cs_serializer = CaseStudySerializer(data=data) 
+        cs_serializer.is_valid(raise_exception=True)
+        case_study = cs_serializer.save()
 
-        serializer = CaseStudySerializer(data=data)
-        serializer.is_valid(raise_exception=True)
-        case_study = serializer.save()
+        for phase in data['phases_to_execute']:
+            match phase:
+                case "gui_components_detection":
+                    serializer = GUIComponentDetectionSerializer(data=data['phases_to_execute'][phase])
+                    serializer.is_valid()
+                    case_study.gui_components_detection = serializer.save()
+                case "classify_image_components":
+                    serializer = ClassifyImageComponentsSerializer(data=data['phases_to_execute'][phase])
+                    serializer.is_valid()
+                    case_study.classify_image_components = serializer.save()
+                case "extract_training_dataset":
+                    serializer = ExtractTrainingDatasetSerializer(data=data['phases_to_execute'][phase])
+                    serializer.is_valid()
+                    case_study.extract_training_dataset = serializer.save()
+                case "decision_tree_training":
+                    serializer = DecisionTreeTrainingSerializer(data=data['phases_to_execute'][phase])
+                    serializer.is_valid()
+                    case_study.decision_tree_training = serializer.save()
+                case _:
+                    pass
+
+        case_study.save()
+
     
     # mode = data['mode']
     # exp_foldername = data['exp_foldername']
