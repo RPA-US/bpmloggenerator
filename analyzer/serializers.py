@@ -4,12 +4,12 @@ from .models import CaseStudy, ClassifyImageComponents, DecisionTreeTraining, Ex
 class GUIComponentDetectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = GUIComponentDetection
-        fields = '__all__' # ['eyetracking_log_filename', 'add_words_columns', 'overwrite_npy']
+        fields = '__all__' # ['eyetracking_log_filename', 'add_words_columns', 'overwrite_npy', 'algorithm']
 
 class ClassifyImageComponentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClassifyImageComponents
-        fields = ['model_json_file_name', 'model_weights']
+        fields = '__all__' # ['model_json_file_name', 'model_weights', 'algorithm']
 
 class ExtractTrainingDatasetSerializer(serializers.ModelSerializer):
     class Meta:

@@ -23,10 +23,12 @@ class GUIComponentDetection(models.Model):
     eyetracking_log_filename =  models.CharField(max_length=255, default="eyetracking_log.csv")
     add_words_columns = models.BooleanField(default=False)
     overwrite_npy = models.BooleanField(default=False)
+    algorithm = models.CharField(max_length=25, default='legacy')
 
 class ClassifyImageComponents(models.Model):
     model_json_file_name = models.CharField(max_length=255, blank=True, default="resources/models/model.json")
     model_weights = models.CharField(max_length=255, default="resources/models/custom-v2.h5")
+    algorithm = models.CharField(max_length=25, default='legacy')
 
 class ExtractTrainingDataset(models.Model):
     columns_to_ignore = ArrayField(models.CharField(max_length=25), default=get_default_extract_training_columns_to_ignore)

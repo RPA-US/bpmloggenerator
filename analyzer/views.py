@@ -13,7 +13,7 @@ from datetime import datetime
 from agosuirpa.system_configuration import times_calculation_mode, metadata_location, sep, decision_foldername
 from featureextraction.views import check_npy_components_of_capture
 from decisiondiscovery.views import decision_tree_training, extract_training_dataset
-from featureextraction.views import gui_components_detection, classify_image_components
+from featureextraction.views import gui_components_detection, classify_image_components, uied_classify_image_components
 # CaseStudyView
 from rest_framework import generics, status, viewsets #, permissions
 from rest_framework.response import Response
@@ -99,7 +99,8 @@ def generate_case_study(case_study):
                                                  case_study.special_colnames,
                                                  case_study.gui_components_detection.eyetracking_log_filename,
                                                  case_study.gui_components_detection.add_words_columns,
-                                                 case_study.gui_components_detection.overwrite_npy) 
+                                                 case_study.gui_components_detection.overwrite_npy,
+                                                 case_study.gui_components_detection.algorithm) 
                                                  if case_study.gui_components_detection  else None,
                     'classify_image_components': (case_study.classify_image_components.model_json_file_name,
                                                   case_study.classify_image_components.model_weights,
@@ -127,6 +128,18 @@ def generate_case_study(case_study):
                     if function_to_exec == "decision_tree_training" and case_study.decision_tree_training.library!='sklearn':
                         res, tree_times = eval(function_to_exec)(*to_exec_args[function_to_exec])
                         times[n][function_to_exec] = tree_times
+                    elif function_to_exec == "classify_image_components":
+                        match case_study.classify_image_components.algorithm:
+                            case "legacy":
+                                times[n][function_to_exec] = {"start": time.time()}
+                                output = classify_image_components(*to_exec_args[function_to_exec])
+                                times[n][function_to_exec]["finish"] = time.time()
+                            case "uied":
+                                times[n][function_to_exec] = {"start": time.time()}
+                                output = uied_classify_image_components(*to_exec_args[function_to_exec])
+                                times[n][function_to_exec]["finish"] = time.time()
+                            case _:
+                                pass
                     else:
                         times[n][function_to_exec] = {"start": time.time()}
                         output = eval(function_to_exec)(*to_exec_args[function_to_exec])
@@ -526,18 +539,32 @@ class CaseStudyView(generics.ListCreateAPIView):
                     st = status.HTTP_422_UNPROCESSABLE_ENTITY 
                     execute_case_study = False
                     return Response(response_content, status=st)
-                        
+
+                if not case_study_serialized.data['phases_to_execute']['gui_components_detection']['algorithm'] in ["legacy", "uied"]:
+                    response_content = {"message": "Component Detection algorithm must be one of ['legacy', 'uied']"}
+                    st = status.HTTP_422_UNPROCESSABLE_ENTITY 
+                    execute_case_study = False
+                    return Response(response_content, status=st)
+
+                if not case_study_serialized.data['phases_to_execute']['classify_image_components']['algorithm'] in ["legacy", "uied"]:
+                    response_content = {"message": "Image Classification algorithm must be one of ['legacy', 'uied']"}
+                    st = status.HTTP_422_UNPROCESSABLE_ENTITY 
+                    execute_case_study = False
+                    return Response(response_content, status=st)
+
                 for phase in dict(case_study_serialized.data['phases_to_execute']).keys():
                     if not(phase in ['gui_components_detection','classify_image_components','extract_training_dataset','decision_tree_training']):
                         response_content = {"message": "phases_to_execute must be composed by phases contained in ['gui_components_detection','classify_image_components','extract_training_dataset','decision_tree_training']"}
                         st = status.HTTP_422_UNPROCESSABLE_ENTITY 
                         execute_case_study = False
                         return Response(response_content, status=st)
+
                 if execute_case_study:
                     generator_msg, generator_success = case_study_generator(case_study_serialized.data)
                     response_content = {"message": generator_msg}
                     if not generator_success:
                         st = status.HTTP_422_UNPROCESSABLE_ENTITY 
+
             except Exception as e:
                 response_content = {"message": "Some of atributes are invalid: " + str(e) }
                 st = status.HTTP_422_UNPROCESSABLE_ENTITY 
