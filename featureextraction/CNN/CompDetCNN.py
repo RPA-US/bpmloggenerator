@@ -7,8 +7,8 @@ from featureextraction.CNN.ConfigCNN import Config
 from tqdm import tqdm
 
 class CompDetCNN:
-    def __init__(self, cnn_type="custom-v2"):
-        cfg = Config(cnn_type)
+    def __init__(self, model_path, model_classes, model_shape):
+        cfg = Config(model_path, model_classes, model_shape)
         self.model = load_model(cfg.CNN_PATH)
         self.class_map = cfg.element_class
         self.image_shape = cfg.image_shape

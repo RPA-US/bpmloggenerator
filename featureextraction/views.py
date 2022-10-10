@@ -1,5 +1,6 @@
 # Components detection
 from genericpath import exists
+import json
 import numpy as np
 import keras_ocr
 import cv2
@@ -409,7 +410,8 @@ def pad(img, h, w):
     left_pad = np.floor((w - img.shape[1]) / 2).astype(np.uint16)
     return np.copy(np.pad(img, ((top_pad, bottom_pad), (left_pad, right_pad), (0, 0)), mode='constant', constant_values=0))
 
-def uied_classify_image_components(model_path="resources/models/model.json", param_model_weights="resources/models/custom-v2.h5",  
+def uied_classify_image_components(model_path="resources/models/model.json", param_model_weights="resources/models/custom-v2.h5", 
+                            model_properties="resources/models/custom-v2-classes.json",
                             param_images_root="resources/screenshots/components_npy/", param_log_path="resources/log.csv", 
                             enriched_log_output_path="resources/enriched_log_feature_extracted.csv", screenshot_colname="Screenshot", 
                             rewrite_log=False):
@@ -429,11 +431,16 @@ def uied_classify_image_components(model_path="resources/models/model.json", par
     :type param_log_path: str
     """
     if not os.path.exists(enriched_log_output_path) or rewrite_log:
-        
+        # Load the model properties from the json
+        f = json.load(open(model_properties,))
+        classes = f["classes"]
+        shape = tuple(f["shape"])
+
         # Load the ML classifier model for the crops 
         # Default model is custom-v2, a model creating by using transfer learning from UIED's generalized model
         classifier = {}
-        classifier['Elements'] = CompDetCNN(param_model_weights)
+        print(type(shape))
+        classifier['Elements'] = CompDetCNN(param_model_weights, classes, shape)
         print("\n\nLoaded ML model from disk\n")
 
         """
@@ -513,7 +520,7 @@ def uied_classify_image_components(model_path="resources/models/model.json", par
             enriched_log_output_path)
     return log_enriched
 
-def classify_image_components(param_json_file_name="resources/models/model.json", param_model_weights="resources/models/model.h5", param_images_root="resources/screenshots/components_npy/", param_log_path="resources/log.csv", enriched_log_output_path="resources/enriched_log_feature_extracted.csv", screenshot_colname="Screenshot", rewrite_log=False):
+def classify_image_components(param_json_file_name="resources/models/model.json", param_model_weights="resources/models/model.h5", model_properties="resources/models/custom-v2-classes.json", param_images_root="resources/screenshots/components_npy/", param_log_path="resources/log.csv", enriched_log_output_path="resources/enriched_log_feature_extracted.csv", screenshot_colname="Screenshot", rewrite_log=False):
     """
     Con esta función clasificamos los componentes recortados de cada una de las capturas para posteriormente añadir al log
     14 columnas. Estas corresponden a cada una de las clases en las que se puede clasificar un componente GUI. Los valores 

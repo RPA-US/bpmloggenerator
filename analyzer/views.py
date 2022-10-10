@@ -104,6 +104,7 @@ def generate_case_study(case_study):
                                                  if case_study.gui_components_detection  else None,
                     'classify_image_components': (case_study.classify_image_components.model_json_file_name,
                                                   case_study.classify_image_components.model_weights,
+                                                  case_study.classify_image_components.model_properties,
                                                   param_path + n + sep + 'components_npy' + sep,
                                                   param_path+n+sep + 'log.csv',
                                                   param_path+n+sep+'enriched_log.csv',

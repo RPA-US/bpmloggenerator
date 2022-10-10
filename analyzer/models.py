@@ -28,6 +28,7 @@ class GUIComponentDetection(models.Model):
 class ClassifyImageComponents(models.Model):
     model_json_file_name = models.CharField(max_length=255, blank=True, default="resources/models/model.json")
     model_weights = models.CharField(max_length=255, default="resources/models/custom-v2.h5")
+    model_properties = models.CharField(max_length=255, default="resources/models/custom-v2-classes.json")
     algorithm = models.CharField(max_length=25, default='legacy')
 
 class ExtractTrainingDataset(models.Model):

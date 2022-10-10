@@ -9,7 +9,7 @@ class GUIComponentDetectionSerializer(serializers.ModelSerializer):
 class ClassifyImageComponentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClassifyImageComponents
-        fields = '__all__' # ['model_json_file_name', 'model_weights', 'algorithm']
+        fields = '__all__' # ['model_json_file_name', 'model_weights', 'model_properties', 'algorithm']
 
 class ExtractTrainingDatasetSerializer(serializers.ModelSerializer):
     class Meta:
