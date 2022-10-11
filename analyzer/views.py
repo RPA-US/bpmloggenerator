@@ -106,6 +106,7 @@ def generate_case_study(case_study):
                                                   case_study.classify_image_components.model_weights,
                                                   case_study.classify_image_components.model_properties,
                                                   param_path + n + sep + 'components_npy' + sep,
+                                                  param_path + n + sep + 'components_json' + sep,
                                                   param_path+n+sep + 'log.csv',
                                                   param_path+n+sep+'enriched_log.csv',
                                                   case_study.special_colnames["Screenshot"],

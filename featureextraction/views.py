@@ -19,7 +19,7 @@ from sklearn.linear_model import enet_path
 import tensorflow as tf
 from keras.models import model_from_json
 from django.core.exceptions import ValidationError
-from agosuirpa.system_configuration import cropping_threshold
+from agosuirpa.system_configuration import cropping_threshold, sep
 from agosuirpa.system_configuration import gaze_analysis_threshold
 import pickle
 from featureextraction.CNN.CompDetCNN import CompDetCNN
@@ -88,6 +88,7 @@ def get_ocr_image(pipeline, param_img_root, images_input):
     #     keras_ocr.tools.drawAnnotations(image=image, predictions=predictions, ax=ax)
     return prediction_groups
 
+
 def nesting_inspection(org, grey, compos, ffl_block):
     '''
     Inspect all big compos through block division by flood-fill
@@ -99,10 +100,12 @@ def nesting_inspection(org, grey, compos, ffl_block):
         if compo.height > 50:
             replace = False
             clip_grey = compo.compo_clipping(grey)
-            n_compos = utils.nested_components_detection(clip_grey, org, grad_thresh=ffl_block, show=False)
+            n_compos = utils.nested_components_detection(
+                clip_grey, org, grad_thresh=ffl_block, show=False)
 
             for comp in n_compos:
-                comp.compo_relative_position(compo.bbox.col_min, compo.bbox.row_min)
+                comp.compo_relative_position(
+                    compo.bbox.col_min, compo.bbox.row_min)
 
             for n_compo in n_compos:
                 if n_compo.redundant:
@@ -113,17 +116,18 @@ def nesting_inspection(org, grey, compos, ffl_block):
                 nesting_compos += n_compos
     return nesting_compos
 
-def get_uied_gui_components_crops(input_imgs_path, image_names, img_index, output_root):
 
-    resize_by_height=800
+def get_uied_gui_components_crops(input_imgs_path, image_names, img_index, path_to_save_components_json):
+
+    resize_by_height = 800
     input_img_path = pjoin(input_imgs_path, image_names[img_index])
 
     uied_params = {
         'min-grad': 3,
         'ffl-block': 5,
-        'min-ele-area': 25, 
+        'min-ele-area': 25,
         'merge-contained-ele': True,
-        'max-word-inline-gap': 4, 
+        'max-word-inline-gap': 4,
         'max-line-gap': 4
     }
 
@@ -137,10 +141,12 @@ def get_uied_gui_components_crops(input_imgs_path, image_names, img_index, outpu
 
     # *** Step 2 *** element detection
     utils.rm_line(binary, show=False, wait_key=0)
-    uicompos = utils.component_detection(binary, min_obj_area=int(uied_params['min-ele-area']))
+    uicompos = utils.component_detection(
+        binary, min_obj_area=int(uied_params['min-ele-area']))
 
     # *** Step 3 *** results refinement
-    uicompos = utils.compo_filter(uicompos, min_area=int(uied_params['min-ele-area']), img_shape=binary.shape)
+    uicompos = utils.compo_filter(uicompos, min_area=int(
+        uied_params['min-ele-area']), img_shape=binary.shape)
     uicompos = utils.merge_intersected_compos(uicompos)
     utils.compo_block_recognition(binary, uicompos)
     if uied_params['merge-contained-ele']:
@@ -149,7 +155,8 @@ def get_uied_gui_components_crops(input_imgs_path, image_names, img_index, outpu
     utils.compos_containment(uicompos)
 
     # *** Step 4 ** nesting inspection: check if big compos have nesting element
-    uicompos += nesting_inspection(org, grey, uicompos, ffl_block=uied_params['ffl-block'])
+    uicompos += nesting_inspection(org, grey,
+                                   uicompos, ffl_block=uied_params['ffl-block'])
     utils.compos_update(uicompos, org.shape)
 
     # ##########################
@@ -160,21 +167,21 @@ def get_uied_gui_components_crops(input_imgs_path, image_names, img_index, outpu
     utils.compos_update(uicompos, org.shape)
 
     clips = [compo.compo_clipping(org) for compo in uicompos]
-    
-    return clips
+
+    return clips, uicompos
+
 
 def get_gui_components_crops(param_img_root, image_names, texto_detectado_ocr, path_to_save_bordered_images, add_words_columns, img_index):
     words = {}
     words_columns_names = {}
-    
-    
+
     # if gaze_analysis:
     #     gaze_point_x = gaze_analysis['gaze_point_x'][img_index]
     #     gaze_point_y = gaze_analysis['gaze_point_y'][img_index]
     #     duration = gaze_analysis['duration'][img_index]
     # else:
     #     gaze_point_x = False
-    
+
     image_path = param_img_root + image_names[img_index]
     # Leemos la imagen
     img = cv2.imread(image_path)
@@ -239,7 +246,7 @@ def get_gui_components_crops(param_img_root, image_names, texto_detectado_ocr, p
 
     # Buscamos los contornos
     (contornos, _) = cv2.findContours(canny.copy(),
-                                    cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                                      cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     # print("Number of GUI components detected: ", len(contornos), "\n")
 
     # y los dibujamos
@@ -278,8 +285,10 @@ def get_gui_components_crops(param_img_root, image_names, texto_detectado_ocr, p
             y_max = max(intervalo_y[k])+cropping_threshold
             x_min = min(intervalo_x[k])-cropping_threshold
             x_max = max(intervalo_x[k])+cropping_threshold
-            solapa_y = (y_min <= y <= y_max) or (y_min <= h <= y_max) #and max([y-y_min, y_max-y, h-y_min, y_max-h])<=surrounding_max_diff
-            solapa_x = (x_min <= x <= x_max) or (x_min <= w <= x_max) #and max([x-x_min, x_max-x, w-x_min, x_max-w])<=surrounding_max_diff
+            # and max([y-y_min, y_max-y, h-y_min, y_max-h])<=surrounding_max_diff
+            solapa_y = (y_min <= y <= y_max) or (y_min <= h <= y_max)
+            # and max([x-x_min, x_max-x, w-x_min, x_max-w])<=surrounding_max_diff
+            solapa_x = (x_min <= x <= x_max) or (x_min <= w <= x_max)
             if (solapa_y and solapa_x):
                 if (lista_para_no_recortar_dos_veces_mismo_gui.count(k) == 0):
                     lista_para_no_recortar_dos_veces_mismo_gui.append(k)
@@ -299,23 +308,26 @@ def get_gui_components_crops(param_img_root, image_names, texto_detectado_ocr, p
         # recortes.append(crop_img)
         # else:
         # Si el componente GUI solapa con el cuadro de texto, cortamos el cuadro de texto a partir de las coordenadas de sus esquinas
-        coincidence_with_attention_point = True #gaze_point_x and gaze_point_x >= x and gaze_point_x <= w and gaze_point_y >= y and gaze_point_y <= h and duration >= gaze_analysis_threshold
+        # gaze_point_x and gaze_point_x >= x and gaze_point_x <= w and gaze_point_y >= y and gaze_point_y <= h and duration >= gaze_analysis_threshold
+        coincidence_with_attention_point = True
         if (condicion_recorte and coincidence_with_attention_point):
             crop_img = img[y:h, x:w]
             recortes.append(crop_img)
             text_or_not_text.append(abs(no_solapa-1))
-            
+
     return (recortes, text_or_not_text, words)
 
 
 def gaze_events_associated_to_event_time_range(eyetracking_log, colnames, timestamp_start, timestamp_end, last_upper_limit):
-    eyetracking_log_timestamp = eyetracking_log[colnames['eyetracking_recording_timestamp']] # timestamp starts from 0
+    # timestamp starts from 0
+    eyetracking_log_timestamp = eyetracking_log[colnames['eyetracking_recording_timestamp']]
     if eyetracking_log_timestamp[0] != 0:
-        raise ValidationError("Recording timestamp in eyetracking log must starts from 0")
-    
+        raise ValidationError(
+            "Recording timestamp in eyetracking log must starts from 0")
+
     lower_limit = 0
     upper_limit = 0
-        
+
     if timestamp_end != "LAST":
         for index, time in enumerate(eyetracking_log_timestamp):
             if time > timestamp_start:
@@ -326,8 +338,9 @@ def gaze_events_associated_to_event_time_range(eyetracking_log, colnames, timest
     else:
         upper_limit = len(eyetracking_log_timestamp)
         lower_limit = last_upper_limit
-        
-    return eyetracking_log.loc[lower_limit:upper_limit,[colnames['eyetracking_gaze_point_x'],colnames['eyetracking_gaze_point_y']]], upper_limit
+
+    return eyetracking_log.loc[lower_limit:upper_limit, [colnames['eyetracking_gaze_point_x'], colnames['eyetracking_gaze_point_y']]], upper_limit
+
 
 def detect_images_components(param_img_root, log, special_colnames, overwrite_npy, eyetracking_log_filename, image_names, text_detected_by_OCR, path_to_save_bordered_images, path_to_save_gui_components_npy, add_words_columns, algorithm):
     """
@@ -347,29 +360,34 @@ def detect_images_components(param_img_root, log, special_colnames, overwrite_np
     :type path_to_save_bordered_images: str
     """
     no_modification = True
-    
+
     eyetracking_log = False
     if eyetracking_log_filename and os.path.exists(param_img_root + eyetracking_log_filename):
-        eyetracking_log = pd.read_csv(param_img_root + eyetracking_log_filename, sep=";")
+        eyetracking_log = pd.read_csv(
+            param_img_root + eyetracking_log_filename, sep=";")
     init_value_ui_log_timestamp = log[special_colnames['Timestamp']][0]
-    
-    gaze_events = {} # key: row number, 
+
+    gaze_events = {}  # key: row number,
     #value: { tuple: [coorX, coorY], gui_component_coordinate: [[corners_of_crop]]}
-    
+
     last_upper_limit = 0
-    
+
     # Recorremos la lista de imágenes
-    for img_index in tqdm (range(0, len(image_names)), desc=f"Getting crops for {param_img_root}"):
-        screenshot_texts_npy = path_to_save_gui_components_npy + image_names[img_index] + "_texts.npy"
-        screenshot_npy = path_to_save_gui_components_npy + image_names[img_index] + ".npy"
+    for img_index in tqdm(range(0, len(image_names)), desc=f"Getting crops for {param_img_root}"):
+        screenshot_texts_npy = path_to_save_gui_components_npy + \
+            image_names[img_index] + "_texts.npy"
+        screenshot_npy = path_to_save_gui_components_npy + \
+            image_names[img_index] + ".npy"
         files_exists = os.path.exists(screenshot_npy)
         no_modification = no_modification and files_exists
         if eyetracking_log is not False:
-            timestamp_start = log[special_colnames['Timestamp']][img_index]-init_value_ui_log_timestamp
+            timestamp_start = log[special_colnames['Timestamp']
+                                  ][img_index]-init_value_ui_log_timestamp
             if img_index < len(image_names)-1:
-                timestamp_end = log[special_colnames['Timestamp']][img_index+1]-init_value_ui_log_timestamp
+                timestamp_end = log[special_colnames['Timestamp']
+                                    ][img_index+1]-init_value_ui_log_timestamp
                 interval, last_upper_limit = gaze_events_associated_to_event_time_range(
-                    eyetracking_log, 
+                    eyetracking_log,
                     special_colnames,
                     timestamp_start,
                     timestamp_end,
@@ -377,22 +395,31 @@ def detect_images_components(param_img_root, log, special_colnames, overwrite_np
             else:
                 print("detect_images_components: LAST SCREENSHOT")
                 interval, last_upper_limit = gaze_events_associated_to_event_time_range(
-                    eyetracking_log, 
+                    eyetracking_log,
                     special_colnames,
                     timestamp_start,
                     "LAST",
                     last_upper_limit)
-            
-            gaze_events[img_index] = interval # { row_number: [[gaze_coorX, gaze_coorY],[gaze_coorX, gaze_coorY],[gaze_coorX, gaze_coorY]]}
-        
+
+            # { row_number: [[gaze_coorX, gaze_coorY],[gaze_coorX, gaze_coorY],[gaze_coorX, gaze_coorY]]}
+            gaze_events[img_index] = interval
+
         if not files_exists or overwrite_npy:
-            if algorithm=="legacy":
-                recortes, text_or_not_text, words = get_gui_components_crops(param_img_root, image_names, text_detected_by_OCR, path_to_save_bordered_images, add_words_columns, img_index)
+            if algorithm == "legacy":
+                recortes, text_or_not_text, words = get_gui_components_crops(
+                    param_img_root, image_names, text_detected_by_OCR, path_to_save_bordered_images, add_words_columns, img_index)
                 aux = np.array(recortes)
                 np.save(screenshot_texts_npy, text_or_not_text)
                 np.save(screenshot_npy, aux)
-            elif algorithm=="uied":
-                recortes = get_uied_gui_components_crops(param_img_root, image_names, img_index, path_to_save_bordered_images)
+            elif algorithm == "uied":
+                path_to_save_components_json = path_to_save_gui_components_npy.replace(
+                    "components_npy", "components_json")
+                recortes, uicompos = get_uied_gui_components_crops(
+                    param_img_root, image_names, img_index, path_to_save_components_json)
+                if not os.path.exists(path_to_save_components_json):
+                    os.makedirs(path_to_save_components_json)
+                utils.save_corners_json(
+                    path_to_save_components_json + image_names[img_index] + '.json', uicompos)
                 aux = np.array(recortes, dtype=object)
                 np.save(screenshot_npy, aux)
 
@@ -410,11 +437,12 @@ def pad(img, h, w):
     left_pad = np.floor((w - img.shape[1]) / 2).astype(np.uint16)
     return np.copy(np.pad(img, ((top_pad, bottom_pad), (left_pad, right_pad), (0, 0)), mode='constant', constant_values=0))
 
-def uied_classify_image_components(model_path="resources/models/model.json", param_model_weights="resources/models/custom-v2.h5", 
-                            model_properties="resources/models/custom-v2-classes.json",
-                            param_images_root="resources/screenshots/components_npy/", param_log_path="resources/log.csv", 
-                            enriched_log_output_path="resources/enriched_log_feature_extracted.csv", screenshot_colname="Screenshot", 
-                            rewrite_log=False):
+
+def uied_classify_image_components(model_path="resources/models/model.json", param_model_weights="resources/models/custom-v2.h5",
+                                   model_properties="resources/models/custom-v2-classes.json", param_images_root="resources/screenshots/components_npy/",
+                                   param_json_root="resources/screenshots/components_json/", param_log_path="resources/log.csv",
+                                   enriched_log_output_path="resources/enriched_log_feature_extracted.csv", screenshot_colname="Screenshot",
+                                   rewrite_log=False):
     """
     Con esta función clasificamos los componentes recortados de cada una de las capturas para posteriormente añadir al log
     10 columnas. Estas corresponden a cada una de las clases en las que se puede clasificar un componente GUI. Los valores 
@@ -436,11 +464,11 @@ def uied_classify_image_components(model_path="resources/models/model.json", par
         classes = f["classes"]
         shape = tuple(f["shape"])
 
-        # Load the ML classifier model for the crops 
+        # Load the ML classifier model for the crops
         # Default model is custom-v2, a model creating by using transfer learning from UIED's generalized model
         classifier = {}
-        print(type(shape))
-        classifier['Elements'] = CompDetCNN(param_model_weights, classes, shape)
+        classifier['Elements'] = CompDetCNN(
+            param_model_weights, classes, shape)
         print("\n\nLoaded ML model from disk\n")
 
         """
@@ -455,7 +483,7 @@ def uied_classify_image_components(model_path="resources/models/model.json", par
         # print(images_names)
         for img_filename in images_names:
             crop_img_aux = np.load(images_root+img_filename +
-                                ".npy", allow_pickle=True)
+                                   ".npy", allow_pickle=True)
             crop_imgs[img_filename] = {
                 'content': crop_img_aux}
 
@@ -468,13 +496,21 @@ def uied_classify_image_components(model_path="resources/models/model.json", par
             """
             Esta red devuelve como salida el nombre de la clase detectada.
             """
+            with open(param_json_root + images_names[i] + '.json', 'r') as f:
+                data = json.load(f)
+
             clips = crop_imgs[images_names[i]]["content"].tolist()
             result = classifier['Elements'].predict(clips)
 
             crop_imgs[images_names[i]]["result"] = result
-            crop_imgs[images_names[i]]["result_freq"] = pd.Series(result).value_counts()
+            crop_imgs[images_names[i]]["result_freq"] = pd.Series(
+                result).value_counts()
             crop_imgs[images_names[i]]["result_freq_df"] = crop_imgs[images_names[i]
-                                                                    ]["result_freq"].to_frame().T
+                                                                     ]["result_freq"].to_frame().T
+            for j in range(0, len(result)):
+                data["compos"][j]["class"] = result[j]
+            with open(param_json_root + images_names[i] + '.json', "w") as jsonFile:
+                json.dump(data, jsonFile)
 
         """
         Como todas las imágenes no tendrán todas las clases, generarán como salida un dataset que no tendrán siempre las mismas
@@ -487,7 +523,7 @@ def uied_classify_image_components(model_path="resources/models/model.json", par
         df = pd.DataFrame([], columns=nombre_clases)
 
         for i in range(0, len(images_names)):
-            row1 = [0 for i in range(0,len(nombre_clases))]
+            row1 = [0 for i in range(0, len(nombre_clases))]
             # accedemos a las frecuencias almacenadas anteriormente
             df1 = crop_imgs[images_names[i]]["result_freq_df"]
             if len(df1.columns.tolist()) > 0:
@@ -513,12 +549,14 @@ def uied_classify_image_components(model_path="resources/models/model.json", par
         """
         log_enriched.to_csv(enriched_log_output_path)
         print("\n\n=========== ENRICHED LOG GENERATED: path=" +
-            enriched_log_output_path)
+              enriched_log_output_path)
     else:
-        log_enriched = pd.read_csv(enriched_log_output_path, sep=",", index_col=0)
+        log_enriched = pd.read_csv(
+            enriched_log_output_path, sep=",", index_col=0)
         print("\n\n=========== ENRICHED LOG ALREADY EXISTS: path=" +
-            enriched_log_output_path)
+              enriched_log_output_path)
     return log_enriched
+
 
 def classify_image_components(param_json_file_name="resources/models/model.json", param_model_weights="resources/models/model.h5", model_properties="resources/models/custom-v2-classes.json", param_images_root="resources/screenshots/components_npy/", param_log_path="resources/log.csv", enriched_log_output_path="resources/enriched_log_feature_extracted.csv", screenshot_colname="Screenshot", rewrite_log=False):
     """
@@ -572,7 +610,7 @@ def classify_image_components(param_json_file_name="resources/models/model.json"
         # print(images_names)
         for img_filename in images_names:
             crop_img_aux = np.load(images_root+img_filename +
-                                ".npy", allow_pickle=True)
+                                   ".npy", allow_pickle=True)
             text_or_not_text = np.load(
                 images_root+img_filename+"_texts.npy", allow_pickle=True)
             crop_imgs[img_filename] = {
@@ -599,7 +637,7 @@ def classify_image_components(param_json_file_name="resources/models/model.json"
                 img_padded = pad(img, 150, 150)
                 # print("Padded: "+str(img_padded.shape))
                 img_resized = tf.image.resize(img_padded, [
-                                            50, 50], method=tf.image.ResizeMethod.NEAREST_NEIGHBOR, preserve_aspect_ratio=True, antialias=True)
+                    50, 50], method=tf.image.ResizeMethod.NEAREST_NEIGHBOR, preserve_aspect_ratio=True, antialias=True)
                 aux.append(img_resized)
                 # print("Cropped: "+str(img_resized.shape))
             crop_imgs[crop_images[i]]["content_preprocessed"] = aux
@@ -608,25 +646,27 @@ def classify_image_components(param_json_file_name="resources/models/model.json"
             (nombre de la clase) correspondiente.
             """
             content_preprocessed_aux = crop_imgs[images_names[i]
-                                                ]["content_preprocessed"]
+                                                 ]["content_preprocessed"]
 
             # print("Content preprocessed length: " + str(len(crop_imgs[images_names[i]]["content_preprocessed"])))
             # result = loaded_model.predict_classes(np.array(content_preprocessed_aux)) # removed from tensorflow 2.6
             # for gui_component in content_preprocessed_aux:
             # print("Content preprocessed object type: " + str(type(gui_component)))
             # print("Content preprocessed component shape: " + str(gui_component.shape))
-            predict_x = loaded_model.predict(np.array(content_preprocessed_aux))
+            predict_x = loaded_model.predict(
+                np.array(content_preprocessed_aux))
             result = np.argmax(predict_x, axis=1)
             # print("\nPREDICTIONS:")
             # print(result)
 
-            result_mapped = ["x0_TextView" if crop_imgs[crop_images[i]]["text"][index] else column_names[x] for index, x in enumerate(result)]
+            result_mapped = ["x0_TextView" if crop_imgs[crop_images[i]]["text"]
+                             [index] else column_names[x] for index, x in enumerate(result)]
 
             crop_imgs[images_names[i]]["result"] = result_mapped
             crop_imgs[images_names[i]]["result_freq"] = pd.Series(
                 result_mapped).value_counts()
             crop_imgs[images_names[i]]["result_freq_df"] = crop_imgs[images_names[i]
-                                                                    ]["result_freq"].to_frame().T
+                                                                     ]["result_freq"].to_frame().T
 
         """
         Como todas las imágenes no tendrán todas las clases, generarán como salida un dataset que no tendrán siempre las mismas
@@ -636,7 +676,7 @@ def classify_image_components(param_json_file_name="resources/models/model.json"
         """
 
         nombre_clases = ['x0_RatingBar', 'x0_ToggleButton', 'x0_Spinner', 'x0_Switch', 'x0_CheckBox', 'x0_TextView', 'x0_EditText',
-                        'x0_ImageButton', 'x0_NumberPicker', 'x0_CheckedTextView', 'x0_SeekBar', 'x0_ImageView', 'x0_RadioButton', 'x0_Button']
+                         'x0_ImageButton', 'x0_NumberPicker', 'x0_CheckedTextView', 'x0_SeekBar', 'x0_ImageView', 'x0_RadioButton', 'x0_Button']
         df = pd.DataFrame([], columns=nombre_clases)
 
         for i in range(0, len(images_names)):
@@ -666,11 +706,12 @@ def classify_image_components(param_json_file_name="resources/models/model.json"
         """
         log_enriched.to_csv(enriched_log_output_path)
         print("\n\n=========== ENRICHED LOG GENERATED: path=" +
-            enriched_log_output_path)
+              enriched_log_output_path)
     else:
-        log_enriched = pd.read_csv(enriched_log_output_path, sep=",", index_col=0)
+        log_enriched = pd.read_csv(
+            enriched_log_output_path, sep=",", index_col=0)
         print("\n\n=========== ENRICHED LOG ALREADY EXISTS: path=" +
-            enriched_log_output_path)
+              enriched_log_output_path)
     return log_enriched
 
 
@@ -762,7 +803,8 @@ def gui_components_detection(param_log_path, param_img_root, special_colnames, e
         if not os.path.exists(p):
             os.mkdir(p)
 
-    detect_images_components(param_img_root, log, special_colnames, overwrite_npy, eyetracking_log_filename, image_names, text_corners, bordered, components_npy, add_words_columns, algorithm)
+    detect_images_components(param_img_root, log, special_colnames, overwrite_npy, eyetracking_log_filename,
+                             image_names, text_corners, bordered, components_npy, add_words_columns, algorithm)
 
 
 ################################
