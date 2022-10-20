@@ -8,7 +8,7 @@ from colorama import Back, Style, Fore
 from plugins.screenshot.create_screenshot import generate_capture, generate_scenario_capture
 from plugins.screenshot.replace_gui_component import generate_copied_capture_without_root, generate_copied_capture
 from agosuirpa.generic_utils import detect_function, args_by_function_in_order
-from agosuirpa.system_configuration import sep, experiment_results_path, ui_logs_foldername, additional_scenarios_resources_foldername, prefix_scenario
+from agosuirpa.settings import sep, EXPERIMENT_RESULTS_PATH, UI_LOGS_FOLDERNAME, ADDITIONAL_SCENARIOS_RESOURCES_FOLDERNAME, PREFIX_SCENARIO
 
 def validation_params(json, number_logs, percent_per_trace):
     '''

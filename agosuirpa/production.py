@@ -21,7 +21,7 @@ env = environ.Env()
 environ.Env.read_env()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['150.214.188.176', 'canela.lsi.us.es']
 
@@ -33,6 +33,14 @@ DB_HOST =       env('DB_HOST')
 DB_PORT =       env('DB_PORT')
 DB_USER =       env('DB_USER')
 DB_PASSWORD =   env('DB_PASSWORD')
+
+# AGOSUIRPA API version
+API_VERSION =                               env('API_VERSION')
+FRONTEND_PREFIX =                           env('FRONTEND_PREFIX')
+PREFIX_SCENARIO =                           env('PREFIX_SCENARIO')
+EXPERIMENT_RESULTS_PATH =                   env('EXPERIMENT_RESULTS_PATH')
+UI_LOGS_FOLDERNAME =                        env('UI_LOGS_FOLDERNAME')
+ADDITIONAL_SCENARIOS_RESOURCES_FOLDERNAME = env('ADDITIONAL_SCENARIOS_RESOURCES_FOLDERNAME')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -87,7 +95,7 @@ ROOT_URLCONF = 'agosuirpa.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'build'],
+        'DIRS': [BASE_DIR / 'build', BASE_DIR / 'landing'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -218,16 +226,25 @@ AUTH_USER_MODEL = 'users.CustomUser'
 # server will be running is safe to receive requests
 # from. All all of this.
 
+ # SECURITY WARNING: don't run with debug turned on in production!
+
 CORS_ALLOWED_ORIGINS = [    
 'http://localhost:3000',
 'http://canela.lsi.us.es',
 'https://canela.lsi.us.es'
 ]
 
-# - django auth
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# server will be running is safe to receive requests
 
 # Django All Auth config. Add all of this.
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
@@ -244,5 +261,20 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
+OLD_PASSWORD_FIELD_ENABLED = True
 # 1 day
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
+
+# AGOSUIRPA platform settings
+# OS 
+operating_system =sys.platform
+print("Operating system detected: " + operating_system)
+# Element specification filename and path separator (depends on OS)
+if "windows" in operating_system:
+    sep = "\\"
+    element_trace = "configuration"+sep+"element_trace.json"
+else:
+    sep = "/"
+    element_trace = "configuration"+sep+"element_trace_linux.json"
+# Function specification filename
+function_trace = "configuration"+sep+"function_trace.json"

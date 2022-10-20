@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from .system_configuration import API_VERSION
+from .settings import API_VERSION, FRONTEND_PREFIX
 from django.contrib import admin
 from django.urls import include, path, re_path
 from django.shortcuts import render
@@ -24,20 +24,14 @@ from django.views.decorators.csrf import csrf_exempt
 # from experiments import views
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
-@csrf_exempt
-def render_react(request):
-    return render(request, "index.html")
-
-@csrf_exempt
-def render_landing(request):
-    return render(request, "rpa-landing.html")
+# @csrf_exempt
+# def render_react(request):
+#     return render(request, "index.html")
 
 router = routers.DefaultRouter()
 
 urlpatterns = [
-    re_path(r"^$", render_landing),
-    re_path(r"agosuirpa/$", render_react),
-    re_path(r"agosuirpa(?:.*)/?$", render_react),
+    # re_path(r""+FRONTEND_PREFIX+"(?:.*)/?$", render_react),
     path(API_VERSION+'admin/', admin.site.urls),
     path(API_VERSION+'users/', include('users.urls')),
     path(API_VERSION+'experiments/', include('experiments.urls')),

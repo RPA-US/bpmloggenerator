@@ -7,7 +7,7 @@ from django.forms import BooleanField
 from users.models import CustomUser
 from private_storage.fields import PrivateImageField
 # from django_postgres_extensions.models.fields import ArrayField
-from agosuirpa.system_configuration import sep
+from agosuirpa.settings import sep
 
 class GUIComponentCategory(CategoryBase):
     """

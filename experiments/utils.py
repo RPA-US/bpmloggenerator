@@ -1,7 +1,7 @@
 import os
 import zipfile
 import shutil
-from agosuirpa.system_configuration import sep, ui_logs_foldername
+from agosuirpa.settings import sep, UI_LOGS_FOLDERNAME
 
 def split_name_system(root_path):
     if "/" in root_path:
