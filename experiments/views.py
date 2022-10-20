@@ -9,7 +9,7 @@ from .models import Experiment, Screenshot, Variations, ExperimentStatusChoice
 from .serializers import ExperimentSerializer, VariationsSerializer
 from users.models import CustomUser
 from .functions import execute_experiment
-from django.http import FileResponse
+from django.http import FileResponse, Http404
 from rest_framework.decorators import api_view
 from django.db import transaction
 import json
@@ -307,13 +307,16 @@ class DownloadExperiment(generics.RetrieveAPIView):
     Download compress experiment
     """
 
+
     def get(self, request, *args, **kwargs):
         msg = "Experiment downloaded"
         st = status.HTTP_200_OK
-        user = get_object_or_404(CustomUser, id=request.user.id)
-        if(user.is_anonymous is False):
-            experiment = get_object_or_404(
-                Experiment, user=user.id, is_being_processed=100, id=kwargs["pk"])
+        experiment = get_object_or_404(Experiment, is_being_processed=100, id=kwargs["pk"])
+        user = CustomUser.objects.filter(id=request.user.id).first()
+        if not (experiment.public == True or (user and experiment.user.id == user.id)):
+            response = Response(
+                {"message": "Experiment not readable: " + str(e)}, status=status.HTTP_401_UNAUTHORIZED)
+        else:
             try:
                 splitted = experiment.foldername.split(sep)
                 val = splitted[len(splitted)-1]
@@ -326,10 +329,6 @@ class DownloadExperiment(generics.RetrieveAPIView):
             except Exception as e:
                 response = Response(
                     {"message": "Experiment error: " + str(e)}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
-        else:
-            response = Response(
-                {"message": "No user valid" + str(e)}, status=status.HTTP_401_UNAUTHORIZED)
-
         return response
 
 
