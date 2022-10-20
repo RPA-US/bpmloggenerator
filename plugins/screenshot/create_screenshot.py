@@ -2,7 +2,7 @@ import os
 import agosuirpa.generic_utils as util
 from experiments.models import Variations
 from agosuirpa.generic_utils import detect_function
-from agosuirpa.system_configuration import sep
+from agosuirpa.settings import sep
 import ast
 
 def manage_dependency(experiment, name, arguments,argumentsSave, j, case, scenario, activity, variant, balanced, log_size):

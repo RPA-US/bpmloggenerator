@@ -5,7 +5,7 @@ from users.permissions import IsActive
 from users.models import CustomUser
 from .models import VariabilityFunction, VariabilityFunctionCategory, GUIComponent, GUIComponentCategory, FunctionParam, FunctionParamCategory
 from .serializers import VariabilityFunctionSerializer, VariabilityFunctionCategorySerializer, GUIComponentSerializer, GUIComponentCategorySerializer, FunctionParamSerializer, FunctionParamCategorySerializer
-from agosuirpa.system_configuration import sep
+from agosuirpa.settings import sep
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 

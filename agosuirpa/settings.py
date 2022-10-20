@@ -34,6 +34,14 @@ DB_PORT =       env('DB_PORT')
 DB_USER =       env('DB_USER')
 DB_PASSWORD =   env('DB_PASSWORD')
 
+# AGOSUIRPA API version
+API_VERSION =                               env('API_VERSION')
+FRONTEND_PREFIX =                           env('FRONTEND_PREFIX')
+PREFIX_SCENARIO =                           env('PREFIX_SCENARIO')
+EXPERIMENT_RESULTS_PATH =                   env('EXPERIMENT_RESULTS_PATH')
+UI_LOGS_FOLDERNAME =                        env('UI_LOGS_FOLDERNAME')
+ADDITIONAL_SCENARIOS_RESOURCES_FOLDERNAME = env('ADDITIONAL_SCENARIOS_RESOURCES_FOLDERNAME')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -254,3 +262,17 @@ ACCOUNT_UNIQUE_EMAIL = True
 OLD_PASSWORD_FIELD_ENABLED = True
 # 1 day
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
+
+# AGOSUIRPA platform settings
+# OS 
+operating_system =sys.platform
+print("Operating system detected: " + operating_system)
+# Element specification filename and path separator (depends on OS)
+if "windows" in operating_system:
+    sep = "\\"
+    element_trace = "configuration"+sep+"element_trace.json"
+else:
+    sep = "/"
+    element_trace = "configuration"+sep+"element_trace_linux.json"
+# Function specification filename
+function_trace = "configuration"+sep+"function_trace.json"

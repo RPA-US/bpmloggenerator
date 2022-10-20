@@ -139,6 +139,7 @@ dmypy.json
 # Custom Folders
 CSV_exit
 resources/
+other_resources/
 mockups
 privatefiles/
 

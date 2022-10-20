@@ -1,7 +1,7 @@
 import json
 import random
 import os
-from agosuirpa.system_configuration import function_trace, element_trace
+from agosuirpa.settings import function_trace, element_trace
 import os
 from wizard.models import VariabilityFunction, FunctionParam
 
