@@ -2,9 +2,6 @@ version: '3.6'
 
 # Networks
 networks:
-  caddy:
-    name: caddy
-    external: true
   internal:
     name: internal
 
@@ -34,5 +31,4 @@ services:
       - agosuirpa_data:/data
     networks:
       - internal
-      - caddy
     env_file: ./.env
