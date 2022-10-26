@@ -21,7 +21,7 @@ env = environ.Env()
 environ.Env.read_env()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['150.214.188.176', 'canela.lsi.us.es']
 
@@ -35,8 +35,8 @@ DB_USER =       env('DB_USER')
 DB_PASSWORD =   env('DB_PASSWORD')
 
 # AGOSUIRPA API version
-API_VERSION =                               env('API_VERSION')
 FRONTEND_PREFIX =                           env('FRONTEND_PREFIX')
+API_VERSION =                               FRONTEND_PREFIX + env('API_VERSION')
 PREFIX_SCENARIO =                           env('PREFIX_SCENARIO')
 EXPERIMENT_RESULTS_PATH =                   env('EXPERIMENT_RESULTS_PATH')
 UI_LOGS_FOLDERNAME =                        env('UI_LOGS_FOLDERNAME')
@@ -167,13 +167,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = env('API_VERSION')+'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_DIRS = [
-  # Tell Django where to look for React's static files (css, js)
-  os.path.join(BASE_DIR, "build/static"),
-]
+# STATICFILES_DIRS = [
+#   # Tell Django where to look for React's static files (css, js)
+#   os.path.join(BASE_DIR, "build/static"),
+# ]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
@@ -230,6 +230,8 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 CORS_ALLOWED_ORIGINS = [    
 'http://localhost:3000',
+'http://localhost',
+'http://0.0.0.0:8000',
 'http://canela.lsi.us.es',
 'https://canela.lsi.us.es'
 ]

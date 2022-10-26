@@ -1,0 +1,38 @@
+version: '3.6'
+
+# Networks
+networks:
+  caddy:
+    name: caddy
+    external: true
+  internal:
+    name: internal
+
+# Volumes
+volumes:
+  db_data:
+    name: db_data
+  agosuirpa_data:
+    name: agosuirpa_data
+
+services:
+  db:
+    image: postgres
+    container_name: db
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - internal
+    env_file: ./.env
+
+  agosuirpa:
+    build: .
+    container_name: agosuirpa
+    restart: unless-stopped
+    volumes:
+      - agosuirpa_data:/data
+    networks:
+      - internal
+      - caddy
+    env_file: ./.env
