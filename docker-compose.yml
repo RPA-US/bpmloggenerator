@@ -30,8 +30,11 @@ services:
     image: ghcr.io/rpa-us/agosuirpa/agosuirpa:latest
     container_name: agosuirpa
     restart: unless-stopped
+    depends_on:
+      - db
     volumes:
       - agosuirpa_data:/data
+      - ./resources:/agosuirpa/resources
     networks:
       - internal
       - caddy
