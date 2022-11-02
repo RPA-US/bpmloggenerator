@@ -40,3 +40,4 @@ services:
       caddy: canela.lsi.us.es
       caddy.handle: /agosuirpa/api/*
       caddy.handle.0_reverse_proxy: '{{upstreams 8000}}'
+      com.centurylinklabs.watchtower.enable: true
