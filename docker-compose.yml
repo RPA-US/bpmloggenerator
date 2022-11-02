@@ -27,7 +27,7 @@ services:
     env_file: ./.env
 
   agosuirpa:
-    build: .
+    image: ghcr.io/rpa-us/agosuirpa/agosuirpa:latest
     container_name: agosuirpa
     restart: unless-stopped
     volumes:
@@ -38,5 +38,5 @@ services:
     env_file: ./.env
     labels:
       caddy: canela.lsi.us.es
-      caddy.handle: /log-generator/api/*
+      caddy.handle: /agosuirpa/api/*
       caddy.handle.0_reverse_proxy: '{{upstreams 8000}}'
