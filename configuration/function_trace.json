@@ -20,9 +20,11 @@
     "replace_gui_element_various_places" : "replace_gui_element_various_places",
     "screenshot_name_without_root_path" : "generate_screenshot_without_root_path",
     "random_text_in_image" : "random_text_image",
+    "digits_in_image" : "digits_in_image",
     "random_paragraph_in_image": "random_paragraph_image", 
     "random_words_in_image": "random_word_image", 
     "random_sentence_in_image": "random_sentence_image",
+    "truncated_random_sentence_in_image": "truncated_random_sentence_image",
     "image_copy_renamed": "generate_copied_capture_without_root",
     "image_copy_renamed_and_return_path": "generate_copied_capture"
 }

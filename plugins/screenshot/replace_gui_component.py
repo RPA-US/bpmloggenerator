@@ -1,14 +1,15 @@
 from PIL import Image
 import PIL
 import shutil
-from PIL import Image
-from PIL import ImageFont
-from PIL import ImageDraw 
+from PIL import Image, ImageFile, ImageFont, ImageDraw
 from lorem_text import lorem
 import agosuirpa.generic_utils as util
 import sqlite3 as sl
 from agosuirpa.settings import sep
 import random
+import string #Python module for strings. It contains a collection of string constants
+
+# ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 def resize_respecting_ratio(width_size, height_size, image):
     image_width = image.size[0]
@@ -214,20 +215,59 @@ def delimit_characters(s, char_limit):
     res = "".join(s[i:i+char_limit] + "\n" for i in range(0,len(s),char_limit))
     return res
 
+
+# =========== AUXILIAR FUNCTIONS ==============
+def random_characters(case_class, max_len, max_words): #The function responsible for generating #random words which are in uppercase
+    word = '' #The variable which will hold the random word
+    size = random.randint(0, int(max_len*0.1+1))
+    size += max_len
+    if case_class == "uppercase":
+        letters = string.ascii_uppercase #A constant containing uppercase letters
+    elif case_class == "mixed":
+        letters = string.ascii_letters #A contstant containing all uppercase and lowercase letters
+    else:
+        letters = string.ascii_lowercase #A constant containing lowercase letters
+    while len(word) != size: #While loop
+        word += random.choice(letters)
+    return word
+
+# =========================
+
+def digits_in_image(args):
+    # Lista de dígitos
+    digitos = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    # Longitud del string
+    n = int(args[0][1])
+    # Inicializamos el string vacío
+    res = ""
+    # Generamos el string de n dígitos
+    for i in range(n):
+        res += random.choice(digitos)
+        
+    return random_text_image(args,res)
+    
 def random_word_image(args):
     """
     Mandatory to have as args Font, Font size, Font color, Background color, Character delimitation, Random max number of word: "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84, 3]
     """
-    if args[0] and len(list(args[0]))>2:
-        if args[0][2] == "":
-            size = 1
+    if isinstance(args[0], list) and isinstance(args[0][0], list):
+        if args[0] and len(list(args[0]))>2:
+            if args[0][2] == "":
+                size = 1
+            else:
+                size = random.randint(1,int(args[0][2]))
         else:
-            size = random.randint(1,int(args[0][2]))
+            size = 1
+        s_without_linebreaks = lorem.words(size)
+        if args[0][3] == '1':
+            res = s_without_linebreaks[0:int(args[0][1])]
+        else:
+            res = delimit_characters(s_without_linebreaks,int(args[0][1]))
     else:
-        size = 1
-    s = lorem.words(size)
-    s_line_breaks = delimit_characters(s,int(args[0][1]))
-    return random_text_image(args,s_line_breaks)
+        res = args[0]
+        del args[0][0]
+        
+    return random_text_image(args,res)
     
 def random_paragraph_image(args):
     """
@@ -258,6 +298,22 @@ def random_sentence_image(args):
     """
         [["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF"], newimage, capture, coordinates]
     """
+    return random_text_image(args,s_line_breaks)
+
+def truncated_random_sentence_image(args):
+    """
+    Mandatory to have as args Font, Font size, Font color, Background color and Character delimitation for paragraph: "args[0]":["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84]
+    [["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF"], 84, newimage, capture, coordinates]   
+    """
+    i = 4
+    trunc = int(args[0][1])
+    cond = True
+    while cond:
+        num = int(trunc/i)
+        s = lorem.words(num)
+        cond = len(s) < trunc
+        i-1
+    s_line_breaks = s[0:num]
     return random_text_image(args,s_line_breaks)
 
 def random_text_image(args,random_text):
@@ -297,7 +353,7 @@ def insert_text_image(args):
     if isinstance(args[4], list):
         coordenates = args[4]
     background_color = False
-    if len(args[1]) > 3:
+    if len(args[1]) > 3 or (isinstance(args[1], list) and len(args[1][0]) > 3):
         background_color = str(args[1][0][3])
     
     # Coordenates x and y

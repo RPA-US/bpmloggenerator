@@ -59,7 +59,11 @@ class Variations(models.Model):
     activity = models.CharField(max_length=255)
     variant = models.CharField(max_length=255)
     function_name = models.CharField(max_length=255)
+    capture_path = models.CharField(max_length=255)
+    coordinates = models.CharField(max_length=255)
+    image_path_to_save = models.CharField(max_length=255)
     arguments = models.TextField()
+    result = models.TextField()
     experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
 
     def __str__(self):
