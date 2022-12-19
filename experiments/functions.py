@@ -72,6 +72,7 @@ def generate_row(experiment, generate_path, dict, acu, case, variant, original_e
                                 val = initValue
                         else:
                             val = ""
+                    print("Varying " + str(variant) + "-act." + str(key))
                 else:
                     val = ""
             attr.append(val)

@@ -8,7 +8,7 @@ from PIL import Image
 import numpy as np
 import ast
 
-def manage_dependency(experiment, name, arguments,argumentsSave, j, case, scenario, activity, variant, balanced, log_size):
+def manage_dependency(experiment, name, arguments, argumentsSave, j, case, scenario, activity, variant, balanced, log_size, image_path_to_save, capture_path, coordinates):
     if "args_dependency" in j:
         dependant_row = Variations.objects.filter(experiment=experiment, case_id=case, scenario=scenario, balanced=balanced, log_size=log_size,
                                                activity=j["args_dependency"]["Activity"], case_variation_id=j["args_dependency"]["id"], variant=j["args_dependency"]["V"]).order_by("id")
@@ -16,15 +16,16 @@ def manage_dependency(experiment, name, arguments,argumentsSave, j, case, scenar
         tmp = ast.literal_eval(row.arguments)
         arguments = tmp+arguments
         name=row.function_name
+        if len(arguments) > 0:
+            arguments[0].insert(0, row.result)
+        else:
+            arguments.append(row.result)
+            
     image_element = util.detect_function(name)(arguments)
-    if len(argumentsSave) > 0:
-        argumentsSave[0]=image_element
-    else:
-        argumentsSave.append(image_element)
     if type(image_element) == str:
         Variations.objects.create(experiment=experiment, case_id=case, scenario=scenario, balanced=balanced, log_size=log_size,
-                                  case_variation_id=j["id"], activity=activity, variant=variant, function_name=name, arguments=argumentsSave)
-    return image_element
+                                  case_variation_id=j["id"], activity=activity, variant=variant, function_name=name, arguments=argumentsSave, result=image_element, image_path_to_save=image_path_to_save, capture_path=capture_path, coordinates=coordinates)
+
 
 def generate_capture(experiment, columns_ui, columns, element, acu, case, generate_path, attr, activity, variant, attachments_path, balanced, log_size, original_experiment):
     '''
@@ -67,12 +68,13 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
                 if i in args_tmp:
                     func = args_tmp[i]
                     for j in func:
+                        print(j['id'])
                         if element is not None:
                             coordinates = j["coordinates"]
                             name = j["name"]
                             # TODO: generate autocolumns in front and edit this line
                             if not "args_dependency" in j: 
-                                if i in columns or "TextInput" in columns:
+                                if experiment.screenshot_name_generation_function == "insert_text_image" and i in columns or "TextInput" in columns:
                                     arguments.append(attr[columns.index(i)])
                                 args = util.args_by_function_in_order(j["args"],name)
                                 arguments.append(args)
@@ -90,8 +92,8 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
                             arguments.append(capture_path)
                             arguments.append(coordinates)
 
-                            object_property = manage_dependency(
-                                experiment, name, arguments, argumentsSave, j, case, 0, activity, variant, balanced, log_size)
+                            object_property = manage_dependency(experiment, name, arguments, argumentsSave, j, case, 0, 
+                                              activity, variant, balanced, log_size, image_path_to_save, capture_path, coordinates)
 
                             ui_element_class = i.split('.')
                             ui_element_class = ui_element_class[len(ui_element_class)-1]

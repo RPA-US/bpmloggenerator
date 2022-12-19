@@ -1966,6 +1966,17 @@
         }
     },
     {
+        "model": "wizard.functionparamcategory",
+        "pk": 6,
+        "fields": {
+            "label": "features.experiment.function_params.integers.label",
+            "placeholder": "features.experiment.function_params.integers.placeholder",
+            "data_type": "integer",
+            "description": "features.experiment.function_params.integers.description",
+            "validation_needs": {}
+        }
+    },
+    {
         "model": "wizard.variabilityfunction",
         "pk": 1,
         "fields": {
@@ -2251,6 +2262,30 @@
             "path": "configuration",
             "description": "features.experiment.function_trace.description.mouse_position_range_y",
             "variability_function_category": 1
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 26,
+        "fields": {
+            "id_code": "truncated_random_sentence_in_image",
+            "function_name": "features.experiment.function_trace.name.truncated_random_sentence_in_image",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.truncated_random_sentence_in_image",
+            "variability_function_category": 4
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 27,
+        "fields": {
+            "id_code": "digits_in_image",
+            "function_name": "features.experiment.function_trace.name.digits_in_image",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.digits_in_image",
+            "variability_function_category": 5
         }
     },
     {
@@ -2569,6 +2604,18 @@
         "model": "wizard.functionparam",
         "pk": 27,
         "fields": {
+            "id_code": "word_configuration_truncate",
+            "order": 4,
+            "description": "features.experiment.param.description.word_configuration_truncate",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 22
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 28,
+        "fields": {
             "id_code": "sentence_configuration_char_limit",
             "order": 2,
             "description": "features.experiment.param.description.sentence_configuration_char_limit",
@@ -2579,7 +2626,7 @@
     },
     {
         "model": "wizard.functionparam",
-        "pk": 28,
+        "pk": 29,
         "fields": {
             "id_code": "paragraph_configuration_char_limit",
             "order": 2,
@@ -2591,7 +2638,7 @@
     },
     {
         "model": "wizard.functionparam",
-        "pk": 29,
+        "pk": 30,
         "fields": {
             "id_code": "paragraph_configuration_max_paragraph",
             "order": 3,
@@ -2599,6 +2646,54 @@
             "function_param_category": 2,
             "validation_needs": {},
             "variability_function": 24
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 31,
+        "fields": {
+            "id_code": "truncated_sentence_configuration_font",
+            "order": 1,
+            "description": "features.experiment.param.description.truncated_sentence_configuration_font",
+            "function_param_category": 4,
+            "validation_needs": {},
+            "variability_function": 26
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 32,
+        "fields": {
+            "id_code": "truncated_sentence_configuration_char_limit",
+            "order": 2,
+            "description": "features.experiment.param.description.truncated_sentence_configuration_char_limit",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 26
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 33,
+        "fields": {
+            "id_code": "digits_configuration_font",
+            "order": 1,
+            "description": "features.experiment.param.description.digits_configuration_font",
+            "function_param_category": 4,
+            "validation_needs": {},
+            "variability_function": 27
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 34,
+        "fields": {
+            "id_code": "digits_to_insert",
+            "order": 2,
+            "description": "features.experiment.param.description.digits_to_insert",
+            "function_param_category": 6,
+            "validation_needs": {},
+            "variability_function": 27
         }
     }
 ]
