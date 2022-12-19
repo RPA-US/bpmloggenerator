@@ -3,6 +3,9 @@ import agosuirpa.generic_utils as util
 from experiments.models import Variations
 from agosuirpa.generic_utils import detect_function
 from agosuirpa.settings import sep
+import json
+from PIL import Image
+import numpy as np
 import ast
 
 def manage_dependency(experiment, name, arguments,argumentsSave, j, case, scenario, activity, variant, balanced, log_size):
@@ -21,7 +24,7 @@ def manage_dependency(experiment, name, arguments,argumentsSave, j, case, scenar
     if type(image_element) == str:
         Variations.objects.create(experiment=experiment, case_id=case, scenario=scenario, balanced=balanced, log_size=log_size,
                                   case_variation_id=j["id"], activity=activity, variant=variant, function_name=name, arguments=argumentsSave)
-
+    return image_element
 
 def generate_capture(experiment, columns_ui, columns, element, acu, case, generate_path, attr, activity, variant, attachments_path, balanced, log_size, original_experiment):
     '''
@@ -41,6 +44,22 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
     #new_image = generate_screenshot_demo(args)
     new_image = detect_function(
         experiment.screenshot_name_generation_function)(args)
+    
+    capture_img = Image.open(capture_path)
+    
+    # if os.path.isfile(image_path_to_save + '.json'):
+    #     with open(image_path_to_save + '.json', 'r') as f:
+    #         data = json.load(f)
+    # else:
+            
+    json_properties = {
+                        "img_shape": [
+                            np.array(capture_img).shape
+                        ],
+                        "compos": []
+                    }
+    id = 0
+    
     try:
         for i in columns_ui:
             try:
@@ -51,7 +70,7 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
                         if element is not None:
                             coordinates = j["coordinates"]
                             name = j["name"]
-                            #TODO: generate autocolumns in front and edit this line
+                            # TODO: generate autocolumns in front and edit this line
                             if not "args_dependency" in j: 
                                 if i in columns or "TextInput" in columns:
                                     arguments.append(attr[columns.index(i)])
@@ -71,8 +90,29 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
                             arguments.append(capture_path)
                             arguments.append(coordinates)
 
-                            manage_dependency(
+                            object_property = manage_dependency(
                                 experiment, name, arguments, argumentsSave, j, case, 0, activity, variant, balanced, log_size)
+
+                            ui_element_class = i.split('.')
+                            ui_element_class = ui_element_class[len(ui_element_class)-1]
+                            
+                            json_properties["compos"].append(
+                                {
+                                    "id": id,
+                                    "class": ui_element_class,
+                                    "column_min": coordinates[1],
+                                    "row_min": coordinates[0],
+                                    "column_max": coordinates[3],
+                                    "row_max": coordinates[2],
+                                    "width": coordinates[2]-coordinates[0],
+                                    "height": coordinates[3]-coordinates[1],
+                                    "object_property": object_property
+                                }
+                            )
+                            id +=1
+                            with open(image_path_to_save + '.json', 'w') as f:
+                                json.dump(json_properties, f)
+
                         else:
                             new_image = ""
                         arguments = []

@@ -1,7 +1,6 @@
 from PIL import Image
 import PIL
 import shutil
-from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw 
 from lorem_text import lorem
