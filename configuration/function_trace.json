@@ -26,5 +26,6 @@
     "random_sentence_in_image": "random_sentence_image",
     "truncated_random_sentence_in_image": "truncated_random_sentence_image",
     "image_copy_renamed": "generate_copied_capture_without_root",
-    "image_copy_renamed_and_return_path": "generate_copied_capture"
+    "image_copy_renamed_and_return_path": "generate_copied_capture",
+    "gui_component_status": "gui_component_status"
 }

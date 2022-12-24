@@ -28,6 +28,10 @@ ALLOWED_HOSTS = ['150.214.188.176', 'canela.lsi.us.es']
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Variability function that modify UI element (json) properties
+var_func_modify_properties = ["gui_component_status"]
+
+# Database configuration
 DB_NAME =       env('DB_NAME')
 DB_HOST =       env('DB_HOST')
 DB_PORT =       env('DB_PORT')

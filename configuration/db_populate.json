@@ -2289,6 +2289,18 @@
         }
     },
     {
+        "model": "wizard.variabilityfunction",
+        "pk": 28,
+        "fields": {
+            "id_code": "gui_component_status",
+            "function_name": "features.experiment.function_trace.name.gui_component_status",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.gui_component_status",
+            "variability_function_category": 4
+        }
+    },
+    {
         "model": "wizard.functionparam",
         "pk": 1,
         "fields": {
@@ -2694,6 +2706,18 @@
             "function_param_category": 6,
             "validation_needs": {},
             "variability_function": 27
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 35,
+        "fields": {
+            "id_code": "gui_component_status",
+            "order": 1,
+            "description": "features.experiment.param.description.gui_component_status",
+            "function_param_category": 1,
+            "validation_needs": {},
+            "variability_function": 28
         }
     }
 ]

@@ -2,30 +2,39 @@ import os
 import agosuirpa.generic_utils as util
 from experiments.models import Variations
 from agosuirpa.generic_utils import detect_function
-from agosuirpa.settings import sep
+from agosuirpa.settings import sep, var_func_modify_properties
 import json
 from PIL import Image
 import numpy as np
 import ast
 
-def manage_dependency(experiment, name, arguments, argumentsSave, j, case, scenario, activity, variant, balanced, log_size, image_path_to_save, capture_path, coordinates):
-    if "args_dependency" in j:
+def manage_dependency(experiment, var_function_name, arguments, argumentsSave, screenshots_args, case, scenario, activity, variant, balanced, log_size, image_path_to_save, capture_path, coordinates, object_json_properties):
+    if "args_dependency" in screenshots_args:
         dependant_row = Variations.objects.filter(experiment=experiment, case_id=case, scenario=scenario, balanced=balanced, log_size=log_size,
-                                               activity=j["args_dependency"]["Activity"], case_variation_id=j["args_dependency"]["id"], variant=j["args_dependency"]["V"]).order_by("id")
+                                               activity=screenshots_args["args_dependency"]["Activity"], case_variation_id=screenshots_args["args_dependency"]["id"], variant=screenshots_args["args_dependency"]["V"]).order_by("id")
         row=dependant_row[len(dependant_row)-1]
         tmp = ast.literal_eval(row.arguments)
         arguments = tmp+arguments
-        name=row.function_name
+        var_function_name = row.function_name
         if len(arguments) > 0:
             arguments[0].insert(0, row.result)
         else:
             arguments.append(row.result)
             
-    image_element = util.detect_function(name)(arguments)
+    process_info = {"variant": variant, "activity": activity, "object_json_properties": object_json_properties}
+    arguments.append(process_info)
+    
+    if var_function_name in var_func_modify_properties:
+        image_element, object_json_properties = util.detect_function(var_function_name)(arguments)
+    else:
+        image_element = util.detect_function(var_function_name)(arguments)
+        
     if type(image_element) == str:
         Variations.objects.create(experiment=experiment, case_id=case, scenario=scenario, balanced=balanced, log_size=log_size,
-                                  case_variation_id=j["id"], activity=activity, variant=variant, function_name=name, arguments=argumentsSave, result=image_element, image_path_to_save=image_path_to_save, capture_path=capture_path, coordinates=coordinates)
-
+                                  case_variation_id=screenshots_args["id"], activity=activity, variant=variant, function_name=var_function_name,
+                                  arguments=argumentsSave, result=image_element, image_path_to_save=image_path_to_save,
+                                  capture_path=capture_path, coordinates=coordinates)
+    return image_element, object_json_properties
 
 def generate_capture(experiment, columns_ui, columns, element, acu, case, generate_path, attr, activity, variant, attachments_path, balanced, log_size, original_experiment):
     '''
@@ -50,16 +59,15 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
     
     # if os.path.isfile(image_path_to_save + '.json'):
     #     with open(image_path_to_save + '.json', 'r') as f:
-    #         data = json.load(f)
+    #         json_properties = json.load(f)
     # else:
-            
     json_properties = {
-                        "img_shape": [
-                            np.array(capture_img).shape
-                        ],
-                        "compos": []
-                    }
-    id = 0
+            "img_shape": [
+                np.array(capture_img).shape
+            ],
+            "compos": []
+        }
+    id = 1
     
     try:
         for i in columns_ui:
@@ -67,16 +75,15 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
                 arguments = []
                 if i in args_tmp:
                     func = args_tmp[i]
-                    for j in func:
-                        print(j['id'])
+                    for screenshots_args in func:
                         if element is not None:
-                            coordinates = j["coordinates"]
-                            name = j["name"]
+                            coordinates = screenshots_args["coordinates"]
+                            var_function_name = screenshots_args["name"]
                             # TODO: generate autocolumns in front and edit this line
-                            if not "args_dependency" in j: 
+                            if not "args_dependency" in screenshots_args: 
                                 if experiment.screenshot_name_generation_function == "insert_text_image" and i in columns or "TextInput" in columns:
                                     arguments.append(attr[columns.index(i)])
-                                args = util.args_by_function_in_order(j["args"],name)
+                                args = util.args_by_function_in_order(screenshots_args["args"],var_function_name)
                                 arguments.append(args)
                             if not sep in new_image:
                                 image_path_to_save = generate_path + new_image
@@ -92,14 +99,10 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
                             arguments.append(capture_path)
                             arguments.append(coordinates)
 
-                            object_property = manage_dependency(experiment, name, arguments, argumentsSave, j, case, 0, 
-                                              activity, variant, balanced, log_size, image_path_to_save, capture_path, coordinates)
-
                             ui_element_class = i.split('.')
                             ui_element_class = ui_element_class[len(ui_element_class)-1]
-                            
-                            json_properties["compos"].append(
-                                {
+
+                            object_json_properties =  {
                                     "id": id,
                                     "class": ui_element_class,
                                     "column_min": coordinates[1],
@@ -107,19 +110,24 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
                                     "column_max": coordinates[3],
                                     "row_max": coordinates[2],
                                     "width": coordinates[2]-coordinates[0],
-                                    "height": coordinates[3]-coordinates[1],
-                                    "object_property": object_property
+                                    "height": coordinates[3]-coordinates[1]
                                 }
-                            )
+                            
+                            object_property, object_json_properties = manage_dependency(experiment, var_function_name, arguments, argumentsSave, screenshots_args, case, 0, 
+                                              activity, variant, balanced, log_size, image_path_to_save, capture_path, coordinates, object_json_properties)
+
+                            json_properties["compos"].append(object_json_properties)
                             id +=1
+                            
                             with open(image_path_to_save + '.json', 'w') as f:
-                                json.dump(json_properties, f)
+                                json.dump(json_properties, f, indent=4)
+                            
 
                         else:
                             new_image = ""
                         arguments = []
             except Exception as e:
-                # print("Unexpected error: " + str(e)) // TODO
+                print("Unexpected error: " + str(e)) # TODO
                 arguments = []
     except Exception as e:
         print("Unexpected error: " + str(e))
@@ -145,9 +153,9 @@ def generate_scenario_capture(experiment, element, case, generate_path, activity
         for variation_conf in json_args[gui_component_label]:
             if element is not None:
                 coordinates = variation_conf["coordinates"]
-                name = variation_conf["name"]
+                var_function_name = variation_conf["var_function_name"]
                 if not "args_dependency" in variation_conf: 
-                    args = util.args_by_function_in_order(variation_conf["args"],name)
+                    args = util.args_by_function_in_order(variation_conf["args"],var_function_name)
                     arguments.append(args)
                 if not sep in new_image:
                     image_path_to_save = generate_path + new_image
@@ -163,7 +171,7 @@ def generate_scenario_capture(experiment, element, case, generate_path, activity
                 arguments.append(capture_path)
                 arguments.append(coordinates)
 
-                manage_dependency(experiment, name, arguments, argumentsSave,
+                manage_dependency(experiment, var_function_name, arguments, argumentsSave,
                                   variation_conf, case, scenario, activity, variant, None, None)
             else:
                 new_image = ""
