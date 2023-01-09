@@ -3,6 +3,7 @@ import agosuirpa.generic_utils as util
 from experiments.models import Variations
 from agosuirpa.generic_utils import detect_function
 from agosuirpa.settings import sep, var_func_modify_properties
+from .gui_component_assign_properties import modify_gui_component_status
 import json
 from PIL import Image
 import numpy as np
@@ -10,31 +11,55 @@ import ast
 
 def manage_dependency(experiment, var_function_name, arguments, argumentsSave, screenshots_args, case, scenario, activity, variant, balanced, log_size, image_path_to_save, capture_path, coordinates, object_json_properties):
     if "args_dependency" in screenshots_args:
-        dependant_row = Variations.objects.filter(experiment=experiment, case_id=case, scenario=scenario, balanced=balanced, log_size=log_size,
-                                               activity=screenshots_args["args_dependency"]["Activity"], case_variation_id=screenshots_args["args_dependency"]["id"], variant=screenshots_args["args_dependency"]["V"]).order_by("id")
-        row=dependant_row[len(dependant_row)-1]
-        tmp = ast.literal_eval(row.arguments)
-        arguments = tmp+arguments
-        var_function_name = row.function_name
-        if len(arguments) > 0:
-            arguments[0].insert(0, row.result)
-        else:
-            arguments.append(row.result)
-            
-    process_info = {"variant": variant, "activity": activity, "object_json_properties": object_json_properties}
-    arguments.append(process_info)
-    
-    if var_function_name in var_func_modify_properties:
-        image_element, object_json_properties = util.detect_function(var_function_name)(arguments)
-    else:
-        image_element = util.detect_function(var_function_name)(arguments)
+        dependant_row = Variations.objects.filter(
+            experiment=experiment, 
+            case_id=case, 
+            scenario=scenario, 
+            balanced=balanced, 
+            log_size=log_size,
+            activity=screenshots_args["args_dependency"]["Activity"], 
+            case_variation_id=screenshots_args["args_dependency"]["id"], 
+            variant=screenshots_args["args_dependency"]["V"]
+        ).order_by("id")
         
-    if type(image_element) == str:
-        Variations.objects.create(experiment=experiment, case_id=case, scenario=scenario, balanced=balanced, log_size=log_size,
-                                  case_variation_id=screenshots_args["id"], activity=activity, variant=variant, function_name=var_function_name,
-                                  arguments=argumentsSave, result=image_element, image_path_to_save=image_path_to_save,
-                                  capture_path=capture_path, coordinates=coordinates)
-    return image_element, object_json_properties
+        row=dependant_row[len(dependant_row)-1]
+        # tmp = ast.literal_eval(row.arguments)
+        arguments = {**row.arguments, **arguments}
+        var_function_name = row.function_name
+        arguments["dependency_res"] = row.result
+            
+    func_res = util.detect_function(var_function_name)(arguments)
+        
+    if type(func_res["res"]) == str:
+        Variations.objects.create(experiment=experiment, 
+                                  case_id=case, 
+                                  scenario=scenario, 
+                                  balanced=balanced, 
+                                  log_size=log_size,
+                                  case_variation_id=screenshots_args["id"], 
+                                  activity=activity, 
+                                  variant=variant, 
+                                  function_name=var_function_name,
+                                  arguments=argumentsSave, 
+                                  result=func_res["res"],
+                                  image_path_to_save=image_path_to_save,
+                                  capture_path=capture_path,
+                                  coordinates=coordinates)
+        
+    if "bounding_box" in func_res:
+        object_json_properties["column_min"] = func_res["bounding_box"][0][0]
+        object_json_properties["row_min"] = func_res["bounding_box"][1][0]
+        object_json_properties["column_max"] = func_res["bounding_box"][0][1]
+        object_json_properties["row_max"] = func_res["bounding_box"][1][1]
+        object_json_properties["width"] = func_res["bounding_box"][2]
+        object_json_properties["height"] = func_res["bounding_box"][3]
+    elif "object_json_properties" in func_res:
+        object_json_properties = func_res["object_json_properties"]
+    
+    if "gui_component_status" in arguments:
+        object_json_properties = modify_gui_component_status(arguments["gui_component_status"], object_json_properties)
+        
+    return func_res, object_json_properties
 
 def generate_capture(experiment, columns_ui, columns, element, acu, case, generate_path, attr, activity, variant, attachments_path, balanced, log_size, original_experiment):
     '''
@@ -72,7 +97,7 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
     try:
         for i in columns_ui:
             try:
-                arguments = []
+                # arguments = []
                 if i in args_tmp:
                     func = args_tmp[i]
                     for screenshots_args in func:
@@ -81,10 +106,7 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
                             var_function_name = screenshots_args["name"]
                             # TODO: generate autocolumns in front and edit this line
                             if not "args_dependency" in screenshots_args: 
-                                if experiment.screenshot_name_generation_function == "insert_text_image" and i in columns or "TextInput" in columns:
-                                    arguments.append(attr[columns.index(i)])
-                                args = util.args_by_function_in_order(screenshots_args["args"],var_function_name)
-                                arguments.append(args)
+                                arguments = screenshots_args["args"]
                             if not sep in new_image:
                                 image_path_to_save = generate_path + new_image
                             else:
@@ -93,11 +115,6 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
                             # Check if there are previous variations applied to the original image and substitute the original image path by the modified one
                             if os.path.exists(image_path_to_save):
                                 capture_path = image_path_to_save
-
-                            argumentsSave = arguments.copy()
-                            arguments.append(image_path_to_save)
-                            arguments.append(capture_path)
-                            arguments.append(coordinates)
 
                             ui_element_class = i.split('.')
                             ui_element_class = ui_element_class[len(ui_element_class)-1]
@@ -111,8 +128,18 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
                                     "row_max": coordinates[2],
                                     "width": coordinates[2]-coordinates[0],
                                     "height": coordinates[3]-coordinates[1]
-                                }
+                            }
                             
+                            argumentsSave = arguments.copy()
+                            arguments["image_path_to_save"] = image_path_to_save
+                            arguments["original_image_path"] = capture_path
+                            arguments["coordinates"] = coordinates
+                            arguments["process_info"] = {
+                                "variant": variant, 
+                                "activity": activity, 
+                                "object_json_properties": object_json_properties
+                            }
+                    
                             object_property, object_json_properties = manage_dependency(experiment, var_function_name, arguments, argumentsSave, screenshots_args, case, 0, 
                                               activity, variant, balanced, log_size, image_path_to_save, capture_path, coordinates, object_json_properties)
 
@@ -166,6 +193,7 @@ def generate_scenario_capture(experiment, element, case, generate_path, activity
                 if os.path.exists(image_path_to_save):
                     capture_path = image_path_to_save
 
+                # TODO: adapt modifications in arguments structure to scenario configuration
                 argumentsSave = arguments.copy()
                 arguments.append(image_path_to_save)
                 arguments.append(capture_path)
