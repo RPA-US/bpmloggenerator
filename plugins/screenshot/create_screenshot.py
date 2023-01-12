@@ -56,8 +56,8 @@ def manage_dependency(experiment, var_function_name, arguments, argumentsSave, s
     elif "object_json_properties" in func_res:
         object_json_properties = func_res["object_json_properties"]
     
-    if "gui_component_status" in arguments:
-        object_json_properties = modify_gui_component_status(arguments["gui_component_status"], object_json_properties)
+    if "resulting_gui_component_status" in arguments:
+        object_json_properties = modify_gui_component_status(arguments["resulting_gui_component_status"], object_json_properties)
         
     return func_res, object_json_properties
 

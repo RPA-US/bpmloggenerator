@@ -2712,7 +2712,7 @@
         "model": "wizard.functionparam",
         "pk": 36,
         "fields": {
-            "id_code": "gui_component_status",
+            "id_code": "resulting_gui_component_status",
             "order": 1,
             "description": "features.experiment.param.description.gui_component_status",
             "function_param_category": 1,
