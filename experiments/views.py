@@ -104,6 +104,8 @@ class ExperimentView(generics.ListCreateAPIView):
                 description=request.data.get('description'),
                 number_scenarios=int(request.data.get('number_scenarios')) if request.data.get(
                     'number_scenarios') else None,
+                seed=request.data.get('seedLog') if request.data.get(
+                    'seedLog') else None,
                 variability_conf=json_attributes_load(request.data.get(
                     'variability_conf')) if request.data.get('variability_conf') else None,
                 scenarios_conf=json_attributes_load(request.data.get(
