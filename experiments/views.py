@@ -134,12 +134,12 @@ class ExperimentView(generics.ListCreateAPIView):
                 experiment.execution_start = datetime.datetime.now(
                     tz=timezone.utc)
                 experiment.is_being_processed = 1
+                experiment.status = ExperimentStatusChoice.LA.value
                 experiment.foldername = execute_experiment(experiment)
                 experiment.execution_finish = datetime.datetime.now(
                     tz=timezone.utc)
                 experiment.is_being_processed = 100
                 experiment.is_active = True
-                experiment.status = ExperimentStatusChoice.LA.value
             elif request.data.get('status') != ExperimentStatusChoice.PR.value:
                 experiment.status = ExperimentStatusChoice.SA.value
             experiment.save()

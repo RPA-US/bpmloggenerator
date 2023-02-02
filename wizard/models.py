@@ -52,7 +52,7 @@ class GUIComponent(models.Model):
             super(GUIComponent, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.filename    
+        return self.id_code    
 
 class VariabilityFunctionCategory(CategoryBase):
     """
@@ -89,7 +89,7 @@ class VariabilityFunction(models.Model):
     variability_function_category = models.ForeignKey(VariabilityFunctionCategory, on_delete=models.CASCADE, blank=True, null=True, limit_choices_to={'active': True},)
         
     def __str__(self):
-        return self.filename
+        return self.function_name
 
 class FunctionParam(models.Model):
     id_code = models.CharField(max_length=255, unique=True)

@@ -4,6 +4,12 @@ Automatic generation of synthetic UI log in RPA context introducing variability.
 ## Before run
 You need to have [Python](https://www.python.org/downloads/) installed.
 
+If you are using a linux based OS, install _tkinter_, p.e. in the case of Ubuntu:
+
+`
+sudo apt-get install python3-tk
+`
+
 If desired, you can create an isolated installation of the project requirements by creating a [virtual environment](https://docs.python.org/3/library/venv.html#:~:text=A%20virtual%20environment%20is%20a,part%20of%20your%20operating%20system.).
 
 ## Configuration DB

@@ -6,7 +6,7 @@ import random
 import json
 from colorama import Back, Style, Fore
 from plugins.screenshot.create_screenshot import generate_capture, generate_scenario_capture
-from plugins.screenshot.replace_gui_component import generate_copied_capture_without_root, generate_copied_capture
+from plugins.screenshot.screenshot_filenames import generate_copied_capture_without_root, generate_copied_capture
 from agosuirpa.generic_utils import detect_function, args_by_function_in_order
 from agosuirpa.settings import sep, EXPERIMENT_RESULTS_PATH, UI_LOGS_FOLDERNAME, ADDITIONAL_SCENARIOS_RESOURCES_FOLDERNAME, PREFIX_SCENARIO
 
@@ -66,13 +66,16 @@ def generate_row(experiment, generate_path, dict, acu, case, variant, original_e
                             if i == screenshot_column_name:
                                 if original_experiment:
                                     initValue = attachments_path + sep + initValue
-                                val = generate_copied_capture_without_root(
-                                    [initValue, generate_path, acu])
+                                val = generate_copied_capture_without_root({
+                                    "original_image_path": initValue, 
+                                    "image_path_to_save": generate_path, 
+                                    "number_to_concatenate": acu
+                                    })
                             else:
                                 val = initValue
                         else:
                             val = ""
-                    print("Varying " + str(variant) + "-act." + str(key))
+                    # print("Varying " + str(variant) + "-act." + str(key))
                 else:
                     val = ""
             attr.append(val)
@@ -299,8 +302,11 @@ def execute_experiment(experiment):
                                 image_to_duplicate = image_prefix + \
                                     select_last_item(
                                         element["image_to_duplicate"], sep)
-                                val = generate_copied_capture(
-                                    [image_to_duplicate, resources_folder + sep, scenario_iteration_path + "_" + init_value_original_screenshot])
+                                val = generate_copied_capture({
+                                    "original_image_path": image_to_duplicate, 
+                                    "image_path_to_save": resources_folder + sep, 
+                                    "to_concatenate": scenario_iteration_path + "_" + init_value_original_screenshot
+                                })
                             else:
                                 val = ""
                         original_json["trace"][str(variant)][key][screenshot_column_name]["initValue"] = str(val)
