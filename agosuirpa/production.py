@@ -271,8 +271,8 @@ ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
 
 # AGOSUIRPA platform settings
 # OS 
-operating_system =sys.platform
-print("Operating system detected: " + operating_system)
+# operating_system =sys.platform
+# print("Operating system detected: " + operating_system)
 # Element specification filename and path separator (depends on OS)
 # if "win" in operating_system:
 #     sep = "\\"
