@@ -6,7 +6,7 @@ import random
 import json
 from colorama import Back, Style, Fore
 from plugins.screenshot.create_screenshot import generate_capture, generate_scenario_capture
-from plugins.screenshot.replace_gui_component import generate_copied_capture_without_root, generate_copied_capture
+from plugins.screenshot.screenshot_filenames import generate_copied_capture_without_root, generate_copied_capture
 from agosuirpa.generic_utils import detect_function, args_by_function_in_order
 from agosuirpa.settings import sep, EXPERIMENT_RESULTS_PATH, UI_LOGS_FOLDERNAME, ADDITIONAL_SCENARIOS_RESOURCES_FOLDERNAME, PREFIX_SCENARIO
 
@@ -66,12 +66,16 @@ def generate_row(experiment, generate_path, dict, acu, case, variant, original_e
                             if i == screenshot_column_name:
                                 if original_experiment:
                                     initValue = attachments_path + sep + initValue
-                                val = generate_copied_capture_without_root(
-                                    [initValue, generate_path, acu])
+                                val = generate_copied_capture_without_root({
+                                    "original_image_path": initValue, 
+                                    "image_path_to_save": generate_path, 
+                                    "number_to_concatenate": acu
+                                    })
                             else:
                                 val = initValue
                         else:
                             val = ""
+                    # print("Varying " + str(variant) + "-act." + str(key))
                 else:
                     val = ""
             attr.append(val)
@@ -195,7 +199,7 @@ def automatic_experiments(experiment, generate_path, variability_conf, scenario)
         current_execution += total_case_generations*scenario
         
         original_experiment = False
-        version_path = generate_path + sep + prefix_scenario + str(scenario+1)
+        version_path = generate_path + sep + PREFIX_SCENARIO + str(scenario+1)
         json_log = open(variability_conf)
         json_act_path = json.load(json_log)
     else:
@@ -231,7 +235,7 @@ def execute_experiment(experiment):
     variability_conf = experiment.variability_conf
     scenarios_conf = experiment.scenarios_conf
     attachments_path = experiment.screenshots_path
-    generate_path = experiment_results_path
+    generate_path = EXPERIMENT_RESULTS_PATH
     screenshot_column_name = experiment.special_colnames["Screenshot"]
     folder_name = experiment.name.replace(" ", "_")+"_"+str(experiment.id)
 
@@ -242,10 +246,10 @@ def execute_experiment(experiment):
     experiment_path = generate_path + sep + \
         folder_name + "_" + str(experiment.id)
     resources_folder = experiment_path + sep + \
-        additional_scenarios_resources_foldername
+        ADDITIONAL_SCENARIOS_RESOURCES_FOLDERNAME
     if not os.path.exists(experiment_path):
         os.makedirs(experiment_path)
-    path = experiment_path + sep + ui_logs_foldername
+    path = experiment_path + sep + UI_LOGS_FOLDERNAME
     if not os.path.exists(path):
         os.makedirs(path)
 
@@ -272,7 +276,7 @@ def execute_experiment(experiment):
         image_mapping = {}
         # Call scenario variation: "size" variations
         for scenario_i in range(1, scenario_size+1):
-            scenario_iteration_path = prefix_scenario + str(scenario_i)
+            scenario_iteration_path = PREFIX_SCENARIO + str(scenario_i)
             image_names_conf[scenario_i-1] = {}
             # Loading json to modify
             original_json = variability_conf
@@ -298,8 +302,11 @@ def execute_experiment(experiment):
                                 image_to_duplicate = image_prefix + \
                                     select_last_item(
                                         element["image_to_duplicate"], sep)
-                                val = generate_copied_capture(
-                                    [image_to_duplicate, resources_folder + sep, scenario_iteration_path + "_" + init_value_original_screenshot])
+                                val = generate_copied_capture({
+                                    "original_image_path": image_to_duplicate, 
+                                    "image_path_to_save": resources_folder + sep, 
+                                    "to_concatenate": scenario_iteration_path + "_" + init_value_original_screenshot
+                                })
                             else:
                                 val = ""
                         original_json["trace"][str(variant)][key][screenshot_column_name]["initValue"] = str(val)
@@ -308,7 +315,7 @@ def execute_experiment(experiment):
             json_to_write = json.dumps(original_json, indent=4)
             # Writing to .json
             filename = resources_folder + sep + \
-                prefix_scenario + str(scenario_i) + ".json"
+                PREFIX_SCENARIO + str(scenario_i) + ".json"
             with open(filename, "w") as outfile:
                 outfile.write(json_to_write)
             image_mapping = filename

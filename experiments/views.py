@@ -104,6 +104,8 @@ class ExperimentView(generics.ListCreateAPIView):
                 description=request.data.get('description'),
                 number_scenarios=int(request.data.get('number_scenarios')) if request.data.get(
                     'number_scenarios') else None,
+                seed=request.data.get('seedLog') if request.data.get(
+                    'seedLog') else None,
                 variability_conf=json_attributes_load(request.data.get(
                     'variability_conf')) if request.data.get('variability_conf') else None,
                 scenarios_conf=json_attributes_load(request.data.get(
@@ -132,12 +134,12 @@ class ExperimentView(generics.ListCreateAPIView):
                 experiment.execution_start = datetime.datetime.now(
                     tz=timezone.utc)
                 experiment.is_being_processed = 1
+                experiment.status = ExperimentStatusChoice.LA.value
                 experiment.foldername = execute_experiment(experiment)
                 experiment.execution_finish = datetime.datetime.now(
                     tz=timezone.utc)
                 experiment.is_being_processed = 100
                 experiment.is_active = True
-                experiment.status = ExperimentStatusChoice.LA.value
             elif request.data.get('status') != ExperimentStatusChoice.PR.value:
                 experiment.status = ExperimentStatusChoice.SA.value
             experiment.save()

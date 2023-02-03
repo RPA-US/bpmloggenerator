@@ -28,6 +28,10 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'agosuirpa.herokuapp.com']
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Variability function that modify UI element (json) properties
+var_func_modify_properties = ["gui_component_status"]
+
+# Database configuration
 DB_NAME =       env('DB_NAME')
 DB_HOST =       env('DB_HOST')
 DB_PORT =       env('DB_PORT')
@@ -265,14 +269,14 @@ ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
 
 # AGOSUIRPA platform settings
 # OS 
-operating_system =sys.platform
-print("Operating system detected: " + operating_system)
+# operating_system =sys.platform
+# print("Operating system detected: " + operating_system)
 # Element specification filename and path separator (depends on OS)
-if "windows" in operating_system:
-    sep = "\\"
-    element_trace = "configuration"+sep+"element_trace.json"
-else:
-    sep = "/"
-    element_trace = "configuration"+sep+"element_trace_linux.json"
+# if "win" in operating_system:
+#     sep = "\\"
+#     element_trace = "configuration"+sep+"element_trace.json"
+# else:
+sep = "/"
+element_trace = "configuration"+sep+"element_trace_linux.json"
 # Function specification filename
 function_trace = "configuration"+sep+"function_trace.json"
