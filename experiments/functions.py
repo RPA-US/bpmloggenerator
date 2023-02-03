@@ -57,8 +57,8 @@ def generate_row(experiment, generate_path, dict, acu, case, variant, original_e
                     args = args_by_function_in_order(element["args"], name)
                     if variate == 1:
                         if i == screenshot_column_name:
-                            val = generate_capture(
-                                experiment, columns_ui, columns, element, acu, case, generate_path, attr, key, variant, attachments_path, balanced, log_size, original_experiment)
+                                val = generate_capture(
+                                    experiment, columns_ui, columns, element, acu, case, generate_path, attr, key, variant, attachments_path, balanced, log_size, original_experiment)
                         else:
                             val = detect_function(name)(args)
                     elif variate == 0:

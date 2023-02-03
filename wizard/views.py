@@ -89,7 +89,7 @@ class GUIComponentViewSet(viewsets.ModelViewSet):
             response_content = {"message": msg, "id": guiComponent.id}
 
         except Exception as e:
-            msg = 'Some of atributes are invalid: ' + str(e)
+            msg = str(e)
             st = status.HTTP_422_UNPROCESSABLE_ENTITY
             response_content = {"message": msg}
         return Response(response_content, status=st)
@@ -119,7 +119,7 @@ class GUIComponentViewSet(viewsets.ModelViewSet):
             response_content = {"message": msg}
 
         except Exception as e:
-            msg = 'Some of atributes are invalid: ' + str(e)
+            msg = str(e)
             st = status.HTTP_422_UNPROCESSABLE_ENTITY
             response_content = {"message": msg}
         return Response(response_content, status=st)

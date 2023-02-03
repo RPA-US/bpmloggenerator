@@ -12,7 +12,8 @@ def generate_copied_capture(args):
         name = generate_path+str(number)+"_img.png"
     else:
         name = generate_path+str(number)
-    shutil.copyfile(capture, name)
+    
+    copyfile(capture, name)
     # Random number and the extension with a img identification
     return name
 
@@ -25,6 +26,12 @@ def generate_copied_capture_without_root(args):
     number = args["number_to_concatenate"]
     
     name = str(number)+"_img.png"
-    shutil.copyfile(capture, generate_path+name)
+    copyfile(capture, generate_path+name)
     # Random number and the extension with a img identification
     return name
+
+def copyfile(capture, path):
+    try:
+        shutil.copyfile(capture, path)
+    except Exception as e:
+        raise Exception('errors.generate.capture.screenshot='+capture)
