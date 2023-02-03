@@ -22,6 +22,13 @@ Firstly, you need configure the Database for the proyect. To do this, create an 
 -  DB_PASSWORD="Password for the previous user"
 -  DJANGO_SETTINGS_MODULE=agosuirpa.settings
 -  DJANGO_SECRET_KEY="Secret text for cryptographic purposes"
+-  EMAIL_HOST_USER="Mail used in the server p.e.: mail@sample.com"
+-  EMAIL_HOST_PASSWORD="Password of the mail used in the server"
+-  API_VERSION="Prefix used in all endpoints p.e.: agosuirpa/api/v1/"
+-  PREFIX_SCENARIO="Prefix used to identify scenarios folders p.e.: sc_"
+-  EXPERIMENT_RESULTS_PATH="Name of the folder where experiment data will be stored"
+-  UI_LOGS_FOLDERNAME="Name of the folder that appears inside the resulting data of generating a experiment where experiment UI logs and screenshots will be stored"
+-  ADDITIONAL_SCENARIOS_RESOURCES_FOLDERNAME="Name of the folder that appears inside the resulting data of generating a experiment where experiment scenarios variability .json files will be stored"
 `
 ## Project initialization
 
