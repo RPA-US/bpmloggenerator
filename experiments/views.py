@@ -148,7 +148,7 @@ class ExperimentView(generics.ListCreateAPIView):
                                 "id": experiment.id, "status": experiment.status}
 
         except Exception as e:
-            msg = 'Some of atributes are invalid: ' + str(e)
+            msg = str(e)
             st = status.HTTP_422_UNPROCESSABLE_ENTITY
             response_content = {"message": msg}
 
@@ -264,7 +264,7 @@ class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
                                     "id": experiment.id, "status": experiment.status}
 
         except Exception as e:
-            msg = 'Some of atributes are invalid: ' + str(e)
+            msg = str(e)
             st = status.HTTP_422_UNPROCESSABLE_ENTITY
             response_content = {"message": msg}
         return Response(response_content, status=st)
