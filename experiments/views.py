@@ -13,7 +13,7 @@ from django.http import FileResponse, Http404
 from rest_framework.decorators import api_view
 from django.db import transaction
 import json
-from agosuirpa.settings import sep
+from bpmloggenerator.settings import sep
 from django.shortcuts import get_object_or_404
 import datetime
 from django.utils import timezone

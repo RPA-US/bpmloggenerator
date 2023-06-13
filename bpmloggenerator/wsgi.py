@@ -1,5 +1,5 @@
 """
-WSGI config for agosuirpa project.
+WSGI config for bpmloggenerator project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

@@ -1,4 +1,4 @@
-# AGOSUIRPA
+# bpmLogGenerator
 Automatic generation of synthetic UI log in RPA context introducing variability.
 
 ## Before run
@@ -20,11 +20,11 @@ Firstly, you need configure the Database for the proyect. To do this, create an 
 -  DB_PORT="Database access port"
 -  DB_USER="Database user to access. Use a new user with limited credentials"
 -  DB_PASSWORD="Password for the previous user"
--  DJANGO_SETTINGS_MODULE=agosuirpa.settings
+-  DJANGO_SETTINGS_MODULE=bpmloggenerator.settings
 -  DJANGO_SECRET_KEY="Secret text for cryptographic purposes"
 -  EMAIL_HOST_USER="Mail used in the server p.e.: mail@sample.com"
 -  EMAIL_HOST_PASSWORD="Password of the mail used in the server"
--  API_VERSION="Prefix used in all endpoints p.e.: agosuirpa/api/v1/"
+-  API_VERSION="Prefix used in all endpoints p.e.: bpmloggenerator/api/v1/"
 -  PREFIX_SCENARIO="Prefix used to identify scenarios folders p.e.: sc_"
 -  EXPERIMENT_RESULTS_PATH="Name of the folder where experiment data will be stored"
 -  UI_LOGS_FOLDERNAME="Name of the folder that appears inside the resulting data of generating a experiment where experiment UI logs and screenshots will be stored"
@@ -48,10 +48,10 @@ To insert initial data in DB.
 
 **`python manage.py runserver`**
 
-Runs the app in the debug mode. If you want to init in deploy mode, change in the *agosuirpa/settings.py* file, the *DEBUG* mode attribute to False.
+Runs the app in the debug mode. If you want to init in deploy mode, change in the *bpmloggenerator/settings.py* file, the *DEBUG* mode attribute to False.
 
 ## Learn More
 
 You can learn more about the deploy of the aplication backend in the [Django documentation](https://docs.djangoproject.com/en/4.0/).
 
-A video demo is available at: [AGOSUIRPA](https://youtu.be/RrrNs2wczos)
+A video demo is available at: [bpmLogGenerator](https://youtu.be/RrrNs2wczos)

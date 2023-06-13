@@ -9,8 +9,8 @@ networks:
 volumes:
   db_data:
     name: db_data
-  agosuirpa_data:
-    name: agosuirpa_data
+  bpmloggenerator_data:
+    name: bpmloggenerator_data
 
 services:
   db:
@@ -23,12 +23,12 @@ services:
       - internal
     env_file: ./.env
 
-  agosuirpa:
+  bpmloggenerator:
     build: .
-    container_name: agosuirpa
+    container_name: bpmloggenerator
     restart: unless-stopped
     volumes:
-      - agosuirpa_data:/data
+      - bpmloggenerator_data:/data
     networks:
       - internal
     env_file: ./.env

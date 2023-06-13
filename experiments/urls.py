@@ -1,6 +1,6 @@
 from django.urls import path, re_path
 from . import views
-from agosuirpa.urls import router
+from bpmloggenerator.urls import router
 
 app_name = 'experiment'
 

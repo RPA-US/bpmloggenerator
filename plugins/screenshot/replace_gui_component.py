@@ -2,8 +2,8 @@ from PIL import Image
 import PIL
 from PIL import Image, ImageFont, ImageDraw
 # ImageFile.LOAD_TRUNCATED_IMAGES = True
-import agosuirpa.generic_utils as util
-from agosuirpa.settings import sep
+import bpmloggenerator.generic_utils as util
+from bpmloggenerator.settings import sep
 
 
 ###################################################################################################

@@ -1,4 +1,4 @@
-from agosuirpa.urls import router
+from bpmloggenerator.urls import router
 # from django.urls import path, re_path
 from .views import FunctionParamViewSet, VariabilityFunctionCategoryViewSet, VariabilityFunctionViewSet, GUIComponentCategoryViewSet, GUIComponentViewSet, FunctionParamCategoryViewSet
 

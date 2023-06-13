@@ -1,6 +1,6 @@
 from lorem_text import lorem
 import random
-from agosuirpa.settings import sep
+from bpmloggenerator.settings import sep
 
 def generate_words(args):
     '''

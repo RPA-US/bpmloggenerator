@@ -8,7 +8,7 @@ RUN apt-get update
 RUN apt-get install -y gcc postgresql-server-dev-all musl-dev libffi-dev cmake python-tk
 
 # Allows docker to cache installed dependencies between builds
-WORKDIR /agosuirpa
+WORKDIR /bpmloggenerator
 RUN /usr/local/bin/python -m venv venv
 RUN ./venv/bin/python -m pip install --upgrade pip
 COPY requirements.txt requirements.txt

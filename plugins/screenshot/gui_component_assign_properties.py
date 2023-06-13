@@ -1,8 +1,8 @@
 from PIL import Image
 import json
 from .replace_gui_component import replace_gui_element_and_save, resize_respecting_ratio
-import agosuirpa.generic_utils as util
-from agosuirpa.settings import sep
+import bpmloggenerator.generic_utils as util
+from bpmloggenerator.settings import sep
 from lorem_text import lorem
 from PIL import Image, ImageDraw, ImageFont
 

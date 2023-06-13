@@ -1,7 +1,7 @@
 import json
 import random
 import os
-from agosuirpa.settings import function_trace, element_trace
+from bpmloggenerator.settings import function_trace, element_trace
 import os
 from wizard.models import VariabilityFunction, FunctionParam
 

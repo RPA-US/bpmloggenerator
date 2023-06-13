@@ -1,8 +1,8 @@
 import os
-import agosuirpa.generic_utils as util
+import bpmloggenerator.generic_utils as util
 from experiments.models import Variations
-from agosuirpa.generic_utils import detect_function
-from agosuirpa.settings import sep, var_func_modify_properties
+from bpmloggenerator.generic_utils import detect_function
+from bpmloggenerator.settings import sep, var_func_modify_properties
 from .gui_component_assign_properties import modify_gui_component_status
 import json
 from PIL import Image

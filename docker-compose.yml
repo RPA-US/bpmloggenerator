@@ -12,8 +12,8 @@ networks:
 volumes:
   db_data:
     name: db_data
-  agosuirpa_data:
-    name: agosuirpa_data
+  bpmloggenerator_data:
+    name: bpmloggenerator_data
 
 services:
   db:
@@ -26,18 +26,18 @@ services:
       - internal
     env_file: ./.env
 
-  agosuirpa:
-    image: ghcr.io/rpa-us/agosuirpa/agosuirpa:latest
-    container_name: agosuirpa
+  bpmloggenerator:
+    image: ghcr.io/rpa-us/bpmloggenerator/bpmloggenerator:latest
+    container_name: bpmloggenerator
     restart: unless-stopped
     volumes:
-      - agosuirpa_data:/data
+      - bpmloggenerator_data:/data
     networks:
       - internal
       - caddy
     env_file: ./.env
     labels:
       caddy: canela.lsi.us.es
-      caddy.handle: /agosuirpa/api/*
+      caddy.handle: /bpmloggenerator/api/*
       caddy.handle.0_reverse_proxy: '{{upstreams 8000}}'
       com.centurylinklabs.watchtower.enable: true

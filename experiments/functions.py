@@ -7,8 +7,8 @@ import json
 from colorama import Back, Style, Fore
 from plugins.screenshot.create_screenshot import generate_capture, generate_scenario_capture
 from plugins.screenshot.screenshot_filenames import generate_copied_capture_without_root, generate_copied_capture
-from agosuirpa.generic_utils import detect_function, args_by_function_in_order
-from agosuirpa.settings import sep, EXPERIMENT_RESULTS_PATH, UI_LOGS_FOLDERNAME, ADDITIONAL_SCENARIOS_RESOURCES_FOLDERNAME, PREFIX_SCENARIO
+from bpmloggenerator.generic_utils import detect_function, args_by_function_in_order
+from bpmloggenerator.settings import sep, EXPERIMENT_RESULTS_PATH, UI_LOGS_FOLDERNAME, ADDITIONAL_SCENARIOS_RESOURCES_FOLDERNAME, PREFIX_SCENARIO
 
 def validation_params(json, number_logs, percent_per_trace):
     '''

@@ -1,8 +1,8 @@
 #!/bin/bash
-/agosuirpa/venv/bin/python /agosuirpa/manage.py makemigrations
-/agosuirpa/venv/bin/python /agosuirpa/manage.py makemigrations users
-/agosuirpa/venv/bin/python /agosuirpa/manage.py makemigrations experiments
-/agosuirpa/venv/bin/python /agosuirpa/manage.py makemigrations wizard
-/agosuirpa/venv/bin/python /agosuirpa/manage.py migrate
-/agosuirpa/venv/bin/python /agosuirpa/manage.py collectstatic --noinput
-/agosuirpa/venv/bin/python -m gunicorn agosuirpa.wsgi:application -b 0.0.0.0:8000
+/bpmloggenerator/venv/bin/python /bpmloggenerator/manage.py makemigrations
+/bpmloggenerator/venv/bin/python /bpmloggenerator/manage.py makemigrations users
+/bpmloggenerator/venv/bin/python /bpmloggenerator/manage.py makemigrations experiments
+/bpmloggenerator/venv/bin/python /bpmloggenerator/manage.py makemigrations wizard
+/bpmloggenerator/venv/bin/python /bpmloggenerator/manage.py migrate
+/bpmloggenerator/venv/bin/python /bpmloggenerator/manage.py collectstatic --noinput
+/bpmloggenerator/venv/bin/python -m gunicorn bpmloggenerator.wsgi:application -b 0.0.0.0:8000
