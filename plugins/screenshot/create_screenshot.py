@@ -24,7 +24,11 @@ def manage_dependency(experiment, var_function_name, arguments, argumentsSave, s
         
         row=dependant_row[len(dependant_row)-1]
         # tmp = ast.literal_eval(row.arguments)
-        arguments = {**row.arguments, **arguments}
+        if type(row.arguments) != dict:
+            row_arg_aux = json.loads(row.arguments.replace("\'", "\""))
+        else:
+            row_arg_aux = row.arguments
+        arguments = {**row_arg_aux, **arguments}
         var_function_name = row.function_name
         arguments["dependency_res"] = row.result
             
@@ -46,7 +50,7 @@ def manage_dependency(experiment, var_function_name, arguments, argumentsSave, s
                                   capture_path=capture_path,
                                   coordinates=coordinates)
         
-    if "bounding_box" in func_res:
+    if "bounding_box" in func_res and type(func_res["bounding_box"][0]) == list:
         object_json_properties["column_min"] = func_res["bounding_box"][0][0]
         object_json_properties["row_min"] = func_res["bounding_box"][1][0]
         object_json_properties["column_max"] = func_res["bounding_box"][0][1]
@@ -97,16 +101,14 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
     try:
         for i in columns_ui:
             try:
-                # arguments = []
+                arguments = {}
                 if i in args_tmp:
                     func = args_tmp[i]
                     for screenshots_args in func:
                         if element is not None:
                             coordinates = screenshots_args["coordinates"]
                             var_function_name = screenshots_args["name"]
-                            # TODO: generate autocolumns in front and edit this line
-                            if not "args_dependency" in screenshots_args: 
-                                arguments = screenshots_args["args"]
+                            
                             if not sep in new_image:
                                 image_path_to_save = generate_path + new_image
                             else:
@@ -130,6 +132,9 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
                                     "height": coordinates[3]-coordinates[1]
                             }
                             
+                            # TODO: generate autocolumns in front and edit this line
+                            if not "args_dependency" in screenshots_args: 
+                                arguments = screenshots_args["args"]
                             argumentsSave = arguments.copy()
                             arguments["image_path_to_save"] = image_path_to_save
                             arguments["original_image_path"] = capture_path
@@ -152,7 +157,7 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
 
                         else:
                             new_image = ""
-                        arguments = []
+                        arguments = {}
             except Exception as e:
                 print("Unexpected error: " + str(e)) # TODO
                 arguments = []
@@ -175,15 +180,17 @@ def generate_scenario_capture(experiment, element, case, generate_path, activity
     json_args = element["args"]
     args = [generate_path, case]
 
-    arguments = []
+    arguments = {}
+    id = 1
+    
     for gui_component_label in json_args:
         for variation_conf in json_args[gui_component_label]:
             if element is not None:
                 coordinates = variation_conf["coordinates"]
-                var_function_name = variation_conf["var_function_name"]
-                if not "args_dependency" in variation_conf: 
-                    args = util.args_by_function_in_order(variation_conf["args"],var_function_name)
-                    arguments.append(args)
+                var_function_name = variation_conf["name"]
+                # if not "args_dependency" in variation_conf: 
+                #     args = util.args_by_function_in_order(variation_conf["args"],var_function_name)
+                #     arguments.append(args)
                 if not sep in new_image:
                     image_path_to_save = generate_path + new_image
                 else:
@@ -193,16 +200,40 @@ def generate_scenario_capture(experiment, element, case, generate_path, activity
                 if os.path.exists(image_path_to_save):
                     capture_path = image_path_to_save
 
-                # TODO: adapt modifications in arguments structure to scenario configuration
-                argumentsSave = arguments.copy()
-                arguments.append(image_path_to_save)
-                arguments.append(capture_path)
-                arguments.append(coordinates)
 
-                manage_dependency(experiment, var_function_name, arguments, argumentsSave,
-                                  variation_conf, case, scenario, activity, variant, None, None)
+                ui_element_class = gui_component_label.split('.')
+                ui_element_class = ui_element_class[len(ui_element_class)-1]
+                
+                object_json_properties =  {
+                        "id": id,
+                        "class": ui_element_class,
+                        "column_min": coordinates[1],
+                        "row_min": coordinates[0],
+                        "column_max": coordinates[3],
+                        "row_max": coordinates[2],
+                        "width": coordinates[2]-coordinates[0],
+                        "height": coordinates[3]-coordinates[1]
+                }
+
+                # TODO: adapt modifications in arguments structure to scenario configuration
+                if not "args_dependency" in variation_conf: 
+                    arguments = variation_conf["args"]
+                argumentsSave = arguments.copy()
+                arguments["image_path_to_save"] = image_path_to_save
+                arguments["original_image_path"] = capture_path
+                arguments["coordinates"] = coordinates
+                arguments["process_info"] = {
+                    "variant": variant, 
+                    "activity": activity, 
+                    "object_json_properties": object_json_properties
+                }
+        
+                object_property, object_json_properties = manage_dependency(experiment, var_function_name, arguments, argumentsSave, variation_conf, case, 0, 
+                                    activity, variant, None, None, image_path_to_save, capture_path, coordinates, object_json_properties)
+
             else:
                 new_image = ""
-            arguments = []
+            id+=1
+            arguments = {}
 
     return new_image

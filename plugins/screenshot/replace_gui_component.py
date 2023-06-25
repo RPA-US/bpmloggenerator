@@ -43,6 +43,8 @@ def replace_gui_element_and_save(image_path_to_save, image_gui_element, newsize,
         
         back_im.paste(upper_im,(int(left_top_x),int(left_top_y)), upper_im)
         back_im.save(str(image_path_to_save), quality=95, format="png")
+        h = upper_im.height
+        w = upper_im.width
     else:
         upper_im = image_gui_element.copy()
         # Resize gui element
@@ -54,7 +56,7 @@ def replace_gui_element_and_save(image_path_to_save, image_gui_element, newsize,
             
         back_im.paste(upper_im,(int(left_top_x),int(left_top_y)), upper_im)
         back_im.save(str(image_path_to_save), quality=95)
-    h, w, c = upper_im.shape
+        h, w, c = upper_im.shape
     ui_element_coords = [[int(left_top_x), int(left_top_x)+w], [int(left_top_y), int(left_top_y)+h], w, h]
     return ui_element_coords
 
@@ -171,14 +173,14 @@ def hidden_gui_element(args):
         new_image: saved image
         configuration: background color (p.e. #FFFFF)
     '''
-    configuration = str(util.select_random_list(args[0]))
+    # configuration = str(util.select_random_list(args[0]))
     new_image = args["image_path_to_save"]
     capture = args["original_image_path"]
     coordinates = args["coordinates"]
     coordinates = [int(coordinates[0]),int(coordinates[1]),int(coordinates[2]),int(coordinates[3])]
 
     # Configuration
-    rectangle_color = configuration
+    rectangle_color = args["color_hidden_square"]
     # Open capture
     capture_img = Image.open(capture)
     back_im = capture_img.copy()
@@ -190,7 +192,7 @@ def hidden_gui_element(args):
     if sep in new_image:
         splitted = new_image.split(sep)
         new_image = splitted[len(splitted)-1]
-    return {"res": new_image, "bounding_box": coordinates}
+    return {"res": new_image, "bounding_box": [[int(coordinates[0]),int(coordinates[1])],[int(coordinates[2]),int(coordinates[3])], int(coordinates[2]) - int(coordinates[0]), int(coordinates[3]) - int(coordinates[1])]}
 
 
 
