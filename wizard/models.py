@@ -4,7 +4,7 @@ from django.db import models
 from categories.models import CategoryBase
 from django.core.exceptions import ValidationError
 from django.forms import BooleanField
-from users.models import CustomUser
+from django.contrib.auth.models import User
 from private_storage.fields import PrivateImageField
 # from django_postgres_extensions.models.fields import ArrayField
 from bpmloggenerator.settings import sep
@@ -37,7 +37,7 @@ class GUIComponent(models.Model):
         GUIComponentCategory, on_delete=models.CASCADE, blank=True, null=True, limit_choices_to={'active': True},
     )
     preloaded = models.BooleanField(default=False)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='GUIComponentOwner')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='GUIComponentOwner')
 
     class Meta:
         verbose_name = "GUI Component"

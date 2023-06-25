@@ -42,13 +42,18 @@ To create a DB model.
 
 To create the tables in the DB based on project models.
 
-**`python manage.py loaddata configuration/db_populate.json`**
+**`python manage.py loaddata configuration/db_populate_v1.json`**
+
+To take all the advantage that pre-loaded data offers to us, it is needed to include [*privatefiles/GUI_components*](https://uses0.sharepoint.com/:u:/r/sites/TonysThesis/Documentos%20compartidos/Workspace/04.%20Miscellaneous/Tesis/Deployments/BPM-LOG-GENERATOR/privatefiles.zip?csf=1&web=1&e=0iE9ee) folder in root of the project. The same need to be done by [*resources*](https://uses0.sharepoint.com/:u:/r/sites/TonysThesis/Documentos%20compartidos/Workspace/04.%20Miscellaneous/Tesis/Deployments/BPM-LOG-GENERATOR/resources.zip?csf=1&web=1&e=8XqP1I).
 
 To insert initial data in DB.
 
 **`python manage.py runserver`**
 
 Runs the app in the debug mode. If you want to init in deploy mode, change in the *bpmloggenerator/settings.py* file, the *DEBUG* mode attribute to False.
+
+## User Verfication Mail
+Note that to change the domain name that appears in users verification mail it is needed to edit Site entity via Django Admin.
 
 ## Learn More
 

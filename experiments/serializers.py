@@ -15,7 +15,7 @@ class ExperimentSerializer(serializers.ModelSerializer):
 
     def get_user(self, obj):
         # here obj is a build model object
-        return obj.author.CustomUser
+        return obj.author.User
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:

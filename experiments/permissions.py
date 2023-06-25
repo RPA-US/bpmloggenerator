@@ -3,7 +3,7 @@ Possible functions for the ``PRIVATE_STORAGE_AUTH_FUNCTION`` setting.
 """
 from wizard.models import GUIComponent
 from experiments.models import Screenshot
-from users.models import CustomUser
+from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 
 

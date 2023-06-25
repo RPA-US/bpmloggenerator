@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_auth',
     'django.contrib.sites',
+    'django_extensions',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -99,7 +100,7 @@ ROOT_URLCONF = 'bpmloggenerator.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'build', BASE_DIR / 'landing'],
+        'DIRS': [BASE_DIR / 'build', BASE_DIR / 'templates'],#, BASE_DIR / 'venv' / 'Lib' /'allauth' /'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -221,11 +222,6 @@ SPECTACULAR_SETTINGS = {
 PRIVATE_STORAGE_ROOT = os.path.join(BASE_DIR, "privatefiles")
 PRIVATE_STORAGE_AUTH_FUNCTION = 'experiments.permissions.allow_staff'
 
-# - Abstract User
-
-AUTH_USER_MODEL = 'users.CustomUser'
-
-
 # Specifies localhost port 3000 where the React
 # server will be running is safe to receive requests
 # from. All all of this.
@@ -247,18 +243,21 @@ CSRF_TRUSTED_ORIGINS = [
 # Django All Auth config. Add all of this.
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_PORT = 587
+# EMAIL_PORT = 465
+DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER')
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = True
+SITE_ID = 1 
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-SITE_ID = 1 
 #django-allauth registraion settings
 # ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS =1
 ACCOUNT_EMAIL_REQUIRED = True
@@ -269,6 +268,9 @@ ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
 OLD_PASSWORD_FIELD_ENABLED = True
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+LOGIN_URL = "canela.lsi.us.es/bpmloggenerator/login"
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "canela.lsi.us.es/bpmloggenerator/login"
 # 1 day
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
 

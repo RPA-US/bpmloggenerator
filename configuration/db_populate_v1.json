@@ -571,7 +571,7 @@
         "fields": {
             "name": "Can add user",
             "content_type": 16,
-            "codename": "add_customuser"
+            "codename": "add_User"
         }
     },
     {
@@ -580,7 +580,7 @@
         "fields": {
             "name": "Can change user",
             "content_type": 16,
-            "codename": "change_customuser"
+            "codename": "change_User"
         }
     },
     {
@@ -589,7 +589,7 @@
         "fields": {
             "name": "Can delete user",
             "content_type": 16,
-            "codename": "delete_customuser"
+            "codename": "delete_User"
         }
     },
     {
@@ -598,7 +598,7 @@
         "fields": {
             "name": "Can view user",
             "content_type": 16,
-            "codename": "view_customuser"
+            "codename": "view_User"
         }
     },
     {
@@ -998,206 +998,6 @@
         }
     },
     {
-        "model": "contenttypes.contenttype",
-        "pk": 1,
-        "fields": {
-            "app_label": "admin",
-            "model": "logentry"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 2,
-        "fields": {
-            "app_label": "auth",
-            "model": "permission"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 3,
-        "fields": {
-            "app_label": "auth",
-            "model": "group"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 4,
-        "fields": {
-            "app_label": "contenttypes",
-            "model": "contenttype"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 5,
-        "fields": {
-            "app_label": "sessions",
-            "model": "session"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 6,
-        "fields": {
-            "app_label": "authtoken",
-            "model": "token"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 7,
-        "fields": {
-            "app_label": "authtoken",
-            "model": "tokenproxy"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 8,
-        "fields": {
-            "app_label": "sites",
-            "model": "site"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 9,
-        "fields": {
-            "app_label": "account",
-            "model": "emailaddress"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 10,
-        "fields": {
-            "app_label": "account",
-            "model": "emailconfirmation"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 11,
-        "fields": {
-            "app_label": "socialaccount",
-            "model": "socialaccount"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 12,
-        "fields": {
-            "app_label": "socialaccount",
-            "model": "socialapp"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 13,
-        "fields": {
-            "app_label": "socialaccount",
-            "model": "socialtoken"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 14,
-        "fields": {
-            "app_label": "categories",
-            "model": "category"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 15,
-        "fields": {
-            "app_label": "categories",
-            "model": "categoryrelation"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 16,
-        "fields": {
-            "app_label": "users",
-            "model": "customuser"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 17,
-        "fields": {
-            "app_label": "experiments",
-            "model": "experiment"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 18,
-        "fields": {
-            "app_label": "experiments",
-            "model": "variations"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 19,
-        "fields": {
-            "app_label": "experiments",
-            "model": "screenshot"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 20,
-        "fields": {
-            "app_label": "wizard",
-            "model": "functionparamcategory"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 21,
-        "fields": {
-            "app_label": "wizard",
-            "model": "variabilityfunctioncategory"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 22,
-        "fields": {
-            "app_label": "wizard",
-            "model": "variabilityfunction"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 23,
-        "fields": {
-            "app_label": "wizard",
-            "model": "guicomponentcategory"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 24,
-        "fields": {
-            "app_label": "wizard",
-            "model": "guicomponent"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 25,
-        "fields": {
-            "app_label": "wizard",
-            "model": "functionparam"
-        }
-    },
-    {
         "model": "sessions.session",
         "pk": "90i8m1ww5298tokydnqpq1vxem6dqrw9",
         "fields": {
@@ -1233,21 +1033,21 @@
         "model": "sites.site",
         "pk": 1,
         "fields": {
-            "domain": "canela.lsi.us.es",
-            "name": "bpmLogGenerator"
+            "domain": "canela.lsi.us.es/bpmloggenerator",
+            "name": "bpmloggenerator"
         }
     },
     {
-        "model": "users.customuser",
+        "model": "auth.user",
         "pk": 1,
         "fields": {
-            "password": "pbkdf2_sha256$260000$SMejNXzmmPuX1yi7WPxOgA$FERx86AN773es9Q+iNKvapKnMxBFmylNUoLRBkNN5g4=",
+            "password": "pbkdf2_sha256$260000$phQmW5bN88Q2obfzotBgjJ$AKhe6pIMAl3eru8AQ0f2LNtkqukyIYE2bYdlf/FLGI4=",
             "last_login": "2022-05-18T08:39:20.857Z",
             "is_superuser": true,
             "username": "admin",
             "first_name": "",
             "last_name": "",
-            "email": "bpmloggenerator@gmail.com",
+            "email": "info@processautomation.es",
             "is_staff": true,
             "is_active": true,
             "date_joined": "2022-03-10T10:18:41.361Z",
@@ -1503,7 +1303,7 @@
             "name": "features.experiment.GUI_components.name.id_card_1",
             "description": "features.experiment.GUI_components.description.id_card",
             "filename": "dni1.jpg",
-            "path": "resources/dni1.jpg",
+            "path": "GUI_components/dni1.jpg",
             "width": 261,
             "height": 166,
             "image": "GUI_components/dni1.jpg",
@@ -1520,7 +1320,7 @@
             "name": "features.experiment.GUI_components.name.delete_1",
             "description": "features.experiment.GUI_components.description.delete",
             "filename": "delete_b.png",
-            "path": "resources/delete_b.png",
+            "path": "GUI_components/delete_b.png",
             "width": 129,
             "height": 96,
             "image": "GUI_components/delete_b.png",
@@ -1537,7 +1337,7 @@
             "name": "features.experiment.GUI_components.name.menu_1",
             "description": "features.experiment.GUI_components.description.menu",
             "filename": "6-android.widget.ImageButton.png",
-            "path": "resources/6-android.widget.ImageButton.png",
+            "path": "GUI_components/6-android.widget.ImageButton.png",
             "width": 128,
             "height": 112,
             "image": "GUI_components/6-android.widget.ImageButton.png",
@@ -1554,7 +1354,7 @@
             "name": "features.experiment.GUI_components.name.reply_1",
             "description": "features.experiment.GUI_components.description.reply",
             "filename": "reply(1).png",
-            "path": "resources/reply(1).png",
+            "path": "GUI_components/reply(1).png",
             "width": 512,
             "height": 512,
             "image": "GUI_components/reply1.png",
@@ -1571,7 +1371,7 @@
             "name": "features.experiment.GUI_components.name.reload_1",
             "description": "features.experiment.GUI_components.description.reload",
             "filename": "16411-android.widget.TextView.png",
-            "path": "resources/16411-android.widget.TextView.png",
+            "path": "GUI_components/16411-android.widget.TextView.png",
             "width": 128,
             "height": 112,
             "image": "GUI_components/16411-android.widget.TextView.png",
@@ -1588,7 +1388,7 @@
             "name": "features.experiment.GUI_components.name.trash_1",
             "description": "features.experiment.GUI_components.description.trash",
             "filename": "190610-android.widget.Button.png",
-            "path": "resources/190610-android.widget.Button.png",
+            "path": "GUI_components/190610-android.widget.Button.png",
             "width": 80,
             "height": 80,
             "image": "GUI_components/190610-android.widget.Button.png",
@@ -1605,7 +1405,7 @@
             "name": "features.experiment.GUI_components.name.mail_1",
             "description": "features.experiment.GUI_components.description.mail",
             "filename": "15317-android.widget.TextView.png",
-            "path": "resources/15317-android.widget.TextView.png",
+            "path": "GUI_components/15317-android.widget.TextView.png",
             "width": 112,
             "height": 112,
             "image": "GUI_components/15317-android.widget.TextView.png",
@@ -1622,7 +1422,7 @@
             "name": "features.experiment.GUI_components.name.back_1",
             "description": "features.experiment.GUI_components.description.back",
             "filename": "15232-android.widget.ImageButton.png",
-            "path": "resources/15232-android.widget.ImageButton.png",
+            "path": "GUI_components/15232-android.widget.ImageButton.png",
             "width": 112,
             "height": 128,
             "image": "GUI_components/15232-android.widget.ImageButton.png",
@@ -1639,7 +1439,7 @@
             "name": "features.experiment.GUI_components.name.next_1",
             "description": "features.experiment.GUI_components.description.next",
             "filename": "15248-android.widget.ImageButton.png",
-            "path": "resources/15248-android.widget.ImageButton.png",
+            "path": "GUI_components/15248-android.widget.ImageButton.png",
             "width": 200,
             "height": 127,
             "image": "GUI_components/15248-android.widget.ImageButton.png",
@@ -1656,7 +1456,7 @@
             "name": "features.experiment.GUI_components.name.save_1",
             "description": "features.experiment.GUI_components.description.save",
             "filename": "save_b.png",
-            "path": "resources/save_b.png",
+            "path": "GUI_components/save_b.png",
             "width": 122,
             "height": 59,
             "image": "GUI_components/save_b.png",
@@ -1673,7 +1473,7 @@
             "name": "features.experiment.GUI_components.name.cancel_1",
             "description": "features.experiment.GUI_components.description.cancel",
             "filename": "15229-android.widget.Button.png",
-            "path": "resources/15229-android.widget.Button.png",
+            "path": "GUI_components/15229-android.widget.Button.png",
             "width": 154,
             "height": 108,
             "image": "GUI_components/15229-android.widget.Button.png",
@@ -1690,7 +1490,7 @@
             "name": "features.experiment.GUI_components.name.ok_1",
             "description": "features.experiment.GUI_components.description.ok",
             "filename": "70839-android.widget.Button.png",
-            "path": "resources/70839-android.widget.Button.png",
+            "path": "GUI_components/70839-android.widget.Button.png",
             "width": 160,
             "height": 96,
             "image": "GUI_components/70839-android.widget.Button.png",
@@ -1707,7 +1507,7 @@
             "name": "features.experiment.GUI_components.name.send_1",
             "description": "features.experiment.GUI_components.description.send",
             "filename": "17317-android.widget.TextView.png",
-            "path": "resources/17317-android.widget.TextView.png",
+            "path": "GUI_components/17317-android.widget.TextView.png",
             "width": 196,
             "height": 96,
             "image": "GUI_components/17317-android.widget.TextView.png",
@@ -1724,7 +1524,7 @@
             "name": "features.experiment.GUI_components.name.text_input_1",
             "description": "features.experiment.GUI_components.description.text_input",
             "filename": "9-android.widget.EditText.png",
-            "path": "resources/9-android.widget.EditText.png",
+            "path": "GUI_components/9-android.widget.EditText.png",
             "width": 1001,
             "height": 83,
             "image": "GUI_components/9-android.widget.EditText.png",
@@ -1741,7 +1541,7 @@
             "name": "features.experiment.GUI_components.name.doc_1",
             "description": "features.experiment.GUI_components.description.doc",
             "filename": "doc_1 (1).jpg",
-            "path": "resources/doc_1 (1).jpg",
+            "path": "GUI_components/doc_1 (1).jpg",
             "width": 1768,
             "height": 2500,
             "image": "GUI_components/doc_1_1.jpg",
@@ -1758,7 +1558,7 @@
             "name": "features.experiment.GUI_components.name.photo_1",
             "description": "features.experiment.GUI_components.description.photo",
             "filename": "passportphoto (1).png",
-            "path": "resources/passportphoto (1).png",
+            "path": "GUI_components/passportphoto (1).png",
             "width": 474,
             "height": 474,
             "image": "GUI_components/passportphoto_1.png",
@@ -1775,7 +1575,7 @@
             "name": "features.experiment.GUI_components.name.alert_1",
             "description": "features.experiment.GUI_components.description.alert",
             "filename": "alert (1).png",
-            "path": "resources/alert (1).png",
+            "path": "GUI_components/alert (1).png",
             "width": 512,
             "height": 512,
             "image": "GUI_components/alert_1.png",
@@ -1792,7 +1592,7 @@
             "name": "features.experiment.GUI_components.name.crm_1",
             "description": "features.experiment.GUI_components.description.cmr",
             "filename": "crm(1).png",
-            "path": "resources/crm(1).png",
+            "path": "GUI_components/crm(1).png",
             "width": 512,
             "height": 512,
             "image": "GUI_components/crm1.png",
@@ -1809,7 +1609,7 @@
             "name": "features.experiment.GUI_components.name.checked_1",
             "description": "features.experiment.GUI_components.description.checked",
             "filename": "checked (1).png",
-            "path": "resources/checked (1).png",
+            "path": "GUI_components/checked (1).png",
             "width": 52,
             "height": 52,
             "image": "GUI_components/checked_1.png",
@@ -1826,7 +1626,7 @@
             "name": "features.experiment.GUI_components.name.checked_1",
             "description": "features.experiment.GUI_components.description.checked",
             "filename": "9-android.widget.CheckBox.png",
-            "path": "resources/9-android.widget.CheckBox.png",
+            "path": "GUI_components/9-android.widget.CheckBox.png",
             "width": 64,
             "height": 64,
             "image": "GUI_components/9-android.widget.CheckBox.png",

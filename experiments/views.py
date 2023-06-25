@@ -7,7 +7,7 @@ from rest_framework.pagination import PageNumberPagination
 from private_storage.views import PrivateStorageDetailView
 from .models import Experiment, Screenshot, Variations, ExperimentStatusChoice
 from .serializers import ExperimentSerializer, VariationsSerializer
-from users.models import CustomUser
+from django.contrib.auth.models import User
 from .functions import execute_experiment
 from django.http import FileResponse, Http404
 from rest_framework.decorators import api_view
@@ -39,7 +39,7 @@ def check_experiment_percentage(request, id):
                    status=status.HTTP_401_UNAUTHORIZED)
     percentage = None
     if(user.is_anonymous is False):
-        user = CustomUser.objects.get(id=request.user.id)
+        user = User.objects.get(id=request.user.id)
         percentage = Experiment.objects.filter(
             pk=id, user=user.id).values('is_being_processed')
     if percentage:
@@ -57,7 +57,7 @@ class ExperimentView(generics.ListCreateAPIView):
         params = self.request.query_params
         experiments = []
         if(user.is_anonymous is False):
-            user = CustomUser.objects.get(id=self.request.user.id)
+            user = User.objects.get(id=self.request.user.id)
             if "public" in params and params["public"] == "true":
                 experiments = Experiment.objects.filter(is_active=True, public=True).order_by("-created_at")
             else:
@@ -69,7 +69,7 @@ class ExperimentView(generics.ListCreateAPIView):
     @transaction.atomic
     def post(self, request, *args, **kwargs):
         try:
-            user = CustomUser.objects.get(id=self.request.user.id)
+            user = User.objects.get(id=self.request.user.id)
         except:
             return Response({"message": "No user found"}, status=status.HTTP_404_NOT_FOUND)
 
@@ -174,7 +174,7 @@ class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
     def put(self, request, id, *args, **kwars):
 
         try:
-            user = CustomUser.objects.get(id=self.request.user.id)
+            user = User.objects.get(id=self.request.user.id)
             experiment = get_object_or_404(Experiment, user=user.id, id=id)
         except:
             return Response({"message": "No user found"}, status=status.HTTP_404_NOT_FOUND)
@@ -299,7 +299,7 @@ class ListPaginatedExperimentAPIView(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         if(user.is_anonymous is False):
-            user_id = CustomUser.objects.get(user_account=self.request.user).id
+            user_id = User.objects.get(user_account=self.request.user).id
             queryset = Experiment.objects.filter(user=user_id, is_active=True)
         return queryset
 
@@ -314,7 +314,7 @@ class DownloadExperiment(generics.RetrieveAPIView):
         msg = "Experiment downloaded"
         st = status.HTTP_200_OK
         experiment = get_object_or_404(Experiment, is_being_processed=100, id=kwargs["pk"])
-        user = CustomUser.objects.filter(id=request.user.id).first()
+        user = User.objects.filter(id=request.user.id).first()
         if not (experiment.public == True or (user and experiment.user.id == user.id)):
             response = Response(
                 {"message": "Experiment not readable: " + str(e)}, status=status.HTTP_401_UNAUTHORIZED)

@@ -1,6 +1,6 @@
 from tkinter import CASCADE
 from django.db import models
-from users.models import CustomUser
+from django.contrib.auth.models import User
 from private_storage.fields import PrivateFileField, PrivateImageField
 from django.core.exceptions import ValidationError
 from enum import Enum
@@ -36,7 +36,7 @@ class Experiment(models.Model):
     is_being_processed=models.IntegerField(default=0)
     is_active=models.BooleanField(default=True)
     public=models.BooleanField(default=False)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='ExperimentOwner')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ExperimentOwner')
     
     class Meta:
         ordering = ["-created_at"]

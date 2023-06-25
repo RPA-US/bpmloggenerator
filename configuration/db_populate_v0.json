@@ -571,7 +571,7 @@
         "fields": {
             "name": "Can add user",
             "content_type": 16,
-            "codename": "add_customuser"
+            "codename": "add_User"
         }
     },
     {
@@ -580,7 +580,7 @@
         "fields": {
             "name": "Can change user",
             "content_type": 16,
-            "codename": "change_customuser"
+            "codename": "change_User"
         }
     },
     {
@@ -589,7 +589,7 @@
         "fields": {
             "name": "Can delete user",
             "content_type": 16,
-            "codename": "delete_customuser"
+            "codename": "delete_User"
         }
     },
     {
@@ -598,7 +598,7 @@
         "fields": {
             "name": "Can view user",
             "content_type": 16,
-            "codename": "view_customuser"
+            "codename": "view_User"
         }
     },
     {
@@ -1122,7 +1122,7 @@
         "pk": 16,
         "fields": {
             "app_label": "users",
-            "model": "customuser"
+            "model": "User"
         }
     },
     {
@@ -1238,7 +1238,7 @@
         }
     },
     {
-        "model": "users.customuser",
+        "model": "users.User",
         "pk": 1,
         "fields": {
             "password": "pbkdf2_sha256$260000$SMejNXzmmPuX1yi7WPxOgA$FERx86AN773es9Q+iNKvapKnMxBFmylNUoLRBkNN5g4=",

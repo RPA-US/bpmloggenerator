@@ -2,7 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from users.permissions import IsActive
-from users.models import CustomUser
+from django.contrib.auth.models import User
 from .models import VariabilityFunction, VariabilityFunctionCategory, GUIComponent, GUIComponentCategory, FunctionParam, FunctionParamCategory
 from .serializers import VariabilityFunctionSerializer, VariabilityFunctionCategorySerializer, GUIComponentSerializer, GUIComponentCategorySerializer, FunctionParamSerializer, FunctionParamCategorySerializer
 from bpmloggenerator.settings import sep
@@ -47,7 +47,7 @@ class GUIComponentViewSet(viewsets.ModelViewSet):
     def list(self, request):
         params = request.query_params
         guiCompoments = []
-        user = CustomUser.objects.get(id=request.user.id)
+        user = User.objects.get(id=request.user.id)
         if "profile" in params and params["profile"] == "true":
             guiCompoments = GUIComponent.objects.filter(user=user.id)
         else:
@@ -58,7 +58,7 @@ class GUIComponentViewSet(viewsets.ModelViewSet):
     def create(self, request):
 
         try:
-            user = CustomUser.objects.get(id=self.request.user.id)
+            user = User.objects.get(id=self.request.user.id)
         except:
             return Response({"message": "No user found"}, status=status.HTTP_404_NOT_FOUND)
         try:
@@ -96,7 +96,7 @@ class GUIComponentViewSet(viewsets.ModelViewSet):
 
     def update(self, request,pk=None):
         try:
-            user = CustomUser.objects.get(id=self.request.user.id)
+            user = User.objects.get(id=self.request.user.id)
         except:
             return Response({"message": "No user found"}, status=status.HTTP_404_NOT_FOUND)
         try:
