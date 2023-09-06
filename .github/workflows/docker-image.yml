@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-publish-latest:
-    runs-on: self-hosted
+    runs-on: linux
 
     steps:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
