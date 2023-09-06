@@ -39,6 +39,7 @@ class Experiment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ExperimentOwner')
     
     class Meta:
+        unique_together = ['name', 'user']
         ordering = ["-created_at"]
     
     def __str__(self):
