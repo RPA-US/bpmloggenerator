@@ -9,7 +9,7 @@ class ExperimentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Experiment
         depth = 1
-        fields = ['id', 'created_at', 'last_edition', 'execution_start', 'execution_finish', 'size_balance', 'seed','name', 'description', 'number_scenarios', 
+        fields = ['id', 'created_at', 'last_edition', 'execution_start', 'execution_finish', 'size_balance', 'seed_log','name', 'description', 'number_scenarios', 
                   'variability_conf', 'scenarios_conf', 'special_colnames', 'is_being_processed', 'is_active', 'status', 'screenshots_path', 'foldername', 
                   'screenshot_name_generation_function', 'public', 'user']
 

@@ -25,7 +25,7 @@ class Experiment(models.Model):
     number_scenarios = models.IntegerField(null=True, blank=True)
     variability_conf = models.JSONField(null=True, blank=True)
     scenarios_conf = models.JSONField(null=True, blank=True)
-    seed = models.CharField(null=True, blank=True, max_length=2500)
+    seed_log = models.CharField(null=True, blank=True, max_length=2500)
     special_colnames = models.JSONField(null=True, blank=True)
     screenshots = PrivateFileField("Screenshots", null=True)
     screenshots_path = models.CharField(null=True, blank=True, max_length=255)
@@ -39,6 +39,7 @@ class Experiment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ExperimentOwner')
     
     class Meta:
+        unique_together = ['name', 'user']
         ordering = ["-created_at"]
     
     def __str__(self):

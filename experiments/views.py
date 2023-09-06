@@ -104,8 +104,8 @@ class ExperimentView(generics.ListCreateAPIView):
                 description=request.data.get('description'),
                 number_scenarios=int(request.data.get('number_scenarios')) if request.data.get(
                     'number_scenarios') else None,
-                seed=request.data.get('seedLog') if request.data.get(
-                    'seedLog') else None,
+                seed_log=request.data.get('seed_log') if request.data.get(
+                    'seed_log') else None,
                 variability_conf=json_attributes_load(request.data.get(
                     'variability_conf')) if request.data.get('variability_conf') else None,
                 scenarios_conf=json_attributes_load(request.data.get(
@@ -199,7 +199,7 @@ class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
                     if request.data.get('number_scenarios') and int(request.data.get('number_scenarios')) > 0 and not ('scenarios_conf' in request.data):
                         return Response({"message": "POST experiment executing - Incomplete data: Number scenarios greater than 1 and no scenario configuration included!"}, status=status.HTTP_400_BAD_REQUEST)
                     for data in ['size_balance', 'name', 'number_scenarios',
-                                'variability_conf',
+                                'variability_conf', 'seed_log',
                                 'special_colnames', 'screenshot_name_generation_function']:
                         if not data in request.data:
                             return Response({"message": "POST experiment executing - Incomplete data: " + data + " not included"}, status=status.HTTP_400_BAD_REQUEST)
@@ -221,6 +221,7 @@ class ExperimentUpdateView(generics.RetrieveUpdateDestroyAPIView):
                     request.data.get('size_balance'))
                 experiment.name = request.data.get('name')
                 experiment.description = request.data.get('description')
+                experiment.seed_log = request.data.get('seed_log')
                 experiment.number_scenarios = int(request.data.get(
                     'number_scenarios')) if request.data.get('number_scenarios') else None
                 experiment.variability_conf = json_attributes_load(request.data.get(
