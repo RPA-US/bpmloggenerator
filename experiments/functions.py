@@ -299,11 +299,11 @@ def execute_experiment(experiment):
                                 experiment, element, 0, generate_path, key, variant, image_prefix + init_value_original_screenshot, scenario_i, attachments_path)
                         elif variate == 0:
                             if initValue != "":
-                                image_to_duplicate = image_prefix + \
+                                image_to_duplicate = attachments_path + sep + \
                                     select_last_item(
-                                        element["image_to_duplicate"], sep)
+                                        element["initValue"], sep)
                                 val = generate_copied_capture({
-                                    "original_image_path": image_to_duplicate, 
+                                    "original_image_path": image_to_duplicate,
                                     "image_path_to_save": resources_folder + sep, 
                                     "to_concatenate": scenario_iteration_path + "_" + init_value_original_screenshot
                                 })
