@@ -29,3 +29,11 @@ def compress_experiment(path, file_name):
     if not os.path.exists(zip_path):
         zip_path = shutil.make_archive(zip_file, 'zip', abs_path)
     return zip_path
+
+def seleccionar_anterior_al_ultimo_punto(cadena):
+    posicion_ultimo_punto = cadena.rfind('.')
+    if posicion_ultimo_punto != -1:
+        resultado = cadena[:posicion_ultimo_punto]
+        return resultado
+    else:
+        return cadena
