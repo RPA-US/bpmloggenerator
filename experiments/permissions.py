@@ -5,6 +5,7 @@ from wizard.models import GUIComponent
 from experiments.models import Screenshot
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
+from .utils import seleccionar_anterior_al_ultimo_punto
 
 
 def allow_staff(private_file):
@@ -17,7 +18,7 @@ def allow_staff(private_file):
     if "GUI_components" in private_file.relative_name:
         guicomponent=GUIComponent.objects.filter(path=private_file.relative_name)
     else:
-        screenshot=Screenshot.objects.filter(relative_path=private_file.relative_name)
+        screenshot=Screenshot.objects.filter(relative_path=seleccionar_anterior_al_ultimo_punto(private_file.relative_name))
     if screenshot:
         screenshot=screenshot[0]
         res=user == screenshot.experiment.user

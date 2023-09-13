@@ -17,7 +17,7 @@ from bpmloggenerator.settings import sep
 from django.shortcuts import get_object_or_404
 import datetime
 from django.utils import timezone
-from .utils import compress_experiment, upload_mockups
+from .utils import compress_experiment, upload_mockups, seleccionar_anterior_al_ultimo_punto
 from PIL import Image
 
 def json_attributes_load(att):
@@ -350,6 +350,7 @@ def associate_experiment(user):
             screenshots = data['screenshots']
             screenshots_path = data['screenshots_path']
             special_colnames = data['special_colnames']
+            seed_log = data['seed_log']
             screenshot_name_generation_function = data['screenshot_name_generation_function']
             foldername = data['foldername']
             scenarios_conf = data['scenarios_conf']
@@ -366,6 +367,7 @@ def associate_experiment(user):
                 variability_conf=variability_conf,
                 special_colnames=special_colnames,
                 screenshots=screenshots,
+                seed_log=seed_log,
                 foldername=foldername,
                 is_being_processed=100,
                 is_active=True,
@@ -395,15 +397,14 @@ def associate_experiment(user):
 #         # This overrides PRIVATE_STORAGE_AUTH_FUNCTION
 #         return True
 
-
 def associate_screenshots_files(experiment):
     for root, directories, file in os.walk(experiment.screenshots_path):
         for file in file:
-            if(file.endswith(".png") or file.endswith(".jpg")):
+            if(file.endswith(".png") or file.endswith(".jpg") or file.endswith(".PNG") or file.endswith(".JPG") or file.endswith(".jpeg") or file.endswith(".JPEG")):
                 image = Image.open(os.path.join(root, file))
                 aux = experiment.screenshots_path.split(sep)
                 width, height = image.size
-                relative_path = aux[len(aux)-1]+sep+file
+                relative_path = aux[len(aux)-1]+sep+seleccionar_anterior_al_ultimo_punto(file)
                 screenshot = Screenshot(
                     relative_path=relative_path, width=width, height=height, image=file, experiment=experiment)
                 screenshot.save()
