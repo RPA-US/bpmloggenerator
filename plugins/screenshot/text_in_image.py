@@ -63,9 +63,11 @@ def random_word_image(args):
         else:
             res = delimit_characters(s_without_linebreaks,int(word_configuration_font[1]))
     else:
-        res = word_configuration_font
-        del word_configuration_font[0]
+        size = random.randint(1,int(args["word_configuration_max_words"]))
+        s_without_linebreaks = lorem.words(size)
+        res = delimit_characters(s_without_linebreaks,int(args["word_configuration_chat_limit"]))
         
+    args["font_configuration"] = word_configuration_font
     args["text_to_insert"] = res
     return insert_text_image(args)
     
@@ -82,12 +84,13 @@ def random_paragraph_image(args):
         else:
             size = random.randint(1,int(paragraph_configuration_font[2]))
     else:
-        size = random.randint(1,2)
+        size = random.randint(1, int(args["paragraph_configuration_max_paragraph"]))
     s = lorem.paragraphs(size)
-    s_line_breaks = delimit_characters(s,int(paragraph_configuration_font[1]))
+    s_line_breaks = delimit_characters(s,int(args["paragraph_configuration_char_limit"]))
     """
         [["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF"], newimage, capture, coordinates]
     """
+    args["font_configuration"] = paragraph_configuration_font
     args["text_to_insert"] = s_line_breaks
     return insert_text_image(args)
     
@@ -98,7 +101,7 @@ def random_sentence_image(args):
     """
     sentence_configuration_font = args["sentence_configuration_font"]
     s = lorem.sentence()
-    s_line_breaks = delimit_characters(s,int(sentence_configuration_font[2]))
+    s_line_breaks = delimit_characters(s,int(args["sentence_configuration_char_limit"]))
     """
         [["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF"], newimage, capture, coordinates]
     """

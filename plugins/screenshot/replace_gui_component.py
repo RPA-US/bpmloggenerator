@@ -204,7 +204,7 @@ def insert_text_image(args):
     An input capture is obtained, and a text is inserted into it​
     args:​
         text: the text to be inserted
-        font_configuration: path to the font type; integer of the font size; the tuple of the font color
+        font_configuration: path to the font type; integer of the font size; color of the font; background color
         new_image: path to saved image
         capture: path of the image to insert in
         coordinates: list with the top left corner. The coordenate (0,0) is the top_left in the image
