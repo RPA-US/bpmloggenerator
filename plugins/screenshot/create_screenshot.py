@@ -51,12 +51,14 @@ def manage_dependency(experiment, var_function_name, arguments, argumentsSave, s
                                   coordinates=coordinates)
         
     if "bounding_box" in func_res and type(func_res["bounding_box"][0]) == list:
-        object_json_properties["column_min"] = func_res["bounding_box"][0][0]
-        object_json_properties["row_min"] = func_res["bounding_box"][1][0]
-        object_json_properties["column_max"] = func_res["bounding_box"][0][1]
-        object_json_properties["row_max"] = func_res["bounding_box"][1][1]
-        object_json_properties["width"] = func_res["bounding_box"][2]
-        object_json_properties["height"] = func_res["bounding_box"][3]
+        # object_json_properties["column_min"] = func_res["bounding_box"][0][0]
+        # object_json_properties["row_min"] = func_res["bounding_box"][1][0]
+        # object_json_properties["column_max"] = func_res["bounding_box"][0][1]
+        # object_json_properties["row_max"] = func_res["bounding_box"][1][1]
+        # object_json_properties["width"] = func_res["bounding_box"][2]
+        # object_json_properties["height"] = func_res["bounding_box"][3]
+        object_json_properties["points"] = [[func_res["bounding_box"][0][0], func_res["bounding_box"][1][0]], [func_res["bounding_box"][0][1], func_res["bounding_box"][1][1]]],
+        object_json_properties["centroid"] = [(func_res["bounding_box"][1][0]+func_res["bounding_box"][0][0])/2, (func_res["bounding_box"][1][1]+func_res["bounding_box"][0][1])/2]
     elif "object_json_properties" in func_res:
         object_json_properties = func_res["object_json_properties"]
     
@@ -124,12 +126,14 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
                             object_json_properties =  {
                                     "id": id,
                                     "class": ui_element_class,
-                                    "column_min": coordinates[1],
-                                    "row_min": coordinates[0],
-                                    "column_max": coordinates[3],
-                                    "row_max": coordinates[2],
-                                    "width": coordinates[2]-coordinates[0],
-                                    "height": coordinates[3]-coordinates[1]
+                                    # "column_min": coordinates[1],
+                                    # "row_min": coordinates[0],
+                                    # "column_max": coordinates[3],
+                                    # "row_max": coordinates[2],
+                                    # "width": coordinates[2]-coordinates[0],
+                                    # "height": coordinates[3]-coordinates[1]
+                                    "points": [[coordinates[0], coordinates[1]], [coordinates[2], coordinates[3]]],
+                                    "centroid": [(coordinates[0]+coordinates[2])/2, (coordinates[1]+coordinates[3])/2]
                             }
                             
                             # TODO: generate autocolumns in front and edit this line
@@ -207,12 +211,14 @@ def generate_scenario_capture(experiment, element, case, generate_path, activity
                 object_json_properties =  {
                         "id": id,
                         "class": ui_element_class,
-                        "column_min": coordinates[1],
-                        "row_min": coordinates[0],
-                        "column_max": coordinates[3],
-                        "row_max": coordinates[2],
-                        "width": coordinates[2]-coordinates[0],
-                        "height": coordinates[3]-coordinates[1]
+                        # "column_min": coordinates[1],
+                        # "row_min": coordinates[0],
+                        # "column_max": coordinates[3],
+                        # "row_max": coordinates[2],
+                        # "width": coordinates[2]-coordinates[0],
+                        # "height": coordinates[3]-coordinates[1]
+                        "points": [[coordinates[0], coordinates[1]], [coordinates[2], coordinates[3]]],
+                        "centroid": [(coordinates[0]+coordinates[2])/2, (coordinates[1]+coordinates[3])/2]
                 }
 
                 # TODO: adapt modifications in arguments structure to scenario configuration
