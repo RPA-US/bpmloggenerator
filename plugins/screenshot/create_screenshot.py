@@ -25,7 +25,7 @@ def manage_dependency(experiment, var_function_name, arguments, argumentsSave, s
         row=dependant_row[len(dependant_row)-1]
         # tmp = ast.literal_eval(row.arguments)
         if type(row.arguments) != dict:
-            row_arg_aux = json.loads(row.arguments.replace("\'", "\""))
+            row_arg_aux = ast.literal_eval(row.arguments)#.replace("\'", "\"")
         else:
             row_arg_aux = row.arguments
         arguments = {**row_arg_aux, **arguments}
@@ -100,75 +100,75 @@ def generate_capture(experiment, columns_ui, columns, element, acu, case, genera
         }
     id = 1
     
-    try:
-        for i in columns_ui:
-            try:
-                arguments = {}
-                if i in args_tmp:
-                    func = args_tmp[i]
-                    for screenshots_args in func:
-                        if element is not None:
-                            coordinates = screenshots_args["coordinates"]
-                            var_function_name = screenshots_args["name"]
-                            
-                            if not sep in new_image:
-                                image_path_to_save = generate_path + new_image
-                            else:
-                                image_path_to_save = new_image
-
-                            # Check if there are previous variations applied to the original image and substitute the original image path by the modified one
-                            if os.path.exists(image_path_to_save):
-                                capture_path = image_path_to_save
-
-                            ui_element_class = i.split('.')
-                            ui_element_class = ui_element_class[len(ui_element_class)-1]
-
-                            object_json_properties =  {
-                                    "id": id,
-                                    "class": ui_element_class,
-                                    # "column_min": coordinates[1],
-                                    # "row_min": coordinates[0],
-                                    # "column_max": coordinates[3],
-                                    # "row_max": coordinates[2],
-                                    # "width": coordinates[2]-coordinates[0],
-                                    # "height": coordinates[3]-coordinates[1]
-                                    "points": [[coordinates[0], coordinates[1]], [coordinates[2], coordinates[3]]],
-                                    "centroid": [(coordinates[0]+coordinates[2])/2, (coordinates[1]+coordinates[3])/2]
-                            }
-                            
-                            # TODO: generate autocolumns in front and edit this line
-                            if not "args_dependency" in screenshots_args: 
-                                arguments = screenshots_args["args"]
-                            argumentsSave = arguments.copy()
-                            arguments["image_path_to_save"] = image_path_to_save
-                            arguments["original_image_path"] = capture_path
-                            arguments["coordinates"] = coordinates
-                            arguments["process_info"] = {
-                                "variant": variant, 
-                                "activity": activity, 
-                                "object_json_properties": object_json_properties
-                            }
-                    
-                            object_property, object_json_properties = manage_dependency(experiment, var_function_name, arguments, argumentsSave, screenshots_args, case, 0, 
-                                              activity, variant, balanced, log_size, image_path_to_save, capture_path, coordinates, object_json_properties)
-
-                            json_properties["compos"].append(object_json_properties)
-                            id +=1
-                            
-                            with open(image_path_to_save + '.json', 'w') as f:
-                                json.dump(json_properties, f, indent=4)
-                            
-
+    # try:
+    for i in columns_ui:
+        # try:
+            arguments = {}
+            if i in args_tmp:
+                func = args_tmp[i]
+                for screenshots_args in func:
+                    if element is not None:
+                        coordinates = screenshots_args["coordinates"]
+                        var_function_name = screenshots_args["name"]
+                        
+                        if not sep in new_image:
+                            image_path_to_save = generate_path + new_image
                         else:
-                            new_image = ""
-                        arguments = {}
-            except Exception as e:
-                print("Unexpected error: " + str(e)) # TODO
-                arguments = []
-    except Exception as e:
-        print("Unexpected error: " + str(e))
+                            image_path_to_save = new_image
+
+                        # Check if there are previous variations applied to the original image and substitute the original image path by the modified one
+                        if os.path.exists(image_path_to_save):
+                            capture_path = image_path_to_save
+
+                        ui_element_class = i.split('.')
+                        ui_element_class = ui_element_class[len(ui_element_class)-1]
+
+                        object_json_properties =  {
+                                "id": id,
+                                "class": ui_element_class,
+                                # "column_min": coordinates[1],
+                                # "row_min": coordinates[0],
+                                # "column_max": coordinates[3],
+                                # "row_max": coordinates[2],
+                                # "width": coordinates[2]-coordinates[0],
+                                # "height": coordinates[3]-coordinates[1]
+                                "points": [[coordinates[0], coordinates[1]], [coordinates[2], coordinates[3]]],
+                                "centroid": [(coordinates[0]+coordinates[2])/2, (coordinates[1]+coordinates[3])/2]
+                        }
+                        
+                        # TODO: generate autocolumns in front and edit this line
+                        if not "args_dependency" in screenshots_args: 
+                            arguments = screenshots_args["args"]
+                        argumentsSave = arguments.copy()
+                        arguments["image_path_to_save"] = image_path_to_save
+                        arguments["original_image_path"] = capture_path
+                        arguments["coordinates"] = coordinates
+                        arguments["process_info"] = {
+                            "variant": variant, 
+                            "activity": activity, 
+                            "object_json_properties": object_json_properties
+                        }
+                
+                        object_property, object_json_properties = manage_dependency(experiment, var_function_name, arguments, argumentsSave, screenshots_args, case, 0, 
+                                            activity, variant, balanced, log_size, image_path_to_save, capture_path, coordinates, object_json_properties)
+
+                        json_properties["compos"].append(object_json_properties)
+                        id +=1
+                        
+                        with open(image_path_to_save + '.json', 'w') as f:
+                            json.dump(json_properties, f, indent=4)
+                        
+
+                    else:
+                        new_image = ""
+                    arguments = {}
+        # except Exception as e:
+        #     print("Unexpected error: " + str(e)) # TODO
+        #     arguments = []
+    # except Exception as e:
+    #     print("Unexpected error: " + str(e))
         # func = args_tmp[i] or content = attr[ind_text]: list out of range
-        new_image = ""
+        # new_image = ""
     return new_image
 
 
