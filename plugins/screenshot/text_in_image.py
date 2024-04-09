@@ -1,7 +1,7 @@
 import random
 from lorem_text import lorem
 from .replace_gui_component import insert_text_image
-from plugins.text.random_text_lorem import person_name_text, person_surname_text, id_card_text
+from plugins.text.random_text_lorem import person_name_text, person_surname_text, generate_DNI
 
 ###################################################################################################
 # Auxiliar functions
@@ -134,8 +134,9 @@ def person_name_image(args):
     """
     Mandatory to have as args Font, Font size, Font color, Background color, Character delimitation, Random max number of word: "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84, 3]
     """
+    args["image_number_of_surnames"] = args["text_number_of_surnames"]
     args["font_configuration"] = args["person_name_configuration_font"]
-    args["text_to_insert"] = person_name_text(args)
+    args["text_to_insert"] = person_name_text()
     return insert_text_image(args)
 
 def person_surname_image(args):
@@ -151,5 +152,5 @@ def person_surname_image(args):
     Mandatory to have as args Font, Font size, Font color, Background color, Character delimitation, Random max number of word: "args": ["resources/Roboto-Black.ttf", 20, "#000000", "#FFFFFF", 84, 3]
     """
     args["font_configuration"] = args["id_card_configuration_font"]
-    args["text_to_insert"] = id_card_text(args)
+    args["text_to_insert"] = generate_DNI(args)
     return insert_text_image(args)

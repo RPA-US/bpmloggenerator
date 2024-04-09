@@ -8,7 +8,7 @@ import time
 
 last_timestamp = 1
 
-def generate_timestamp():
+def generate_timestamp(args):
     global last_timestamp
     new_timestamp = time.time()
     while new_timestamp <= last_timestamp:
