@@ -2089,6 +2089,78 @@
         }
     },
     {
+        "model": "wizard.variabilityfunction",
+        "pk": 29,
+        "fields": {
+            "id_code": "person_name_image",
+            "function_name": "features.experiment.function_trace.name.person_name_image",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.person_name_image",
+            "variability_function_category": 5
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 30,
+        "fields": {
+            "id_code": "person_surname_image",
+            "function_name": "features.experiment.function_trace.name.person_surname_image",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.person_surname_image",
+            "variability_function_category": 5
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 31,
+        "fields": {
+            "id_code": "id_card_image",
+            "function_name": "features.experiment.function_trace.name.id_card_image",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.id_card_image",
+            "variability_function_category": 5
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 32,
+        "fields": {
+            "id_code": "digits_text",
+            "function_name": "features.experiment.function_trace.name.digits_text",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.digits_text",
+            "variability_function_category": 3
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 33,
+        "fields": {
+            "id_code": "person_name_text",
+            "function_name": "features.experiment.function_trace.name.person_name_text",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.person_name_text",
+            "variability_function_category": 3
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 34,
+        "fields": {
+            "id_code": "person_surname_text",
+            "function_name": "features.experiment.function_trace.name.person_surname_text",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.person_surname_text",
+            "variability_function_category": 3
+        }
+    },
+    {
         "model": "wizard.functionparam",
         "pk": 1,
         "fields": {
@@ -2518,6 +2590,18 @@
             "function_param_category": 1,
             "validation_needs": {},
             "variability_function": 26
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 37,
+        "fields": {
+            "id_code": "number_of_digits",
+            "order": 1,
+            "description": "features.experiment.param.description.number_of_digits",
+            "function_param_category": 1,
+            "validation_needs": {},
+            "variability_function": 32
         }
     }
 ]
