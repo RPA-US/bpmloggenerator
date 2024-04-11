@@ -2620,9 +2620,9 @@
         "model": "wizard.functionparam",
         "pk": 41,
         "fields": {
-            "id_code": "person_name_configuration_char_limit",
-            "order": 4,
-            "description": "features.experiment.param.description.person_name_configuration_char_limit",
+            "id_code": "image_number_of_names",
+            "order": 2,
+            "description": "features.experiment.param.description.number_of_names",
             "function_param_category": 2,
             "validation_needs": {},
             "variability_function": 29
@@ -2632,9 +2632,9 @@
         "model": "wizard.functionparam",
         "pk": 42,
         "fields": {
-            "id_code": "image_number_of_names",
-            "order": 1,
-            "description": "features.experiment.param.description.number_of_names",
+            "id_code": "image_number_of_surnames",
+            "order": 3,
+            "description": "features.experiment.param.description.number_of_surnames",
             "function_param_category": 2,
             "validation_needs": {},
             "variability_function": 29
@@ -2644,12 +2644,12 @@
         "model": "wizard.functionparam",
         "pk": 43,
         "fields": {
-            "id_code": "image_number_of_surnames",
-            "order": 2,
-            "description": "features.experiment.param.description.number_of_surnames",
-            "function_param_category": 2,
+            "id_code": "id_card_configuration_font",
+            "order": 1,
+            "description": "features.experiment.param.description.id_card_configuration_font",
+            "function_param_category": 4,
             "validation_needs": {},
-            "variability_function": 29
+            "variability_function": 31
         }
     }
 ]
