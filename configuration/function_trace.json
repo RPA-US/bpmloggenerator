@@ -30,9 +30,7 @@
     "status_replace_gui_element_by_other" : "status_replace_gui_element_by_other",
     "status_truncated_random_sentence_in_image": "status_truncated_random_sentence_image",
     "person_name_image": "person_name_image",
-    "person_surname_image": "person_surname_image",
     "id_card_image": "id_card_image",
     "digits_text": "digits_text",
-    "person_name_text": "person_name_text",
-    "person_surname_text": "person_surname_text"
+    "person_name_text": "person_name_text"
 }

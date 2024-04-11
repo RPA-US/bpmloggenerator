@@ -2,6 +2,7 @@ from lorem_text import lorem
 import random
 from bpmloggenerator.settings import sep
 
+
 # nombres = ["Sofía", "Juan", "María", "Luis", "Ana", "Carlos", "Lucía", "José", "Camila", "Diego", "Elena", "Gabriel", "Isabel", "Fernando", "Julia", "Héctor", "Irene", "Javier", "Laura", "Kevin", "Marta", "Leonardo", "Nuria", "Óscar", "Patricia", "Raúl", "Silvia", "Tomás", "Úrsula", "Víctor", "Yolanda", "Xavier", "Zoe", "Aarón", "Beatriz", "César", "Daniela", "Eduardo", "Fátima", "Gustavo", "Helena", "Iván", "Joana", "Kike", "Lidia", "Manuel", "Noa", "Olivia", "Pablo", "Queralt", "Ricardo", "Sara", "Toni", "Ubaldo", "Valeria", "Waldo", "Xenia", "Yago", "Zaira", "Adrián", "Blanca", "Cristian", "Diana", "Ernesto", "Flora", "Silvia", "Gerardo", "Hilda", "Ian", "Jana", "Kai", "Leonor", "Matías", "Nadia", "Omar", "Paloma", "Quim", "Rebeca", "Sergio", "Tania", "Ursula", "Vanesa", "Wilfredo", "Ximena", "Yeray", "Zara", "Alicia", "Borja", "Clara", "Damián", "Eva", "Félix", "Gloria", "Hugo", "Inés", "Joel", "Karen", "Leo", "Mireia", "Néstor", "Olga", "Pepe", "Raquel", "Samuel", "Teresa", "Úrsula", "Violeta", "Wilson", "Xilena", "Yuri", "Zacarías", "Amalia", "Bernardo", "Carmen", "David", "Esther", "Fabián", "Gracia", "Ignacio", "Jessica", "Kurt", "Luna", "Miguel", "Nicolás", "Octavio", "Paula", "Ramón", "Susana", "Teo", "Verónica", "Wendy", "Xander", "Yasmina", "Zeno", "Ariadna", "Bruno", "Carla", "Daniel", "Elisa", "Felipe", "Gema", "Héctor", "Iris", "Jon", "Kristina", "Lorenzo", "Melissa", "Norberto", "Oriol", "Penélope", "Rubén", "Sofía", "Tristán", "Úrsula", "Valentín", "Wanda", "Xavier", "Yolanda", "Zac", "Alba", "Benjamín", "Celia", "Dario", "Elsa", "Fausto", "Gisela", "Hilario", "India", "Jordi", "Kiara", "Liam", "Mónica", "Nolan", "Odette", "Pau", "Rita", "Salvador", "Tatiana", "Uriel", "Vega", "Wilma", "Xilo", "Yvette", "Zurich"]
 nombres_sin_acentos = [
     "Sofia", "Juan", "Maria", "Luis", "Ana", "Carlos", "Lucia", "Jose", "Camila", "Diego",
@@ -162,29 +163,13 @@ def generate_DNI(args):
     DNI = str(value)+letters[number_control]
     return DNI
 
-#   person_name_text, generate a random person name.
 def person_name_text(args):
     '''
     Generate a person name.
     '''
     global nombres_sin_acentos
+    number_of_names = int(args["text_number_of_names"])
     number_of_surnames = int(args["text_number_of_surnames"])
-    name = random.choice(nombres_sin_acentos)
-    if number_of_surnames == 0:
-        return name
-    elif number_of_surnames == 1:
-        return name + " " + random.choice(apellidos)
-    # elif number_of_surnames == 2:
-    else:
-        apellido1, apellido2 = random.sample(apellidos, 2)
-        return name + " " + apellido1 + " " + apellido2
-
-#   "person_surname_text": "person_surname_text",
-def person_surname_text(args):
-    '''
-    Generate a person name.
-    '''
-    global apellidos
-    # Seleccionar dos apellidos aleatorios que sean distintos y concatenarlos
-    apellido1, apellido2 = random.sample(apellidos, 2)
-    return apellido1 + " " + apellido2
+    res = [random.choice(nombres_sin_acentos) for _ in range(number_of_names)]
+    res += [random.choice(apellidos) for _ in range(number_of_surnames)]
+    return ' '.join(res)

@@ -2137,18 +2137,6 @@
         }
     },
     {
-        "model": "wizard.variabilityfunction",
-        "pk": 34,
-        "fields": {
-            "id_code": "person_surname_text",
-            "function_name": "features.experiment.function_trace.name.person_surname_text",
-            "filename": "function_trace.json",
-            "path": "configuration",
-            "description": "features.experiment.function_trace.description.person_surname_text",
-            "variability_function_category": 3
-        }
-    },
-    {
         "model": "wizard.functionparam",
         "pk": 1,
         "fields": {
@@ -2601,7 +2589,7 @@
             "description": "features.experiment.param.description.number_of_surnames",
             "function_param_category": 1,
             "validation_needs": {},
-            "variability_function": 29
+            "variability_function": 33
         }
     },
     {
@@ -2613,55 +2601,55 @@
             "description": "features.experiment.param.description.number_of_names",
             "function_param_category": 1,
             "validation_needs": {},
-            "variability_function": 29
+            "variability_function": 33
         }
     },
     {
         "model": "wizard.functionparam",
         "pk": 40,
         "fields": {
-            "id_code": "image_number_of_names",
+            "id_code": "person_name_configuration_font",
             "order": 1,
-            "description": "features.experiment.param.description.number_of_names",
-            "function_param_category": 2,
+            "description": "features.experiment.param.description.person_name_configuration_font",
+            "function_param_category": 4,
             "validation_needs": {},
-            "variability_function": 33
+            "variability_function": 29
         }
     },
     {
         "model": "wizard.functionparam",
         "pk": 41,
         "fields": {
-            "id_code": "image_number_of_surnames",
-            "order": 2,
-            "description": "features.experiment.param.description.number_of_surnames",
+            "id_code": "person_name_configuration_char_limit",
+            "order": 4,
+            "description": "features.experiment.param.description.person_name_configuration_char_limit",
             "function_param_category": 2,
             "validation_needs": {},
-            "variability_function": 33
+            "variability_function": 29
         }
     },
     {
         "model": "wizard.functionparam",
         "pk": 42,
         "fields": {
-            "id_code": "person_name_configuration_font",
-            "order": 3,
-            "description": "features.experiment.param.description.person_name_configuration_font",
-            "function_param_category": 4,
+            "id_code": "image_number_of_names",
+            "order": 1,
+            "description": "features.experiment.param.description.number_of_names",
+            "function_param_category": 2,
             "validation_needs": {},
-            "variability_function": 33
+            "variability_function": 29
         }
     },
     {
         "model": "wizard.functionparam",
         "pk": 43,
         "fields": {
-            "id_code": "person_name_configuration_char_limit",
-            "order": 4,
-            "description": "features.experiment.param.description.person_name_configuration_font",
+            "id_code": "image_number_of_surnames",
+            "order": 2,
+            "description": "features.experiment.param.description.number_of_surnames",
             "function_param_category": 2,
             "validation_needs": {},
-            "variability_function": 33
+            "variability_function": 29
         }
     }
 ]
