@@ -163,6 +163,24 @@ def generate_DNI(args):
     DNI = str(value)+letters[number_control]
     return DNI
 
+def bank_account_text(args):
+    '''
+    Generate a bank account number.
+    '''
+    bank = random.randint(1,9999)
+    office = random.randint(1,9999)
+    control = random.randint(1,9999)
+    account = random.randint(1,9999999999)
+    bank = str(bank)
+    office = str(office)
+    control = str(control)
+    account = str(account)
+    for i in range(0,(4-len(bank))): bank="0"+bank
+    for i in range(0,(4-len(office))): office="0"+office
+    for i in range(0,(2-len(control))): control="0"+control
+    for i in range(0,(10-len(account))): account="0"+account
+    return bank+"-"+office+"-"+control+"-"+account
+
 def person_name_text(args):
     '''
     Generate a person name.

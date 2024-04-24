@@ -2073,7 +2073,7 @@
             "filename": "function_trace.json",
             "path": "configuration",
             "description": "features.experiment.function_trace.description.digits_in_image",
-            "variability_function_category": 5
+            "variability_function_category": 4
         }
     },
     {
@@ -2097,6 +2097,18 @@
             "filename": "function_trace.json",
             "path": "configuration",
             "description": "features.experiment.function_trace.description.person_name_image",
+            "variability_function_category": 4
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 30,
+        "fields": {
+            "id_code": "bank_account_image",
+            "function_name": "features.experiment.function_trace.name.bank_account_image",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.bank_account_image",
             "variability_function_category": 4
         }
     },
@@ -2643,6 +2655,18 @@
     {
         "model": "wizard.functionparam",
         "pk": 43,
+        "fields": {
+            "id_code": "bank_account_configuration_font",
+            "order": 1,
+            "description": "features.experiment.param.description.bank_account_configuration_font",
+            "function_param_category": 4,
+            "validation_needs": {},
+            "variability_function": 30
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 44,
         "fields": {
             "id_code": "id_card_configuration_font",
             "order": 1,

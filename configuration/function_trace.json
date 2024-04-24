@@ -32,5 +32,6 @@
     "person_name_image": "person_name_image",
     "id_card_image": "id_card_image",
     "digits_text": "digits_text",
-    "person_name_text": "person_name_text"
+    "person_name_text": "person_name_text",
+    "bank_account_image": "bank_account_image"
 }
