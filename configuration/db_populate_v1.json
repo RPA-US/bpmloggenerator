@@ -1989,7 +1989,7 @@
             "filename": "function_trace.json",
             "path": "configuration",
             "description": "features.experiment.function_trace.description.image_copy_renamed",
-            "variability_function_category": 4
+            "variability_function_category": 5
         }
     },
     {
@@ -2001,7 +2001,7 @@
             "filename": "function_trace.json",
             "path": "configuration",
             "description": "features.experiment.function_trace.description.image_copy_renamed_and_return_path",
-            "variability_function_category": 4
+            "variability_function_category": 5
         }
     },
     {
@@ -2073,7 +2073,7 @@
             "filename": "function_trace.json",
             "path": "configuration",
             "description": "features.experiment.function_trace.description.digits_in_image",
-            "variability_function_category": 5
+            "variability_function_category": 4
         }
     },
     {
@@ -2086,6 +2086,66 @@
             "path": "configuration",
             "description": "features.experiment.function_trace.description.gui_component_status",
             "variability_function_category": 4
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 29,
+        "fields": {
+            "id_code": "person_name_image",
+            "function_name": "features.experiment.function_trace.name.person_name_image",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.person_name_image",
+            "variability_function_category": 4
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 30,
+        "fields": {
+            "id_code": "bank_account_image",
+            "function_name": "features.experiment.function_trace.name.bank_account_image",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.bank_account_image",
+            "variability_function_category": 4
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 31,
+        "fields": {
+            "id_code": "id_card_image",
+            "function_name": "features.experiment.function_trace.name.id_card_image",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.id_card_image",
+            "variability_function_category": 4
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 32,
+        "fields": {
+            "id_code": "digits_text",
+            "function_name": "features.experiment.function_trace.name.digits_text",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.digits_text",
+            "variability_function_category": 3
+        }
+    },
+    {
+        "model": "wizard.variabilityfunction",
+        "pk": 33,
+        "fields": {
+            "id_code": "person_name_text",
+            "function_name": "features.experiment.function_trace.name.person_name_text",
+            "filename": "function_trace.json",
+            "path": "configuration",
+            "description": "features.experiment.function_trace.description.person_name_text",
+            "variability_function_category": 3
         }
     },
     {
@@ -2518,6 +2578,102 @@
             "function_param_category": 1,
             "validation_needs": {},
             "variability_function": 26
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 37,
+        "fields": {
+            "id_code": "number_of_digits",
+            "order": 1,
+            "description": "features.experiment.param.description.number_of_digits",
+            "function_param_category": 1,
+            "validation_needs": {},
+            "variability_function": 32
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 38,
+        "fields": {
+            "id_code": "text_number_of_names",
+            "order": 1,
+            "description": "features.experiment.param.description.number_of_surnames",
+            "function_param_category": 1,
+            "validation_needs": {},
+            "variability_function": 33
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 39,
+        "fields": {
+            "id_code": "text_number_of_surnames",
+            "order": 1,
+            "description": "features.experiment.param.description.number_of_names",
+            "function_param_category": 1,
+            "validation_needs": {},
+            "variability_function": 33
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 40,
+        "fields": {
+            "id_code": "person_name_configuration_font",
+            "order": 1,
+            "description": "features.experiment.param.description.person_name_configuration_font",
+            "function_param_category": 4,
+            "validation_needs": {},
+            "variability_function": 29
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 41,
+        "fields": {
+            "id_code": "image_number_of_names",
+            "order": 2,
+            "description": "features.experiment.param.description.number_of_names",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 29
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 42,
+        "fields": {
+            "id_code": "image_number_of_surnames",
+            "order": 3,
+            "description": "features.experiment.param.description.number_of_surnames",
+            "function_param_category": 2,
+            "validation_needs": {},
+            "variability_function": 29
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 43,
+        "fields": {
+            "id_code": "bank_account_configuration_font",
+            "order": 1,
+            "description": "features.experiment.param.description.bank_account_configuration_font",
+            "function_param_category": 4,
+            "validation_needs": {},
+            "variability_function": 30
+        }
+    },
+    {
+        "model": "wizard.functionparam",
+        "pk": 44,
+        "fields": {
+            "id_code": "id_card_configuration_font",
+            "order": 1,
+            "description": "features.experiment.param.description.id_card_configuration_font",
+            "function_param_category": 4,
+            "validation_needs": {},
+            "variability_function": 31
         }
     }
 ]
